@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> ClinEQ System</title>
+        <link rel="stylesheet" href="clineq.css">
+        
+   <script>
+    function validateForm() {
+        var un = document.loginForm.userid.value;
+        var pw = document.loginForm.password.value;
+        
+        if (loginForm.userid.value=="") {
+           alert ("you must enter userid");
+           loginForm.usrid.focus();
+           return false;
+        }
+      }
+   </script>    
+    </head>
+    <body>
+    <center>
+        <section>
+        <h1> ClinEQ Login </h1>
+        
+    <form action="UserLogin" method="post">
+            
+         <label>User name</label>
+         <input type="text" name="userId" placeholder="username(email address)"> 
+         <span>*</span><br>
+         
+         <label>Password</label>
+         <input type="password" name="password" placeholder="password">
+         <span>*</span><br>
+         
+         <label>&nbsp;</label>
+         <input type="Submit" value="Login" onSubmit="validateForm();" />
+         
+    </form>
+    
+    </section>
+    </center>
+    </body>
+</html>
