@@ -53,6 +53,8 @@ public class StudyDB {
                 s.setEqStudyId(rs.getString("EQ_STUDY_ID"));
                 s.setEqCoSponId(rs.getString("EQ_CO_SPON_ID"));
                 s.setNctid(rs.getString("NCTID"));
+                s.setEuStudyId(rs.getString("EU_STUDY_ID"));
+                
                 s.setEuStudyId(rs.getString("STUDY_ANAME"));
                 s.setStudyAname(rs.getString("STUDY_ANAME"));
                 s.setStudyTitle(rs.getString("STUDY_TITLE"));
