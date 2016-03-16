@@ -64,6 +64,7 @@ public class StudyController extends HttpServlet {
             
         if(requestURI.endsWith("/displayStudyList")) {
              url = displayStudyList(request, response);
+             System.out.println("doGet url="+url);
         } 
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -72,9 +73,13 @@ public class StudyController extends HttpServlet {
             HttpServletResponse response) throws IOException {
 
         ArrayList<Studies> studyArrayList = null;
+        ArrayList<String> studyStatusList = null;
+        ArrayList<String> sponsorNameList = null;
         
         try{
             studyArrayList = StudyDB.selectAllStudy();
+            studyStatusList = StudyDB.selectAllStudyStatus();
+            sponsorNameList = StudyDB.selectAllStudySponsorName();
         }
         catch (DBException e)
         {
@@ -89,10 +94,12 @@ public class StudyController extends HttpServlet {
        // }
         
         HttpSession session = request.getSession();
-        
+
         if (studyArrayList != null) {
  System.out.println("i checking array");
              session.setAttribute("studyArrayList", studyArrayList);
+             session.setAttribute("studyStatusList", studyStatusList);
+             session.setAttribute("sponsorNameList", sponsorNameList);
              url = "/eqhome/index.jsp";
   System.out.println("url " + url);
              return url;

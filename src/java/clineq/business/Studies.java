@@ -113,6 +113,8 @@ public class Studies implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studies")
     private Collection<StudyLocationMap> studyLocationMapCollection;
 
+    private String eqSponName;
+
     public Studies() {
     }
 
@@ -249,6 +251,14 @@ public class Studies implements Serializable {
         this.eqSponId = eqSponId;
     }
 
+    public String getEqSponName() {
+        return eqSponName;
+    }
+
+    public void setEqSponName(String eqSponName) {
+        this.eqSponName = eqSponName;
+    }
+
     public String getEqIwrsId() {
         return eqIwrsId;
     }
@@ -350,5 +360,5 @@ public class Studies implements Serializable {
     public String toString() {
         return "clineq.business.Studies[ eqStudyId=" + eqStudyId + " ]";
     }
-    
+
 }

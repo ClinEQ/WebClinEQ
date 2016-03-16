@@ -15,49 +15,71 @@
     </head>
     <body>
         <section id="EQHome">
-            
-      
-        <h1>Hello World!</h1>
-        
-        <c:if test="${studyArrayList == null}">
-            <p>no studies </p>
-        </c:if>
-            
-        <table>
-           <tr>
-            <th>EQ Study ID</th>
-            <th>NCI ID</th>
-            <th>Study Aname</th>
-            <th>Sponsor Name</th>
-            <th>Sponsor Name</th>
-            <th>&nbsp;</th>
-         </tr>
-          <c:forEach var="study" items="${studyArrayList}">
-            <tr>
-              <td>
-                  ${study.getEqStudyId()}
-              </td>
-              <td>
-                  ${study.getStudyAname()}
-              </td>
-            <td>
-                  ${study.getStudyTitle()}
-              </td>
-              <td>
-                  ${study.getSponStudyId()}
-              </td>
-            <td>
-                  ${study.getStudyEqInitDate()}
-              </td>
-              <td>
-                  ${study.getStudyStatus()}
-              </td>
-            </tr>
-          </c:forEach>
-           
-        </table>
- 
 
-  </section>
-     </body>
+
+            <h1>Study List</h1>
+
+            <select id="studyStatus" name="studyStatus">
+
+                <c:forEach var="studyStatus" items="${studyStatusList}">
+
+                    <option value="${studyStatus}">${studyStatus}</option>
+
+                </c:forEach>
+
+            </select>
+
+            <select id="sponsorName" name="sponsorName">
+
+                <c:forEach var="sponsorName" items="${sponsorNameList}">
+
+                    <option value="${sponsorName}">${sponsorName}</option>
+
+                </c:forEach>
+
+            </select>
+
+            <c:if test="${studyArrayList == null}">
+                <p>no studies </p>
+            </c:if>
+
+            <table>
+                <tr>
+                    <th>EQ Study ID</th>
+                    <th>NCI ID</th>
+                    <th>Study Aname</th>
+                    <th>Sponsor Name</th>
+                    <th>Sponsor Name</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <c:forEach var="study" items="${studyArrayList}">
+                    <tr>
+                        <td>
+                            ${study.getEqStudyId()}
+                        </td>
+                        <td>
+                            ${study.getStudyAname()}
+                        </td>
+                        <td>
+                            ${study.getStudyTitle()}
+                        </td>
+                        <td>
+                            ${study.getSponStudyId()}
+                        </td>
+                        <td>
+                            ${study.getStudyEqInitDate()}
+                        </td>
+                        <td>
+                            ${study.getStudyStatus()}
+                        </td>
+                    </tr>
+                    ${study.getNctid()}
+                    ${study.getEqSponName()}
+                </c:forEach>
+
+            </table>
+
+
+        </section>
+    </body>
 </html>
