@@ -2,15 +2,19 @@
     margin-left: 250px !important;
 }
 
-.container p {
+.container .firstLvl {
     margin-left: 25%;
     margin-bottom: 15px;
     font-size: 25px;
 }
 
-#checkSpon {
+.checkSpon {
     margin-left: 25%;
     margin-bottom: 25px;
+}
+
+.checkSpon2{
+    margin-top: 140px;
 }
 
 .form-horizontal{
@@ -52,4 +56,13 @@ button{
     margin-top: 150px;
 }
 
+textarea{
+    width: 500px;
+    margin-left: 0px !important;
+    height: 100px !important;
+}
+
+.secondLvl{
+    fond-size:22px;
+}
 

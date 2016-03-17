@@ -80,7 +80,7 @@
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEQClsDate">EQ Close Date</label>
-                <div id="datePicker" class="col-sm-7 input-group date">
+                <div class="col-sm-7 input-group date">
                     <input type="text" id="inpeqhomeNSMEQClsDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 </div>
             </div>
             <form>
-            <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
+                <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
             </form>
     </div>
 
@@ -108,3 +108,4 @@
 
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
+

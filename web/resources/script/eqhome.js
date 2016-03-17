@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    $('#datePicker').datepicker();
+    $('.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
 });
 
 

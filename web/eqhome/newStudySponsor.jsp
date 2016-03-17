@@ -15,12 +15,11 @@
 </nav>
 
 <div class="container content">
-    <div id="studySponPrim">
-        <p>Sponsor</p>
-        <div id="checkSpon">
-                Primary Sponsor
-                <a class="btn btn-default" href="#" role="button">Check if sponsor exist</a>
-            </div>
+    <div id="studySponPrimary">
+        <p class="firstLvl">Sponsor</p>
+        <div class="checkSpon">
+            <p class="secondLvl">Primary Sponsor   <a href="#">Check if sponsor exist</a>  </p>              
+        </div>
 
         <form class="form-horizontal" method="post">
             <div class="form-group form-group-lg">
@@ -117,12 +116,64 @@
                     <input class="form-control" id="inpeqhomeNSSStudyStatus" >
                 </div>
             </div>
-            
-            <form>
-                <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
-            </form>
+            <div class="form-group form-group-lg">
+                <label class="col-sm-5 control-label" for="txteqhomeNSSNote">Notes</label>
+                <div class="col-sm-12">
+                    <textarea class="form-group" rows="4" id="txteqhomeNSSNote"></textarea>
+                </div>
+            </div>
     </div>
 
+
+    <div class="checkSpon checkSpon2">
+        <p class="secondLvl">Sponsor User List   <a href="#">Check if sponsor exist</a>  </p>              
+    </div>
+    
+    <div class="table-area">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>EQ User ID</th>
+                        <th>User Type</th>
+                        <th>Institute</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Detail</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <c:if test="${studyArrayList == null}">
+                    <p>no studies </p>
+                </c:if>
+                <tbody>
+                    <c:forEach var="study" items="${studyArrayList}">
+                        <tr>
+                            <td>
+                                ${study.getEqStudyId()}
+                            </td>
+                            <td>
+                                ${study.getNctid()}
+                            </td>
+                            <td>
+                                ${study.getStudyAname()}
+                            </td>
+                            <td>
+                                ${study.getSponStudyId()}
+                            </td>
+                            <td>
+                                ${study.getStudyEqInitDate()}
+                            </td>
+                            <td><a href="#">Details</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+    
+    <div class="form-horizontal">
+            <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
+    </div>
+    
     <div class="save-options">
         <button type="button" class="btn btn-primary">Create Study</button>
 
@@ -133,6 +184,7 @@
         <button type="button" class="btn btn btn-danger">Cancel</button>
     </div>
 </div>
+
 
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
