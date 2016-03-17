@@ -1,10 +1,9 @@
-<style></style>
 <link href="../resources/css/eqhome/index.css" rel="stylesheet" type="text/css"/>
 
 <jsp:include page="../includes/header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<nav id="nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav id="navbar-main" class="navbar navbar-inverse">
     <jsp:include page="../includes/topNav.jsp"/>
     <jsp:include page="../includes/leftNav.jsp"/>
 </nav>
@@ -77,8 +76,9 @@
             </table>
         </div>
     </section>
-    
-    <button type="button" class="btn btn-success">Add New Study</button>
+    <form>
+    <button type="submit" formaction="../eqhome/newStudyMain.jsp" class="btn btn-success">Add New Study</button>
+    </form>
 </div>
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>

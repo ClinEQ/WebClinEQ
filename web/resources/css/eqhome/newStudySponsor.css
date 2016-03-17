@@ -1,0 +1,55 @@
+.container{
+    margin-left: 250px !important;
+}
+
+.container p {
+    margin-left: 25%;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+#checkSpon {
+    margin-left: 25%;
+    margin-bottom: 25px;
+}
+
+.form-horizontal{
+    width:500px;
+    margin-left: 25%
+}
+
+.form-horizontal .form-group-lg .control-label{
+    text-align: left !important;
+    font-size:16px !important;
+    padding-right: 0px;
+}
+
+.form-group {
+    height:30px;
+    font-size:16px !important;
+}
+
+.form-group-lg .form-control{
+    height:35px !important;
+}
+
+.input-group{
+    padding-left: 15px !important;
+    width:295px !important;
+}
+
+button{
+    width:130px;
+}
+
+.btn-success{
+    float:right;
+    width:100px;
+}
+
+.save-options{
+    margin-left:34%;
+    margin-top: 150px;
+}
+
+

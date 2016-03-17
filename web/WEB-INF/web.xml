@@ -14,4 +14,7 @@
         <session-timeout>30</session-timeout>
     </session-config>
     <!-- define the welcome files -->
+<welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+</welcome-file-list>
 </web-app>

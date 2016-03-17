@@ -8,6 +8,8 @@
         <script src="../resources/lib/bootstrap-3.3.6-dist/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/lib/fonts/font-awesome-4.5.0/css/font-awesome.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/css/main.css" rel="stylesheet" type="text/css"/>
+
+       
         <title>ClinEQ</title> <!-- pass value -->
     </head>
     <body>
