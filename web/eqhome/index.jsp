@@ -8,6 +8,8 @@
     <jsp:include page="../includes/leftNav.jsp"/>
 </nav>
 
+<h1>Hello</h1>
+
 <div class="container content">
     <section id="EQHome">
         <h3>Study List</h3>
