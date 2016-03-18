@@ -21,7 +21,6 @@
             <p class="secondLvl">Primary Sponsor   <a href="javascript:void(0);" onclick="OpenPage();">Check if sponsor exist</a>  </p>              
         </div>
         <div id="divTest" style="display:none">
-            <jsp:include page="../includes/forms/sponsorForm.jspf"/>
             <jsp:include page="../includes/forms/newjsp.jsp"/>
         </div>
         <form class="form-horizontal" method="post">
