@@ -18,9 +18,12 @@
     <div id="studySponPrimary">
         <p class="firstLvl">Sponsor</p>
         <div class="checkSpon">
-            <p class="secondLvl">Primary Sponsor   <a href="#">Check if sponsor exist</a>  </p>              
+            <p class="secondLvl">Primary Sponsor   <a href="javascript:void(0);" onclick="OpenPage();">Check if sponsor exist</a>  </p>              
         </div>
-
+        <div id="divTest" style="display:none">
+            <jsp:include page="../includes/forms/sponsorForm.jspf"/>
+            <jsp:include page="../includes/forms/newjsp.jsp"/>
+        </div>
         <form class="form-horizontal" method="post">
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>

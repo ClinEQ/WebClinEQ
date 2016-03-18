@@ -8,6 +8,10 @@ h3{
     font-size:26px !important;
 }
 
+#EQHome{
+    position: relative;
+}
+
 .filter-bar{
     height:40px;
 }

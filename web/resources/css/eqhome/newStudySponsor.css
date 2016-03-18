@@ -2,6 +2,10 @@
     margin-left: 250px !important;
 }
 
+#studySponPrimary{
+    position:relative;
+}
+
 .container .firstLvl {
     margin-left: 25%;
     margin-bottom: 15px;
@@ -15,6 +19,10 @@
 
 .checkSpon2{
     margin-top: 140px;
+}
+
+.secondLvl > a{
+    margin: 25px;
 }
 
 .form-horizontal{
