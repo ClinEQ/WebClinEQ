@@ -1,0 +1,104 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.jumbotron {
+    height: 100px;
+    margin: 0px;
+}
+
+.jumbotron h1 {
+    font-size: 40px;
+    margin-top: -10px;
+    padding-left: 30px;
+}
+
+#navbar-main{
+    padding-left: 2em;
+    min-height:30px !important;
+    height:30px;
+    border-radius: 0;
+}
+
+.navbar-brand{
+    padding:5px 0px;
+    font-size: 14px;
+}
+
+.dropdown{
+    height:30px;
+}
+
+.dropdown-menu{
+    border-top-width: 0px;
+    margin-top:0px;
+}
+
+.top-nav > li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 4px;
+    line-height: 20px;
+    color: #999;
+}
+
+.top-nav > li > a:hover,
+.top-nav > li > a:focus,
+.top-nav > .open > a,
+.top-nav > .open > a:hover,
+.top-nav > .open > a:focus {
+    color: #fff;
+    background-color: #000;
+}
+
+.side-nav {
+    margin-top: 30px;
+    left: 225px;
+    width: 225px;
+    margin-left: -85px;
+    border: none;
+    border-radius: 0;
+    overflow-y: auto;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+}
+
+.side-nav > li > a {
+    padding-left: 2em;
+    width: 225px;
+}
+
+.side-nav > li > a:hover,
+.side-nav > li > a:focus {
+    color: #999 !important;
+}
+
+.side-nav > li > ul {
+    padding-left: 2em;
+    list-style-type: none;
+}
+
+.side-nav > li > ul > li > a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+#content {
+    margin-top: 20px;
+}
+
+footer{
+    margin: 200px 30px 0px;
+}
+
+footer>hr{
+    margin-bottom: 5px;
+}

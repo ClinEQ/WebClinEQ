@@ -39,78 +39,113 @@ public class StudyController extends HttpServlet {
     //private static final String defaultURL = "/views/EQHome/iindex.jsp";
     @Override
     public void doPost(HttpServletRequest request,
-                      HttpServletResponse response)
-                      throws IOException, ServletException {
-            
-         System.out.println("enter study controller dopost!");
-            String requestURI = request.getRequestURI();
-            String url = "/eqhome";
-            
-           if(requestURI.endsWith("/displayStudyList")) {
-               url = displayStudyList(request, response);
-            //   if ("STUDYLIST_NODATA" url equal())
-               System.out.println("the list is not empty!");
-           } 
-           getServletContext().getRequestDispatcher(url).forward(request, response);
-    }
-    
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-                        throws IOException, ServletException
-    {
-        
+            HttpServletResponse response)
+            throws IOException, ServletException {
+
+        System.out.println("enter study controller dopost!");
         String requestURI = request.getRequestURI();
-        String url = "/EQHome";
-            
-        if(requestURI.endsWith("/displayStudyList")) {
-             url = displayStudyList(request, response);
-             System.out.println("doGet url="+url);
-        } 
+        String url = null;
+
+        if (requestURI.endsWith("/displayStudyList")) {
+
+            url = displayStudyList(request, response);
+
+            System.out.println("doPost the list is not empty!");
+        }
+        else if (requestURI.endsWith("newStudy")) {
+
+            url = "/eqhome/newStudyMain.jsp";
+        }
+        else if (requestURI.endsWith("newStudySponsor")) {
+
+            url = "/eqhome/newStudyMain.jsp";
+        }        
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
-    
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        String requestURI = request.getRequestURI();
+        String url = "/EQHome";
+
+        if (requestURI.endsWith("/displayStudyList")) {
+            url = displayStudyList(request, response);
+            System.out.println("doGet url=" + url);
+        }
+        getServletContext().getRequestDispatcher(url).forward(request, response);
+    }
+
     private String displayStudyList(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         ArrayList<Studies> studyArrayList = null;
         ArrayList<String> studyStatusList = null;
         ArrayList<String> sponsorNameList = null;
-        
-        try{
+
+        try {
             studyArrayList = StudyDB.selectAllStudy();
             studyStatusList = StudyDB.selectAllStudyStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
-        }
-        catch (DBException e)
-        {
+        } catch (DBException e) {
             System.err.println();
         }
 
-        String url;
+        String url = "/eqhome/index.jsp";
         //if (unprocessedInvoices != null) {
         //    if (unprocessedInvoices.size() <= 0) {
         //        unprocessedInvoices = null;
-         //   }
-       // }
-        
+        //   }
+        // }
+
         HttpSession session = request.getSession();
 
         if (studyArrayList != null) {
- System.out.println("i checking array");
-             session.setAttribute("studyArrayList", studyArrayList);
-             session.setAttribute("studyStatusList", studyStatusList);
-             session.setAttribute("sponsorNameList", sponsorNameList);
-             url = "/eqhome/index.jsp";
-  System.out.println("url " + url);
-             return url;
-             
-        }else {
- //System.out.println("url " );
-           return "/eqhome/index.jsp";
+
+            session.setAttribute("studyArrayList", studyArrayList);
+            session.setAttribute("studyStatusList", studyStatusList);
+            session.setAttribute("sponsorNameList", sponsorNameList);
+
         }
+        return url;
+    }
+
+
+
+    private String displayOrganizationList(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+
+        ArrayList<Organizations> orgArrayList = null;
+
+
+        try {
+            orgArrayList = OrganizationDB.selectAllOrganization();
+
+        } catch (DBException e) {
+            System.err.println();
+        }
+
+        String url = "/eqhome/newStudySponsor.jsp";
+        //if (unprocessedInvoices != null) {
+        //    if (unprocessedInvoices.size() <= 0) {
+        //        unprocessedInvoices = null;
+        //   }
+        // }
+
+        HttpSession session = request.getSession();
+
+        if (orgArrayList != null) {
+
+            session.setAttribute("orgArrayList", orgArrayList);
+
+
+        }
+        return url;
     }
 }
- 
+
+
 /*
  private String displayInvoices(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
@@ -130,4 +165,4 @@ public class StudyController extends HttpServlet {
         url = "/admin/invoices.jsp";
         return url;
     }
-*/
+ */

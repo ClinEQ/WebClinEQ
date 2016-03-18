@@ -3,83 +3,108 @@
     Created on : Mar 6, 2016, 11:49:55 AM
     Author     : songy04
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@page contentType="text/html" pageEncoding="windows-1252"%>
-<script src="../../../resources/scripts/EQHomeJavascript.js" type="text/javascript"></script>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <section id="EQHome">
+        <title>Home Page</title>
+        <link href="../resources/css/eqhome/index.css" rel="stylesheet" type="text/css"/>
+        <jsp:include page="../includes/header.jsp"/>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+    <nav id="navbar-main" class="navbar navbar-inverse">
+        <jsp:include page="../includes/topNav.jsp"/>
+        <jsp:include page="../includes/leftNav.jsp"/>
+    </nav>        
+</head>
+<body>
+<div class="container content">
+    <section id="EQHome">
+        <h3>Study List</h3>
+        <div class="filter-bar">
+            <form class="form-inline">
+                <div class="form-group select-box" >
+                    <label>Study Status</label>
+                    <select id="sltStudyStatus" name="sltStudyStatus" class="form-control">
+
+                        <c:forEach var="studyStatus" items="${studyStatusList}">
+
+                            <option value="${studyStatus}" id="${studyStatus}">${studyStatus}</option>
+
+                        </c:forEach>
+
+                    </select>                    
+
+                </div>
+                <div class="form-group select-box">
+                    <label>Sponsor Name</label>
 
 
-            <h1>Study List</h1>
+                    <select id="sltSponsorName" name="sltSponsorName" class="form-control">
 
-            <select id="studyStatus" name="studyStatus">
+                        <c:forEach var="sponsorName" items="${sponsorNameList}">
 
-                <c:forEach var="studyStatus" items="${studyStatusList}">
+                            <option value="${sponsorName}">${sponsorName}</option>
 
-                    <option value="${studyStatus}">${studyStatus}</option>
+                        </c:forEach>
 
-                </c:forEach>
+                    </select>                    
+                </div>
+            </form>
+        </div>
 
-            </select>
-
-            <select id="sponsorName" name="sponsorName">
-
-                <c:forEach var="sponsorName" items="${sponsorNameList}">
-
-                    <option value="${sponsorName}">${sponsorName}</option>
-
-                </c:forEach>
-
-            </select>
-
-            <c:if test="${studyArrayList == null}">
-                <p>no studies </p>
-            </c:if>
-
-            <table>
-                <tr>
-                    <th>EQ Study ID</th>
-                    <th>NCI ID</th>
-                    <th>Study Aname</th>
-                    <th>Sponsor Name</th>
-                    <th>Sponsor Name</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <c:forEach var="study" items="${studyArrayList}">
+        <div class="table-area">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            ${study.getEqStudyId()}
-                        </td>
-                        <td>
-                            ${study.getStudyAname()}
-                        </td>
-                        <td>
-                            ${study.getStudyTitle()}
-                        </td>
-                        <td>
-                            ${study.getSponStudyId()}
-                        </td>
-                        <td>
-                            ${study.getStudyEqInitDate()}
-                        </td>
-                        <td>
-                            ${study.getStudyStatus()}
-                        </td>
+                        <th>EQ Study ID</th>
+                        <th>NCI ID</th>
+                        <th>Study Aname</th>
+                        <th>Sponsor Name</th>
+                        <th>Eq_initial_date</th>
+                        <th>Status</th>
+                        <th>Details</th>
                     </tr>
-                    ${study.getNctid()}
-                    ${study.getEqSponName()}
-                </c:forEach>
-
+                </thead>
+                <c:if test="${studyArrayList == null}">
+                    <p>no studies </p>
+                </c:if>
+                <tbody>
+                    <c:forEach var="study" items="${studyArrayList}">
+                        <tr>
+                            <td>
+                                ${study.getEqStudyId()}
+                            </td>
+                            <td>
+                                ${study.getNctid()}
+                            </td>
+                            <td>
+                                ${study.getStudyAname()}
+                            </td>
+                            <td>
+                                ${study.getSponStudyId()}
+                            </td>
+                            <td>
+                                ${study.getStudyEqInitDate()}
+                            </td>
+                            <td>
+                                ${study.getStudyStatus()}
+                            </td>
+                            <td><a href="#">Detail</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
-
-
-        </section>
-    </body>
+        </div>
+    </section>
+    <form>
+        <!--<button type="submit" formaction="newStudy" class="btn btn-success">Add New Study</button>-->
+        <button type="submit" formaction="../eqhome/newStudyMain.jsp" class="btn btn-success">Add New Study</button>
+        
+    </form>
+</div>
+<!-- footer -->
+<jsp:include page="../includes/footer.jsp"/>    
+</body>
 </html>
