@@ -1,0 +1,27 @@
+.container{
+    margin-left: 250px !important;
+}
+
+h3{
+    text-align: center;
+    font-weight: 600 !important;
+    font-size:26px !important;
+}
+
+#EQHome{
+    position: relative;
+}
+
+.filter-bar{
+    height:40px;
+}
+
+.select-box{
+    float:left;
+    margin-left: 200px;
+    font-size:18px;
+}
+
+.table-area{
+    margin-top:10px;
+}
