@@ -15,7 +15,7 @@
     <body>
         <div id="login">
 
-                <!--<form class="form-horizontal" action="login/loginCheck" method="post">-->
+                <form class="form-horizontal" action="login/loginCheck" method="post">
                     <form class="form-horizontal" action="study/displayStudyList" method="post">
                 <div class="form-group form-group-lg">
                     <label class="col-sm-4 control-label" type="text" for="inpUserName">User Name</label>

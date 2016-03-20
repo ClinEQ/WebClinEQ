@@ -15,30 +15,14 @@
 </nav>
 
 <div class="container content">
-    <div id="studySponPrim">
-        <p>Sponsor</p>
-        <div id="checkSpon">
-                Primary Sponsor
-                <a class="btn btn-default" href="#" role="button">Check if sponsor exist</a>
-            </div>
-
-        
-        
-                      <c:forEach var="sponsor" items="${orgArrayList}">
-                        <tr>
-                            <td>
-                                ${sponsor.getOrgFullName()}
-                            </td>
-                            <td>
-                                ${sponsor.getStatus()}
-                            </td>
-
-                            <td><a href="#">Detail</a></td>
-                        </tr>
-                    </c:forEach>      
-        
-        
-        
+    <div id="studySponPrimary">
+        <p class="firstLvl">Sponsor</p>
+        <div class="checkSpon">
+            <p class="secondLvl">Primary Sponsor   <a href="javascript:void(0);" onclick="OpenPage();">Check if sponsor exist</a>  </p>              
+        </div>
+        <div id="divTest" style="display:none">
+            <jsp:include page="../includes/forms/newjsp.jsp"/>
+        </div>
         <form class="form-horizontal" method="post">
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
@@ -134,22 +118,89 @@
                     <input class="form-control" id="inpeqhomeNSSStudyStatus" >
                 </div>
             </div>
-            
-            <form>
-                <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
-            </form>
+            <div class="form-group form-group-lg">
+                <label class="col-sm-5 control-label" for="txteqhomeNSSNote">Notes</label>
+                <div class="col-sm-12">
+                    <textarea class="form-group" rows="4" id="txteqhomeNSSNote"></textarea>
+                </div>
+            </div>
     </div>
 
-    <div class="save-options">
-        <button type="button" class="btn btn-primary">Create Study</button>
 
-
-        <button type="button" class="btn btn btn-info">Save as Default</button>
-
-
-        <button type="button" class="btn btn btn-danger">Cancel</button>
+    <div class="checkSpon checkSpon2">
+        <p class="secondLvl">Sponsor User List   <a href="#">Check if sponsor exist</a>  </p>              
     </div>
-</div>
 
-<!-- footer -->
-<jsp:include page="../includes/footer.jsp"/>
+    <div class="table-area">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>EQ User ID</th>
+                    <th>User Type</th>
+                    <th>Institute</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Detail</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <c:if test="${userArrayList == null}">
+                <p>no user </p>
+            </c:if>
+            <tbody>
+                <c:forEach var="user" items="${userArrayList}">
+                    <tr>
+                        <td>
+                            ${user.getEqUserId()}
+                        </td>
+                        <td>
+                            ${user.getUserType()}
+                        </td>
+                        <td>
+                            ${user.getEqOrgId().getOrgFullName()}
+                        </td>
+                        <td>
+                            ${user.getFname()}
+                        </td>
+                        <td>
+                            ${user.getLname()}
+                        </td>
+                        <td><a href="#">Details</a></td>
+                        <td><a href="#">Delete</a></td>
+                    </tr>
+                </c:forEach>
+
+
+                <c:forEach var="sponsor" items="${orgArrayList}">
+                    <tr>
+                        <td>
+                            ${sponsor.getOrgFullName()}
+                        </td>
+                        <td>
+                            ${sponsor.getStatus()}
+                        </td>
+
+                        <td><a href="#">Detail</a></td>
+                    </tr>
+                </c:forEach>   
+            </tbody>
+        </table>
+
+        <div class="form-horizontal">
+            <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
+        </div>
+
+        <div class="save-options">
+            <button type="button" class="btn btn-primary">Create Study</button>
+
+
+            <button type="button" class="btn btn btn-info">Save as Default</button>
+
+
+            <button type="button" class="btn btn btn-danger">Cancel</button>
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <jsp:include page="../includes/footer.jsp"/>

@@ -83,11 +83,15 @@ public class StudyController extends HttpServlet {
         ArrayList<Studies> studyArrayList = null;
         ArrayList<String> studyStatusList = null;
         ArrayList<String> sponsorNameList = null;
+        ArrayList<Users> userArrayList = null;
+        ArrayList<Organizations> orgArrayList = null;
 
         try {
             studyArrayList = StudyDB.selectAllStudy();
             studyStatusList = StudyDB.selectAllStudyStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
+            userArrayList = UserDB.selectAllUser();
+            orgArrayList = OrganizationDB.selectAllOrganization();
         } catch (DBException e) {
             System.err.println();
         }
@@ -106,6 +110,8 @@ public class StudyController extends HttpServlet {
             session.setAttribute("studyArrayList", studyArrayList);
             session.setAttribute("studyStatusList", studyStatusList);
             session.setAttribute("sponsorNameList", sponsorNameList);
+            session.setAttribute("userArrayList", userArrayList);
+            session.setAttribute("orgArrayList", orgArrayList);
 
         }
         return url;

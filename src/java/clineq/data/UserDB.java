@@ -37,7 +37,34 @@ public class UserDB {
  //       {
        
     
-    public static ArrayList<Users> selectAllUser() throws DBException {   
+    public static void deleteOneUser(String userid) throws DBException {   
+  //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "DELETE * FROM CLINEQ.USERS WHERE EQ_USER_ID =" + userid;
+        
+        ArrayList<Users> objList = new ArrayList<>();
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+      
+        try { 
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+//            stmt = conn.createStatement();
+//            rs = stmt.executeQuery(sql); 
+            
+
+        } catch (SQLException e) {
+            System.err.println("Error in userDB deleteOneUser "+ e.getMessage());
+
+        } finally {
+           DBUtil.closeResultSet(rs);
+           DBUtil.closePreparedStatement(ps);
+        }
+        return;
+    }
+    
+        public static ArrayList<Users> selectAllUser() throws DBException {   
   //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.USERS";
         
@@ -52,11 +79,14 @@ public class UserDB {
 //            rs = ps.executeQuery();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql); 
-            
+            String eqOrgId = null;
             while (rs.next()) {
                 Users obj = new Users();
                 obj.setEqUserId(rs.getString("EQ_USER_ID"));
-                obj.setEqOrgId(new Organizations(rs.getString("EQ_ORG_ID")));
+                eqOrgId = rs.getString("EQ_ORG_ID");
+                Organizations org = new Organizations(eqOrgId);
+                org.setOrgFullName(OrganizationDB.getOrgName(eqOrgId));
+                obj.setEqOrgId(org);
                 obj.setLname(rs.getString("LNAME"));
                 obj.setFname(rs.getString("FNAME"));
                 obj.setTitle(rs.getString("TITLE"));

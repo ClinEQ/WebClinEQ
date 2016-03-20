@@ -91,8 +91,8 @@
                 </div>
             </div>
             <form>
-            <!--<button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>-->
-                        <button type="submit" formaction="study/newStudySponsor" class="btn btn-success">Next</button>
+            <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
+                        <!--<button type="submit" formaction="study/newStudySponsor" class="btn btn-success">Next</button>-->
             </form>
     </div>
 

@@ -81,5 +81,30 @@ public class OrganizationDB {
         }
     }
     
-    
+     public static String getOrgName(String orgid) throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
+
+        String orgname = null;
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                orgname = rs.getString("ORG_FULL_NAME");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in organizationDB getOrgName " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return orgname;
+    } 
 }

@@ -355,6 +355,8 @@ public class Users implements Serializable {
     public void setEqOrgId(Organizations eqOrgId) {
         this.eqOrgId = eqOrgId;
     }
+    
+
 
     @Override
     public int hashCode() {

@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
         String requestURI = request.getRequestURI();
         String url = null;
         String userid = request.getParameter("userId");
-        if (!userExist(userid)) {
+        if (userExist(userid)) {
             url = "/study/displayStudyList";
             //url = "/eqhome/index.jsp";
         } else {
