@@ -44,22 +44,19 @@ public class StudyController extends HttpServlet {
 
         System.out.println("enter study controller dopost!");
         String requestURI = request.getRequestURI();
-        String url = null;
+        String url = "/eqhome";
 
         if (requestURI.endsWith("/displayStudyList")) {
-
             url = displayStudyList(request, response);
-
-            System.out.println("doPost the list is not empty!");
+            //   if ("STUDYLIST_NODATA" url equal())
+            System.out.println("the list is not empty!");
+        } else if (requestURI.endsWith("/createNewStudy")) {
+            url = createNewStudy(request, response);
+        } else if (requestURI.endsWith("/newStudySponsor")) {
+            url = newStudySponsor(request, response);
+        } else {
+            url = "/eqhome/error.jsp";
         }
-        else if (requestURI.endsWith("newStudy")) {
-
-            url = "/eqhome/newStudyMain.jsp";
-        }
-        else if (requestURI.endsWith("newStudySponsor")) {
-
-            url = "/eqhome/newStudyMain.jsp";
-        }        
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -72,7 +69,12 @@ public class StudyController extends HttpServlet {
 
         if (requestURI.endsWith("/displayStudyList")) {
             url = displayStudyList(request, response);
-            System.out.println("doGet url=" + url);
+        } else if (requestURI.endsWith("/createNewStudy")) {
+            url = createNewStudy(request, response);
+        } else if (requestURI.endsWith("/newStudySponsor")) {
+            url = newStudySponsor(request, response);
+        } else {
+            url = "/eqhome/error.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -92,11 +94,43 @@ public class StudyController extends HttpServlet {
             sponsorNameList = StudyDB.selectAllStudySponsorName();
             userArrayList = UserDB.selectAllUser();
             orgArrayList = OrganizationDB.selectAllOrganization();
+
         } catch (DBException e) {
             System.err.println();
         }
 
-        String url = "/eqhome/index.jsp";
+        String url;
+
+        HttpSession session = request.getSession();
+
+        if (studyArrayList != null) {
+            System.out.println("i checking array");
+            session.setAttribute("studyArrayList", studyArrayList);
+            session.setAttribute("studyStatusList", studyStatusList);
+            session.setAttribute("sponsorNameList", sponsorNameList);
+            session.setAttribute("userArrayList", userArrayList);
+            session.setAttribute("orgArrayList", orgArrayList);
+            url = "/eqhome/index.jsp";
+            System.out.println("url " + url);
+            return url;
+        } else {
+            //System.out.println("url " );
+            return "/eqhome/index.jsp";
+        }
+    }
+
+    private String createNewStudy(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+
+        //   ArrayList<Studies> studyArrayList = null;
+        // try{
+        //   studyArrayList = StudyDB.selectAllStudy();
+        // }
+        // catch (DBException e)
+        // {
+        //    System.err.println();
+        //}
+        String url;
         //if (unprocessedInvoices != null) {
         //    if (unprocessedInvoices.size() <= 0) {
         //        unprocessedInvoices = null;
@@ -105,25 +139,54 @@ public class StudyController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        if (studyArrayList != null) {
-
-            session.setAttribute("studyArrayList", studyArrayList);
-            session.setAttribute("studyStatusList", studyStatusList);
-            session.setAttribute("sponsorNameList", sponsorNameList);
-            session.setAttribute("userArrayList", userArrayList);
-            session.setAttribute("orgArrayList", orgArrayList);
-
-        }
+        //if (studyArrayList != null) {
+        //   System.out.println("i checking array");
+        // session.setAttribute("studyArrayList", studyArrayList);
+        url = "/eqhome/newStudyMain.jsp";
+        System.out.println("url " + url);
         return url;
+        //}else {
+        //System.out.println("url " );
+        //  return "/eqhome/index.jsp";
+        //}
     }
 
+    private String newStudySponsor(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
 
+        //   ArrayList<Studies> studyArrayList = null;
+        // try{
+        //   studyArrayList = StudyDB.selectAllStudy();
+        // }
+        // catch (DBException e)
+        // {
+        //    System.err.println();
+        //}
+        String url;
+        //if (unprocessedInvoices != null) {
+        //    if (unprocessedInvoices.size() <= 0) {
+        //        unprocessedInvoices = null;
+        //   }
+        // }
+
+        HttpSession session = request.getSession();
+
+        //if (studyArrayList != null) {
+        //   System.out.println("i checking array");
+        // session.setAttribute("studyArrayList", studyArrayList);
+        url = "/eqhome/newStudySponsor.jsp";
+        System.out.println("url " + url);
+        return url;
+        //}else {
+        //System.out.println("url " );
+        //  return "/eqhome/index.jsp";
+        //}
+    }
 
     private String displayOrganizationList(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         ArrayList<Organizations> orgArrayList = null;
-
 
         try {
             orgArrayList = OrganizationDB.selectAllOrganization();
@@ -145,27 +208,46 @@ public class StudyController extends HttpServlet {
 
             session.setAttribute("orgArrayList", orgArrayList);
 
-
         }
         return url;
     }
 }
 
-
+/*
++ private String displayInvoices(HttpServletRequest request,
++            HttpServletResponse response) throws IOException {
++
++        List<Invoice> unprocessedInvoices
++                = InvoiceDB.selectUnprocessedInvoices();
++       
++        String url;
++        if (unprocessedInvoices != null) {
++            if (unprocessedInvoices.size() <= 0) {
++                unprocessedInvoices = null;
++            }
++        }
++       
++        HttpSession session = request.getSession();
++        session.setAttribute("unprocessedInvoices", unprocessedInvoices);
++        url = "/admin/invoices.jsp";
++        return url;
++    }
++ */
+//////////////////////
 /*
  private String displayInvoices(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         List<Invoice> unprocessedInvoices
                 = InvoiceDB.selectUnprocessedInvoices();
-        
+       
         String url;
         if (unprocessedInvoices != null) {
             if (unprocessedInvoices.size() <= 0) {
                 unprocessedInvoices = null;
             }
         }
-        
+       
         HttpSession session = request.getSession();
         session.setAttribute("unprocessedInvoices", unprocessedInvoices);
         url = "/admin/invoices.jsp";

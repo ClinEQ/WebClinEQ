@@ -1,24 +1,15 @@
-<%-- 
-    Document   : Index
-    Created on : Mar 6, 2016, 11:49:55 AM
-    Author     : songy04
---%>
+<link href="../resources/css/eqhome/index.css" rel="stylesheet" type="text/css"/>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>Home Page</title>
-        <link href="../resources/css/eqhome/index.css" rel="stylesheet" type="text/css"/>
-        <jsp:include page="../includes/header.jsp"/>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../includes/header.jsp"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <nav id="navbar-main" class="navbar navbar-inverse">
-        <jsp:include page="../includes/topNav.jsp"/>
-        <jsp:include page="../includes/leftNav.jsp"/>
-    </nav>        
-</head>
-<body>
+<nav id="navbar-main" class="navbar navbar-inverse">
+    <jsp:include page="../includes/topNav.jsp"/>
+    <jsp:include page="../includes/leftNav.jsp"/>
+</nav>
+
+
+
 <div class="container content">
     <section id="EQHome">
         <h3>Study List</h3>
@@ -26,6 +17,7 @@
             <form class="form-inline">
                 <div class="form-group select-box" >
                     <label>Study Status</label>
+                    
                     <select id="sltStudyStatus" name="sltStudyStatus" class="form-control">
 
                         <c:forEach var="studyStatus" items="${studyStatusList}">
@@ -34,22 +26,20 @@
 
                         </c:forEach>
 
-                    </select>                    
-
+                    </select>                                        
                 </div>
                 <div class="form-group select-box">
                     <label>Sponsor Name</label>
-
-
+                    
                     <select id="sltSponsorName" name="sltSponsorName" class="form-control">
 
                         <c:forEach var="sponsorName" items="${sponsorNameList}">
 
-                            <option value="${sponsorName}">${sponsorName}</option>
+                            <option value="${sponsorName}" id="${sponsorName}">${sponsorName}</option>
 
                         </c:forEach>
 
-                    </select>                    
+                    </select>                      
                 </div>
             </form>
         </div>
@@ -83,7 +73,7 @@
                                 ${study.getStudyAname()}
                             </td>
                             <td>
-                                ${study.getSponStudyId()}
+                                ${study.getEqSponName()}
                             </td>
                             <td>
                                 ${study.getStudyEqInitDate()}
@@ -99,12 +89,8 @@
         </div>
     </section>
     <form>
-        <!--<button type="submit" formaction="newStudy" class="btn btn-success">Add New Study</button>-->
-        <button type="submit" formaction="../eqhome/newStudyMain.jsp" class="btn btn-success">Add New Study</button>
-        
+    <button type="submit" formaction="../study/createNewStudy" class="btn btn-success">Add New Study</button>
     </form>
 </div>
 <!-- footer -->
-<jsp:include page="../includes/footer.jsp"/>    
-</body>
-</html>
+<jsp:include page="../includes/footer.jsp"/>

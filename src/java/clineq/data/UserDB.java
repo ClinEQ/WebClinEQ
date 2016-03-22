@@ -21,7 +21,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author songy04
+ * @author Calum
  */
 
 public class UserDB {

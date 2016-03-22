@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link href="../resources/css/eqhome/newStudySponsor.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/css/forms/formSearchSponsor.css" rel="stylesheet" type="text/css"/>
+
 <script src="../resources/lib/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
 <link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.standalone.css" rel="stylesheet" type="text/css"/>
@@ -16,13 +18,14 @@
 
 <div class="container content">
     <div id="studySponPrimary">
-        <p class="firstLvl">Sponsor</p>
+        <p class="firstLv">Sponsor</p>
         <div class="checkSpon">
-            <p class="secondLvl">Primary Sponsor   <a href="javascript:void(0);" onclick="OpenPage();">Check if sponsor exist</a>  </p>              
+            <p class="secondLv">Primary Sponsor   <a href="javascript:void(0);" onclick="ToggleSubform('divSearchSponsor', 'formSearchSponsor');">Check if sponsor exist</a>  </p>              
         </div>
-        <div id="divTest" style="display:none">
-            <jsp:include page="../includes/forms/newjsp.jsp"/>
+
+        <div class="divSearchSponsor subSearchArea" style="display:none">
         </div>
+
         <form class="form-horizontal" method="post">
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
@@ -124,11 +127,15 @@
                     <textarea class="form-group" rows="4" id="txteqhomeNSSNote"></textarea>
                 </div>
             </div>
+        </form>
     </div>
 
 
     <div class="checkSpon checkSpon2">
-        <p class="secondLvl">Sponsor User List   <a href="#">Check if sponsor exist</a>  </p>              
+        <p class="secondLv">Sponsor User List   <a href="javascript:void(0);" onclick="ToggleSubform('divSearchUser', 'formSearchUser');">Check if user exist</a>  </p>              
+    </div>
+
+    <div class="divSearchUser" style="display:none">
     </div>
 
     <div class="table-area">
@@ -169,38 +176,30 @@
                         <td><a href="#">Delete</a></td>
                     </tr>
                 </c:forEach>
-
-
-                <c:forEach var="sponsor" items="${orgArrayList}">
-                    <tr>
-                        <td>
-                            ${sponsor.getOrgFullName()}
-                        </td>
-                        <td>
-                            ${sponsor.getStatus()}
-                        </td>
-
-                        <td><a href="#">Detail</a></td>
-                    </tr>
-                </c:forEach>   
             </tbody>
         </table>
-
-        <div class="form-horizontal">
-            <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
-        </div>
-
-        <div class="save-options">
-            <button type="button" class="btn btn-primary">Create Study</button>
-
-
-            <button type="button" class="btn btn btn-info">Save as Default</button>
-
-
-            <button type="button" class="btn btn btn-danger">Cancel</button>
+        <a class="btn btn-default" href="javascript:void(0);" onclick="ToggleSubform('divCreateNewUser', 'formCreatNewUser');" role="button">Add New User</a>
+        <div class="divCreateNewUser" style="display:none">
         </div>
     </div>
+
+    <div class="form-horizontal">
+        <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
+    </div>
+
+    <div class="save-options">
+        <button type="button" class="btn btn-primary">Create Study</button>
+
+
+        <button type="button" class="btn btn btn-info">Save as Default</button>
+
+
+        <button type="button" class="btn btn btn-danger">Cancel</button>
+    </div>
+
 
 
     <!-- footer -->
     <jsp:include page="../includes/footer.jsp"/>
+
+ 

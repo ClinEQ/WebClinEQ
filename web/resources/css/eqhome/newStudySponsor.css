@@ -2,7 +2,11 @@
     margin-left: 250px !important;
 }
 
-.container .firstLvl {
+#studySponPrimary{
+    position:relative;
+}
+
+.container .firstLv {
     margin-left: 25%;
     margin-bottom: 15px;
     font-size: 25px;
@@ -16,6 +20,12 @@
 .checkSpon2{
     margin-top: 140px;
 }
+
+.secondLv > a{
+    margin: 25px;
+    fond-size:22px;
+}
+
 
 .form-horizontal{
     width:500px;
@@ -62,7 +72,16 @@ textarea{
     height: 100px !important;
 }
 
-.secondLvl{
-    fond-size:22px;
+
+.subSearchArea{
+    width:600px;
+    margin-left: 25%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 35px;
 }
 
+p.secondLv{
+    margin-top: 20px;
+    font-weight: bold;
+}
