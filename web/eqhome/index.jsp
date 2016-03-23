@@ -52,9 +52,9 @@
                         <th>NCI ID</th>
                         <th>Study Aname</th>
                         <th>Sponsor Name</th>
-                        <th>Eq_initial_date</th>
+                        <th>EQ Initial Date</th>
                         <th>Status</th>
-                        <th>Details</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
                 <c:if test="${studyArrayList == null}">

@@ -1,3 +1,6 @@
+<link href="/WebClinEQ/resources/css/forms/formSearchSponsor.css" rel="stylesheet" type="text/css"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <div id="searchArea">
     <p class="firstLv subform">Search Sponsor</p>
@@ -27,12 +30,12 @@
                         <th><i class="fa fa-dot-circle-o"></i></th>
                     </tr>
                 </thead>
-<!--                <c:if test="${studyArrayList == null}">
+<c:if test="${studyArrayList == null}">
                     <p>no studies </p>
-                </c:if>-->
+                </c:if>
                 <tbody>
                     <c:forEach var="study" items="${studyArrayList}">
-                        <tr>
+                        <tr id="${study.getEqStudyId()}">
                             <td>
                                 ${study.getEqStudyId()}
                             </td>
@@ -46,7 +49,7 @@
                                 ${study.getSponStudyId()}
                             </td>
                             <td>
-                                <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
+                                <input type="radio" name="optionsRadios" value="option">
                             </td>
                         </tr>
                     </c:forEach>

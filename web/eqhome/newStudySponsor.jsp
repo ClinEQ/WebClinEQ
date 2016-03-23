@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link href="../resources/css/eqhome/newStudySponsor.css" rel="stylesheet" type="text/css"/>
-<link href="../resources/css/forms/formSearchSponsor.css" rel="stylesheet" type="text/css"/>
 
 <script src="../resources/lib/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
@@ -178,13 +177,14 @@
                 </c:forEach>
             </tbody>
         </table>
-        <a class="btn btn-default" href="javascript:void(0);" onclick="ToggleSubform('divCreateNewUser', 'formCreatNewUser');" role="button">Add New User</a>
-        <div class="divCreateNewUser" style="display:none">
-        </div>
+
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add New User</button>
+
+
     </div>
 
     <div class="form-horizontal">
-        <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
+        <a type="submit" href="../eqhome/newStudySite.jsp" class="btn btn-success">Next</a>
     </div>
 
     <div class="save-options">
@@ -197,9 +197,10 @@
         <button type="button" class="btn btn btn-danger">Cancel</button>
     </div>
 
+</div>
 
+<!-- footer -->
+<jsp:include page="../includes/footer.jsp"/>
 
-    <!-- footer -->
-    <jsp:include page="../includes/footer.jsp"/>
+<jsp:include page="../includes/forms/formCreateNewUser.jsp"/>
 
- 
