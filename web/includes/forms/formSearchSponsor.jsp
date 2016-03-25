@@ -3,7 +3,7 @@
     <p class="firstLv subform">Search Sponsor</p>
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh">
-<!--            <legend class="search">Search Sponsor</legend>-->
+            <!--            <legend class="search">Search Sponsor</legend>-->
             <div class="form-group">
                 <label for="inpSearchName">Enter Sponsor Name</label>
                 <input type="text" class="form-control" id="inpSearchName">
@@ -11,48 +11,54 @@
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
     </form>
-    
-       <div class="seacrhSpon">
+
+    <div class="seacrhSpon">
         <p class="secondLv">Search Result</p>              
     </div>
-    
+
     <div class="tableSearchSponsor">
-            <table class="table table-striped">
-                <thead>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sponsor Name</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th><i class="fa fa-dot-circle-o"></i></th>
+                </tr>
+            </thead>
+            <c:if test="${orgArrayList == null}">
+                <p>no org </p>
+            </c:if>
+            <tbody>
+            <c:forEach var="org" items="${orgArrayList}">
+                ${org.getOrgType()}
+                <c:if test="${org.getOrgType()=='SPONSOR'}">
+
+
                     <tr>
-                        <th>Sponsor Name</th>
-                        <th>Department</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th><i class="fa fa-dot-circle-o"></i></th>
+                        <td>
+                            ${org.getOrgFullName()}
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            ${org.getAddress1()} ${org.getAddress2()} ${org.getCity()} ${org.getState()} ${org.getZip()}
+                        </td>
+                        <td>
+                            ${org.getStatus()}
+                        </td>
+                        <td>
+                            <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
+                        </td>
                     </tr>
-                </thead>
-<!--                <c:if test="${studyArrayList == null}">
-                    <p>no studies </p>
-                </c:if>-->
-                <tbody>
-                    <c:forEach var="study" items="${studyArrayList}">
-                        <tr>
-                            <td>
-                                ${study.getEqStudyId()}
-                            </td>
-                            <td>
-                                ${study.getNctid()}
-                            </td>
-                            <td>
-                                ${study.getStudyAname()}
-                            </td>
-                            <td>
-                                ${study.getSponStudyId()}
-                            </td>
-                            <td>
-                                <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    </c:if>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
-    <button type="submit" class="btn btn-default" style="float:right;">Add to Study</button>          
+    <button type="submit" class="btn btn-default" style="float:right;">Add to Study</button> 
+
 </div>
 

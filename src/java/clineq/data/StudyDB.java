@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSetMetaData;
 import clineq.data.DBUtil;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -139,5 +141,57 @@ public class StudyDB {
            DBUtil.closeResultSet(rs);
            DBUtil.closePreparedStatement(ps);
         }
-    }    
+    }   
+    
+        public static void saveStudy(Studies study) throws DBException {   
+            SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
+            if (study==null)
+            {
+                return;
+            }
+            
+            /* INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); */
+            
+        String sql = "INSERT INTO CLINEQ.STUDIES ( EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, " +
+                "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, " +
+                "CO_SPON_STUDY_ID, STUDY_START_DATE, STUDY_END_DATE, " +
+                "STUDY_EQ_INIT_DATE, STUDY_EQ_CLOSE_DATE, PLANNED_PATIENTS_NUM, " +
+                "EQ_IWRS_ID, CHART_GROUP_ID, STUDY_STATUS ) VALUES (" +
+                "'" + study.getEqStudyId() + "'," +
+                "'" + study.getEqCoSponId()+ "'," +
+                "'" + study.getNctid() + "'," +
+                "'" + study.getEuStudyId() + "'," +
+                "'" + study.getEqSponId() + "'," +
+                "'" + study.getStudyAname() + "'," +
+                "'" + study.getStudyTitle() + "'," +
+                "'" + study.getSponStudyId() + "'," +
+                "'" + study.getCoSponStudyId() + "'," +
+                //to_date('01/01/2015','mm/dd/yyyy'),
+                "to_date('" + (formatter.format(study.getStudyStartDate().getTime())) + "','mm/dd/yyyy')," +
+                "to_date('" + (formatter.format(study.getStudyEndDate().getTime())) + "','mm/dd/yyyy')," +
+                "to_date('" + (formatter.format(study.getStudyEqInitDate().getTime())) + "','mm/dd/yyyy')," +
+                "to_date('" + (formatter.format(study.getStudyEqCloseDate().getTime())) + "','mm/dd/yyyy')," +
+                study.getPlannedPatientsNum() + "," +
+                "'" + study.getEqIwrsId() + "'," +
+                "'" + study.getChartGroupId() + "'," +
+                "'" + study.getStudyStatus() +"'" +
+                ")";
+        
+        System.out.println("insert sql=" + sql);
+        //PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+      
+        try { 
+            Connection conn = DBConnect.getConnection();
+            //ps = conn.prepareStatement(sql);
+            //rs = ps.executeQuery(); //{
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.err.println("in studyDB = error"+ e.getMessage());
+            return ;
+        } 
+    }
 }

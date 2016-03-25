@@ -24,73 +24,73 @@
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSMNCTId">NCT ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSMNCTId" name="inpEqhomeNSMNCTId">
+                    <input class="form-control" id="inpEqhomeNSMNCTId" name="NCTId">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEUStudyId">EU Study ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSMEUStudyId" name="inpEqhomeNSMEUStudyId">
+                    <input class="form-control" id="inpEqhomeNSMEUStudyId" name="EUStudyId">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyAname">Study Aname</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMEQStudyAname" name="inpeqhomeNSMEQStudyAname">
+                    <input class="form-control" id="inpeqhomeNSMEQStudyAname" name="StudyAname">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyTitle">Study Title</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMStudyTitle" name="inpeqhomeNSMStudyTitle">
+                    <input class="form-control" id="inpeqhomeNSMStudyTitle" name="StudyTitle">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMSponStudyId">Sponsor Study ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMSponStudyId" name="inpeqhomeNSMSponStudyId">
+                    <input class="form-control" id="inpeqhomeNSMSponStudyId" name="SponStudyId">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMCoSponStudyId">Co Sponsor Study ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMCoSponStudyId" name="inpeqhomeNSMCoSponStudyId" >
+                    <input class="form-control" id="inpeqhomeNSMCoSponStudyId" name="CoSponStudyId" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyStartDate">Study Start Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMStudyStartDate" name="inpeqhomeNSMStudyStartDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMStudyStartDate" name="StudyStartDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyEndDate">Study End Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMStudyEndDate" name="inpeqhomeNSMStudyEndDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMStudyEndDate" name="StudyEndDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMPlanSubNum">Planned Subject Number</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMPlanSubNum" name="inpeqhomeNSMPlanSubNum" >
+                    <input class="form-control" id="inpeqhomeNSMPlanSubNum" name="PlanSubNum" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEQSetDate">EQ Setup Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMEQSetDate" name="inpeqhomeNSMEQSetDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMEQSetDate" name="EQSetDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEQClsDate">EQ Close Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMEQClsDate" name="inpeqhomeNSMEQClsDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMEQClsDate" name="EQClsDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyStatus">Study Status</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMStudyStatus" name="inpeqhomeNSMStudyStatus" >
+                    <input class="form-control" id="inpeqhomeNSMStudyStatus" name="StudyStatus" >
                 </div>
             </div>
 
