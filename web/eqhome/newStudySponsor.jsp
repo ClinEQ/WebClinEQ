@@ -69,103 +69,104 @@
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSSEqSponId" value="${sponsor.getEqOrgId()}">
+                    <input class="form-control" id="inpEqhomeNSSEqSponId" name="EqSponId" value="${sponsor.getEqOrgId()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSSponName">Sponsor Name</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSSponName" value="${sponsor.getOrgFullName()}">
+                    <input class="form-control" id="inpeqhomeNSSSponName" name="SponName" value="${sponsor.getOrgFullName()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSSponAB">Sponsor Name ABBR</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSSponAB" value="${sponsor.getOrgNameAbbr()}">
+                    <input class="form-control" id="inpeqhomeNSSSponAB" name="SponAB" value="${sponsor.getOrgNameAbbr()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSSponType">Sponsor Type</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSSponType" value="${sponsor.getOrgType()}" >
+                    <input class="form-control" id="inpeqhomeNSSSponType" name="SponType" value="${sponsor.getOrgType()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSSponCate">Sponsor Category</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSSponCate" value="${sponsor.getOrgCategory()}" >
+                    <input class="form-control" id="inpeqhomeNSSSponCate" name="SponCate" value="${sponsor.getOrgCategory()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSAddress1">Address1</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSAddress1" value="${sponsor.getAddress1()}" >
+                    <input class="form-control" id="inpeqhomeNSSAddress1" name="Address1" value="${sponsor.getAddress1()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSAddress2">Address2</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSAddress2" value="${sponsor.getAddress2()}" >
+                    <input class="form-control" id="inpeqhomeNSSAddress2" name="Address2" value="${sponsor.getAddress2()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-1 control-label" for="inpeqhomeNSSCity">City</label>
                 <div class="col-sm-3">
-                    <input class="form-control" id="inpeqhomeNSSCity" value="${sponsor.getCity()}" >
+                    <input class="form-control" id="inpeqhomeNSSCity" name="City" value="${sponsor.getCity()}" >
                 </div>
                 <label class="col-sm-1 control-label" for="inpeqhomeNSSState">State</label>
                 <div class="col-sm-2">
-                    <input class="form-control" id="inpeqhomeNSSState" value="${sponsor.getState()}" >
+                    <input class="form-control" id="inpeqhomeNSSState" name="State" value="${sponsor.getState()}" >
                 </div>
                 <label class="col-sm-2 control-label" for="inpeqhomeNSSZip">Zip Code</label>
                 <div class="col-sm-3">
-                    <input class="form-control" id="inpeqhomeNSSZip" value="${sponsor.getZip()}" >
+                    <input class="form-control" id="inpeqhomeNSSZip" name="Zip" value="${sponsor.getZip()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSCountry">Country</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSCountry" value="${sponsor.getCountry()}" >
+                    <input class="form-control" id="inpeqhomeNSSCountry" name="Country" value="${sponsor.getCountry()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-2 control-label" for="inpeqhomeNSSPhone">Phone</label>
                 <div class="col-sm-4">
-                    <input class="form-control" id="inpeqhomeNSSPhone" value="${sponsor.getPhone()}" >
+                    <input class="form-control" id="inpeqhomeNSSPhone" name="Phone" value="${sponsor.getPhone()}" >
                 </div>
                 <label class="col-sm-1 control-label" for="inpeqhomeNSSFax">Fax</label>
                 <div class="col-sm-5">
-                    <input class="form-control" id="inpeqhomeNSSFax" value="${sponsor.getFax()}" >
+                    <input class="form-control" id="inpeqhomeNSSFax" name="Fax" value="${sponsor.getFax()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSSponUrl">Sponsor URL</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSSponUrl" value="${sponsor.getOrgUrl()}" >
+                    <input class="form-control" id="inpeqhomeNSSSponUrl" name="SponUrl" value="${sponsor.getOrgUrl()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-3 control-label" for="inpeqhomeNSSConName">Contact Name</label>
                 <div class="col-sm-3">
-                    <input class="form-control" id="inpeqhomeNSSConName" value="${sponsor}" >
+                    <input class="form-control" id="inpeqhomeNSSConName" name="ConName" value="${sponsor}" >
                 </div>
                 <label class="col-sm-1 control-label" for="inpeqhomeNSSEmail">Email</label>
                 <div class="col-sm-5">
-                    <input class="form-control" id="inpeqhomeNSSEmail" value="${sponsor}" >
+                    <input class="form-control" id="inpeqhomeNSSEmail" name="Email" value="${sponsor}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSSStudyStatus">Study Status</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSStudyStatus" value="${sponsor.getStatus()}" >
+                    <input class="form-control" id="inpeqhomeNSSStudyStatus" name="Status" value="${sponsor.getStatus()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="txteqhomeNSSNote">Notes</label>
                 <div class="col-sm-12">
-                    <textarea class="form-group" rows="4" id="txteqhomeNSSNote" value="${sponsor.getNotes()}"></textarea>
+                    <textarea class="form-group" rows="4" id="txteqhomeNSSNote" name="Note" value="${sponsor.getNotes()}"></textarea>
                 </div>
             </div>
+                <input type="submit" value="Create Study" class="btn btn-primary" onclick="form.action = 'saveNewStudy';">
         </form>
     </div>
 
@@ -227,13 +228,16 @@
     </div>
 
     <div class="save-options">
-        <button type="button" class="btn btn-primary">Create Study</button>
+        <form class="form-horizontal" action="#" method="post">
+        <!--<button type="button" class="btn btn-primary">Create Study</button>-->
+        <!--<input type="submit" value="Create Study" class="btn btn-primary" onclick="form.action = 'saveNewStudy';">-->
 
 
         <button type="button" class="btn btn btn-info">Save as Default</button>
 
 
         <button type="button" class="btn btn btn-danger">Cancel</button>
+        </form>
     </div>
 
 

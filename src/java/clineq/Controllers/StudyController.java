@@ -166,7 +166,7 @@ public class StudyController extends HttpServlet {
         try {
             for (Organizations item : orgArrayList) {
                 System.out.println("request.getParameter(optionsRadios):" + request.getParameter("optionsRadios"));
-                System.out.println("item.getEqOrgId():"+item.getEqOrgId());
+                System.out.println("item.getEqOrgId():" + item.getEqOrgId());
                 if (item.getEqOrgId().equals(request.getParameter("optionsRadios"))) {
                     session.setAttribute("sponsor", item);
                     break;
@@ -186,11 +186,24 @@ public class StudyController extends HttpServlet {
             HttpServletResponse response, String status) throws IOException {
 
         String url;
-
+        HttpSession session = request.getSession();
         try {
+            //sponsor = (Organizations) session.getAttribute("sponsor");
+            sponsor = getOrganization(request);
+            if (sponsor != null) {
+                OrganizationDB.saveOrg(sponsor);
+            }
             study = getStudy(request);
-            study.setStudyStatus(status);
-            StudyDB.saveStudy(study);
+            if (study != null) {
+                study.setStudyStatus(status);
+                if (sponsor != null)
+                {
+                    study.setSponStudyId(sponsor.getEqOrgId());
+                }
+                
+                StudyDB.saveStudy(study);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -256,6 +269,37 @@ public class StudyController extends HttpServlet {
         }
         return study;
     }
+    
+    public Organizations getOrganization(HttpServletRequest request)
+            throws IOException, ServletException {
+        Organizations org = new Organizations();
+
+        try {
+            org.setEqOrgId(request.getParameter("EqSponId"));
+            org.setOrgFullName(request.getParameter("SponName"));
+            org.setOrgNameAbbr(request.getParameter("SponAB"));
+            org.setOrgType(request.getParameter("SponType"));
+            org.setOrgCategory(request.getParameter("SponCate"));
+            org.setAddress1(request.getParameter("Address1"));
+            org.setAddress2(request.getParameter("Address2"));
+            org.setCity(request.getParameter("City"));
+            org.setState(request.getParameter("State"));
+            org.setZip(request.getParameter("Zip"));
+            org.setCountry(request.getParameter("Country"));
+            org.setPhone(request.getParameter("Phone"));
+            org.setFax(request.getParameter("Fax"));
+            org.setOrgUrl(request.getParameter("SponUrl"));
+            org.setFax(request.getParameter("Fax"));
+            org.setStatus(request.getParameter("Status"));
+            
+            
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return org;
+    }    
 }
 
 /*

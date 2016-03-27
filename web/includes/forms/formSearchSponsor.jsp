@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="searchArea">
     <p class="firstLv subform">Search Sponsor</p>
     <form class="form-inline" action="#" method="post">
