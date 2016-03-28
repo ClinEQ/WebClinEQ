@@ -29,7 +29,7 @@
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSSEqSponId" >
+                    <input class="form-control" id="inpEqhomeNSSEqSponId" readonly >
                 </div>
             </div>
             <div class="form-group form-group-lg">
@@ -115,9 +115,9 @@
                 </div>
             </div>
             <div class="form-group form-group-lg">
-                <label class="col-sm-5 control-label" for="inpeqhomeNSSStudyStatus">Study Status</label>
+                <label class="col-sm-5 control-label" for="inpeqhomeNSSSponsorStatus">Sponsor Status</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSSStudyStatus" >
+                    <input class="form-control" id="inpeqhomeNSSSponsorStatus" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
