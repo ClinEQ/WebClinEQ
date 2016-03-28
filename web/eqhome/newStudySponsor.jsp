@@ -242,6 +242,8 @@
 
 
 
-    <!-- footer -->
-    <jsp:include page="../includes/footer.jsp"/>
+  <!-- footer -->
+<jsp:include page="../includes/footer.jsp"/>
+
+<jsp:include page="../includes/forms/formCreateNewUser.jsp"/>
 
