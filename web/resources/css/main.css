@@ -102,3 +102,25 @@ footer{
 footer>hr{
     margin-bottom: 5px;
 }
+
+.container{
+    margin-left: 250px !important;
+}
+
+.container .firstLv {
+    margin-left: 25%;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+p.firstLv.subform{
+    margin-left:0px;
+    text-align: center;
+}
+
+p.secondLv{
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
