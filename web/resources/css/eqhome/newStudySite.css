@@ -1,0 +1,24 @@
+.content{
+    position: relative;
+    min-height: 400px;
+}
+
+#studySitePrimary>.firstLv{
+    margin: auto;
+    text-align: center;
+}
+
+.btn-default{
+    width: 120px;
+}
+
+.btn-success{
+    margin-top: 60px;
+    float: right;
+    width: 100px;
+}
+
+.save-options{  
+    margin-left: 35%;
+    margin-top: 150px;
+}

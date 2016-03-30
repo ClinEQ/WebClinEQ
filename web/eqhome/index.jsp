@@ -31,7 +31,7 @@
                 <div class="form-group select-box">
                     <label>Sponsor Name</label>
                     
-                    <select id="sltSponsorName" name="sltSponsorName" class="form-control">
+                    <select id="sltSponsorName" name="sltSponsorName" class="form-control" onChange="changeSponsor()">
 
                         <c:forEach var="sponsorName" items="${sponsorNameList}">
 

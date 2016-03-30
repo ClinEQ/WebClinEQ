@@ -83,9 +83,9 @@ public class UserDB {
             while (rs.next()) {
                 Users obj = new Users();
                 obj.setEqUserId(rs.getString("EQ_USER_ID"));
-                eqOrgId = rs.getString("EQ_ORG_ID");
-                Organizations org = new Organizations(eqOrgId);
-                org.setOrgFullName(OrganizationDB.getOrgName(eqOrgId));
+
+                Organizations org = OrganizationDB.selectOneOrganization(rs.getString("EQ_ORG_ID"));
+
                 obj.setEqOrgId(org);
                 obj.setLname(rs.getString("LNAME"));
                 obj.setFname(rs.getString("FNAME"));

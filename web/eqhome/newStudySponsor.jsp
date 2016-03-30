@@ -23,45 +23,6 @@
             <p class="secondLv">Primary Sponsor   <a href="javascript:void(0);" onclick="ToggleSubform('divSearchSponsor', 'formSearchSponsor');">Check if sponsor exist</a>  </p>              
         </div>
 
-
-        <c:if test="${orgArrayList == null}">
-            <p>no org </p>
-        </c:if>
-        <tbody>
-        <form class="form-horizontal" action="#" method="post">
-            <c:forEach var="org" items="${orgArrayList}">
-                ${org.getOrgType()}
-                <c:if test="${org.getOrgType()=='SPONSOR'}">
-
-
-                    <tr>
-                        <td>
-                            ${org.getOrgFullName()}
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            ${org.getAddress1()} ${org.getAddress2()} ${org.getCity()} ${org.getState()} ${org.getZip()}
-                        </td>
-                        <td>
-                            ${org.getStatus()}
-                        </td>
-                        <td>
-                            <input type="radio" name="optionsRadios" id="optionsRadios" value="${org.getEqOrgId()}">
-                        </td>
-                    </tr>
-                </c:if>
-                <p>
-                </c:forEach>
-
-                <input type="submit" value="Add to Study" class="btn btn-danger" onclick="form.action = 'AddSponsorToStudy';">
-        </form>   
-        </tbody>     
-
-
-
-
         <div class="divSearchSponsor subSearchArea" style="display:none">
         </div>
 

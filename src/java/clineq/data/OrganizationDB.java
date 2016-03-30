@@ -196,7 +196,7 @@ public class OrganizationDB {
             return;
         }
 
-/*
+        /*
         insert into  ORGANIZATIONS
 (
   EQ_ORG_ID       ,
@@ -236,40 +236,45 @@ values(
 'THIS IS owner COMPANY',
 'ACTIVE');
         
-        */
-        String sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
-                + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
-                + "ADDRESS2, CITY, STATE, "
-                + "ZIP, COUNTRY, PHONE, "
-                + "FAX, ORG_URL, NOTES, STATUS ) VALUES ("
-                + "'" + org.getEqOrgId() + "',"
-                + "'" + org.getOrgFullName()+ "',"
-                + "'" + org.getOrgNameAbbr()+ "',"
-                + "'" + org.getOrgDisplayName()+ "',"
-                + "'" + org.getOrgType()+ "',"
-                + "'" + org.getOrgCategory()+ "',"
-                + "'" + org.getAddress1()+ "',"
-                + "'" + org.getAddress2()+ "',"
-                + "'" + org.getCity()+ "',"
-                + "'" + org.getState()+ "',"
-                + "'" + org.getZip()+ "',"
-                + "'" + org.getCountry()+ "',"
-                + "'" + org.getPhone()+ "',"
-                + "'" + org.getFax()+ "',"
-                + "'" + org.getOrgUrl()+ "',"
-                + "'" + org.getNotes()+ "',"
-                + "'" + org.getStatus()+ "'"
-                + ")";
-
-        System.out.println("insert sql=" + sql);
-        //PreparedStatement ps = null;
+         */
+        PreparedStatement ps = null;
         Statement stmt = null;
         ResultSet rs = null;
 
         try {
             Connection conn = DBConnect.getConnection();
-            //ps = conn.prepareStatement(sql);
-            //rs = ps.executeQuery(); //{
+            ps = conn.prepareStatement("select clineq.seq_eqorgid.currval from dual;");
+            rs = ps.executeQuery();
+            String EQ_ORG_ID = null;
+            while (rs.next()) {
+                EQ_ORG_ID = Integer.toString(rs.getInt("NEXTVAL"));
+            }
+
+            String sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
+                    + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
+                    + "ADDRESS2, CITY, STATE, "
+                    + "ZIP, COUNTRY, PHONE, "
+                    + "FAX, ORG_URL, NOTES, STATUS ) VALUES ("
+                    + "'" + EQ_ORG_ID + "',"
+                    + "'" + org.getOrgFullName() + "',"
+                    + "'" + org.getOrgNameAbbr() + "',"
+                    + "'" + org.getOrgDisplayName() + "',"
+                    + "'" + org.getOrgType() + "',"
+                    + "'" + org.getOrgCategory() + "',"
+                    + "'" + org.getAddress1() + "',"
+                    + "'" + org.getAddress2() + "',"
+                    + "'" + org.getCity() + "',"
+                    + "'" + org.getState() + "',"
+                    + "'" + org.getZip() + "',"
+                    + "'" + org.getCountry() + "',"
+                    + "'" + org.getPhone() + "',"
+                    + "'" + org.getFax() + "',"
+                    + "'" + org.getOrgUrl() + "',"
+                    + "'" + org.getNotes() + "',"
+                    + "'" + org.getStatus() + "'"
+                    + ")";
+
+            System.out.println("insert sql=" + sql);
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {

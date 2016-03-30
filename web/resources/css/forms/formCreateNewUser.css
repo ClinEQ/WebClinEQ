@@ -1,0 +1,11 @@
+form.form-modal{
+    margin:auto;
+}
+
+div.modal-content{
+    width: 600px;
+}
+
+.modal-footer{
+    margin-top: 20px;
+}
