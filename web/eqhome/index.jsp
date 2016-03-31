@@ -1,25 +1,27 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="../resources/css/eqhome/index.css" rel="stylesheet" type="text/css"/>
 
 <jsp:include page="../includes/header.jsp"/>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav id="navbar-main" class="navbar navbar-inverse">
-    <jsp:include page="../includes/topNav.jsp"/>
-    <jsp:include page="../includes/leftNav.jsp"/>
+    <div class="container-fluid">
+        <jsp:include page="../includes/topNav.jsp"/>
+        <jsp:include page="../includes/leftNav.jsp"/>
+    </div>
 </nav>
 
 
 
 <div class="container content">
     <section id="EQHome">
-        <h3>Study List</h3>
+        <h1 class="firstLv">Study List</h1>
         <div class="filter-bar">
             <form class="form-inline">
                 <div class="form-group select-box" >
                     <label>Study Status</label>
-                    
-                    <select id="sltStudyStatus" name="sltStudyStatus" class="form-control">
 
+                    <select id="sltStudyStatus" name="sltStudyStatus" class="form-control"  >
+<!-- onchange="changeTable($(this).val(), $('#sltSponsorName').val());"-->
                         <c:forEach var="studyStatus" items="${studyStatusList}">
 
                             <option value="${studyStatus}" id="${studyStatus}">${studyStatus}</option>
@@ -30,8 +32,8 @@
                 </div>
                 <div class="form-group select-box">
                     <label>Sponsor Name</label>
-                    
-                    <select id="sltSponsorName" name="sltSponsorName" class="form-control">
+
+                    <select id="sltSponsorName" name="sltSponsorName" class="form-control" onchange="changeTable($('#sltStudyStatus').val(), $(this).val());">
 
                         <c:forEach var="sponsorName" items="${sponsorNameList}">
 
@@ -45,16 +47,16 @@
         </div>
 
         <div class="table-area">
-            <table class="table table-striped">
+            <table class="table table-striped" id="tableStudy">
                 <thead>
                     <tr>
                         <th>EQ Study ID</th>
                         <th>NCI ID</th>
                         <th>Study Aname</th>
                         <th>Sponsor Name</th>
-                        <th>EQ Initial Date</th>
+                        <th>Eq_initial_date</th>
                         <th>Status</th>
-                        <th>Detail</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <c:if test="${studyArrayList == null}">
@@ -89,7 +91,7 @@
         </div>
     </section>
     <form>
-    <button type="submit" formaction="../eqhome/newStudyMain.jsp" class="btn btn-success">Add New Study</button>
+        <button type="submit" formaction="../study/createNewStudy" class="btn btn-success">Add New Study</button>
     </form>
 </div>
 <!-- footer -->

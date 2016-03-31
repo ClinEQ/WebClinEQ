@@ -45,19 +45,22 @@ public class LoginController extends HttpServlet {
         System.out.println("doPost enter user controller dopost!");
         String requestURI = request.getRequestURI();
         String url = null;
-        String userid = request.getParameter("userId");
+        String userid = request.getParameter("inpUserName");
         if (userExist(userid)) {
             url = "/study/displayStudyList";
             //url = "/eqhome/index.jsp";
         } else {
 //            response.sendRedirect("/login.jsp");
 //            return;
-            request.getSession().invalidate();
-            url = "/eqhome/login.jsp";
+            //request.getSession().invalidate();
+            //url = "/eqhome/login.jsp";
+            url = "../login.html";
+            response.sendRedirect(url);
+            return;
         }
 
-        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        //RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 

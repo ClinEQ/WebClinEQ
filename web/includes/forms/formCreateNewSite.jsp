@@ -1,11 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <link href="/WebClinEQ/resources/css/forms/formCreateNewSite.css" rel="stylesheet" type="text/css"/>
 
 <div class="container">
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="modalNewSite" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->

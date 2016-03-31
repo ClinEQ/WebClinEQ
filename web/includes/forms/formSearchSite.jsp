@@ -1,12 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="/WebClinEQ/resources/css/forms/formSearchSite.css" rel="stylesheet" type="text/css"/>
 
 
 <div id="searchArea">
-    <p class="firstLv subform">Search Site</p>
+    <h2 class="secondLv subform">Search Site</h2>
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh">
-<!--            <legend class="search">Search Sponsor</legend>-->
             <div class="form-group">
                 <label for="inpSearchName">Enter Sponsor Name</label>
                 <input type="text" class="form-control" id="inpSearchName">
@@ -14,10 +12,6 @@
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
     </form>
-    
-       <div class="seacrhSpon">
-        <p class="secondLv">Search Result</p>              
-    </div>
     
     <div class="tableSearchSponsor">
             <table class="table table-striped">

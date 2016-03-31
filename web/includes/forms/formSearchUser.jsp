@@ -1,15 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div id="searchArea">
-    <p class="firstLv subform">Search User</p>
+    <h2 class="secondLvLv subform">Search User</h2>
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh">
             <div class="form-group">
-                <label for="inpSearchName">Enter Sponsor Name</label>
+                <label style="margin-left: 8px;" for="inpSearchName">User</label>
                 <input type="text" class="form-control" id="inpSearchName">
             </div>
             <div class="form-group">
-                <label for="sltFltIns">by Institution</label>
+                <label style="margin-right: 8px;" for="sltFltIns">Filter by Organization</label>
                 <select id="sltFltIns" name="sltFltIns" class="form-control">
                     <option value="all" id="optAll" selected="selected">All</option>
                     <option value="acitve" id="optActive">AA</option>
@@ -19,12 +18,8 @@
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
     </form>
-
-    <div class="seacrhSpon">
-        <p class="secondLv">Search Result</p>              
-    </div>
-
-    <div class="tableSearchSponsor">
+    
+    <div class="tableSearchUser">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -36,9 +31,7 @@
                     <th><i class="fa fa-dot-circle-o"></i></th>
                 </tr>
             </thead>
-<!--            <c:if test="${studyArrayList == null}">
-                <p>no studies </p>
-            </c:if>-->
+
             <tbody>
             <c:forEach var="study" items="${studyArrayList}">
                 <tr>
@@ -66,4 +59,3 @@
         </table>
     </div>
     <button type="submit" class="btn btn-default" style="float:right;">Add to Study</button>
-</div>
