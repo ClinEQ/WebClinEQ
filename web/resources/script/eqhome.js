@@ -1,5 +1,6 @@
 var table;
 $(document).ready(function () {
+
 //    $('.date').datepicker({
 //        autoclose: true,
 //        todayHighlight: true
@@ -9,9 +10,10 @@ $(document).ready(function () {
 //        'id':'tempForm'
 //    }).append($("#tableStudy")));
 //    table=$("#tempForm").find('table');
-    
+
 });
 
+//toggle sub form
 function ToggleSubform(selector, form) {
     $("." + selector).slideToggle();
     if ($("." + selector).css("display") === "block") {
@@ -19,17 +21,21 @@ function ToggleSubform(selector, form) {
     }
 }
 
-function changeTable(status,sponsorname){
+//dropdown filter
+function changeTable(status, sponsorname) {
     debugger;
-    var tbody=$("<tbody>");
-    table.find('tbody').find('tr').each(function(){
-        if($(this).find('td:nth-child(4)').text().trim()===sponsorname&&$(this).find('td:nth-child(4)').text().trim()===sponsorname){
+    var tbody = $("<tbody>");
+    table.find('tbody').find('tr').each(function () {
+        if ($(this).find('td:nth-child(4)').text().trim() === sponsorname && $(this).find('td:nth-child(4)').text().trim() === sponsorname) {
             tbody.append($(this));
         }
     });
     $("#tableStudy").find("tbody").remove();
     $("#tableStudy").append(tbody[0].outerHTML);
 }
+
+
+
 
 
 
