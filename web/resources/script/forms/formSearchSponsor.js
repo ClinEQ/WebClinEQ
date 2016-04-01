@@ -1,6 +1,6 @@
     $("#inpSearchName").keyup(function () {
         //split the current value of searchInput
-        var data = this.value.split(" ");
+        var data = this.value.toUpperCase().split(" ");
         //create a jquery object of the rows
         var jo = $("#fbody").find("tr");
         if (this.value == "") {
@@ -12,8 +12,15 @@
         //Recusively filter the jquery object to get results.
         jo.filter(function (i, v) {
             var $t = $(this);
+            
+            var $c=[];
+            
+            $t.find('td').each(function(){
+                $c.push($(this).text().toUpperCase());
+            })
+            
             for (var d = 0; d < data.length; ++d) {
-                if ($t.is(":contains('" + data[d] + "')")) {
+                if ($c.indexOf(data[d])) {
                     return true;
                 }
             }
