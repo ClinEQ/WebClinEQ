@@ -21,7 +21,8 @@
                     <label>Study Status</label>
 
                     <select id="sltStudyStatus" name="sltStudyStatus" class="form-control"  >
-<!-- onchange="changeTable($(this).val(), $('#sltSponsorName').val());"-->
+                        <!-- onchange="changeTable($(this).val(), $('#sltSponsorName').val());"-->
+                        <option value="All">ALL</option>
                         <c:forEach var="studyStatus" items="${studyStatusList}">
 
                             <option value="${studyStatus}" id="${studyStatus}">${studyStatus}</option>
@@ -33,7 +34,7 @@
                 <div class="form-group select-box">
                     <label>Sponsor Name</label>
 
-                    <select id="sltSponsorName" name="sltSponsorName" class="form-control" onchange="changeTable($('#sltStudyStatus').val(), $(this).val());">
+                    <select id="sltSponsorName" name="sltSponsorName" class="form-control">
 
                         <c:forEach var="sponsorName" items="${sponsorNameList}">
 
