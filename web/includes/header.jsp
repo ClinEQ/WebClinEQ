@@ -18,7 +18,7 @@
     <body>
         <div id="header">
         <div class="jumbotron">
-            <h1>ClinEQ System</h1>
+            <h1>ClinEQ System changed from yu song</h1>
         </div>
     </div>
 
