@@ -4,17 +4,17 @@
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh">
             <div class="form-group">
-                <label style="margin-left: 8px;" for="inpSearchName">User</label>
-                <input type="text" class="form-control" id="inpSearchName">
+<!--                <label style="margin-left: 8px;" for="inpSearchName">User</label>-->
+                <input type="text" class="form-control" id="inpSearchName" placeholder="Search">
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label style="margin-right: 8px;" for="sltFltIns">Filter by Organization</label>
                 <select id="sltFltIns" name="sltFltIns" class="form-control">
                     <option value="all" id="optAll" selected="selected">All</option>
                     <option value="acitve" id="optActive">AA</option>
                     <option value="pending" id="optPending">BB</option>
                 </select>   
-            </div>            
+            </div>            -->
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
     </form>

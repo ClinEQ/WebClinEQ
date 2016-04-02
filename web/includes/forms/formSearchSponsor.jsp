@@ -9,8 +9,8 @@
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh" style="margin:15px 10px;">
             <div class="form-group">
-                <label style="font-size:15px;" for="inpSearchName">Enter Sponsor Name</label>
-                <input type="text" class="form-control" id="inpSearchName">
+<!--                <label style="font-size:15px;" for="inpSearchName">Enter Sponsor Name</label>-->
+                <input type="text" class="form-control" id="inpSearchName" placeholder="Search">
             </div>            
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
@@ -32,13 +32,9 @@
                     <p>no org </p>
                 </c:if>
                 <tbody id="fbody">
-
                     <c:forEach var="org" items="${orgArrayList}">
-                        
                         <c:if test="${org.getOrgType()=='SPONSOR'}">
-
-
-                            <tr>
+                            <tr id="${org.getEqOrgId()}">
                                 <td>
                                     ${org.getOrgFullName()}
                                 </td>
@@ -68,7 +64,3 @@
     </form>
 </div>
 
-<script>
-    //search
-    
-</script>

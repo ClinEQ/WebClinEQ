@@ -1,12 +1,8 @@
-<jsp:include page="../includes/header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <link href="../resources/css/eqhome/newStudySponsor.css" rel="stylesheet" type="text/css"/>
 
-<script src="../resources/lib/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
-<link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
-<link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.standalone.css" rel="stylesheet" type="text/css"/>
-<script src="../resources/script/eqhome.js" type="text/javascript"></script>
+<jsp:include page="../includes/header.jsp"/>
+
 
 <nav id="navbar-main" class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -150,31 +146,8 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <c:if test="${userArrayList == null}">
-                <p>no user </p>
-            </c:if>
             <tbody>
-                <c:forEach var="user" items="${userArrayList}">
-                    <tr>
-                        <td>
-                            ${user.getEqUserId()}
-                        </td>
-                        <td>
-                            ${user.getUserType()}
-                        </td>
-                        <td>
-                            ${user.getEqOrgId().getOrgFullName()}
-                        </td>
-                        <td>
-                            ${user.getFname()}
-                        </td>
-                        <td>
-                            ${user.getLname()}
-                        </td>
-                        <td><a href="#">Details</a></td>
-                        <td><a href="#">Delete</a></td>
-                    </tr>
-                </c:forEach>
+                
             </tbody>
         </table>
         <input type="submit" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >

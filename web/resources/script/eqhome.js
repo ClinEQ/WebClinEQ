@@ -1,10 +1,5 @@
 var tdlist=[];
 $(document).ready(function () {
-//    $('.date').datepicker({
-//        autoclose: true,
-//        todayHighlight: true
-//        });
-
     $("#tableStudy").find('tbody').find('tr').each(function(){
         tdlist.push($(this));
     });
@@ -55,6 +50,11 @@ $(document).ready(function () {
     $("#tableStudy").append(tbody[0].outerHTML);
 });
 
+
+    $('.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+        });
 
 });
 
