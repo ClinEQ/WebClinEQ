@@ -71,7 +71,7 @@
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEQSetDate">EQ Setup Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMEQSetDate" name="EQSetDate" value="${newStudy.getStudyEqInitDateString()}"  class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMEQSetDate" name="EQSetDate" value="${newStudy.getStudyEqInitDateString()}" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
@@ -95,8 +95,6 @@
         <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySponsor.jsp">Next</button>
         </form>
     </div>
-
-</div>
 
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>

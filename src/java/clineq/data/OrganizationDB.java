@@ -149,7 +149,7 @@ public class OrganizationDB {
 
     public static Organizations selectOneOrganization(String EQ_ORG_ID) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
-        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + EQ_ORG_ID;
+        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = '" + EQ_ORG_ID + "'";
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -243,7 +243,7 @@ values(
 
         try {
             Connection conn = DBConnect.getConnection();
-            ps = conn.prepareStatement("select clineq.seq_eqorgid.currval from dual;");
+            ps = conn.prepareStatement("select clineq.seq_eqorgid.nextval from dual");
             rs = ps.executeQuery();
             String EQ_ORG_ID = null;
             while (rs.next()) {

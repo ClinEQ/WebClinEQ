@@ -37,9 +37,7 @@
                     <select id="sltSponsorName" name="sltSponsorName" class="form-control">
 
                         <c:forEach var="sponsorName" items="${sponsorNameList}">
-
-                            <option value="${sponsorName}" id="${sponsorName}">${sponsorName}</option>
-
+                            <option value="${sponsorName}" >${sponsorName}</option>
                         </c:forEach>
 
                     </select>                      
@@ -96,4 +94,3 @@
     </form>
 </div>
 <!-- footer -->
-<jsp:include page="../includes/footer.jsp"/>

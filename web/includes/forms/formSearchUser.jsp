@@ -33,28 +33,28 @@
             </thead>
 
             <tbody>
-            <c:forEach var="study" items="${studyArrayList}">
-                <tr>
-                    <td>
-                        ${study.getEqStudyId()}
-                    </td>
-                    <td>
-                        ${study.getNctid()}
-                    </td>
-                    <td>
-                        ${study.getStudyAname()}
-                    </td>
-                    <td>
-                        ${study.getSponStudyId()}
-                    </td>
-                    <td>
-                        ${study.getSponStudyId()}
-                    </td>
-                    <td>
-                        <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
-                    </td>
-                </tr>
-            </c:forEach>
+                <c:forEach var="user" items="${userArrayList}">
+                    <tr>
+                        <td>
+                            ${user.getFname()} ${user.getLname()}
+                        </td>
+                        <td>
+                            ${user.getEqUserId()} 
+                        </td>
+                        <td>
+                            ${user.getEqOrgId().getOrgFullName()}
+                        </td>
+                        <td>
+                            ${user.getUserType()} 
+                        </td>
+                        <td>
+                            ${user.getStatus()}
+                        </td>
+                        <td>
+                            <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>
