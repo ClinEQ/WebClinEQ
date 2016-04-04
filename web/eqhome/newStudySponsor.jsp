@@ -11,7 +11,6 @@
     </div>
 </nav>
 
-${newStudy.getNctid()}
 <div class="container content">
     <div id="studySponPrimary">
         <h1 class="firstLv">Sponsor</h1>

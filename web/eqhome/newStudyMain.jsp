@@ -17,73 +17,73 @@
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSMNCTId">NCT ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSMNCTId" >
+                    <input class="form-control" id="inpEqhomeNSMNCTId" name="NCTId" value="${newStudy.getNctid()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEUStudyId">EU Study ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSMEUStudyId" >
+                    <input class="form-control" id="inpEqhomeNSMEUStudyId" name="EUStudyId" value="${newStudy.getEuStudyId()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyAname">Study Aname</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMEQStudyAname" >
+                    <input class="form-control" id="inpeqhomeNSMEQStudyAname" name="StudyAname" value="${newStudy.getStudyAname()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyTitle">Study Title</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMStudyTitle" >
+                    <input class="form-control" id="inpeqhomeNSMStudyTitle" name="StudyTitle" value="${newStudy.getStudyTitle()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMSponStudyId">Sponsor Study ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMSponStudyId" >
+                    <input class="form-control" id="inpeqhomeNSMSponStudyId" name="SponStudyId" value="${newStudy.getSponStudyId()}">
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMCoSponStudyId">Co Sponsor Study ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMCoSponStudyId" >
+                    <input class="form-control" id="inpeqhomeNSMCoSponStudyId" name="CoSponStudyId" value="${newStudy.getCoSponStudyId()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyStartDate">Study Start Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMStudyStartDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMStudyStartDate" name="StudyStartDate" value="${newStudy.getStudyStartDateString()}" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyEndDate">Study End Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMStudyEndDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMStudyEndDate" name="StudyEndDate" value="${newStudy.getStudyEndDateString()}"  class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMPlanSubNum">Planned Subject Number</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMPlanSubNum" >
+                    <input class="form-control" id="inpeqhomeNSMPlanSubNum" name="PlanSubNum" value="${newStudy.getPlannedPatientsNum()}" >
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEQSetDate">EQ Setup Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMEQSetDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMEQSetDate" name="EQSetDate" value="${newStudy.getStudyEqInitDateString()}"  class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMEQClsDate">EQ Close Date</label>
                 <div class="col-sm-7 input-group date">
-                    <input type="text" id="inpeqhomeNSMEQClsDate" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="inpeqhomeNSMEQClsDate" name="EQClsDate" value="${newStudy.getStudyEqCloseDateString()}" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpeqhomeNSMStudyStatus">Study Status</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpeqhomeNSMStudyStatus" >
+                    <input class="form-control" id="inpeqhomeNSMStudyStatus" name="StudyStatus" value="${newStudy.getStudyStatus()}">
                 </div>
             </div>
         </form>
