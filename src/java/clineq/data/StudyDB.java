@@ -163,13 +163,13 @@ public class StudyDB {
 
     public static ArrayList<String> selectAllStudySponsorName() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
-        String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS O, CLINEQ.STUDIES S WHERE O.EQ_ORG_ID = S.EQ_SPON_ID";
+        String sql = "SELECT DISTINCT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS O, CLINEQ.STUDIES S WHERE O.EQ_ORG_ID = S.EQ_SPON_ID";
 
         ArrayList<String> sponsorNameList = new ArrayList<>();
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        sponsorNameList.add("All");
+        //sponsorNameList.add("All");
 
         try {
             Connection conn = DBConnect.getConnection();
@@ -238,7 +238,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            System.err.println("in studyDB = error" + e.getMessage());
+            System.err.println("Error in studyDB saveStudy : " + e.getMessage());
             return;
         }
     }

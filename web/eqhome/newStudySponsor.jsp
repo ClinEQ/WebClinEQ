@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link href="../resources/css/eqhome/newStudySponsor.css" rel="stylesheet" type="text/css"/>
-<link href="../resources/css/forms/formSearchSponsor.css" rel="stylesheet" type="text/css"/>
 
 <script src="../resources/lib/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
@@ -16,21 +15,22 @@
     </div>
 </nav>
 
+
 <div class="container content">
     <div id="studySponPrimary">
-        <p class="firstLv">Sponsor</p>
+        <h1 class="firstLv">Sponsor</h1>
         <div class="checkSpon">
-            <p class="secondLv">Primary Sponsor   <a href="javascript:void(0);" onclick="ToggleSubform('divSearchSponsor', 'formSearchSponsor');">Check if sponsor exist</a>  </p>              
+            <a href="javascript:void(0);" onclick="ToggleSubform('divSearchSponsor', 'formSearchSponsor');">Check if sponsor exist</a>           
         </div>
 
         <div class="divSearchSponsor subSearchArea" style="display:none">
         </div>
-
+        <p style="margin-left: 28%">Enter New Sponsor Information</p>
         <form class="form-horizontal" method="post">
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
                 <div class="col-sm-7">
-                    <input class="form-control" id="inpEqhomeNSSEqSponId" name="EqSponId" value="${sponsor.getEqOrgId()}">
+                    <input class="form-control" id="inpEqhomeNSSEqSponId" name="EqSponId" value="${sponsor.getEqOrgId()}" readonly>
                 </div>
             </div>
             <div class="form-group form-group-lg">
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="form-group form-group-lg">
-                <label class="col-sm-5 control-label" for="inpeqhomeNSSStudyStatus">Study Status</label>
+                <label class="col-sm-5 control-label" for="inpeqhomeNSSSponsorStatus">Sponsor Status</label>
                 <div class="col-sm-7">
                     <input class="form-control" id="inpeqhomeNSSStudyStatus" name="Status" value="${sponsor.getStatus()}" >
                 </div>
@@ -127,16 +127,15 @@
                     <textarea class="form-group" rows="4" id="txteqhomeNSSNote" name="Note" value="${sponsor.getNotes()}"></textarea>
                 </div>
             </div>
-                <input type="submit" value="Create Study" class="btn btn-primary" onclick="form.action = 'saveNewStudy';">
         </form>
     </div>
 
 
     <div class="checkSpon checkSpon2">
-        <p class="secondLv">Sponsor User List   <a href="javascript:void(0);" onclick="ToggleSubform('divSearchUser', 'formSearchUser');">Check if user exist</a>  </p>              
+        <h2 class="secondLv">Sponsor User List   <a style="font-weight: normal" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Check if user exist</a>  </h2>              
     </div>
 
-    <div class="divSearchUser" style="display:none">
+    <div class="searchUser" style="display:none">
     </div>
 
     <div class="table-area">
@@ -179,31 +178,21 @@
                 </c:forEach>
             </tbody>
         </table>
-        <a class="btn btn-default" href="javascript:void(0);" onclick="ToggleSubform('divCreateNewUser', 'formCreatNewUser');" role="button">Add New User</a>
-        <div class="divCreateNewUser" style="display:none">
-        </div>
+        <input type="submit" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >
     </div>
 
-    <div class="form-horizontal">
-        <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
-    </div>
+
 
     <div class="save-options">
-        <form class="form-horizontal" action="#" method="post">
-        <!--<button type="button" class="btn btn-primary">Create Study</button>-->
-        <!--<input type="submit" value="Create Study" class="btn btn-primary" onclick="form.action = 'saveNewStudy';">-->
-
-
-        <button type="button" class="btn btn btn-info">Save as Default</button>
-
-
-        <button type="button" class="btn btn btn-danger">Cancel</button>
+        <form>
+            <button type="submit" class="btn btn-info" formaction="createNewStudy">Back</button>
+            <button type="submit" class="btn btn-success" formaction="newStudySite">Next</button>
         </form>
     </div>
 
+</div>
 
-
-  <!-- footer -->
+<!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
 
 <jsp:include page="../includes/forms/formCreateNewUser.jsp"/>

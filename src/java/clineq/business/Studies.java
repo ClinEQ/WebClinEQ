@@ -7,6 +7,7 @@ package clineq.business;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -114,6 +115,7 @@ public class Studies implements Serializable {
     private Collection<StudyLocationMap> studyLocationMapCollection;
 
     private String eqSponName;
+    SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
 
     public Studies() {
     }
@@ -190,12 +192,20 @@ public class Studies implements Serializable {
         return studyStartDate;
     }
 
+    public String getStudyStartDateString() {
+        return (studyStartDate!=null?formatter.format(studyStartDate):"");
+    }
+
     public void setStudyStartDate(Date studyStartDate) {
         this.studyStartDate = studyStartDate;
     }
 
     public Date getStudyEndDate() {
         return studyEndDate;
+    }
+
+    public String getStudyEndDateString() {
+        return (studyEndDate!=null?formatter.format(studyEndDate):"");
     }
 
     public void setStudyEndDate(Date studyEndDate) {
@@ -206,8 +216,16 @@ public class Studies implements Serializable {
         return studyEqInitDate;
     }
 
+    public String getStudyEqInitDateString() {
+        return (studyEqInitDate!=null?formatter.format(studyEqInitDate):"");
+    }
+
     public void setStudyEqInitDate(Date studyEqInitDate) {
         this.studyEqInitDate = studyEqInitDate;
+    }
+
+    public String getStudyEqCloseDateString() {
+        return (studyEqCloseDate!=null?formatter.format(studyEqCloseDate):"");
     }
 
     public Date getStudyEqCloseDate() {

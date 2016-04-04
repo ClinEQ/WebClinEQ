@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div id="searchArea">
     <p class="firstLv subform">Search User</p>
     <form class="form-inline" action="#" method="post">
@@ -34,32 +36,32 @@
                     <th><i class="fa fa-dot-circle-o"></i></th>
                 </tr>
             </thead>
-<!--            <c:if test="${studyArrayList == null}">
-                <p>no studies </p>
-            </c:if>-->
+            <c:if test="${userArrayList == null}">
+                <p>no user </p>
+            </c:if>
             <tbody>
-            <c:forEach var="study" items="${studyArrayList}">
-                <tr>
-                    <td>
-                        ${study.getEqStudyId()}
-                    </td>
-                    <td>
-                        ${study.getNctid()}
-                    </td>
-                    <td>
-                        ${study.getStudyAname()}
-                    </td>
-                    <td>
-                        ${study.getSponStudyId()}
-                    </td>
-                    <td>
-                        ${study.getSponStudyId()}
-                    </td>
-                    <td>
-                        <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
-                    </td>
-                </tr>
-            </c:forEach>
+                <c:forEach var="user" items="${userArrayList}">
+                    <tr>
+                        <td>
+                            ${user.getFname()} ${user.getLname()}
+                        </td>
+                        <td>
+                            ${user.getEqUserId()} 
+                        </td>
+                        <td>
+                            ${user.getEqOrgId().getOrgFullName()}
+                        </td>
+                        <td>
+                            ${user.getUserType()} 
+                        </td>
+                        <td>
+                            ${user.getStatus()}
+                        </td>
+                        <td>
+                            <input type="radio" name="optionsRadios" id="optionsRadios" value="option">
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>

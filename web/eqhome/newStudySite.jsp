@@ -1,7 +1,8 @@
-<jsp:include page="../includes/header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link href="../resources/css/eqhome/newStudySite.css" rel="stylesheet" type="text/css"/>
+
+<jsp:include page="../includes/header.jsp"/>
 
 <nav id="navbar-main" class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -12,71 +13,67 @@
 
 <div class="container content">
     <div id="studySitePrimary">
-        <p class="firstLv">Site List</p>
+        <h1 class="firstLv">Site List</h1>
     </div>
     <div class="checkSite">
-        <p class="secondLv">Site   <a href="javascript:void(0);" onclick="ToggleSubform('divSearchSponsor', 'formSearchSponsor');">Check if site exist</a>  </p>              
+        <a href="javascript:void(0);" onclick="ToggleSubform('searchSite', 'formSearchSite');">Check if site exist</a>          
     </div>
-    
+    <div class="searchSite subSearchArea" style="display:none">
+    </div>
+
     <div class="table-area">
-            <table class="table table-striped">
-                <thead>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>EQ Site ID</th>
+                    <th>Site Name</th>
+                    <th>Site Desc</th>
+                    <th>Site Type</th>
+                    <th>Status</th>
+                    <th>Detail</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <c:if test="${studyArrayList == null}">
+                <p>no studies </p>
+            </c:if>
+            <tbody>
+                <c:forEach var="study" items="${studyArrayList}">
                     <tr>
-                        <th>EQ Site ID</th>
-                        <th>Site Name</th>
-                        <th>Site Desc</th>
-                        <th>Site Type</th>
-                        <th>Status</th>
-                        <th>Detail</th>
-                        <th>Delete</th>
+                        <td>
+                            ${study.getEqStudyId()}
+                        </td>
+                        <td>
+                            ${study.getNctid()}
+                        </td>
+                        <td>
+                            ${study.getStudyAname()}
+                        </td>
+                        <td>
+                            ${study.getEqSponName()}
+                        </td>
+                        <td>
+                            ${study.getStudyEqInitDate()}
+                        </td>
+                        <td><a href="#">Detail</a></td>
+                        <td><a href="#">Delete</a></td>
                     </tr>
-                </thead>
-                <c:if test="${studyArrayList == null}">
-                    <p>no studies </p>
-                </c:if>
-                <tbody>
-                    <c:forEach var="study" items="${studyArrayList}">
-                        <tr>
-                            <td>
-                                ${study.getEqStudyId()}
-                            </td>
-                            <td>
-                                ${study.getNctid()}
-                            </td>
-                            <td>
-                                ${study.getStudyAname()}
-                            </td>
-                            <td>
-                                ${study.getEqSponName()}
-                            </td>
-                            <td>
-                                ${study.getStudyEqInitDate()}
-                            </td>
-                            <td><a href="#">Detail</a></td>
-                            <td><a href="#">Delete</a></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        <button type="submit" class="btn btn-default">Add Site</button>
-        </div>  
-    <div>
-    <button type="submit" class="btn btn-success">Next</button>
-    </div>
-    
+                </c:forEach>
+            </tbody>
+        </table>
+        <input type="submit" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >
+    </div>  
+
+
     <div class="save-options">
-        <button type="button" class="btn btn-primary">Create Study</button>
-
-
-        <button type="button" class="btn btn btn-info">Save as Default</button>
-
-
-        <button type="button" class="btn btn btn-danger">Cancel</button>
+        <form>
+            <button type="submit" class="btn btn-info" formaction="../eqhome/newStudySponsor.jsp">Back</button>
+            <button type="submit" class="btn btn-success" >Next</button>
+        </form>
     </div>
-    
-    
 </div>
-    
-    
-    <!-- footer -->
+
+
+<!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
+<jsp:include page="../includes/forms/formCreateNewSite.jsp"/>

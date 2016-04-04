@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import clineq.data.*;
 import clineq.business.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class StudyController extends HttpServlet {
     private ArrayList<String> sponsorNameList = null;
     private ArrayList<Users> userArrayList = null;
     private ArrayList<Organizations> orgArrayList = null;
+    private ArrayList<SiteLocations> siteArrayList = null;
 
     @Override
     public void doPost(HttpServletRequest request,
@@ -67,6 +69,8 @@ public class StudyController extends HttpServlet {
             url = saveNewStudy(request, response, "Draft");
         } else if (requestURI.endsWith("/AddSponsorToStudy")) {
             url = addSponsorToStudy(request, response);
+        } else if (requestURI.endsWith("/newStudySite")) {
+            url = newStudySite(request, response);            
         } else {
             url = "/eqhome/error.jsp";
         }
@@ -86,6 +90,8 @@ public class StudyController extends HttpServlet {
             url = createNewStudy(request, response);
         } else if (requestURI.endsWith("/newStudySponsor")) {
             url = newStudySponsor(request, response);
+        } else if (requestURI.endsWith("/newStudySite")) {
+            url = newStudySite(request, response);              
         } else {
             url = "/eqhome/error.jsp";
         }
@@ -101,6 +107,7 @@ public class StudyController extends HttpServlet {
             sponsorNameList = StudyDB.selectAllStudySponsorName();
             userArrayList = UserDB.selectAllUser();
             orgArrayList = OrganizationDB.selectAllOrganization();
+            siteArrayList = SiteLocationDB.selectAllSiteLocations();
 
         } catch (DBException e) {
             System.err.println();
@@ -117,6 +124,7 @@ public class StudyController extends HttpServlet {
             session.setAttribute("sponsorNameList", sponsorNameList);
             session.setAttribute("userArrayList", userArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
+            session.setAttribute("siteArrayList", siteArrayList);
             url = "/eqhome/index.jsp";
             System.out.println("url " + url);
             return url;
@@ -196,11 +204,10 @@ public class StudyController extends HttpServlet {
             study = getStudy(request);
             if (study != null) {
                 study.setStudyStatus(status);
-                if (sponsor != null)
-                {
+                if (sponsor != null) {
                     study.setSponStudyId(sponsor.getEqOrgId());
                 }
-                
+
                 StudyDB.saveStudy(study);
             }
 
@@ -214,6 +221,38 @@ public class StudyController extends HttpServlet {
 
     }
 
+    
+        private String newStudySite(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+
+        String url;
+        HttpSession session = request.getSession();
+        try {
+            //sponsor = (Organizations) session.getAttribute("sponsor");
+            sponsor = getOrganization(request);
+            if (sponsor != null) {
+                OrganizationDB.saveOrg(sponsor);
+            }
+            study = getStudy(request);
+            if (study != null) {
+                if (sponsor != null) {
+                    study.setSponStudyId(sponsor.getEqOrgId());
+                }
+
+                StudyDB.saveStudy(study);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        url = "/eqhome/newStudySite.jsp";
+        System.out.println("url " + url);
+        return url;
+
+    }
+        
+        
     private String displayOrganizationList(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
@@ -248,6 +287,12 @@ public class StudyController extends HttpServlet {
         Studies study = new Studies();
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
 
+        String studyStartDate = null;
+        String studyEndDate = null;
+        String eQSetDate = null;
+        String eQClsDate = null;
+        String planSubNum = null;
+
         try {
             study.setNctid(request.getParameter("NCTId"));
             study.setEuStudyId(request.getParameter("EUStudyId"));
@@ -257,11 +302,56 @@ public class StudyController extends HttpServlet {
             study.setCoSponStudyId(request.getParameter("CoSponStudyId"));
             System.out.println("CoSponStudyId=" + request.getParameter("CoSponStudyId"));
             System.out.println("study start date=" + request.getParameter("StudyStartDate"));
-            study.setStudyStartDate(formatter.parse(request.getParameter("StudyStartDate")));
-            study.setStudyEndDate(formatter.parse(request.getParameter("StudyEndDate")));
-            study.setPlannedPatientsNum(Integer.parseInt(request.getParameter("PlanSubNum")));
-            study.setStudyEqInitDate(formatter.parse(request.getParameter("EQSetDate")));
-            study.setStudyEqCloseDate(formatter.parse(request.getParameter("EQClsDate")));
+
+            studyStartDate = request.getParameter("StudyStartDate");
+            if (studyStartDate != null && !studyStartDate.equals("")) {
+                try {
+                    study.setStudyStartDate(formatter.parse(studyStartDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            studyEndDate = request.getParameter("StudyEndDate");
+            if (studyEndDate != null && !studyEndDate.equals("")) {
+
+                try {
+                    study.setStudyEndDate(formatter.parse(studyEndDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            planSubNum = request.getParameter("PlanSubNum");
+            if (planSubNum != null && !planSubNum.equals("")) {
+                try {
+                    study.setPlannedPatientsNum(Integer.parseInt(planSubNum));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            eQSetDate = request.getParameter("EQSetDate");
+            if (eQSetDate != null && !eQSetDate.equals("")) {
+
+                try {
+                    study.setStudyEqInitDate(formatter.parse(eQSetDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            eQClsDate = request.getParameter("EQClsDate");
+            if (eQClsDate != null && !eQClsDate.equals("")) {
+
+                try {
+                    study.setStudyEqCloseDate(formatter.parse(eQClsDate));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
             study.setStudyStatus(request.getParameter("StudyStatus"));
 
         } catch (Exception e) {
@@ -269,7 +359,7 @@ public class StudyController extends HttpServlet {
         }
         return study;
     }
-    
+
     public Organizations getOrganization(HttpServletRequest request)
             throws IOException, ServletException {
         Organizations org = new Organizations();
@@ -291,15 +381,54 @@ public class StudyController extends HttpServlet {
             org.setOrgUrl(request.getParameter("SponUrl"));
             org.setFax(request.getParameter("Fax"));
             org.setStatus(request.getParameter("Status"));
-            
-            
-
 
         } catch (Exception e) {
+
             e.printStackTrace();
+            return null;
         }
         return org;
-    }    
+    }
+
+    public Users getUser(HttpServletRequest request)
+            throws IOException, ServletException {
+        Users user = new Users();
+        SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
+        String formCNUAccSetDate = null;
+        try {
+
+            user.setLname(request.getParameter("FormCNULastName"));
+            user.setFname(request.getParameter("FormCNUFirstName"));
+            user.setTitle(request.getParameter("FormCNUTitle"));
+            user.setAddress1(request.getParameter("FormCNUAddress1"));
+            user.setAddress2(request.getParameter("FormCNUAddress2"));
+            user.setCity(request.getParameter("FormCNUCity"));
+            user.setState(request.getParameter("FormCNUState"));
+            user.setZip(request.getParameter("FormCNUZip"));
+            user.setCountry(request.getParameter("FormCNUCountry"));
+            user.setPhone(request.getParameter("FormCNUPhone"));
+            user.setFax(request.getParameter("FormCNUFax"));
+            user.setExternalEmployerId(request.getParameter("FormCNUExEmId"));
+            user.setUserType(request.getParameter("FormCNUUserType"));
+            user.setUserRole(request.getParameter("FormCNUUserRole"));
+            user.setUserLoginId(request.getParameter("FormCNUUserLogId"));
+            user.setUserLoginPwd(request.getParameter("FormCNUUserPass"));
+            user.setExternalDeptName(request.getParameter("FormCNUExDep"));
+
+            formCNUAccSetDate = request.getParameter("FormCNUAccSetDate");
+            if (formCNUAccSetDate != null && !formCNUAccSetDate.equals("")) {
+                study.setStudyStartDate(formatter.parse(formCNUAccSetDate));
+            }
+
+            user.setStatus(request.getParameter("FormCNUStatus"));
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return null;
+        }
+        return user;
+    }
 }
 
 /*

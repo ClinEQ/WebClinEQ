@@ -1,24 +1,13 @@
-.content{
-    position: relative;
-    min-height: 400px;
-}
-
-#studySitePrimary>.firstLv{
-    margin: auto;
+.checkSite {
+    margin:auto;
+    margin-bottom: 25px;
     text-align: center;
 }
 
-.btn-default{
-    width: 120px;
-}
-
-.btn-success{
-    margin-top: 60px;
-    float: right;
-    width: 100px;
-}
-
-.save-options{  
-    margin-left: 35%;
-    margin-top: 150px;
+.searchSite{
+    margin:auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
 }
