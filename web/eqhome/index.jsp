@@ -10,8 +10,6 @@
     </div>
 </nav>
 
-
-
 <div class="container content">
     <section id="EQHome">
         <h1 class="firstLv">Study List</h1>
@@ -21,25 +19,19 @@
                     <label>Study Status</label>
 
                     <select id="sltStudyStatus" name="sltStudyStatus" class="form-control"  >
-                        <!-- onchange="changeTable($(this).val(), $('#sltSponsorName').val());"-->
                         <option value="All">ALL</option>
                         <c:forEach var="studyStatus" items="${studyStatusList}">
-
-                            <option value="${studyStatus}" id="${studyStatus}">${studyStatus}</option>
-
+                            <option value="${studyStatus}">${studyStatus}</option>
                         </c:forEach>
-
                     </select>                                        
                 </div>
                 <div class="form-group select-box">
                     <label>Sponsor Name</label>
-
                     <select id="sltSponsorName" name="sltSponsorName" class="form-control">
-
+                        <option value="All">ALL</option>
                         <c:forEach var="sponsorName" items="${sponsorNameList}">
                             <option value="${sponsorName}" >${sponsorName}</option>
                         </c:forEach>
-
                     </select>                      
                 </div>
             </form>
@@ -93,4 +85,6 @@
         <button type="submit" formaction="../study/createNewStudy" class="btn btn-success" formtarget="_blank">Add New Study</button>
     </form>
 </div>
+
 <!-- footer -->
+<jsp:include page="../includes/footer.jsp"/>
