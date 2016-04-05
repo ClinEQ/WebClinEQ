@@ -50,7 +50,7 @@ public class StudyController extends HttpServlet {
         String requestURI = request.getRequestURI();
         String userid = request.getParameter("inpUserName");
         System.out.println("in study controler, userid="+userid); 
-        String url = "/eqhome";
+        String url = "/siteHome";
         System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
                 System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
         System.out.println("URI=" + requestURI);
@@ -73,7 +73,7 @@ public class StudyController extends HttpServlet {
         } else if (requestURI.endsWith("/AddSponsorToStudy")) {
             url = addSponsorToStudy(request, response);
         } else {
-            url = "/eqhome/error.jsp";
+            url = "/siteHome/error.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -83,7 +83,7 @@ public class StudyController extends HttpServlet {
             throws IOException, ServletException {
 
         String requestURI = request.getRequestURI();
-        String url = "/eqhome";
+        String url = "/siteHome";
 
         if (requestURI.endsWith("/displaySiteList")) {
             url = displaySiteList(request, response,request.getParameter("inpUserName"));
@@ -92,7 +92,7 @@ public class StudyController extends HttpServlet {
         } else if (requestURI.endsWith("/newStudySponsor")) {
             url = newStudySponsor(request, response);
         } else {
-            url = "/eqhome/error.jsp";
+            url = "/siteHome/error.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -122,12 +122,12 @@ public class StudyController extends HttpServlet {
             session.setAttribute("sponsorNameList", sponsorNameList);
             session.setAttribute("userArrayList", userArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
-            url = "/eqhome/index.jsp";
+            url = "/siteHome/index.jsp";
             System.out.println("url " + url);
             return url;
         } else {
             //System.out.println("url " );
-            return "/eqhome/index.jsp";
+            return "/siteHome/index.jsp";
         }
     }
 
@@ -138,7 +138,7 @@ public class StudyController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        url = "/eqhome/newStudyMain.jsp";
+        url = "/siteHome/newStudyMain.jsp";
         System.out.println("url " + url);
         return url;
 
@@ -156,7 +156,7 @@ public class StudyController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        url = "/eqhome/newStudySponsor.jsp";
+        url = "/siteHome/newStudySponsor.jsp";
         System.out.println("url " + url);
         return url;
 
@@ -181,7 +181,7 @@ public class StudyController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        url = "/eqhome/newStudySponsor.jsp";
+        url = "/siteHome/newStudySponsor.jsp";
         System.out.println("url " + url);
         return url;
 
@@ -213,7 +213,7 @@ public class StudyController extends HttpServlet {
             e.printStackTrace();
         }
 
-        url = "/eqhome/newStudySponsor.jsp";
+        url = "/siteHome/newStudySponsor.jsp";
         System.out.println("url " + url);
         return url;
 
@@ -231,7 +231,7 @@ public class StudyController extends HttpServlet {
             System.err.println();
         }
 
-        String url = "/eqhome/newStudySponsor.jsp";
+        String url = "/siteHome/newStudySponsor.jsp";
         //if (unprocessedInvoices != null) {
         //    if (unprocessedInvoices.size() <= 0) {
         //        unprocessedInvoices = null;
