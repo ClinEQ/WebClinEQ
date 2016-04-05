@@ -72,11 +72,12 @@ body {
 .side-nav > li > a {
     padding-left: 2em;
     width: 225px;
+    color:#595959 !important;
 }
 
 .side-nav > li > a:hover,
 .side-nav > li > a:focus {
-    color: #999 !important;
+    color: #000000 !important;
 }
 
 .side-nav > li > ul {
@@ -88,7 +89,12 @@ body {
     display: block;
     padding: 10px 15px 10px 38px;
     text-decoration: none;
-    color: #999;
+    color: #595959;
+}
+
+.side-nav > li > ul > li > a:hover,
+.side-nav > li > a:focus {
+    color: #000000 !important;
 }
 
 #content {

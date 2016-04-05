@@ -134,7 +134,7 @@
     </div>
 
     <div class="table-area">
-        <table class="table table-striped">
+        <table id="tblNSSSponsorUserList" class="table table-striped">
             <thead>
                 <tr>
                     <th>EQ User ID</th>
@@ -147,7 +147,7 @@
                 </tr>
             </thead>
             <tbody>
-
+                
             </tbody>
         </table>
         <input type="submit" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >
@@ -158,7 +158,7 @@
     <div class="save-options">
         <form>
             <button type="submit" class="btn btn-info" formaction="../eqhome/newStudyMain.jsp">Back</button>
-            <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySite.jsp">Next</button>
+            <button id="btnNextNewStudySponsor"  class="btn btn-success" formaction="../eqhome/newStudySite.jsp">Next</button>
         </form>
     </div>
 </div>

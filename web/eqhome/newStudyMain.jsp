@@ -95,6 +95,7 @@
         <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySponsor.jsp">Next</button>
         </form>
     </div>
+</div>
 
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
