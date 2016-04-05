@@ -48,13 +48,18 @@ public class StudyController extends HttpServlet {
 
         System.out.println("enter study controller dopost!");
         String requestURI = request.getRequestURI();
+        String userid = request.getParameter("inpUserName");
+        System.out.println("in study controler, userid="+userid); 
         String url = "/eqhome";
         System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
+                System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
+        System.out.println("URI=" + requestURI);
+
         System.out.println("dopost CoSponStudyId=" + request.getParameter("CoSponStudyId"));
         System.out.println("dopost study start date=" + request.getParameter("StudyStartDate"));
 
-        if (requestURI.endsWith("/displayStudyList")) {
-            url = displayStudyList(request, response);
+        if (requestURI.endsWith("/displaySiteList")) {
+            url = displaySiteList(request, response,userid);
             //   if ("STUDYLIST_NODATA" url equal())
             System.out.println("the list is not empty!");
         } else if (requestURI.endsWith("/createNewStudy")) {
@@ -78,10 +83,10 @@ public class StudyController extends HttpServlet {
             throws IOException, ServletException {
 
         String requestURI = request.getRequestURI();
-        String url = "/EQHome";
+        String url = "/eqhome";
 
-        if (requestURI.endsWith("/displayStudyList")) {
-            url = displayStudyList(request, response);
+        if (requestURI.endsWith("/displaySiteList")) {
+            url = displaySiteList(request, response,request.getParameter("inpUserName"));
         } else if (requestURI.endsWith("/createNewStudy")) {
             url = createNewStudy(request, response);
         } else if (requestURI.endsWith("/newStudySponsor")) {
@@ -92,11 +97,11 @@ public class StudyController extends HttpServlet {
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
-    private String displayStudyList(HttpServletRequest request,
-            HttpServletResponse response) throws IOException {
+    private String displaySiteList(HttpServletRequest request,
+            HttpServletResponse response,String userId) throws IOException {
 
         try {
-            studyArrayList = StudyDB.selectAllStudy();
+            studyArrayList = StudyDB.selectAllStudy(userId); 
             studyStatusList = StudyDB.selectAllStudyStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
             userArrayList = UserDB.selectAllUser();

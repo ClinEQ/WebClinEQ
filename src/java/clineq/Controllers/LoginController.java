@@ -47,8 +47,8 @@ public class LoginController extends HttpServlet {
         String url = null;
         String userid = request.getParameter("inpUserName");
         if (userExist(userid)) {
-            url = "/study/displayStudyList";
-            //url = "/eqhome/index.jsp";
+            url = "/study/displaySiteList";
+            //url = "/eqhome/index.jsp"; 
         } else {
 //            response.sendRedirect("/login.jsp");
 //            return;
@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
             url = "../login.html";
             response.sendRedirect(url);
             return;
-        }
+        } 
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         //RequestDispatcher dispatcher = request.getRequestDispatcher(url);
@@ -80,9 +80,11 @@ public class LoginController extends HttpServlet {
 
         try {
             userArrayList = UserDB.selectAllUser();
+            //System.out.println("UserLoginId="+userLoginId+"userArrayListsize="+userArrayList.size());
             for (int i=0; i<userArrayList.size(); i++)
             {
                 user = userArrayList.get(i);
+                //System.out.println("UserId in DB="+user.getUserLoginId());
                 if (userLoginId.equals(user.getUserLoginId()))
                 {
                     return true;

@@ -114,6 +114,8 @@ public class Studies implements Serializable {
     private Collection<StudyLocationMap> studyLocationMapCollection;
 
     private String eqSponName;
+    
+    private String eqUserName;
 
     public Studies() {
     }
@@ -250,8 +252,17 @@ public class Studies implements Serializable {
     public void setEqSponId(String eqSponId) {
         this.eqSponId = eqSponId;
     }
+ 
+   
+     public String getEqUserName() {
+        return eqUserName;
+    }
 
-    public String getEqSponName() {
+    public void setEqUserName(String eqUserName) {
+        this.eqUserName = eqUserName;
+    }
+    
+       public String getEqSponName() {
         return eqSponName;
     }
 

@@ -66,8 +66,31 @@ public class UserDB {
     
         public static ArrayList<Users> selectAllUser() throws DBException {   
   //   public  List<AtomObj> getAll() throws DBException { 
-        String sql = "SELECT * FROM CLINEQ.USERS";
-        
+        //String sql = "SELECT * FROM CLINEQ.USERS";
+        String sql = "SELECT EQ_USER_ID   ," +
+"  EQ_ORG_ID            ," +
+"  LNAME                ," +
+"  FNAME                ," +
+"  TITLE               ," +
+"  SETUP_DATE          ," +
+"  LAST_UPDATE_DATE      ," +
+"  ADDRESS1             ," +
+"  ADDRESS2             ," +
+"  ZIP                   ," +
+"  PHONE                ," +
+"  EMAIL                 ," +
+"  CITY                  ," +
+"  STATE                ," +
+"  COUNTRY               ," +
+"  STATUS                ," +
+"  EXTERNAL_EMPLOYER_ID  ," +
+"  EXTERNAL_DEPT_NAME    ," +
+"  USER_TYPE             ," +
+"  USER_ROLE             ," +
+"  USER_LOGIN_ID         ," +
+"  USER_LOGIN_PWD        ," +
+"  FAX    " + "FROM CLINEQ.USERS";
+        System.out.println("Select all users here");
         ArrayList<Users> objList = new ArrayList<>();
         PreparedStatement ps = null;
         Statement stmt = null;
@@ -81,6 +104,7 @@ public class UserDB {
             rs = stmt.executeQuery(sql); 
             String eqOrgId = null;
             while (rs.next()) {
+//
                 Users obj = new Users();
                 obj.setEqUserId(rs.getString("EQ_USER_ID"));
 
@@ -107,8 +131,9 @@ public class UserDB {
                 obj.setUserRole(rs.getString("USER_ROLE"));
                 obj.setUserLoginId(rs.getString("USER_LOGIN_ID"));
                 obj.setUserLoginPwd(rs.getString("USER_LOGIN_PWD"));
+                //System.out.println("City="+obj.getCity());
                 objList.add(obj);
-            }
+            } 
             return objList;
         } catch (SQLException e) {
             System.err.println("in userDB = error"+ e.getMessage());
