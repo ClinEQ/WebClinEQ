@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
         String requestURI = request.getRequestURI();
         String url = null;
         String userid = request.getParameter("inpUserName");
-        if (userExist(userid)) {
+        if (userExist(userid, request)) {
             url = "/study/displayStudyList";
             //url = "/eqhome/index.jsp";
         } else {
@@ -74,7 +74,7 @@ public class LoginController extends HttpServlet {
         
    }     
 
-    private boolean userExist(String userLoginId) {
+    private boolean userExist(String userLoginId, HttpServletRequest request) {
         ArrayList<Users> userArrayList = null;
         Users user = new Users();
 
@@ -85,6 +85,8 @@ public class LoginController extends HttpServlet {
                 user = userArrayList.get(i);
                 if (userLoginId.equals(user.getUserLoginId()))
                 {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("loginUser", user);
                     return true;
                 }
             }

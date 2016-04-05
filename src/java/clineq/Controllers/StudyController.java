@@ -38,6 +38,7 @@ public class StudyController extends HttpServlet {
     private Organizations sponsor = null;
     private ArrayList<Studies> studyArrayList = null;
     private ArrayList<String> studyStatusList = null;
+    private ArrayList<String> orgStatusList = null;
     private ArrayList<String> sponsorNameList = null;
     private ArrayList<Users> userArrayList = null;
     private ArrayList<Organizations> orgArrayList = null;
@@ -104,6 +105,7 @@ public class StudyController extends HttpServlet {
         try {
             studyArrayList = StudyDB.selectAllStudy();
             studyStatusList = StudyDB.selectAllStudyStatus();
+            orgStatusList = StudyDB.selectAllOrgStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
             userArrayList = UserDB.selectAllUser();
             orgArrayList = OrganizationDB.selectAllOrganization();
@@ -121,6 +123,7 @@ public class StudyController extends HttpServlet {
             System.out.println("i checking array");
             session.setAttribute("studyArrayList", studyArrayList);
             session.setAttribute("studyStatusList", studyStatusList);
+            session.setAttribute("orgStatusList", orgStatusList);
             session.setAttribute("sponsorNameList", sponsorNameList);
             session.setAttribute("userArrayList", userArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
