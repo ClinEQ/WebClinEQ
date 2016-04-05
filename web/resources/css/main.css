@@ -3,6 +3,10 @@ body {
     padding: 0px;
 }
 
+#footer p{
+    margin-left: 18%;
+}
+
 .jumbotron {
     height: 100px;
     margin: 0px;
@@ -110,7 +114,7 @@ footer>hr{
 }
 
 .content{
-    margin-left: 250px !important;
+    margin-left: 15% !important;
     position:relative;
 }
 
@@ -147,6 +151,7 @@ footer>hr{
 }
 
 .save-options button{  
-    margin: 100px 20px 30px 30px;
+    margin: 50px 20px 30px 30px;
     width:100px;
 }
+

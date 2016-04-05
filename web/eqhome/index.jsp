@@ -13,9 +13,9 @@
 <div class="container content">
     <section id="EQHome">
         <h1 class="firstLv">Study List</h1>
-        <div class="filter-bar">
+        <div class="filter-bar indexFilterBar">
             <form class="form-inline">
-                <div class="form-group select-box" >
+                <div class="form-group select-box" id="divIndexStudyStatus" >
                     <label>Study Status</label>
 
                     <select id="sltStudyStatus" name="sltStudyStatus" class="form-control"  >

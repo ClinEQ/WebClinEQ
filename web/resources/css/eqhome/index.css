@@ -7,8 +7,6 @@
 }
 
 .select-box{
-    float:left;
-    margin-left: 200px;
     font-size:18px;
 }
 
@@ -18,4 +16,12 @@
 
 .btn-success{
     float:right;
+}
+
+.indexFilterBar{
+    margin-left: 25%;
+}
+
+#divIndexStudyStatus{
+    margin-right: 10%;
 }
