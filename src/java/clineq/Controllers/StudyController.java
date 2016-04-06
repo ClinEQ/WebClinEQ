@@ -280,7 +280,7 @@ public class StudyController extends HttpServlet {
         if (orgArrayList != null) {
 
             session.setAttribute("orgArrayList", orgArrayList);
-
+            
         }
         return url;
     }

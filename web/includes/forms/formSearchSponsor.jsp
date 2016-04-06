@@ -27,14 +27,11 @@
                         <th>Status</th>
                         <th><i class="fa fa-dot-circle-o"></i></th>
                     </tr>
-                </thead>
-                <c:if test="${orgArrayList == null}">
-                    <p>no org </p>
-                </c:if>
+                </thead>               
                 <tbody id="fbody">
                     <c:forEach var="org" items="${orgArrayList}">
                         <c:if test="${org.getOrgType()=='SPONSOR'}">
-                            <tr id="${org.getEqOrgId()}">
+                            <tr>
                                 <td>
                                     ${org.getOrgFullName()}
                                 </td>
@@ -48,7 +45,7 @@
                                     ${org.getStatus()}
                                 </td>
                                 <td>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios" value="value="${org.getEqOrgId()}">
+                                    <input type="radio" name="optionsRadios" value="${org.getEqOrgId()}">
                                 </td>
                             </tr>
                         </c:if>

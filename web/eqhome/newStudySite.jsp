@@ -33,31 +33,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <c:if test="${studyArrayList == null}">
-                <p>no studies </p>
-            </c:if>
             <tbody>
-                <c:forEach var="study" items="${studyArrayList}">
-                    <tr>
-                        <td>
-                            ${study.getEqStudyId()}
-                        </td>
-                        <td>
-                            ${study.getNctid()}
-                        </td>
-                        <td>
-                            ${study.getStudyAname()}
-                        </td>
-                        <td>
-                            ${study.getEqSponName()}
-                        </td>
-                        <td>
-                            ${study.getStudyEqInitDate()}
-                        </td>
-                        <td><a href="#">Detail</a></td>
-                        <td><a href="#">Delete</a></td>
-                    </tr>
-                </c:forEach>
             </tbody>
         </table>
         <input type="submit" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >

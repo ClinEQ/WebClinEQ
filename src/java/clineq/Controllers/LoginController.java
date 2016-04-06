@@ -86,7 +86,7 @@ public class LoginController extends HttpServlet {
                 if (userLoginId.equals(user.getUserLoginId()))
                 {
                     HttpSession session = request.getSession();
-                    session.setAttribute("loginUser", user);
+                session.setAttribute("loginUser", user);                  
                     return true;
                 }
             }

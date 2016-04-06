@@ -4,7 +4,7 @@
             <a href="javascript:;" data-toggle="collapse" data-target="#nav_study"><i class="fa fa-book"></i> Study <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="nav_study" class="collapse">
                 <li>
-                    <a href="#">New Study</a>
+                    <a href="../study/createNewStudy">New Study</a>
                 </li>
                 <li>
                     <a href="#">Search</a>

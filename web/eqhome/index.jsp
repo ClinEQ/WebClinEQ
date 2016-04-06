@@ -17,7 +17,6 @@
             <form class="form-inline">
                 <div class="form-group select-box" id="divIndexStudyStatus" >
                     <label>Study Status</label>
-
                     <select id="sltStudyStatus" name="sltStudyStatus" class="form-control"  >
                         <option value="All">ALL</option>
                         <c:forEach var="studyStatus" items="${studyStatusList}">
