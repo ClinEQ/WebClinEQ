@@ -1,4 +1,4 @@
-$("#inpSearchName").keyup(function () {
+$(".inpSearchTableContent").keyup(function () {
     //split the current value of searchInput
     var data = this.value.toUpperCase().split(" ");
     //create a jquery object of the rows

@@ -114,7 +114,7 @@
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="sltEqhomeNSSSponsorStatus">Sponsor Status</label>
                 <div class="col-sm-7">                    
-                    <select id="sltSponsorName" id="sltEqhomeNSSSponsorStatus" class="form-control">
+                    <select id="sltEqhomeNSSSponsorStatus" class="form-control">
                         <option disabled selected value> -- Select an Status -- </option>
                         <c:forEach var="sponsorStatus" items="${orgStatusList}">
                             <option value="${sponsorStatus}" >${sponsorStatus}</option>

@@ -43,7 +43,7 @@
     <div class="save-options">
         <form>
             <button type="submit" class="btn btn-info" formaction="../eqhome/newStudySponsor.jsp">Back</button>
-            <button type="submit" class="btn btn-success" >Next</button>
+            <button type="submit" class="btn btn-success" formaction="../eqhome/newStudyIWRS.jsp">Next</button>
         </form>
     </div>
 </div>

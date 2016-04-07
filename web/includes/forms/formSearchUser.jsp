@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="/WebClinEQ/resources/script/forms/formSearchTableContent.js" type="text/javascript"></script>
 
     <h2 class="secondLvLv subform">Search User</h2>
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh">
             <div class="form-group">
 <!--                <label style="margin-left: 8px;" for="inpSearchName">User</label>-->
-                <input type="text" class="form-control" id="inpSearchName" placeholder="Search">
+                <input type="text" class="form-control inpSearchTableContent" placeholder="Search">
             </div>
 <!--            <div class="form-group">
                 <label style="margin-right: 8px;" for="sltFltIns">Filter by Organization</label>
@@ -31,8 +32,7 @@
                     <th><i class="fa fa-dot-circle-o"></i></th>
                 </tr>
             </thead>
-
-            <tbody>
+            <tbody id="fbody">
                 <c:forEach var="user" items="${userArrayList}">
                     <tr>
                         <td>

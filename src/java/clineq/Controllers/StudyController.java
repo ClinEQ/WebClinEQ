@@ -127,7 +127,7 @@ public class StudyController extends HttpServlet {
             session.setAttribute("sponsorNameList", sponsorNameList);
             session.setAttribute("userArrayList", userArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
-            session.setAttribute("siteArrayList", siteArrayList);
+            session.setAttribute("siteArrayList", siteArrayList);            
             url = "/eqhome/index.jsp";
             System.out.println("url " + url);
             return url;
@@ -280,6 +280,8 @@ public class StudyController extends HttpServlet {
         if (orgArrayList != null) {
 
             session.setAttribute("orgArrayList", orgArrayList);
+                        
+            session.setAttribute("test", "aa");
             
         }
         return url;

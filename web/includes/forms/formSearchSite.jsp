@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="/WebClinEQ/resources/script/forms/formSearchTableContent.js" type="text/javascript"></script>
 
 
 <div id="searchArea">
@@ -7,7 +8,7 @@
         <fieldset class="seacrh">
             <div class="form-group">
                 <label for="inpSearchName">Enter Sponsor Name</label>
-                <input type="text" class="form-control" id="inpSearchName">
+                <input type="text" class="form-control inpSearchTableContent" placeholder="Search">
             </div>            
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
@@ -24,12 +25,9 @@
                         <th><i class="fa fa-dot-circle-o"></i></th>
                     </tr>
                 </thead>
-<c:if test="${studyArrayList == null}">
-                    <p>no studies </p>
-                </c:if>
-                <tbody>
+                <tbody id="fbody">
                     <c:forEach var="study" items="${studyArrayList}">
-                        <tr id="${study.getEqStudyId()}">
+                        <tr>
                             <td>
                                 ${study.getEqStudyId()}
                             </td>

@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="/WebClinEQ/resources/css/forms/formSearchSponsor.css" rel="stylesheet" type="text/css"/>
-<script src="/WebClinEQ/resources/script/forms/formSearchSponsor.js" type="text/javascript"></script>
-
+<script src="/WebClinEQ/resources/script/forms/formSearchTableContent.js" type="text/javascript"></script>
 
 
 <div class="searchArea">
@@ -10,7 +9,7 @@
         <fieldset class="seacrh" style="margin:15px 10px;">
             <div class="form-group">
 <!--                <label style="font-size:15px;" for="inpSearchName">Enter Sponsor Name</label>-->
-                <input type="text" class="form-control" id="inpSearchName" placeholder="Search">
+                <input type="text" class="form-control inpSearchTableContent" placeholder="Search">
             </div>            
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>

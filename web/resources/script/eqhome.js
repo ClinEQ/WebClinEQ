@@ -46,6 +46,7 @@ $(document).ready(function () {
         autoclose: true,
         todayHighlight: true
     });
+    
     $('#btnNextNewStudySponsor').on('click', function () {
         var studySponPrimary = {
             eqSponsorId: $("#inpEqhomeNSSEqSponId").val(),
