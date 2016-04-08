@@ -358,8 +358,6 @@ public class StudyController extends HttpServlet {
         if (orgArrayList != null) {
 
             session.setAttribute("orgArrayList", orgArrayList);
-                        
-            session.setAttribute("test", "aa");
             
         }
         return url;
