@@ -264,24 +264,24 @@ public class StudyController extends HttpServlet {
             session.setAttribute("siteArrayList", siteArrayList);
         } 
         
-        try {
-            //sponsor = (Organizations) session.getAttribute("sponsor");
-            sponsor = getOrganization(request);
-            if (sponsor != null) {
-                OrganizationDB.saveOrg(sponsor);
-            }
-            study = getStudy(request);
-            if (study != null) {
-                if (sponsor != null) {
-                    study.setSponStudyId(sponsor.getEqOrgId());
-                }
-
-                StudyDB.saveStudy(study);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//
+//            sponsor = getOrganization(request);
+//            if (sponsor != null) {
+//                OrganizationDB.saveOrg(sponsor);
+//            }
+//            study = getStudy(request);
+//            if (study != null) {
+//                if (sponsor != null) {
+//                    study.setSponStudyId(sponsor.getEqOrgId());
+//                }
+//
+//                StudyDB.saveStudy(study);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         url = "/eqhome/newStudySite.jsp";
         System.out.println("url " + url);
