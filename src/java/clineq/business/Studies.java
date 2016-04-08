@@ -115,6 +115,7 @@ public class Studies implements Serializable {
     private Collection<StudyLocationMap> studyLocationMapCollection;
 
     private String eqSponName;
+    private String eqUserName;
     SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
 
     public Studies() {
@@ -269,6 +270,14 @@ public class Studies implements Serializable {
         this.eqSponId = eqSponId;
     }
 
+         public String getEqUserName() {
+        return eqUserName;
+    }
+
+    public void setEqUserName(String eqUserName) {
+        this.eqUserName = eqUserName;
+    }
+    
     public String getEqSponName() {
         return eqSponName;
     }
