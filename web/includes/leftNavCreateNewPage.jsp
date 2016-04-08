@@ -1,8 +1,8 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#navStudy"><i class="fa fa-book"></i> Study <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="navStudy" class="collapse">
+            <a><i class="fa fa-book"></i> Study </a>
+            <ul>
                 <li>
                     <a href="javascript:;"> Basic </a>
                 </li>

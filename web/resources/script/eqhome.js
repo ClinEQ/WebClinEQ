@@ -97,6 +97,15 @@ $(document).ready(function () {
         });
     });
 });
+
+
+//click add new study to open a new window
+function openAddNewStudy(url,width){
+    var leftPosition, topPosition;
+    leftPosition=(window.screen.width/2)-((width/2)+10);
+    window.open(url,"","width="+width+",resizable=yes,left=" +leftPosition+ ",screenX="+leftPosition);
+}
+
 //toggle sub form
 function ToggleSubform(selector, form) {
     $("." + selector).slideToggle();

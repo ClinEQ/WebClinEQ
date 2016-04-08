@@ -133,7 +133,7 @@
 
 
     <div class="checkSpon checkSpon2">
-        <h2 class="secondLv">Sponsor User List   <a style="font-weight: normal" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Check if user exist</a>  </h2>              
+        <h2 class="secondLv">Sponsor User List   <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Check if user exist</a>  </h2>              
     </div>
 
     <div class="searchUser" style="display:none">

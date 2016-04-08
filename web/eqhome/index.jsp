@@ -80,9 +80,7 @@
             </table>
         </div>
     </section>
-    <form>
-        <button type="submit" formaction="../study/createNewStudy" class="btn btn-success" formtarget="_blank">Add New Study</button>
-    </form>
+    <button onclick="openAddNewStudy('../study/createNewStudy',1000)" class="btn btn-success">Add New Study</button>
 </div>
 
 <!-- footer -->

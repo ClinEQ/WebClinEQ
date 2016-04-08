@@ -1,6 +1,8 @@
 body {
     margin: 0px;
     padding: 0px;
+    min-width: 1245px;
+    width:auto !important;
 }
 
 .jumbotron {
@@ -120,7 +122,7 @@ footer>hr{
 }
 
 .content{
-    padding-left: 15% !important;
+    padding-left: 10% !important;
     position:relative;
 }
 
