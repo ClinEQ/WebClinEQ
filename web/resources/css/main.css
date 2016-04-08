@@ -80,16 +80,21 @@ body {
     color: #000000 !important;
 }
 
-.side-nav > li > ul {
+.side-nav ul{
     padding-left: 2em;
     list-style-type: none;
 }
 
-.side-nav > li > ul > li > a {
+.side-nav > li > ul > li > a,
+.thirdNavHyper{
     display: block;
     padding: 10px 15px 10px 38px;
     text-decoration: none;
     color: #595959;
+}
+
+.thirdNavHyper:hover{
+    text-decoration: none;
 }
 
 .side-nav > li > ul > li > a:hover,

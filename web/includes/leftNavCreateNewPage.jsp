@@ -1,32 +1,38 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#nav_study"><i class="fa fa-book"></i> Study <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="nav_study" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#navStudy"><i class="fa fa-book"></i> Study <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="navStudy" class="collapse">
                 <li>
-                    <a href="#">New Study</a>
+                    <a href="javascript:;"> Basic </a>
                 </li>
                 <li>
-                    <a href="#">Search</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#nav_site"><i class="fa fa-map-marker"></i> Site <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="nav_site" class="collapse">
-                <li>
-                    <a href="#">New Site</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#navSponsor"> Sponsor <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="navSponsor" class="collapse">
+                        <li>
+                            <a class="thirdNavHyper" href="javascript:;"> User </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Search</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#navSite"> Site <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="navSite" class="collapse">
+                        <li>
+                            <a class="thirdNavHyper" href="javascript:;"> User </a>
+                        </li>
+                        <li>
+                            <a class="thirdNavHyper" href="javascript:;"> Subject </a>
+                        </li>
+                        <li>
+                            <a class="thirdNavHyper" href="javascript:;"> Site </a>
+                        </li>
+                    </ul>
                 </li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#nav_eq_admin"><i class="fa fa-users"></i> EQ Admin <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="nav_eq_admin" class="collapse">
                 <li>
-                    <a href="#">Code Configuration</a>
+                    <a href="javascript:;"> Chart </a>
+                </li>
+                <li>
+                    <a href="javascript:;"> IWRS/EDC </a>
                 </li>
             </ul>
         </li>
