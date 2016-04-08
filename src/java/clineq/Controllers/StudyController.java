@@ -42,7 +42,9 @@ public class StudyController extends HttpServlet {
     private ArrayList<String> sponsorNameList = null;
     private ArrayList<Users> userArrayList = null;
     private ArrayList<Organizations> orgArrayList = null;
-    private ArrayList<SiteLocations> siteArrayList = null;
+    private ArrayList<Organizations> siteArrayList = null;
+    private ArrayList<Organizations> arrayIWRSList = null;
+    private ArrayList<Organizations> arrayEDCList = null;
 
     @Override
     public void doPost(HttpServletRequest request,
@@ -71,7 +73,11 @@ public class StudyController extends HttpServlet {
         } else if (requestURI.endsWith("/AddSponsorToStudy")) {
             url = addSponsorToStudy(request, response);
         } else if (requestURI.endsWith("/newStudySite")) {
-            url = newStudySite(request, response);            
+            url = newStudySite(request, response);
+        } else if (requestURI.endsWith("/newStudyIWRS")) {
+            url = newStudyIWRS(request, response);
+        } else if (requestURI.endsWith("/newStudyEDC")) {
+            url = newStudyEDC(request, response);
         } else {
             url = "/eqhome/error.jsp";
         }
@@ -92,7 +98,7 @@ public class StudyController extends HttpServlet {
         } else if (requestURI.endsWith("/newStudySponsor")) {
             url = newStudySponsor(request, response);
         } else if (requestURI.endsWith("/newStudySite")) {
-            url = newStudySite(request, response);              
+            url = newStudySite(request, response);
         } else {
             url = "/eqhome/error.jsp";
         }
@@ -144,8 +150,6 @@ public class StudyController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-
-
         url = "/eqhome/newStudyMain.jsp";
         System.out.println("url " + url);
         return url;
@@ -158,8 +162,8 @@ public class StudyController extends HttpServlet {
         String url;
 
         HttpSession session = request.getSession();
-        
-                try {
+
+        try {
 
             orgStatusList = StudyDB.selectAllOrgStatus();
             userArrayList = UserDB.selectAllUser();
@@ -169,8 +173,7 @@ public class StudyController extends HttpServlet {
             session.setAttribute("newStudy", study);
         } catch (DBException e) {
             System.err.println();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.err.println();
         }
 
@@ -180,7 +183,6 @@ public class StudyController extends HttpServlet {
             session.setAttribute("userArrayList", userArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
         }
-        
 
         url = "/eqhome/newStudySponsor.jsp";
         System.out.println("url " + url);
@@ -218,8 +220,7 @@ public class StudyController extends HttpServlet {
 
         String url;
         HttpSession session = request.getSession();
-        
-        
+
         try {
             //sponsor = (Organizations) session.getAttribute("sponsor");
             sponsor = getOrganization(request);
@@ -246,15 +247,14 @@ public class StudyController extends HttpServlet {
 
     }
 
-    
-        private String newStudySite(HttpServletRequest request,
+    private String newStudySite(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         String url;
         HttpSession session = request.getSession();
-        
-                try {
-            siteArrayList = SiteLocationDB.selectAllSiteLocations();
+
+        try {
+            siteArrayList = OrganizationDB.selectOrganizationByType("SITE");
 
         } catch (DBException e) {
             System.err.println();
@@ -262,34 +262,78 @@ public class StudyController extends HttpServlet {
 
         if (siteArrayList != null) {
             session.setAttribute("siteArrayList", siteArrayList);
-        } 
-        
-        try {
-            //sponsor = (Organizations) session.getAttribute("sponsor");
-            sponsor = getOrganization(request);
-            if (sponsor != null) {
-                OrganizationDB.saveOrg(sponsor);
-            }
-            study = getStudy(request);
-            if (study != null) {
-                if (sponsor != null) {
-                    study.setSponStudyId(sponsor.getEqOrgId());
-                }
-
-                StudyDB.saveStudy(study);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
+//        try {
+//
+//            sponsor = getOrganization(request);
+//            if (sponsor != null) {
+//                OrganizationDB.saveOrg(sponsor);
+//            }
+//            study = getStudy(request);
+//            if (study != null) {
+//                if (sponsor != null) {
+//                    study.setSponStudyId(sponsor.getEqOrgId());
+//                }
+//
+//                StudyDB.saveStudy(study);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         url = "/eqhome/newStudySite.jsp";
         System.out.println("url " + url);
         return url;
 
     }
-        
-        
+
+    private String newStudyIWRS(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+
+        String url;
+        HttpSession session = request.getSession();
+
+        try {
+            arrayIWRSList = OrganizationDB.selectOrganizationByType("IWRS");
+
+        } catch (DBException e) {
+            System.err.println();
+        }
+
+        if (siteArrayList != null) {
+            session.setAttribute("arrayIWRSList", arrayIWRSList);
+        }
+
+        url = "/eqhome/newStudyIWRS.jsp";
+        System.out.println("url " + url);
+        return url;
+
+    }
+    
+       private String newStudyEDC(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+
+        String url;
+        HttpSession session = request.getSession();
+
+        try {
+            arrayEDCList = OrganizationDB.selectOrganizationByType("EDC");
+
+        } catch (DBException e) {
+            System.err.println();
+        }
+
+        if (siteArrayList != null) {
+            session.setAttribute("arrayEDCList", arrayEDCList);
+        }
+
+        url = "/eqhome/newStudyEDC.jsp";
+        System.out.println("url " + url);
+        return url;
+
+    }
+
     private String displayOrganizationList(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
