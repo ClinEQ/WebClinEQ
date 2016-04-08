@@ -131,40 +131,11 @@
         </form>
     </div>
 
-
-    <div class="checkSpon checkSpon2">
-        <h2 class="secondLv">EDC User List   <a style="font-weight: normal" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Check if user exist</a>  </h2>              
-    </div>
-
-    <div class="searchUser" style="display:none">
-    </div>
-
-    <div class="table-area">
-        <table id="tblNSEEDCUserList" class="table table-striped">
-            <thead>
-                <tr>
-                    <th>EQ User ID</th>
-                    <th>User Type</th>
-                    <th>Institute</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Detail</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-        <input type="submit" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >
-    </div>
-
-
-
     <div class="save-options">
         <form>
             <button type="submit" class="btn btn-info" formaction="../eqhome/newStudyIWRS.jsp">Back</button>
-            <button id="btnNextNewStudySponsor"  class="btn btn-success" formaction="#">Next</button>
+            <button id="btnNextNewStudySponsor"  class="btn btn-success" formaction="#">Create Study</button>
+            <button id="btnNextNewStudySponsor"  class="btn btn-default" formaction="#">Cancel</button>
         </form>
     </div>
 </div>
@@ -172,5 +143,4 @@
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
 
-<jsp:include page="../includes/forms/formCreateNewUser.jsp"/>
 

@@ -98,7 +98,7 @@
     <div class="save-options">
         <form>
             <button type="submit" class="btn btn-info" formaction="../eqhome/index.jsp">Back</button>
-            <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySponsor.jsp">Next</button>
+            <button type="submit" class="btn btn-success" formaction="../study/newStudySponsor">Next</button>
         </form>
     </div>
 </div>

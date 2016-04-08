@@ -12,7 +12,18 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#nav_site"><i class="fa fa-map-marker"></i> Site <i class="fa fa-fw fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#nav_study"><i class="fa fa-medkit"></i> Sponsor <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="nav_study" class="collapse">
+                <li>
+                    <a href="../study/createNewStudy">New Sponsor</a>
+                </li>
+                <li>
+                    <a href="#">Search</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#nav_site"><i class="fa fa-hospital-o"></i> Site <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="nav_site" class="collapse">
                 <li>
                     <a href="#">New Site</a>
