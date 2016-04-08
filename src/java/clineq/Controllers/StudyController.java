@@ -105,11 +105,11 @@ public class StudyController extends HttpServlet {
         try {
             studyArrayList = StudyDB.selectAllStudy();
             studyStatusList = StudyDB.selectAllStudyStatus();
-            orgStatusList = StudyDB.selectAllOrgStatus();
+            //orgStatusList = StudyDB.selectAllOrgStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
-            userArrayList = UserDB.selectAllUser();
-            orgArrayList = OrganizationDB.selectAllOrganization();
-            siteArrayList = SiteLocationDB.selectAllSiteLocations();
+//            userArrayList = UserDB.selectAllUser();
+//            orgArrayList = OrganizationDB.selectAllOrganization();
+//            siteArrayList = SiteLocationDB.selectAllSiteLocations();
 
         } catch (DBException e) {
             System.err.println();
@@ -123,11 +123,11 @@ public class StudyController extends HttpServlet {
             System.out.println("i checking array");
             session.setAttribute("studyArrayList", studyArrayList);
             session.setAttribute("studyStatusList", studyStatusList);
-            session.setAttribute("orgStatusList", orgStatusList);
+            //session.setAttribute("orgStatusList", orgStatusList);
             session.setAttribute("sponsorNameList", sponsorNameList);
-            session.setAttribute("userArrayList", userArrayList);
-            session.setAttribute("orgArrayList", orgArrayList);
-            session.setAttribute("siteArrayList", siteArrayList);
+//            session.setAttribute("userArrayList", userArrayList);
+//            session.setAttribute("orgArrayList", orgArrayList);
+//            session.setAttribute("siteArrayList", siteArrayList);
             url = "/eqhome/index.jsp";
             System.out.println("url " + url);
             return url;
@@ -144,6 +144,8 @@ public class StudyController extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+
+
         url = "/eqhome/newStudyMain.jsp";
         System.out.println("url " + url);
         return url;
@@ -156,12 +158,30 @@ public class StudyController extends HttpServlet {
         String url;
 
         HttpSession session = request.getSession();
-        try {
+        
+                try {
+
+            orgStatusList = StudyDB.selectAllOrgStatus();
+            userArrayList = UserDB.selectAllUser();
+            orgArrayList = OrganizationDB.selectAllOrganization();
+
             study = getStudy(request);
             session.setAttribute("newStudy", study);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (DBException e) {
+            System.err.println();
+        } catch (Exception e)
+        {
+            System.err.println();
         }
+
+        if (orgArrayList != null) {
+
+            session.setAttribute("orgStatusList", orgStatusList);
+            session.setAttribute("userArrayList", userArrayList);
+            session.setAttribute("orgArrayList", orgArrayList);
+        }
+        
+
         url = "/eqhome/newStudySponsor.jsp";
         System.out.println("url " + url);
         return url;
@@ -198,6 +218,8 @@ public class StudyController extends HttpServlet {
 
         String url;
         HttpSession session = request.getSession();
+        
+        
         try {
             //sponsor = (Organizations) session.getAttribute("sponsor");
             sponsor = getOrganization(request);
@@ -230,6 +252,18 @@ public class StudyController extends HttpServlet {
 
         String url;
         HttpSession session = request.getSession();
+        
+                try {
+            siteArrayList = SiteLocationDB.selectAllSiteLocations();
+
+        } catch (DBException e) {
+            System.err.println();
+        }
+
+        if (siteArrayList != null) {
+            session.setAttribute("siteArrayList", siteArrayList);
+        } 
+        
         try {
             //sponsor = (Organizations) session.getAttribute("sponsor");
             sponsor = getOrganization(request);
