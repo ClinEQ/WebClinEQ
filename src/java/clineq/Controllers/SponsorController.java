@@ -100,9 +100,7 @@ public class SponsorController extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (sponsorArrayList != null) {
-            
-            
-            
+                    
             System.out.println("i checking array");
             String jsonStrSponsorList = mapper.writeValueAsString(sponsorArrayList);
             session.setAttribute("sponsorList", jsonStrSponsorList );
