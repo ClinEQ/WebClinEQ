@@ -18,7 +18,7 @@
                     <a href="../study/createNewStudy">New Sponsor</a>
                 </li>
                 <li>
-                    <a href="#">Search</a>
+                    <a href="/eqhome/sponsor.jsp">Search</a>
                 </li>
             </ul>
         </li>
