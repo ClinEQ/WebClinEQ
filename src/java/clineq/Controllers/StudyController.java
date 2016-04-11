@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  *
  * @author songy04
@@ -42,6 +46,7 @@ public class StudyController extends HttpServlet {
     private ArrayList<String> sponsorNameList = null;
     private ArrayList<Users> userArrayList = null;
     private ArrayList<Organizations> orgArrayList = null;
+    private ArrayList<Organizations> sponsorArrayList = null;
     private ArrayList<Organizations> siteArrayList = null;
     private ArrayList<Organizations> arrayIWRSList = null;
     private ArrayList<Organizations> arrayEDCList = null;
@@ -168,6 +173,7 @@ public class StudyController extends HttpServlet {
             orgStatusList = StudyDB.selectAllOrgStatus();
             userArrayList = UserDB.selectAllUser();
             orgArrayList = OrganizationDB.selectAllOrganization();
+            sponsorArrayList = OrganizationDB.selectOrganizationByType("SPONSOR");
 
             study = getStudy(request);
             session.setAttribute("newStudy", study);
@@ -176,12 +182,21 @@ public class StudyController extends HttpServlet {
         } catch (Exception e) {
             System.err.println();
         }
-
+ObjectMapper mapper = new ObjectMapper();
         if (orgArrayList != null) {
 
             session.setAttribute("orgStatusList", orgStatusList);
             session.setAttribute("userArrayList", userArrayList);
+            String jsonInUserArrayList = mapper.writeValueAsString(userArrayList);
+            
+            
+            String jsonInOrgArrayList = mapper.writeValueAsString(orgArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
+            
+            session.setAttribute("jsonInOrgArr", jsonInOrgArrayList);
+            session.setAttribute("jsonInUserArr", jsonInUserArrayList);
+                       
+            session.setAttribute("sponsorArrayList", sponsorArrayList);
         }
 
         url = "/eqhome/newStudySponsor.jsp";
