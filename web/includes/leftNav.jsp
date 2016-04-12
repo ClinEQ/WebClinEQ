@@ -12,8 +12,8 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#nav_study"><i class="fa fa-medkit"></i> Sponsor <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="nav_study" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#nav_sponsor"><i class="fa fa-medkit"></i> Sponsor <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="nav_sponsor" class="collapse">
                 <li>
                     <a href="../study/createNewStudy">New Sponsor</a>
                 </li>
