@@ -13,6 +13,7 @@ body {
 .jumbotron h1 {
     font-size: 40px;
     margin-top: -10px;
+    margin-left: 30px;
     padding-left: 30px;
 }
 
@@ -24,9 +25,20 @@ body {
 }
 
 .navbar-brand{
-    padding:5px 0px;
+    padding:5px 30px;
     font-size: 14px;
 }
+
+.navbar-right{
+    padding-right: 30px;
+}
+
+.col-lg-10,
+.col-md-10,
+.col-sm-10 {
+    padding-right: 10%;
+}
+
 
 .dropdown{
     height:30px;
@@ -39,6 +51,7 @@ body {
 
 .top-nav > li {
     display: inline-block;
+    margin-right: 20px;
     float: left;
 }
 
@@ -59,10 +72,7 @@ body {
 }
 
 .side-nav {
-    margin-top: 30px;
-    left: 225px;
     width: 225px;
-    margin-left: -85px;
     border: none;
     border-radius: 0;
     overflow-y: auto;
@@ -122,7 +132,6 @@ footer>hr{
 }
 
 .content{
-    padding-left: 10% !important;
     position:relative;
 }
 

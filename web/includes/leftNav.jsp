@@ -15,10 +15,10 @@
             <a href="javascript:;" data-toggle="collapse" data-target="#nav_sponsor"><i class="fa fa-medkit"></i> Sponsor <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="nav_sponsor" class="collapse">
                 <li>
-                    <a href="../study/createNewStudy">New Sponsor</a>
+                    <a href="../sponsor/displaySponsorList">New Sponsor</a>
                 </li>
                 <li>
-                    <a href="/eqhome/sponsor.jsp">Search</a>
+                    <a href="/eqhome/sponsor.jsp">Search/Edit</a>
                 </li>
             </ul>
         </li>

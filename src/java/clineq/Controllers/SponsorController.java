@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
- * @author songy04
+ * @author Yu
  */
 public class SponsorController extends HttpServlet {
 
@@ -41,27 +41,26 @@ public class SponsorController extends HttpServlet {
      */
 
     private Organizations sponsor = null;
-    private ArrayList<Organizations> sponsorArrayList = null;
- //   private ArrayList<String> studyStatusList = null;
+    private ArrayList<Organizations> orgArrayList = null;
+    private ArrayList<String> orgStatusList = null;
+    
+   //   private ArrayList<String> studyStatusList = null;
    // private ArrayList<String> orgStatusList = null;
-   // private ArrayList<String> sponsorNameList = null;
-   // private ArrayList<Users> userArrayList = null;
-   // private ArrayList<Organizations> orgArrayList = null;
-   // private ArrayList<SiteLocations> siteArrayList = null;
+ 
 
     @Override
     public void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws IOException, ServletException {
 
-        System.out.println("enter study controller dopost!");
+        System.out.println("enter sponsor controller dopost!");
         String requestURI = request.getRequestURI();
         String url = "/eqhome";
-        System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
-        System.out.println("dopost CoSponStudyId=" + request.getParameter("CoSponStudyId"));
-        System.out.println("dopost study start date=" + request.getParameter("StudyStartDate"));
+        //System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
+        //System.out.println("dopost CoSponStudyId=" + request.getParameter("CoSponStudyId"));
+        //System.out.println("dopost study start date=" + request.getParameter("StudyStartDate"));
 
-        if (requestURI.endsWith("/displayStudyList")) {
+        if (requestURI.endsWith("/displaySponsorList")) {
             url = displaySponsorList(request, response);
             //   if ("STUDYLIST_NODATA" url equal())
             System.out.println("the list is not empty!");
@@ -86,9 +85,9 @@ public class SponsorController extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
        
         try {
-            sponsorArrayList = OrganizationDB.selectOrganizationByType("SPONSOR");
+            orgArrayList = OrganizationDB.selectOrganizationByType("SPONSOR");
            // studyStatusList = StudyDB.selectAllStudyStatus();
-           //orgStatusList = StudyDB.selectAllOrgStatus();
+            orgStatusList = OrganizationDB.selectOrgStatus();
            //sponsorNameList = StudyDB.selectAllStudySponsorName();
 
         } catch (DBException e) {
@@ -96,21 +95,28 @@ public class SponsorController extends HttpServlet {
         }
 
         String url;
-
         HttpSession session = request.getSession();
 
-        if (sponsorArrayList != null) {
+        if (orgArrayList != null) {
                     
-            System.out.println("i checking array");
-            String jsonStrSponsorList = mapper.writeValueAsString(sponsorArrayList);
-            session.setAttribute("sponsorList", jsonStrSponsorList );
+            System.out.println("checking array");
+            String jsonStrSponList = mapper.writeValueAsString(orgArrayList);
+            session.setAttribute("sponList", orgArrayList );
+            session.setAttribute("jsonSponList", jsonStrSponList );
+            
+            String jsonStrSponStatusList = mapper.writeValueAsString(orgStatusList);
+            session.setAttribute("sponStatusList", orgStatusList);
+            session.setAttribute("jsonSponStatusList", jsonStrSponStatusList);
+            
+            //session.setAttribute("sponsorList", sponsorArrayList );
+
       
             url = "/eqhome/sponsor.jsp";
             System.out.println("url " + url);
             return url;
         } else {
             //System.out.println("url " );
-            return "/eqhome/index.jsp";
+            return "/eqhome/error.jsp";
         }
     }
 

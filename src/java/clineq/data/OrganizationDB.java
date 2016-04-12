@@ -121,6 +121,33 @@ public class OrganizationDB {
         }
     }
 
+    public static ArrayList<String> selectOrgStatus() throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT DISTINCT STATUS FROM CLINEQ.ORGANIZATIONS";
+
+        ArrayList<String> statusList = new ArrayList<>();
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                statusList.add(rs.getString("STATUS"));
+            }
+            return statusList;
+        } catch (SQLException e) {
+            System.err.println("Error in studyDB selectAllOrgStatus" + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+    }
+         
+         
     public static String getOrgName(String orgid) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;

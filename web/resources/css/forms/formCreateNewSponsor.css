@@ -1,0 +1,26 @@
+.form-horizontal .form-group-lg .control-label{
+    text-align: left !important;
+    font-size:16px !important;
+    padding-right: 0px;
+}
+
+.form-group {
+    height:30px;
+    font-size:16px !important;
+}
+
+.form-group-lg .form-control{
+    height:35px !important;
+}
+
+.input-group{
+    padding-left: 15px !important;
+    width:295px !important;
+}
+
+textarea{
+    width: 500px;
+    margin-left: 0px !important;
+    height: 100px !important;
+}
+
