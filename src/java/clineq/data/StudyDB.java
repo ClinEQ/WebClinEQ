@@ -36,8 +36,11 @@ public class StudyDB {
                 + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
                 + "CO_SPON_STUDY_ID, STUDY_START_DATE, STUDY_END_DATE, "
                 + "STUDY_EQ_INIT_DATE, STUDY_EQ_CLOSE_DATE, PLANNED_PATIENTS_NUM, "
-                + "EQ_IWRS_ID, CHART_GROUP_ID, STUDY_STATUS, ORG_FULL_NAME,USER,USER_LOGIN_ID"
-                + " FROM CLINEQ.STUDIES S, CLINEQ.ORGANIZATIONS O, CLINEQ.USERS U, CLINEQ.STUDY_USER_MAP M"
+                + "EQ_IWRS_ID, CHART_GROUP_ID, STUDY_STATUS, ORG_FULL_NAME, "
+                + "USER_LOGIN_ID"
+                + " FROM CLINEQ.STUDIES S, CLINEQ.ORGANIZATIONS O, "
+                + " CLINEQ.USERS U, "
+                + "CLINEQ.STUDY_SITE_USER_MAP M"
                 + " WHERE S.EQ_SPON_ID = O.EQ_ORG_ID"
                 + " AND S.EQ_STUDY_ID=M.EQ_STUDY_ID"
                 + " AND M.EQ_USER_ID=U.EQ_USER_ID"
@@ -52,9 +55,11 @@ System.out.println("sql="+sql);
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery(); //{
+            System.out.println("Start do next");
             while (rs.next()) {
                 Studies s = new Studies();
                 s.setEqStudyId(rs.getString("EQ_STUDY_ID"));
+                System.out.println("We get data. EQ_STUDY_ID="+s.getEqStudyId());
                 s.setEqCoSponId(rs.getString("EQ_CO_SPON_ID"));
                 s.setNctid(rs.getString("NCTID"));
                 s.setEuStudyId(rs.getString("EU_STUDY_ID"));
@@ -68,12 +73,12 @@ System.out.println("sql="+sql);
                 s.setStudyEndDate(rs.getDate("STUDY_END_DATE"));
                 s.setStudyEqInitDate(rs.getDate("STUDY_EQ_INIT_DATE"));
                 s.setStudyEqCloseDate(rs.getDate("STUDY_EQ_CLOSE_DATE"));
-                s.setPlannedPatientsNum(rs.getInt("PLANNED_PATIENTS_NUM"));
+               // s.setPlannedPatientsNum(rs.getInt("PLANNED_PATIENTS_NUM"));
                 s.setEqIwrsId(rs.getString("EQ_IWRS_ID"));
                 s.setChartGroupId(rs.getString("CHART_GROUP_ID"));
                 s.setStudyStatus(rs.getString("STUDY_STATUS"));
                 s.setEqSponName(rs.getString("ORG_FULL_NAME"));
-                s.setEqUserName(rs.getString("USER_LOGIN_ID"));
+                //s.setEqUserName(rs.getString("USER_LOGIN_ID"));
                 studylist.add(s);
             }
             return studylist;
@@ -247,4 +252,86 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
             return;
         }
     }
+    public static String  selectSiteUserById(String studyid) throws DBException {
+        //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
+        String sql = "select user_login_id from clineq.users U, clineq.studies S, CLINEQ.STUDY_SITE_USER_MAP M "
+                + "where U.eq_user_id=M.eq_user_id and M.eq_study_id=S.eq_study_id and S.eq_study_id ='"
+                + studyid + "'";
+           
+        String user = null; 
+        //  Connection connecti on = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                user = rs.getString("USER_LOGIN_ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in StudyDB getSiteUser " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return user;
+    }
+    
+    public static String  selectSiteSponsorById(String studyid) throws DBException {
+        //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
+        String sql = " select org_full_name from clineq.organizations O, clineq.studies S "
+                + " where O.eq_org_id=S.eq_spon_id  and S.eq_study_id ='" + studyid + "'";
+           System.out.println("In getSiteSponsor,sql=" + sql);
+        String sponsor = null; 
+        //  Connection connecti on = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                sponsor = rs.getString("ORG_FULL_NAME");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in StudyDB getSiteSponsor " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return sponsor;
+    }
+    
+    public static String  selectSiteNameById(String studyid) throws DBException {
+        //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
+        String sql = "select org_full_name,org_type from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
+        
+        String sitename = null; 
+        //  Connection connecti on = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                sitename = rs.getString("ORG_FULL_NAME");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in StudyDB getSiteName " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return sitename;
+    }
+    
+
 }

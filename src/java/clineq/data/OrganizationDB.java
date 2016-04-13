@@ -147,6 +147,34 @@ public class OrganizationDB {
         return orgname;
     }
 
+    public static String getSiteByUserName(String user_id) throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS O, CLINEQ.USERS U WHERE U.EQ_ORG_ID =O.EQ_ORG_ID " 
+                + " AND ORG_TYPE = 'SITE' "
+                + " AND USER_LOGIN_ID='" + user_id +"'";
+System.out.println(" In getSiteByUserName, sql= "+sql);
+        String orgname = null;
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                orgname = rs.getString("ORG_FULL_NAME");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in organizationDB getOrgName " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return orgname;
+    }
+
     public static Organizations selectOneOrganization(String EQ_ORG_ID) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + EQ_ORG_ID;

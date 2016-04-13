@@ -143,6 +143,5 @@ public class UserDB {
            DBUtil.closePreparedStatement(ps);
         }
     }
-    
-    
+      
 }

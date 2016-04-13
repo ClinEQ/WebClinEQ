@@ -6,7 +6,7 @@
 package clineq.business;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Elijah
+ * @author User
  */
 @Entity
 @Table(name = "STUDY_CHART_CATEGORY")
@@ -29,30 +33,29 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "StudyChartCategory.findAll", query = "SELECT s FROM StudyChartCategory s"),
     @NamedQuery(name = "StudyChartCategory.findByChartCategoryId", query = "SELECT s FROM StudyChartCategory s WHERE s.chartCategoryId = :chartCategoryId"),
     @NamedQuery(name = "StudyChartCategory.findByChartCategoryName", query = "SELECT s FROM StudyChartCategory s WHERE s.chartCategoryName = :chartCategoryName"),
-    @NamedQuery(name = "StudyChartCategory.findByChartType", query = "SELECT s FROM StudyChartCategory s WHERE s.chartType = :chartType"),
-    @NamedQuery(name = "StudyChartCategory.findBySysCodeId", query = "SELECT s FROM StudyChartCategory s WHERE s.sysCodeId = :sysCodeId"),
-    @NamedQuery(name = "StudyChartCategory.findByChartCategorySeq", query = "SELECT s FROM StudyChartCategory s WHERE s.chartCategorySeq = :chartCategorySeq"),
-    @NamedQuery(name = "StudyChartCategory.findByChartCategoryStatus", query = "SELECT s FROM StudyChartCategory s WHERE s.chartCategoryStatus = :chartCategoryStatus")})
+    @NamedQuery(name = "StudyChartCategory.findByStatus", query = "SELECT s FROM StudyChartCategory s WHERE s.status = :status"),
+    @NamedQuery(name = "StudyChartCategory.findByLastUpdateDate", query = "SELECT s FROM StudyChartCategory s WHERE s.lastUpdateDate = :lastUpdateDate")})
 public class StudyChartCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "CHART_CATEGORY_ID")
     private String chartCategoryId;
+    @Size(max = 50)
     @Column(name = "CHART_CATEGORY_NAME")
     private String chartCategoryName;
-    @Column(name = "CHART_TYPE")
-    private String chartType;
-    @Column(name = "SYS_CODE_ID")
-    private String sysCodeId;
-    @Column(name = "CHART_CATEGORY_SEQ")
-    private BigInteger chartCategorySeq;
-    @Column(name = "CHART_CATEGORY_STATUS")
-    private String chartCategoryStatus;
-    @JoinColumn(name = "CHART_GROUP_ID", referencedColumnName = "CHART_GROUP_ID")
+    @Size(max = 30)
+    @Column(name = "STATUS")
+    private String status;
+    @Column(name = "LAST_UPDATE_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateDate;
+    @JoinColumn(name = "EQ_STUDY_ID", referencedColumnName = "EQ_STUDY_ID")
     @ManyToOne
-    private StudyChartGroup chartGroupId;
+    private Studies eqStudyId;
 
     public StudyChartCategory() {
     }
@@ -77,44 +80,28 @@ public class StudyChartCategory implements Serializable {
         this.chartCategoryName = chartCategoryName;
     }
 
-    public String getChartType() {
-        return chartType;
+    public String getStatus() {
+        return status;
     }
 
-    public void setChartType(String chartType) {
-        this.chartType = chartType;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getSysCodeId() {
-        return sysCodeId;
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
     }
 
-    public void setSysCodeId(String sysCodeId) {
-        this.sysCodeId = sysCodeId;
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 
-    public BigInteger getChartCategorySeq() {
-        return chartCategorySeq;
+    public Studies getEqStudyId() {
+        return eqStudyId;
     }
 
-    public void setChartCategorySeq(BigInteger chartCategorySeq) {
-        this.chartCategorySeq = chartCategorySeq;
-    }
-
-    public String getChartCategoryStatus() {
-        return chartCategoryStatus;
-    }
-
-    public void setChartCategoryStatus(String chartCategoryStatus) {
-        this.chartCategoryStatus = chartCategoryStatus;
-    }
-
-    public StudyChartGroup getChartGroupId() {
-        return chartGroupId;
-    }
-
-    public void setChartGroupId(StudyChartGroup chartGroupId) {
-        this.chartGroupId = chartGroupId;
+    public void setEqStudyId(Studies eqStudyId) {
+        this.eqStudyId = eqStudyId;
     }
 
     @Override
