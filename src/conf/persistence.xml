@@ -21,6 +21,7 @@
     <class>clineq.business.Users</class>
     <class>clineq.business.SubjectCharts</class>
     <class>clineq.business.StudyChartCategory</class>
+    <class>clineq.business.StudyChartSubcategory</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>

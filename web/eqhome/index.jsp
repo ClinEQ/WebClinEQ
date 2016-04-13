@@ -92,7 +92,8 @@
         </div>
     </section>
     <form>
-        <button type="submit" formaction="../study/createNewStudy" class="btn btn-success" formtarget="_blank">Add New Study</button>
+        <button type="submit" formaction="../study/createNewStudy" class="btn btn-success" >Add New Study</button>
+        <!--<button type="submit" formaction="../study/createNewStudy" class="btn btn-success" formtarget="_blank">Add New Study</button>-->
     </form>
 </div>
 <!-- footer -->

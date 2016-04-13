@@ -13,7 +13,8 @@
 <div class="container content">
     <div id="studyBasicInfo">
         <h1>Study Basic Information</h1>
-        <form class="form-horizontal" action="study/displayStudyList" method="post">
+        <form class="form-horizontal" action="http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_his_back" method="post">
+        <!--<form class="form-horizontal" action="study/displayStudyList" autocomplete="on" method="post">-->    
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSMNCTId">NCT ID</label>
                 <div class="col-sm-7">
@@ -92,9 +93,10 @@
     <div class="save-options">
         <form>
         <button type="submit" class="btn btn-info" formaction="../eqhome/index.jsp">Back</button>
+        <!--<button type="submit" class="btn btn-success" formaction="../eqhome/newjsp.jsp">Next</button>-->
         <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySponsor.jsp">Next</button>
         </form>
-    </div>
+    </div> 
 
 </div>
 

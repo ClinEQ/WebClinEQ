@@ -13,7 +13,7 @@
 
 ${newStudy.getNctid()}
 <div class="container content">
-    <div id="studySponPrimary">
+   <div id="studySponPrimary">
         <h1 class="firstLv">Sponsor</h1>
         <div class="checkSpon">
             <a href="javascript:void(0);" onclick="ToggleSubform('divSearchSponsor', 'formSearchSponsor');">Check if sponsor exist</a>           
@@ -21,9 +21,9 @@ ${newStudy.getNctid()}
 
         <div class="divSearchSponsor subSearchArea" style="display:none">
         </div>
-        <p style="margin-left: 28%">Enter New Sponsor Information</p>
+        <p style="margin-left: 28%">Enter New Sponsor Information</p>       
         <form class="form-horizontal" method="post">
-            <div class="form-group form-group-lg">
+           <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
                 <div class="col-sm-7">
                     <input class="form-control" id="inpEqhomeNSSEqSponId" name="EqSponId" value="${sponsor.getEqOrgId()}" readonly>
@@ -124,7 +124,7 @@ ${newStudy.getNctid()}
                 </div>
             </div>
         </form>
-    </div>
+    </div>-->
 
 
     <div class="checkSpon checkSpon2">
@@ -155,15 +155,21 @@ ${newStudy.getNctid()}
     </div>
 
 
-
+    
     <div class="save-options">
-        <form>
-            <button type="submit" class="btn btn-info" formaction="../eqhome/newStudyMain.jsp">Back</button>
+        <button class="btn btn-info" onclick="window.history.back()">Back</button>
+        <button class="btn btn-success" onclick="location.href = '../eqhome/newStudySite.jsp'" >Next </button>
+       <!--
+        <form>          
+            <button  class="btn btn-info" action="../eqhome/newStudyMain.jsp">Back</button>
+            
             <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySite.jsp">Next</button>
         </form>
+       -->
     </div>
 </div>
-
+                
+ 
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
 
