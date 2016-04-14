@@ -3,7 +3,7 @@
 
 <jsp:include page="../includes/header.jsp"/>
 
-<div class="container-fluid">
+<div id="pageEqhomeNewStudyMain" class="container-fluid">
     <div class="row">
         <div>
             <nav id="navbar-main" class="navbar navbar-inverse">
@@ -21,7 +21,7 @@
         <div class="col-lg-10 col-md-10 col-sm-10">
             <div id="studyBasicInfo">
                 <h1>Study Basic Information</h1>
-                <form class="form-horizontal" action="study/displayStudyList" method="post">
+                <form id="formEqhomeNSMStudyBasicInfo" class="form-horizontal" action="study/displayStudyList" method="post">
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSMNCTId">NCT ID</label>
                         <div class="col-sm-7">
@@ -91,7 +91,6 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="sltEqhomeNSMStudyStatus">Study Status</label>
                         <div class="col-sm-7">
-        <!--                    <input class="form-control" id="inpeqhomeNSMStudyStatus" name="StudyStatus" value="${newStudy.getStudyStatus()}">-->
                             <select id="sltSponsorName" id="sltEqhomeNSMStudyStatus" class="form-control">
                                 <option disabled selected value> -- Select an Status -- </option>
                                 <c:forEach var="studyStatus" items="${studyStatusList}">
@@ -104,10 +103,8 @@
             </div>
 
             <div class="save-options">
-                <form>
-                    <button type="submit" class="btn btn-info" formaction="../eqhome/index.jsp">Back</button>
-                    <button type="submit" class="btn btn-success" formaction="../study/newStudySponsor">Next</button>
-                </form>
+<!--                    <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>-->
+                    <button id="btnEqhomeNSMNext" class="btn btn-success">Next</button>
             </div>
         </div>
     </div>

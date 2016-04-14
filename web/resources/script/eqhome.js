@@ -4,6 +4,7 @@ $(document).ready(function () {
     $("#tableStudy").find('tbody').find('tr').each(function () {
         tdlist.push($(this));
     });
+
     //dropdown filter Study Status
     $('#sltStudyStatus').change(function () {
         var sponsorname = $('#sltSponsorName').val();
@@ -23,6 +24,7 @@ $(document).ready(function () {
         $("#tableStudy").find("tbody").remove();
         $("#tableStudy").append(tbody[0].outerHTML);
     });
+
     //dropdown filter Sponsor Name
     $('#sltSponsorName').change(function () {
         var sponsorname = $(this).val();
@@ -46,16 +48,32 @@ $(document).ready(function () {
         autoclose: true,
         todayHighlight: true
     });
-    
-    $('#btnEqhomeNSMNext').on('click',function(){
-        var studyBisicInfo= JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serializeArray());
-        localStorage.setItem("studyBisicInfo",studyBisicInfo);
-        window.location.href="../study/newStudySponsor";
+
+
+    //New Study Main page 
+    $('#btnEqhomeNSMNext').on('click', function () {
+        var studyBisicInfo = JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serializeArray());
+        localStorage.setItem("studyBisicInfo", studyBisicInfo);
+        
+        $.ajax({
+            type: 'POST',
+            url: "../study/getBasicInfo",
+            contentType: "application/json;charset=utf-8;",
+            dataType: "json",
+            data: studyBisicInfo,
+            success: function (data) {
+                alert("success");
+                //location.href("../study/newStudySponsor");
+            },
+            error:function(ts){
+             alert(ts.responseText);   
+            }
+        });
     });
-    
-    
-    
-    
+
+
+
+
 //    $('#btnNewStudySponsorNext').on('click', function () {
 //        var studySponPrimary = {
 //            eqSponsorId: $("#inpEqhomeNSSEqSponId").val(),
@@ -109,10 +127,10 @@ $(document).ready(function () {
 
 
 //click add new study to open a new window
-function openAddNewStudy(url,width){
+function openAddNewStudy(url, width) {
     var leftPosition, topPosition;
-    leftPosition=(window.screen.width/2)-((width/2)+10);
-    window.open(url,"","width="+width+",resizable=yes,left=" +leftPosition+ ",screenX="+leftPosition);
+    leftPosition = (window.screen.width / 2) - ((width / 2) + 10);
+    window.open(url, "", "width=" + width + ",resizable=yes,left=" + leftPosition + ",screenX=" + leftPosition);
 }
 
 //toggle sub form
@@ -121,5 +139,10 @@ function ToggleSubform(selector, form) {
     if ($("." + selector).css("display") === "block") {
         $("." + selector).load("../includes/forms/" + form + ".jsp");
     }
+}
+
+//go back to previous page
+function goBack() {
+    window.history.back();
 }
 

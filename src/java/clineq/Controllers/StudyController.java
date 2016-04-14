@@ -5,6 +5,8 @@
  */
 package clineq.Controllers;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -83,6 +85,8 @@ public class StudyController extends HttpServlet {
             url = newStudyIWRS(request, response);
         } else if (requestURI.endsWith("/newStudyEDC")) {
             url = newStudyEDC(request, response);
+        } else if (requestURI.endsWith("/getBasicInfo")) {
+            url = getBasicInfo(request, response);
         } else {
             url = "/eqhome/error.jsp";
         }
@@ -108,6 +112,18 @@ public class StudyController extends HttpServlet {
             url = "/eqhome/error.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
+    }
+
+    public String getBasicInfo(HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String jsonInStudy="";
+        if(br!=null){
+            jsonInStudy=br.readLine();
+        }
+        Studies study = new Studies();
+        
+        return "success";
     }
 
     private String displayStudyList(HttpServletRequest request,
@@ -182,20 +198,19 @@ public class StudyController extends HttpServlet {
         } catch (Exception e) {
             System.err.println();
         }
-ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         if (orgArrayList != null) {
 
             session.setAttribute("orgStatusList", orgStatusList);
             session.setAttribute("userArrayList", userArrayList);
             String jsonInUserArrayList = mapper.writeValueAsString(userArrayList);
-            
-            
+
             String jsonInOrgArrayList = mapper.writeValueAsString(orgArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
-            
+
             session.setAttribute("jsonInOrgArr", jsonInOrgArrayList);
             session.setAttribute("jsonInUserArr", jsonInUserArrayList);
-                       
+
             session.setAttribute("sponsorArrayList", sponsorArrayList);
         }
 
@@ -325,8 +340,8 @@ ObjectMapper mapper = new ObjectMapper();
         return url;
 
     }
-    
-       private String newStudyEDC(HttpServletRequest request,
+
+    private String newStudyEDC(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
         String url;
@@ -373,7 +388,7 @@ ObjectMapper mapper = new ObjectMapper();
         if (orgArrayList != null) {
 
             session.setAttribute("orgArrayList", orgArrayList);
-            
+
         }
         return url;
     }

@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="../resources/lib/jquery-1.11.3.js" type="text/javascript"></script>
+<!--        <script src="../resources/lib/jquery.mobile-1.4.5.js" type="text/javascript"></script>-->
         <link href="../resources/lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="../resources/lib/bootstrap-3.3.6-dist/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
