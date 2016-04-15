@@ -30,8 +30,7 @@ public class StudyDB {
     //try ( Connection conn = DBConnect.getConnection();
     //    PreparedStatement ps = conn.prepareStatement(sql))
     //       {
-    
-        public static ArrayList<Studies> selectAllStudy(String userId) throws DBException {
+    public static ArrayList<Studies> selectAllStudy(String userId) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT S.EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
                 + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
@@ -42,8 +41,8 @@ public class StudyDB {
                 + " WHERE S.EQ_SPON_ID = O.EQ_ORG_ID"
                 + " AND S.EQ_STUDY_ID=M.EQ_STUDY_ID"
                 + " AND M.EQ_USER_ID=U.EQ_USER_ID"
-                + " AND USER_LOGIN_ID='" + userId +"'"; 
-System.out.println("sql="+sql);
+                + " AND USER_LOGIN_ID='" + userId + "'";
+        System.out.println("sql=" + sql);
         ArrayList<Studies> studylist = new ArrayList<>();
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
@@ -86,8 +85,7 @@ System.out.println("sql="+sql);
             DBUtil.closePreparedStatement(ps);
         }
     }
-    
-        
+
     public static ArrayList<Studies> selectAllStudy() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
@@ -139,10 +137,9 @@ System.out.println("sql="+sql);
             DBUtil.closePreparedStatement(ps);
         }
     }
-    
-      public static ArrayList<Studies> selectStudies(String eqSponsorID) throws DBException {
-        if ("ALL".equals(eqSponsorID))
-        {
+
+    public static ArrayList<Studies> selectStudies(String eqSponsorID) throws DBException {
+        if ("ALL".equals(eqSponsorID)) {
             return selectAllStudy();
         }
         String sql = "SELECT EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
@@ -195,8 +192,8 @@ System.out.println("sql="+sql);
             DBUtil.closePreparedStatement(ps);
         }
     }
-    
-       public static Studies selectOneStudy(String EQ_STUDY_ID) throws DBException {
+
+    public static Studies selectOneStudy(String EQ_STUDY_ID) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
                 + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
@@ -206,7 +203,6 @@ System.out.println("sql="+sql);
                 + "FROM CLINEQ.STUDIES S, CLINEQ.ORGANIZATIONs O "
                 + "WHERE S.EQ_SPON_ID = O.EQ_ORG_ID "
                 + "AND EQ_STUDY_ID='" + EQ_STUDY_ID + "'";
-
 
         Studies s = null;
         PreparedStatement ps = null;
@@ -237,7 +233,7 @@ System.out.println("sql="+sql);
                 s.setChartGroupId(rs.getString("CHART_GROUP_ID"));
                 s.setStudyStatus(rs.getString("STUDY_STATUS"));
                 s.setEqSponName(rs.getString("ORG_FULL_NAME"));
-  
+
             }
             return s;
         } catch (SQLException e) {
@@ -274,8 +270,8 @@ System.out.println("sql="+sql);
             DBUtil.closePreparedStatement(ps);
         }
     }
-    
-        public static ArrayList<String> selectAllOrgStatus() throws DBException {
+
+    public static ArrayList<String> selectAllOrgStatus() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT DISTINCT STATUS FROM CLINEQ.ORGANIZATIONS";
 
@@ -342,12 +338,9 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
 
         try {
             Connection conn = DBConnect.getConnection();
-            ps = conn.prepareStatement("select clineq.seq_eqstuddyid.nextval from dual");
-            rs = ps.executeQuery();
-            String EQ_STUDY_ID = null;
-            while (rs.next()) {
-                EQ_STUDY_ID = Integer.toString(rs.getInt("NEXTVAL"));
-            }
+            //ps = conn.prepareStatement("select clineq.seq_eqstuddyid.nextval from dual");
+            //rs = ps.executeQuery();
+            String EQ_STUDY_ID = generateStudyID();
 
             String sql = "INSERT INTO CLINEQ.STUDIES ( EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
                     + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
@@ -381,5 +374,32 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
             System.err.println("Error in studyDB saveStudy : " + e.getMessage());
             return;
         }
+    }
+    
+     
+    public static String generateStudyID() throws DBException {
+
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String EQ_STUDY_ID = null;
+        
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement("select clineq.seq_eqstuddyid.nextval from dual");
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                EQ_STUDY_ID = Integer.toString(rs.getInt("NEXTVAL"));
+                EQ_STUDY_ID = "eqstu" + ("00000" + EQ_STUDY_ID).substring(EQ_STUDY_ID.length());
+            }
+            
+
+
+        } catch (SQLException e) {
+            System.err.println("Error in studyDB saveStudy : " + e.getMessage());
+            
+        }
+        return EQ_STUDY_ID;
     }
 }

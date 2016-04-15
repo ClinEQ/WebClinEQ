@@ -114,10 +114,9 @@ public class UserDB {
         }
     }
 
-        public static ArrayList<Users> selectUsers(String eq_org_id) throws DBException {
-        
-                    if ("ALL".equals(eq_org_id))
-        {
+    public static ArrayList<Users> selectUsers(String eq_org_id) throws DBException {
+
+        if ("ALL".equals(eq_org_id)) {
             return selectAllUser();
         }
         String sql = "SELECT * FROM CLINEQ.USERS WHERE EQ_ORG_ID = '" + eq_org_id + "'";
@@ -174,7 +173,7 @@ public class UserDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-    
+
     public static void saveUser(Users user) throws DBException {
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
         if (user == null) {
@@ -239,12 +238,7 @@ sysdate,
 
         try {
             Connection conn = DBConnect.getConnection();
-            ps = conn.prepareStatement("select clineq.seq_equserid.nextval from dual");
-            rs = ps.executeQuery();
-            String EQ_USER_ID = null;
-            while (rs.next()) {
-                EQ_USER_ID = Integer.toString(rs.getInt("NEXTVAL"));
-            }
+            String EQ_USER_ID = generateUserID();
 
             String sql = "INSERT INTO CLINEQ.USERS ( EQ_USER_ID, EQ_ORG_ID, LNAME, FNAME, TITLE, SETUP_DATE, "
                     + "LAST_UPDATE_DATE, ADDRESS1, ADDRESS2, ZIP, PHONE, EMAIL, CITY, STATE, COUNTRY, STATUS, "
@@ -282,5 +276,31 @@ sysdate,
             System.err.println("in userDB = error" + e.getMessage());
             return;
         }
+    }
+      
+    public static String generateUserID() throws DBException {
+
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String EQ_USER_ID = null;
+        
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement("select clineq.seq_equserid.nextval from dual");
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                EQ_USER_ID = Integer.toString(rs.getInt("NEXTVAL"));
+                EQ_USER_ID = "eqstu" + ("00000" + EQ_USER_ID).substring(EQ_USER_ID.length());
+            }
+            
+
+
+        } catch (SQLException e) {
+            System.err.println("Error in studyDB saveStudy : " + e.getMessage());
+            
+        }
+        return EQ_USER_ID;
     }
 }

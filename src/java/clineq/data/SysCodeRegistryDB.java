@@ -72,6 +72,30 @@ public class SysCodeRegistryDB {
            DBUtil.closePreparedStatement(ps);
         }
     }
-    
+              public static ArrayList<String> selectAllStudyStatus() throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT DISTINCT CODE_VALUE FROM CLINEQ.SYS_CODE_REGISTRY WHERE CODE_GROUP_NAME = 'STUDY_STATUS'";
+
+        ArrayList<String> statusList = new ArrayList<>();
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                statusList.add(rs.getString("study_status"));
+            }
+            return statusList;
+        } catch (SQLException e) {
+            System.err.println("Error in SysCodeRegistryDB " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+    } 
     
 }
