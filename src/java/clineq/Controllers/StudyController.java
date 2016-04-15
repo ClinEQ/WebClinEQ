@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import java.util.List;
+//import org.apache.commons.fileupload.FileItem;
+//import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+//import org.apache.commons.fileupload.servlet.ServletFileUpload;
+//import java.util.List;
 
 
 /**
@@ -68,7 +68,7 @@ ServletFileUpload sfu  = new ServletFileUpload(factory);*/
                return;
            }*/
   /* try {   
-List items = sfu.parseRequest(request);
+//List items = sfu.parseRequest(request);
            FileItem  id = (FileItem) items.get(0);
             String photoid =  id.getString();
             
@@ -77,7 +77,8 @@ List items = sfu.parseRequest(request);
    }catch(SQLException e) {
             System.err.println("Error in image insert "+ e.getMessage());
         }*/
-/*File file = new File("C:/clineq/info.pdf");
+ /* try {
+File file = new File("C:/clineq/info.pdf");
 FileInputStream fs = new FileInputStream(file);
 
 Connection conn = DBConnect.getConnection();
@@ -103,8 +104,10 @@ PreparedStatement ps = null;
       }catch (SQLException e) {
             System.err.println("Error in image insert "+ e.getMessage());
         }*/
-     /* try {
+      /*try {
           InputStream sPdf;
+          File targetFile = new File("C:/clineq/output.pdf");
+          OutputStream outStream = new FileOutputStream(targetFile);
           
             Connection con = DBConnect.getConnection();
             PreparedStatement psmnt;
@@ -117,8 +120,16 @@ PreparedStatement ps = null;
             System.out.println("Try to get pdf after running executeQuery");
              
             if(rs1.next()){ 
+                byte[] bytearray = new byte[1048576];
+                    //out.println(bytearray);
+                int size=0;
+                sPdf = rs1.getBinaryStream(1);
                 //String username = rs1.getString("USERNAME");
-                //System.out.println("get USER NAME="+username); 
+                //System.out.println("get USER NAME="+username);
+                int bytesRead;
+                while ((bytesRead = sPdf.read(bytearray)) != -1) {
+                    outStream.write(bytearray, 0, bytesRead);
+                }
                 System.out.println("get pdf....");
             }
             
@@ -481,6 +492,81 @@ public String userOrgType(String userLoginId) {
         }
         return "";
     }
+
+public boolean InsertPdf(String fileName) {
+ try {
+File file = new File(fileName);
+FileInputStream fs = new FileInputStream(file);
+Connection conn = DBConnect.getConnection();
+PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+            //ps = conn.prepareStatement("INSERT INTO pictures VALUES(?,?)");
+            //String sql = "Select * from clineq.Studies";
+            ps = conn.prepareStatement("INSERT INTO pictures VALUES(?,?)");
+            //ps = conn.prepareStatement(sql);
+            ps.setInt(1,4);
+            ps.setBinaryStream(2,fs,fs.available());
+            int i = ps.executeUpdate();
+            if(i!=0)
+            {
+               System.out.println("inser good"); 
+            }
+            else
+            {
+                 System.out.println("inser bad");
+            }
+      }catch (SQLException e) {
+            System.err.println("Error in image insert "+ e.getMessage());
+        }catch (FileNotFoundException ex){
+            System.err.println("Error in image insert "+ ex.getMessage());
+            }catch (IOException eio){
+            System.err.println("Error in image insert "+ eio.getMessage());
+            }
+      
+      return true;
+    }
+
+public boolean RetrievePdf(String fileName) {
+try {
+          InputStream sPdf;
+          File targetFile = new File(fileName);
+          OutputStream outStream = new FileOutputStream(targetFile);
+          
+            Connection con = DBConnect.getConnection();
+            PreparedStatement psmnt;
+            //String sqlSelect = "SELECT picture FROM clineq.pictures WHERE id = 4";
+            String sqlSelect = "SELECT picture from pictures where id=?";
+             psmnt = con.prepareStatement(sqlSelect);             
+             psmnt.setInt(1,4);
+            System.out.println("Try to get pdf");
+            ResultSet rs1 = psmnt.executeQuery();
+            System.out.println("Try to get pdf after running executeQuery");
+             
+            if(rs1.next()){ 
+                byte[] bytearray = new byte[1048576];
+                    //out.println(bytearray);
+                int size=0;
+                sPdf = rs1.getBinaryStream(1);
+                //String username = rs1.getString("USERNAME");
+                //System.out.println("get USER NAME="+username);
+                int bytesRead;
+                while ((bytesRead = sPdf.read(bytearray)) != -1) {
+                    outStream.write(bytearray, 0, bytesRead);
+                }
+                System.out.println("get pdf....");
+            }
+            
+}catch (SQLException e) {
+            System.err.println("Error in image retrieve "+ e.getMessage());
+        }catch (FileNotFoundException ex){
+            System.err.println("Error in image insert "+ ex.getMessage());
+            }catch (IOException eio){
+            System.err.println("Error in image insert "+ eio.getMessage());
+            }
+      return true;
+   }
 
 }
 /*
