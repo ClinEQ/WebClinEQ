@@ -37,6 +37,8 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     //private static final String defaultURL = "/views/EQHome/iindex.jsp";
+    private Users user = new Users();
+
     @Override
     public void doPost(HttpServletRequest request,
             HttpServletResponse response)
@@ -46,8 +48,16 @@ public class LoginController extends HttpServlet {
         String requestURI = request.getRequestURI();
         String url = null;
         String userid = request.getParameter("inpUserName");
-        if (userExist(userid, request)) {
-            url = "/study/displayStudyList";
+        String pwd = request.getParameter("inpPassword");
+        if (userExist(userid, pwd, request)) {
+            String user_type = user.getUserType();
+            if ("CLINEQ".equals(user_type)) {
+                url = "/study/displayStudyList";
+            } else if ("SITE".endsWith(user_type)) {
+                url = "/site/displaySiteList";
+            } else if ("SPONSOR".endsWith(user_type)) {
+                url = "/sponsor/displaySponsorList";
+            }
             //url = "/eqhome/index.jsp";
         } else {
 //            response.sendRedirect("/login.jsp");
@@ -71,22 +81,20 @@ public class LoginController extends HttpServlet {
         System.out.println("doGet!");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
-        
-   }     
 
-    private boolean userExist(String userLoginId, HttpServletRequest request) {
+    }
+
+    private boolean userExist(String userLoginId, String password, HttpServletRequest request) {
         ArrayList<Users> userArrayList = null;
-        Users user = new Users();
-
+        //  Users user = new Users();
+        HttpSession session = request.getSession();
         try {
             userArrayList = UserDB.selectAllUser();
-            for (int i=0; i<userArrayList.size(); i++)
-            {
+            for (int i = 0; i < userArrayList.size(); i++) {
                 user = userArrayList.get(i);
-                if (userLoginId.equals(user.getUserLoginId()))
-                {
-                    HttpSession session = request.getSession();
-                session.setAttribute("loginUser", user);                  
+                if (userLoginId.equals(user.getUserLoginId()) && password.equals(user.getUserLoginPwd())) {
+
+                    session.setAttribute("loginUser", user);
                     return true;
                 }
             }
@@ -96,6 +104,5 @@ public class LoginController extends HttpServlet {
         }
         return false;
     }
-
 
 }

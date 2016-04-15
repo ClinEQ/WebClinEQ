@@ -116,13 +116,13 @@ public class StudyController extends HttpServlet {
 
     public String getBasicInfo(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
-        BufferedReader br=new BufferedReader(new InputStreamReader(request.getInputStream()));
-        String jsonInStudy="";
-        if(br!=null){
-            jsonInStudy=br.readLine();
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String jsonInStudy = "";
+        if (br != null) {
+            jsonInStudy = br.readLine();
         }
         Studies study = new Studies();
-        
+
         return "success";
     }
 
@@ -131,7 +131,7 @@ public class StudyController extends HttpServlet {
 
         try {
             studyArrayList = StudyDB.selectAllStudy();
-            studyStatusList = StudyDB.selectAllStudyStatus();
+            studyStatusList = SysCodeRegistryDB.selectAllStudyStatus();
             //orgStatusList = StudyDB.selectAllOrgStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
 //            userArrayList = UserDB.selectAllUser();
@@ -291,7 +291,10 @@ public class StudyController extends HttpServlet {
         }
 
         if (siteArrayList != null) {
+            ObjectMapper mapper = new ObjectMapper();
             session.setAttribute("siteArrayList", siteArrayList);
+            String jsonInSiteArrayList = mapper.writeValueAsString(siteArrayList);
+            session.setAttribute("jsonInSiteArr", jsonInSiteArrayList);
         }
 
 //        try {
