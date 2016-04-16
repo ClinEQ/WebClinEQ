@@ -103,7 +103,6 @@
             </div>
 
             <div class="save-options">
-<!--                    <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>-->
                     <button id="btnEqhomeNSMNext" class="btn btn-success">Next</button>
             </div>
         </div>

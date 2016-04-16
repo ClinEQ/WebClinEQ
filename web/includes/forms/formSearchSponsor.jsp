@@ -1,6 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false"%>
+
+<script>
+    var sponsors=JSON.stringify(${jsonInOrgArr});
+</script>
+
 <link href="/WebClinEQ/resources/css/forms/formSearchSponsor.css" rel="stylesheet" type="text/css"/>
 <script src="/WebClinEQ/resources/script/forms/formSearchTableContent.js" type="text/javascript"></script>
+<script src="/WebClinEQ/resources/script/forms/formSearchSponsor.js" type="text/javascript"></script>
 
 
 <div class="searchArea">
@@ -8,16 +15,16 @@
     <form class="form-inline" action="#" method="post">
         <fieldset class="seacrh" style="margin:15px 10px;">
             <div class="form-group">
-<!--                <label style="font-size:15px;" for="inpSearchName">Enter Sponsor Name</label>-->
+                <!--                <label style="font-size:15px;" for="inpSearchName">Enter Sponsor Name</label>-->
                 <input type="text" class="form-control inpSearchTableContent" placeholder="Search">
             </div>            
             <button type="submit" class="btn btn-default">Search</button>
         </fieldset>
     </form>
 
-    <form  action="AddSponsorToStudy" method="post">
+    <form>
         <div class="tableSearchSponsor">
-            <table class="table table-striped">
+            <table id="tblFormSearchSponsor" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Sponsor Name</th>
@@ -54,8 +61,8 @@
                 </tbody>
             </table>
         </div>
-        
-        <input type="submit" value="Add to Study" style="float:right;" class="btn btn-default" >
+
+        <input id="btnAddToStudyFormSearchSponsor" type="button" value="Add to Study" style="float:right;" class="btn btn-default" >
 
     </form>
 </div>

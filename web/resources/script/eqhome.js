@@ -54,21 +54,22 @@ $(document).ready(function () {
     $('#btnEqhomeNSMNext').on('click', function () {
         var studyBisicInfo = JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serializeArray());
         localStorage.setItem("studyBisicInfo", studyBisicInfo);
+        window.location.href="../study/newStudySponsor";
         
-        $.ajax({
-            type: 'POST',
-            url: "../study/getBasicInfo",
-            contentType: "application/json;charset=utf-8;",
-            dataType: "json",
-            data: studyBisicInfo,
-            success: function (data) {
-                alert("success");
-                //location.href("../study/newStudySponsor");
-            },
-            error:function(ts){
-             alert(ts.responseText);   
-            }
-        });
+//        $.ajax({
+//            type: 'POST',
+//            url: "../study/getBasicInfo",
+//            contentType: "application/json;charset=utf-8;",
+//            dataType: "json",
+//            data: studyBisicInfo,
+//            success: function (data) {
+//                alert("success");
+//                //location.href("../study/newStudySponsor");
+//            },
+//            error:function(){
+//             alert("error");   
+//            }
+//        });
     });
 
 

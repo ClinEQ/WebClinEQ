@@ -58,6 +58,8 @@ public class StudyController extends HttpServlet {
             HttpServletResponse response)
             throws IOException, ServletException {
 
+        boolean isAjax = false;
+
         System.out.println("enter study controller dopost!");
         String requestURI = request.getRequestURI();
         String url = "/eqhome";
@@ -87,10 +89,18 @@ public class StudyController extends HttpServlet {
             url = newStudyEDC(request, response);
         } else if (requestURI.endsWith("/getBasicInfo")) {
             url = getBasicInfo(request, response);
+            isAjax = true;
         } else {
             url = "/eqhome/error.jsp";
         }
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+
+        if (isAjax == false) {
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        } else {
+            System.out.println("ajax");
+            response.setContentType("application/json");
+            response.getWriter().write(url);
+        }
     }
 
     @Override
@@ -121,9 +131,13 @@ public class StudyController extends HttpServlet {
         if (br != null) {
             jsonInStudy = br.readLine();
         }
-        Studies study = new Studies();
 
-        return "success";
+        ObjectMapper mapper = new ObjectMapper();
+
+        Studies study = mapper.readValue(jsonInStudy, Studies.class);
+
+        System.out.println(jsonInStudy);
+        return jsonInStudy;
     }
 
     private String displayStudyList(HttpServletRequest request,
