@@ -7,11 +7,7 @@
           $(this).closest('li').addClass('active');
       });
     
-     $("#tableStudy").tablesorter({
-        onRenderHeader: function(){
-          this.prepend('<span class="icon"></span>');
-        }
-      });
+     $('#tableStudy').tablesorter();
     
 //    $("#tableStudy").tablesorter( {sortList: [[0,0], [2,0], [3, 0], [5, 0]]} ); 
     
