@@ -306,7 +306,7 @@ values(
         }
     }
 
-    public static void saveStudyOrgUserMapAndUser(String EQ_STUDY_ID, Organizations org) throws DBException {
+    public static void saveOrgNUserNMap(String EQ_STUDY_ID, Organizations org) throws DBException {
         Collection<Users> usersCollection = org.getUsersCollection();
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
         String EQ_USER_ID = null;
