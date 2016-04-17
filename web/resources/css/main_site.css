@@ -1,0 +1,162 @@
+body {
+    margin: 0px;
+    padding: 0px; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4em;
+    font-color: black;
+    font-weight: normal;
+    position: relative;
+}
+
+
+.container{
+    min-height: 480px;
+}
+
+.jumbotron {
+    height: 100px;
+    margin: 0px;
+}
+
+.jumbotron h1 {
+    font-size: 2.8em;
+    margin-top: -15px;
+    padding-left: 30px;
+}
+
+
+h3 {
+     
+     font-weight: bold;
+     text-align: center !important;
+     font-size: 1.6em;
+/*     margin-bottom: 30px;*/
+     margin-top: 0px;
+ }
+
+#navbar-main{
+    padding-left: 2em;
+    padding-right: 2em;
+    min-height:30px !important;
+    height:30px;
+    border-radius: 0;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    padding:5px 0px;
+    font-size: 14px;
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    font-weight: bolder;
+}
+
+.dropdown{
+    height:30px;
+}
+
+.dropdown-menu{
+    border-top-width: 0px;
+    margin-top:0px;
+}
+
+.top-nav > li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 4px;
+    line-height: 20px;
+    color: #fff;
+}
+
+.top-nav > li > a:hover,
+.top-nav > li > a:focus,
+.top-nav > .open > a,
+.top-nav > .open > a:hover,
+.top-nav > .open > a:focus {
+    color: #fff;
+    background-color: #000;
+    font-weight: bolder;
+}
+
+
+footer{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 1px;
+    margin-right: auto;
+    margin-left: auto;
+    
+    height: 80px;
+    background: lightgrey; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(lightgrey, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(lightgrey, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(lightgrey, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(lightgrey, white); /* Standard syntax (must be last) */
+}
+
+footer>hr{
+    margin-bottom: 5px;
+}
+
+
+table {
+    overflow: auto;
+    margin-top:10px;
+}
+
+table thead tr {
+    // background-color: #cae8ca;
+    background-color: #b8e0b8;
+}
+
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {	
+	border: 1px solid #FFF;	
+	padding: 4px;
+}
+
+
+table.tablesorter thead tr .th-sort {
+	background-image: url(../images/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(../images/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(../images/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+
+
+.form-inline .form-control {
+    display: inline-block;
+    width: 200px;
+    vertical-align: middle;
+    height: 30px;
+    background-color:white;
+  }
+  
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+ 
+  background-color: #337ab7;
+}
+
+.btninfo {
+        padding: 4px;        
+        font-size: 0.8em;
+        font-weight: bold;        
+    }
