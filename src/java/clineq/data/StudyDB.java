@@ -40,7 +40,8 @@ public class StudyDB {
                 + "USER_LOGIN_ID"
                 + " FROM CLINEQ.STUDIES S, CLINEQ.ORGANIZATIONS O, "
                 + " CLINEQ.USERS U, "
-                + "CLINEQ.STUDY_SITE_USER_MAP M"
+                //+ "CLINEQ.STUDY_SITE_USER_MAP M"
+                + "CLINEQ.STUDY_ORG_USER_MAP M"
                 + " WHERE S.EQ_SPON_ID = O.EQ_ORG_ID"
                 + " AND S.EQ_STUDY_ID=M.EQ_STUDY_ID"
                 + " AND M.EQ_USER_ID=U.EQ_USER_ID"
@@ -254,7 +255,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
     }
     public static String  selectSiteUserById(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
-        String sql = "select user_login_id from clineq.users U, clineq.studies S, CLINEQ.STUDY_SITE_USER_MAP M "
+        String sql = "select user_login_id from clineq.users U, clineq.studies S, CLINEQ.STUDY_ORG_USER_MAP M "
                 + "where U.eq_user_id=M.eq_user_id and M.eq_study_id=S.eq_study_id and S.eq_study_id ='"
                 + studyid + "'";
            
@@ -309,7 +310,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
     
     public static String  selectSiteNameById(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
-        String sql = "select org_full_name,org_type from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
+        String sql = "select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
         
         String sitename = null; 
         //  Connection connecti on = DBConnect.getConnection();
