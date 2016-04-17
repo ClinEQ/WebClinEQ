@@ -109,7 +109,7 @@
                  </div>
 
                
-                    <table class="table table-striped tablesorter" id="tableStudy">
+                    <table class="table table-striped tablesorter" id="tblStudy">
                         <thead>
                             <tr>
                                 <th>EQ Study ID</th>                                
