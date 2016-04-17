@@ -25,7 +25,7 @@
     
     label.lblInfo {
         
-        font-style: italic;
+       /* font-style: italic;*/
     }
 
 

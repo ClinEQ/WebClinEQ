@@ -17,7 +17,20 @@
            }
        }
     });
+    
+    
+    $('label.tree-toggler').click(function () {
+        $(this).parent().children('ul.tree').toggle(300);
+    });
      
+     
+     
+     var typeaheadSource = [];
+     
+     $('input.typeahead').typeahead({
+        source: typeaheadSource
+    });
+    
      
     
 //    $("#tableStudy").tablesorter( {sortList: [[0,0], [2,0], [3, 0], [5, 0]]} ); 

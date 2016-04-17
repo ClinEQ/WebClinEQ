@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../includes/header_site.jsp"/>
 
+
+
 <style>
     .filter-bar{
         height:40px;
@@ -13,18 +15,18 @@
         margin-left: 100px;  
     }
     
-    .col2 {                
+    .col3 {                
         font-size: 1.2em;
-        border-right-width: 2px;
-        border-right-color: #ddd;
-        border-right-style: groove;
+        //border-right-width: 2px;
+        //border-right-color: #ddd;
+       // border-right-style: groove;
         min-height: 450px;
           // background-color: #eef7ee;
       }
       
-      .col10 {                
-        font-size: 1.0em;
-        padding-left: 30px;
+      .col9 {                
+        font-size: inherit;
+        //padding-left: 30px;
     }
       
       .studyrow:target {
@@ -45,6 +47,14 @@
 
     }
     
+    .tvnavheader {
+        font-size: 0.85em;
+        color: black;
+    }
+    
+    
+    
+ 
     
 
 
@@ -64,16 +74,37 @@
     
     <div class="row">
         
-        <nav class="col-sm-2 col2">
-         <div id="ltlStudies">Studies</div>
-          <ul class="nav nav-pills nav-stacked">
-            <c:forEach var="study" items="${studyArrayList}">
-                <li><a href="#${study.getNctid()}"> ${study.getStudyAname()}</a></li>         
-            </c:forEach>
-          </ul>
+        <nav class="col-sm-3 col3">
+            <div class="well" style="width:100%; padding: 8px 0; background-color: #dcefdc; font-weight: bold;">
+                <div style="overflow-y: auto; overflow-x: hidden; min-height: 450px;">
+                    <ul class="nav nav-list">
+                        <li><label class="tree-toggler nav-header tvnavheader">Study</label>
+                            <ul class="nav nav-list tree">
+                                <li>
+                                    <div style="font-size: 0.8em; margin-top: 5px; font-weight: bold; color: #737373;">Search Study</div>
+                                    <div id="the-basics">
+                                        <input class="form-control input-lg typeahead" style="font-size: 0.8em;" type="text" placeholder="Enter study name">
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li><label class="tree-toggler nav-header tvnavheader">Subject</label>
+                            <ul class="nav nav-list tree">
+                                <li>
+                                    <div style="font-size: 0.8em; margin-top: 5px; color: #737373;">Search Subject</div>
+                                    <div id="the-basics">
+                                        <input class="typeahead" type="text" style="font-size: 0.8em;" placeholder="Enter subject name">
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
         
-        <div class="col-sm-10 col10">   
+        <div class="col-sm-9 col9">   
            
                 <h3>Study List</h3>
                 <div class="filter-bar">

@@ -9,6 +9,8 @@
     <script src="../resources/lib/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="../resources/lib/jquery.tablesorter.min.js" type="text/javascript"></script>
     
+     <script src="../resources/lib/bootstrap-typeahead.min.js" type="text/javascript"></script>
+    
     <script src="../resources/script/eqhome.js" type="text/javascript"></script> 
     <script src="../resources/script/sitehome.js" type="text/javascript"></script>
 </body>
