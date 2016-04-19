@@ -1,5 +1,12 @@
 var tdlist = [];
 
+if (window.jQuery) {
+    // jQuery is available.
+
+    // Print the jQuery version, e.g. "1.0.0":
+    console.log(window.jQuery.fn.jquery);
+}
+
 $(document).ready(function () {
     $("#tableStudy").find('tbody').find('tr').each(function () {
         tdlist.push($(this));
@@ -51,25 +58,30 @@ $(document).ready(function () {
 
 
     //New Study Main page 
-    $('#btnEqhomeNSMNext').on('click', function () {
-        var studyBisicInfo = JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serializeArray());
+    //$('#btnEqhomeNSMNext').on('click', function (event) {
+    $('#btnEqhomeNSMNext').click(function (event) {
+        event.preventDefault();
+
+        var studyBisicInfo = JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serialize());
         localStorage.setItem("studyBisicInfo", studyBisicInfo);
         window.location.href="../study/newStudySponsor";
         
-//        $.ajax({
-//            type: 'POST',
-//            url: "../study/getBasicInfo",
-//            contentType: "application/json;charset=utf-8;",
-//            dataType: "json",
-//            data: studyBisicInfo,
-//            success: function (data) {
-//                alert("success");
-//                //location.href("../study/newStudySponsor");
-//            },
-//            error:function(){
-//             alert("error");   
-//            }
-//        });
+        $.ajax( {
+            url: "getBasicInfo",
+            method: "POST",
+
+            contentType: "application/json;charset=utf-8;",
+            dataType: 'json',
+//            async: false,
+            data: studyBisicInfo,
+            success: function (data) {
+                alert("ss");
+                //location.href("../study/newStudySponsor");
+            },
+            error:function(){
+             alert("ee");   
+            }
+        });
     });
 
 

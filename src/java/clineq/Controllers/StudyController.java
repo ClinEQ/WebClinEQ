@@ -137,10 +137,11 @@ public class StudyController extends HttpServlet {
         }
 
         ObjectMapper mapper = new ObjectMapper();
-
+        System.out.println("jsonInStudy=" + jsonInStudy);
+        
         Studies study = mapper.readValue(jsonInStudy, Studies.class);
 
-        System.out.println(jsonInStudy);
+        
         return jsonInStudy;
     }
 
