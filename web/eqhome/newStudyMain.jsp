@@ -99,12 +99,15 @@
                             </select>
                         </div>
                     </div>
+                    <div class="save-options">
+                        <button id="btnEqhomeNSMNext" class="btn btn-success" formaction="../study/newStudySponsor">Next</button>
+                    </div>
                 </form>
             </div>
 
-            <div class="save-options">
-                    <button id="btnEqhomeNSMNext" class="btn btn-success">Next</button>
-            </div>
+            <!--            <div class="save-options">
+                                <button id="btnEqhomeNSMNext" class="btn btn-success">Next</button>
+                        </div>-->
         </div>
     </div>
 

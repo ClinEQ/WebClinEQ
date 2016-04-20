@@ -21,9 +21,15 @@
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10">
             <div class="checkSpon checkSpon2">
-                <h1 class="firstLv">Setup Sponsor User   <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Search User</a>  </h1>              
+                <h1 class="firstLv">Setup Site User <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Search User</a>  </h1>              
             </div>
             <div class="searchUser" style="display:none">
+            </div>
+            <div>
+                <label>Site</label>
+                <select style="width:130px;" id="sltStudySiteUserList" name="sltStudySiteUserList" class="form-control"  >                    
+                        <option value="">AA</option>                   
+                </select>                     
             </div>
             <form>
                 <div class="table-area">
@@ -47,7 +53,7 @@
                 </div>
                 <div class="save-options">
                     <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>
-                    <button class="btn btn-success" formaction="../eqhome/newStudySite.jsp">Next</button>
+                    <button  class="btn btn-success" formaction="../eqhome/newStudyIWRS.jsp">Next</button>
                 </div>
             </form>
         </div>

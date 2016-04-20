@@ -27,34 +27,33 @@
             </div>
             <div class="searchSite subSearchArea" style="display:none">
             </div>
-
-            <div class="table-area">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>EQ Site ID</th>
-                            <th>Site Name</th>
-                            <th>Site Desc</th>
-                            <th>Site Type</th>
-                            <th>Status</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <input type="submit" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >
-            </div>  
-
-
-            <div class="save-options">
+            <form>
+                <div class="table-area">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>EQ Site ID</th>
+                                <th>Site Name</th>
+                                <th>Site Desc</th>
+                                <th>Site Type</th>
+                                <th>Status</th>
+                                <th>Detail</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <input type="button" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >
+                </div>  
+                <div class="save-options">
                     <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>
-                    <button type="submit" class="btn btn-success" formaction="../eqhome/newStudyIWRS.jsp">Next</button>
-            </div>
+                    <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySiteUserList.jsp">Next</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 <!-- footer -->
-    <jsp:include page="../includes/footer.jsp"/>
-    <jsp:include page="../includes/forms/formCreateNewSite.jsp"/>
+<jsp:include page="../includes/footer.jsp"/>
+<jsp:include page="../includes/forms/formCreateNewSite.jsp"/>

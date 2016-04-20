@@ -59,30 +59,30 @@ $(document).ready(function () {
 
     //New Study Main page 
     //$('#btnEqhomeNSMNext').on('click', function (event) {
-    $('#btnEqhomeNSMNext').click(function (event) {
-        event.preventDefault();
-
-        var studyBisicInfo = JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serialize());
-        localStorage.setItem("studyBisicInfo", studyBisicInfo);
-        window.location.href="../study/newStudySponsor";
-        
-        $.ajax( {
-            url: "getBasicInfo",
-            method: "POST",
-
-            contentType: "application/json;charset=utf-8;",
-            dataType: 'json',
-//            async: false,
-            data: studyBisicInfo,
-            success: function (data) {
-                alert("ss");
-                //location.href("../study/newStudySponsor");
-            },
-            error:function(){
-             alert("ee");   
-            }
-        });
-    });
+//    $('#btnEqhomeNSMNext').click(function (event) {
+//        event.preventDefault();
+//
+//        var studyBisicInfo = JSON.stringify($("#formEqhomeNSMStudyBasicInfo").serializeArray());
+//        localStorage.setItem("studyBisicInfo", studyBisicInfo);
+//        window.location.href="../study/newStudySponsor";
+//        
+//        $.ajax( {
+//            url: "getBasicInfo",
+//            method: "POST",
+//
+//            contentType: "application/json;charset=utf-8;",
+//            dataType: 'json',
+////            async: false,
+//            data: studyBisicInfo,
+//            success: function (data) {
+//                alert("ss");
+//                //location.href("../study/newStudySponsor");
+//            },
+//            error:function(){
+//             alert("ee");   
+//            }
+//        });
+//    });
 
 
 
