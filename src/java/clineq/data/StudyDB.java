@@ -30,7 +30,7 @@ public class StudyDB {
     //try ( Connection conn = DBConnect.getConnection();
     //    PreparedStatement ps = conn.prepareStatement(sql))
     //       {
-    public static ArrayList<Studies> selectAllStudy(String userId) throws DBException {
+    public static ArrayList<Studies> selectSiteAllStudy(String userId) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT S.EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
                 + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
@@ -102,7 +102,7 @@ System.out.println("sql="+sql);
                 + "FROM CLINEQ.STUDIES S, CLINEQ.ORGANIZATIONs O "
                 + "WHERE S.EQ_SPON_ID = O.EQ_ORG_ID "
                 + "AND EQ_STUDY_ID=" + EQ_STUDY_ID;
-                 System.out.println("one study,sql="+sql);
+                // System.out.println("one study,sql="+sql);
 
 
         Studies s = null;
@@ -259,7 +259,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                 + "where U.eq_user_id=M.eq_user_id and M.eq_study_id=S.eq_study_id and S.eq_study_id ='"
                 + studyid + "'";
            
-        String user = null; 
+        String user = null;
         //  Connection connecti on = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -310,8 +310,8 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
     
     public static String  selectSiteNameById(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
-        String sql = "select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
-        
+        //String sql = "select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
+        String sql = "select study_aname from clineq.studies where eq_study_id = '" + studyid +"'";
         String sitename = null; 
         //  Connection connecti on = DBConnect.getConnection();
         PreparedStatement ps = null;
@@ -322,10 +322,36 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery(); //{
             while (rs.next()) {
-                sitename = rs.getString("ORG_FULL_NAME");
+                sitename = rs.getString("STUDY_ANAME");
             }
         } catch (SQLException e) {
             System.err.println("Error in StudyDB getSiteName " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return sitename;
+    }
+    
+    public static String  selectSiteNCTIDById(String studyid) throws DBException {
+        //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
+        //String sql = "select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
+        String sql = "select nctid from clineq.studies where eq_study_id = '" + studyid +"'";
+        String sitename = null; 
+        //  Connection connecti on = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                sitename = rs.getString("NCTID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in StudyDB getSiteNCTID " + e.getMessage());
             return null;
         } finally {
             DBUtil.closeResultSet(rs);

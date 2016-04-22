@@ -45,6 +45,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Subjects.findBySubjectStatus", query = "SELECT s FROM Subjects s WHERE s.subjectStatus = :subjectStatus")})
 public class Subjects implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjects")
+    private Collection<SubjectCharts> subjectChartsCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -237,6 +240,15 @@ public class Subjects implements Serializable {
     @Override
     public String toString() {
         return "clineq.business.Subjects[ eqSubjectId=" + eqSubjectId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<SubjectCharts> getSubjectChartsCollection() {
+        return subjectChartsCollection;
+    }
+
+    public void setSubjectChartsCollection(Collection<SubjectCharts> subjectChartsCollection) {
+        this.subjectChartsCollection = subjectChartsCollection;
     }
     
 }

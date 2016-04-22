@@ -7,7 +7,9 @@ package clineq.business;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,6 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "StudyChartSubcategory.findByChartSubcategoryStatus", query = "SELECT s FROM StudyChartSubcategory s WHERE s.chartSubcategoryStatus = :chartSubcategoryStatus")})
 public class StudyChartSubcategory implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studyChartSubcategory")
+    private Collection<SubjectCharts> subjectChartsCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -50,7 +57,7 @@ public class StudyChartSubcategory implements Serializable {
     @Column(name = "CHART_TYPE")
     private String chartType;
     @Column(name = "CHART_SUBCATEGORY_SEQ")
-    private BigInteger chartSubcategorySeq;
+    private int chartSubcategorySeq;
     @Size(max = 30)
     @Column(name = "CHART_SUBCATEGORY_STATUS")
     private String chartSubcategoryStatus;
@@ -89,11 +96,11 @@ public class StudyChartSubcategory implements Serializable {
         this.chartType = chartType;
     }
 
-    public BigInteger getChartSubcategorySeq() {
+    public int getChartSubcategorySeq() {
         return chartSubcategorySeq;
     }
 
-    public void setChartSubcategorySeq(BigInteger chartSubcategorySeq) {
+    public void setChartSubcategorySeq(int chartSubcategorySeq) {
         this.chartSubcategorySeq = chartSubcategorySeq;
     }
 
@@ -136,6 +143,15 @@ public class StudyChartSubcategory implements Serializable {
     @Override
     public String toString() {
         return "clineq.business.StudyChartSubcategory[ chartSubcategoryId=" + chartSubcategoryId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<SubjectCharts> getSubjectChartsCollection() {
+        return subjectChartsCollection;
+    }
+
+    public void setSubjectChartsCollection(Collection<SubjectCharts> subjectChartsCollection) {
+        this.subjectChartsCollection = subjectChartsCollection;
     }
     
 }

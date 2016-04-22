@@ -10,7 +10,8 @@
     </head>
     <body>
         <div id="login">
-            <form class="form-horizontal" action="user/login" method="post">
+            <form class="form-horizontal" action="user/login"  method="post">
+            <!--<form class="form-horizontal" action="user/login" enctype="multipart/form-data" method="post">-->
                 <!--<form class="form-horizontal" action="study/displayStudyList" method="post">-->
                 <div class="form-group form-group-lg">
                     <label class="col-sm-4 control-label" type="text" for="inpUserName">User Name</label>
@@ -24,7 +25,14 @@
                     <input type="password" class="form-control" id="inpPassword" name="inpPassword" placeholder="Password">
                     </div>
                 </div>
-                <div>
+                <!--<div class="form-group form-group-lg">
+                   <label class="col-sm-4 control-label" for="inpFile">file</label>
+                    <div class="col-sm-8">
+                    <input type="file" class="form-control" id="inpFile" name="inpFile" placeholder="inpFile">
+                    </div>
+                    <input type="file" name="inpFile" size="50"/>
+                </div>-->
+                
                   <!--
                 <div class="form-group form-group-lg">
                     <label class="col-sm-4 control-label" type="text" for="inpPassword">PhotoId</label>

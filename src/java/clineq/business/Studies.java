@@ -51,13 +51,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Studies.findByStudyStatus", query = "SELECT s FROM Studies s WHERE s.studyStatus = :studyStatus")})
 public class Studies implements Serializable {
 
+    @Column(name = "PLANNED_PATIENTS_NUM")
+    private int plannedPatientsNum;
+    @JoinColumn(name = "EQ_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
+    @ManyToOne
+    private Users eqManagerId;
+
     @JoinColumn(name = "SPON_STUDY_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
     @ManyToOne
     private Users sponStudyManagerId;
 
-    @Column(name = "PLANNED_PATIENTS_NUM")
-    //private BigInteger plannedPatientsNum;
-    private int plannedPatientsNum;
     @Size(max = 30)
     @Column(name = "CHART_GROUP_ID")
     private String chartGroupId;
@@ -113,7 +116,7 @@ public class Studies implements Serializable {
     //private Users sponStudyManagerId;
     //@JoinColumn(name = "EQ_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
     //@ManyToOne
-    private Users eqManagerId;
+    //private Users eqManagerId;
     @OneToMany(mappedBy = "eqStudyId")
     //private Collection<StudyChartGroup> studyChartGroupCollection;
    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "studies")
@@ -417,4 +420,20 @@ public class Studies implements Serializable {
         this.sponStudyManagerId = sponStudyManagerId;
     }*/
 
+ /*   public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(int plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
+
+ /*   public Users getEqManagerId() {
+        return eqManagerId;
+    }
+
+    public void setEqManagerId(Users eqManagerId) {
+        this.eqManagerId = eqManagerId;
+    }
+*/
 }

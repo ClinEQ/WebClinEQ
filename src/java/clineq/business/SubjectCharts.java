@@ -19,11 +19,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Elijah
+ * @author User
  */
 @Entity
 @Table(name = "SUBJECT_CHARTS")
@@ -31,11 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "SubjectCharts.findAll", query = "SELECT s FROM SubjectCharts s"),
     @NamedQuery(name = "SubjectCharts.findByEqSubjectId", query = "SELECT s FROM SubjectCharts s WHERE s.subjectChartsPK.eqSubjectId = :eqSubjectId"),
-    @NamedQuery(name = "SubjectCharts.findByChartGroupId", query = "SELECT s FROM SubjectCharts s WHERE s.subjectChartsPK.chartGroupId = :chartGroupId"),
     @NamedQuery(name = "SubjectCharts.findByChartCategoryId", query = "SELECT s FROM SubjectCharts s WHERE s.subjectChartsPK.chartCategoryId = :chartCategoryId"),
+    @NamedQuery(name = "SubjectCharts.findByChartSubcategoryId", query = "SELECT s FROM SubjectCharts s WHERE s.subjectChartsPK.chartSubcategoryId = :chartSubcategoryId"),
     @NamedQuery(name = "SubjectCharts.findByUploadType", query = "SELECT s FROM SubjectCharts s WHERE s.uploadType = :uploadType"),
     @NamedQuery(name = "SubjectCharts.findByUploadSeq", query = "SELECT s FROM SubjectCharts s WHERE s.uploadSeq = :uploadSeq"),
     @NamedQuery(name = "SubjectCharts.findByUploadTimestamp", query = "SELECT s FROM SubjectCharts s WHERE s.uploadTimestamp = :uploadTimestamp"),
+    @NamedQuery(name = "SubjectCharts.findByUploadId", query = "SELECT s FROM SubjectCharts s WHERE s.uploadId = :uploadId"),
     @NamedQuery(name = "SubjectCharts.findByDocName", query = "SELECT s FROM SubjectCharts s WHERE s.docName = :docName"),
     @NamedQuery(name = "SubjectCharts.findByDocVersion", query = "SELECT s FROM SubjectCharts s WHERE s.docVersion = :docVersion"),
     @NamedQuery(name = "SubjectCharts.findByReviewStatus", query = "SELECT s FROM SubjectCharts s WHERE s.reviewStatus = :reviewStatus")})
@@ -44,6 +46,7 @@ public class SubjectCharts implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SubjectChartsPK subjectChartsPK;
+    @Size(max = 30)
     @Column(name = "UPLOAD_TYPE")
     private String uploadType;
     @Column(name = "UPLOAD_SEQ")
@@ -51,18 +54,32 @@ public class SubjectCharts implements Serializable {
     @Column(name = "UPLOAD_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadTimestamp;
+    @Size(max = 30)
+    @Column(name = "UPLOAD_ID")
+    private String uploadId;
+    @Size(max = 50)
     @Column(name = "DOC_NAME")
     private String docName;
+    @Size(max = 30)
     @Column(name = "DOC_VERSION")
     private String docVersion;
     @Lob
     @Column(name = "DOC_CONTENT")
-    private String docContent;
+    private Serializable docContent;
+    @Size(max = 50)
     @Column(name = "REVIEW_STATUS")
     private String reviewStatus;
-    @JoinColumn(name = "UPLOAD_ID", referencedColumnName = "ORG_DOC_UPLOAD_ID")
-    @ManyToOne
-    private OrgDocUpldRegistry uploadId;
+    @JoinColumn(name = "CHART_CATEGORY_ID", referencedColumnName = "CHART_CATEGORY_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private StudyChartCategory studyChartCategory;
+    @JoinColumn(name = "CHART_SUBCATEGORY_ID", referencedColumnName = "CHART_SUBCATEGORY_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private StudyChartSubcategory studyChartSubcategory;
+    @JoinColumn(name = "EQ_SUBJECT_ID", referencedColumnName = "EQ_SUBJECT_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Subjects subjects;
+    
+    private String eqSubjectId;
 
     public SubjectCharts() {
     }
@@ -71,8 +88,8 @@ public class SubjectCharts implements Serializable {
         this.subjectChartsPK = subjectChartsPK;
     }
 
-    public SubjectCharts(String eqSubjectId, String chartGroupId, String chartCategoryId) {
-        this.subjectChartsPK = new SubjectChartsPK(eqSubjectId, chartGroupId, chartCategoryId);
+    public SubjectCharts(String eqSubjectId, String chartCategoryId, String chartSubcategoryId) {
+        this.subjectChartsPK = new SubjectChartsPK(eqSubjectId, chartCategoryId, chartSubcategoryId);
     }
 
     public SubjectChartsPK getSubjectChartsPK() {
@@ -107,6 +124,14 @@ public class SubjectCharts implements Serializable {
         this.uploadTimestamp = uploadTimestamp;
     }
 
+    public String getUploadId() {
+        return uploadId;
+    }
+
+    public void setUploadId(String uploadId) {
+        this.uploadId = uploadId;
+    }
+
     public String getDocName() {
         return docName;
     }
@@ -123,11 +148,11 @@ public class SubjectCharts implements Serializable {
         this.docVersion = docVersion;
     }
 
-    public String getDocContent() {
+    public Serializable getDocContent() {
         return docContent;
     }
 
-    public void setDocContent(String docContent) {
+    public void setDocContent(Serializable docContent) {
         this.docContent = docContent;
     }
 
@@ -139,12 +164,36 @@ public class SubjectCharts implements Serializable {
         this.reviewStatus = reviewStatus;
     }
 
-    public OrgDocUpldRegistry getUploadId() {
-        return uploadId;
+    public StudyChartCategory getStudyChartCategory() {
+        return studyChartCategory;
     }
 
-    public void setUploadId(OrgDocUpldRegistry uploadId) {
-        this.uploadId = uploadId;
+    public void setStudyChartCategory(StudyChartCategory studyChartCategory) {
+        this.studyChartCategory = studyChartCategory;
+    }
+
+    public StudyChartSubcategory getStudyChartSubcategory() {
+        return studyChartSubcategory;
+    }
+
+    public void setStudyChartSubcategory(StudyChartSubcategory studyChartSubcategory) {
+        this.studyChartSubcategory = studyChartSubcategory;
+    }
+
+    public Subjects getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Subjects subjects) {
+        this.subjects = subjects;
+    }
+    
+       public String getEqSubjectId() {
+        return eqSubjectId;
+    }
+
+    public void setEqSubjectId(String eqSubjectId) {
+        this.eqSubjectId = eqSubjectId;
     }
 
     @Override

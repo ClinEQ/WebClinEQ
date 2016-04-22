@@ -9,31 +9,39 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author Elijah
+ * @author User
  */
 @Embeddable
 public class SubjectChartsPK implements Serializable {
 
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "EQ_SUBJECT_ID")
     private String eqSubjectId;
     @Basic(optional = false)
-    @Column(name = "CHART_GROUP_ID")
-    private String chartGroupId;
-    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "CHART_CATEGORY_ID")
     private String chartCategoryId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "CHART_SUBCATEGORY_ID")
+    private String chartSubcategoryId;
 
     public SubjectChartsPK() {
     }
 
-    public SubjectChartsPK(String eqSubjectId, String chartGroupId, String chartCategoryId) {
+    public SubjectChartsPK(String eqSubjectId, String chartCategoryId, String chartSubcategoryId) {
         this.eqSubjectId = eqSubjectId;
-        this.chartGroupId = chartGroupId;
         this.chartCategoryId = chartCategoryId;
+        this.chartSubcategoryId = chartSubcategoryId;
     }
 
     public String getEqSubjectId() {
@@ -44,14 +52,6 @@ public class SubjectChartsPK implements Serializable {
         this.eqSubjectId = eqSubjectId;
     }
 
-    public String getChartGroupId() {
-        return chartGroupId;
-    }
-
-    public void setChartGroupId(String chartGroupId) {
-        this.chartGroupId = chartGroupId;
-    }
-
     public String getChartCategoryId() {
         return chartCategoryId;
     }
@@ -60,12 +60,20 @@ public class SubjectChartsPK implements Serializable {
         this.chartCategoryId = chartCategoryId;
     }
 
+    public String getChartSubcategoryId() {
+        return chartSubcategoryId;
+    }
+
+    public void setChartSubcategoryId(String chartSubcategoryId) {
+        this.chartSubcategoryId = chartSubcategoryId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (eqSubjectId != null ? eqSubjectId.hashCode() : 0);
-        hash += (chartGroupId != null ? chartGroupId.hashCode() : 0);
         hash += (chartCategoryId != null ? chartCategoryId.hashCode() : 0);
+        hash += (chartSubcategoryId != null ? chartSubcategoryId.hashCode() : 0);
         return hash;
     }
 
@@ -79,10 +87,10 @@ public class SubjectChartsPK implements Serializable {
         if ((this.eqSubjectId == null && other.eqSubjectId != null) || (this.eqSubjectId != null && !this.eqSubjectId.equals(other.eqSubjectId))) {
             return false;
         }
-        if ((this.chartGroupId == null && other.chartGroupId != null) || (this.chartGroupId != null && !this.chartGroupId.equals(other.chartGroupId))) {
+        if ((this.chartCategoryId == null && other.chartCategoryId != null) || (this.chartCategoryId != null && !this.chartCategoryId.equals(other.chartCategoryId))) {
             return false;
         }
-        if ((this.chartCategoryId == null && other.chartCategoryId != null) || (this.chartCategoryId != null && !this.chartCategoryId.equals(other.chartCategoryId))) {
+        if ((this.chartSubcategoryId == null && other.chartSubcategoryId != null) || (this.chartSubcategoryId != null && !this.chartSubcategoryId.equals(other.chartSubcategoryId))) {
             return false;
         }
         return true;
@@ -90,7 +98,7 @@ public class SubjectChartsPK implements Serializable {
 
     @Override
     public String toString() {
-        return "clineq.business.SubjectChartsPK[ eqSubjectId=" + eqSubjectId + ", chartGroupId=" + chartGroupId + ", chartCategoryId=" + chartCategoryId + " ]";
+        return "clineq.business.SubjectChartsPK[ eqSubjectId=" + eqSubjectId + ", chartCategoryId=" + chartCategoryId + ", chartSubcategoryId=" + chartSubcategoryId + " ]";
     }
     
 }

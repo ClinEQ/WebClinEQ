@@ -6,8 +6,10 @@
 package clineq.business;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,12 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,6 +40,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "StudyChartCategory.findByStatus", query = "SELECT s FROM StudyChartCategory s WHERE s.status = :status"),
     @NamedQuery(name = "StudyChartCategory.findByLastUpdateDate", query = "SELECT s FROM StudyChartCategory s WHERE s.lastUpdateDate = :lastUpdateDate")})
 public class StudyChartCategory implements Serializable {
+
+    @OneToMany(mappedBy = "chartCategoryId")
+    private Collection<StudyChartSubcategory> studyChartSubcategoryCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studyChartCategory")
+    private Collection<SubjectCharts> subjectChartsCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -127,6 +136,24 @@ public class StudyChartCategory implements Serializable {
     @Override
     public String toString() {
         return "clineq.business.StudyChartCategory[ chartCategoryId=" + chartCategoryId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<StudyChartSubcategory> getStudyChartSubcategoryCollection() {
+        return studyChartSubcategoryCollection;
+    }
+
+    public void setStudyChartSubcategoryCollection(Collection<StudyChartSubcategory> studyChartSubcategoryCollection) {
+        this.studyChartSubcategoryCollection = studyChartSubcategoryCollection;
+    }
+
+    @XmlTransient
+    public Collection<SubjectCharts> getSubjectChartsCollection() {
+        return subjectChartsCollection;
+    }
+
+    public void setSubjectChartsCollection(Collection<SubjectCharts> subjectChartsCollection) {
+        this.subjectChartsCollection = subjectChartsCollection;
     }
     
 }
