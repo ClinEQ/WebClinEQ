@@ -163,6 +163,11 @@ PreparedStatement ps = null;
         String subcategory_id = request.getParameter("chartSubcategoryID");
         System.out.println("in study controler, userid="+userid);
         System.out.println("in study controler, study_id="+study_id);
+        
+        PrintWriter writer = new PrintWriter("C:/clineq/myClineq.txt", "UTF-8");
+writer.println("The first line");
+writer.println("The second line");
+writer.close();
         //userid = "JOHN01";
         //System.out.println("in study controler, Hard userid="+userid);
         /*Part filePart = request.getPart("inpFile");

@@ -174,7 +174,7 @@
                                         ${study.getStudyStatus()}
                                     </td>
                                     <td></td>
-                                    <td><a class="btn btn-info btninfo" href="../study/studySiteDetails?eqStudyID=${study.getEqStudyId()}&inpUserName=${UserId}" target="_blank">Details</a></td>
+                                    <td><a class="btn btn-info btninfo" href="../site/studySiteDetails?eqStudyID=${study.getEqStudyId()}&inpUserName=${UserId}" target="_blank">Details</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

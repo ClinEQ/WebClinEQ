@@ -48,9 +48,18 @@ public class LoginController extends HttpServlet {
         String userid = request.getParameter("inpUserName");
         String title = request.getParameter("title");
         System.out.println("title="+title+" userid="+userid);
+        
         //userid = "JOHN01";
         if (userExist(userid)) {
-            url = "/study/displaySiteList";
+            String userType = userOrgType(userid);
+            if(userType.equals("SITE"))
+            {
+              url = "/site/displaySiteList";
+            }
+            else if(userType.equals("CLINEQ"))
+            {
+                url = "/study/displayStudySiteList";
+            }
             //url = "/eqhome/index.jsp"; 
         } else {
 //            response.sendRedirect("/login.jsp");
@@ -99,6 +108,27 @@ public class LoginController extends HttpServlet {
         }
         return false;
     }
+public String userOrgType(String userLoginId) {
+        ArrayList<Users> userArrayList = null;
+        Users user = new Users();
 
+        try {
+            userArrayList = UserDB.selectAllUser();
+            //System.out.println("UserLoginId="+userLoginId+"userArrayListsize="+userArrayList.size());
+            for (int i=0; i<userArrayList.size(); i++)
+            {
+                user = userArrayList.get(i);
+                //System.out.println("UserId in DB="+user.getUserLoginId());
+                if (userLoginId.equals(user.getUserLoginId()))
+                {
+                    return user.getUserType();
+                }
+            }
+
+        } catch (DBException e) {
+            System.err.println();
+        }
+        return "";
+    }
 
 }
