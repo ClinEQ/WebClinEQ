@@ -60,6 +60,10 @@ public class LoginController extends HttpServlet {
             {
                 url = "/study/displayStudySiteList";
             }
+              else if(userType.equals("SPONSOR"))
+            {
+                url = "/sponsor/displayStudySponsorList";
+            }
             //url = "/eqhome/index.jsp"; 
         } else {
 //            response.sendRedirect("/login.jsp");

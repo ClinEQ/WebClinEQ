@@ -33,20 +33,12 @@ import javax.servlet.ServletOutputStream;
  maxFileSize = 1024 * 1024 * 10,
  maxRequestSize = 1024 * 1024 * 15,
  location = "C:/clineq" )
-
-//import org.apache.commons.fileupload.FileItem;
-//import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-//import org.apache.commons.fileupload.servlet.ServletFileUpload;
-//import java.util.List;
+//WebServlet(name = "SponsorController", urlPatterns = {"/SponsorController"})
 
 
-/**
- *
- * @author songy04
- */
-public class SiteController extends HttpServlet {
+public class SponsorController extends HttpServlet {
 
-    /**
+     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -64,7 +56,7 @@ public class SiteController extends HttpServlet {
     private ArrayList<Organizations> orgArrayList = null;
     private ArrayList<Subjects> subjectArrayList = null;
     private ArrayList<InputStream> sPdfArrayList = null; 
-    private ArrayList<Subjects> studySiteSubjectList = null;
+    private ArrayList<Subjects> studySponsorSubjectList = null;
     private ArrayList<StudyChartCategory> siteSubjectCategory = null;
     private ArrayList<StudyChartSubcategory> siteSubjectSubcategory = null;
     private ArrayList<SubjectCharts> siteSubjectChart = null;
@@ -123,11 +115,10 @@ PreparedStatement ps = null;
         }*/
  String uploadtype = "Initial";
  //boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
-  try {
+  /*try {
           InputStream sPdf;
-          File targetFile = new File("C:/clineq/output1.pdf");
+          File targetFile = new File("C:/clineq/output5.pdf");
           OutputStream outStream = new FileOutputStream(targetFile);
-          //ServletOutputStream out = response.getOutputStream();
           
             Connection con = DBConnect.getConnection();
             PreparedStatement psmnt;
@@ -150,20 +141,18 @@ PreparedStatement ps = null;
                 int bytesRead;
                 while ((bytesRead = sPdf.read(bytearray)) != -1) {
                     outStream.write(bytearray, 0, bytesRead);
-                    //out.write(bytearray, 0, bytesRead);
                 }
                 System.out.println("get pdf....");
             }
             
 }catch (SQLException e) {
             System.err.println("Error in image retrieve "+ e.getMessage());
-        }
+        }*/
             
-        System.out.println("enter study controller dopost! This is site Controllers ");
+        System.out.println("enter study controller dopost! This is Sponsor Controllers ");
       
         String requestURI = request.getRequestURI();
         String userid = request.getParameter("inpUserName");
-        userid = "JOHN01";
         String study_id = request.getParameter("eqStudyID");
         String subject_id = request.getParameter("eqSubjectID");
         String category_id = request.getParameter("chartCategoryID");
@@ -176,7 +165,7 @@ PreparedStatement ps = null;
         System.out.println("Real path="+path);*/
         //userid = "JOHN01";
         //System.out.println("in study controler, Hard userid="+userid);
-  /*      Part filePart = request.getPart("inpFile");
+        /*Part filePart = request.getPart("inpFile");
         if (filePart != null) {
             // prints out some information for debugging
             System.out.println("filepart name="+filePart.getName());
@@ -200,45 +189,32 @@ PreparedStatement ps = null;
         }
         else if(userType.equals("SITE"))
         {*/
-         if (requestURI.endsWith("/displaySiteList")) {
-            url = displaySiteList(request, response,userid);
+         if (requestURI.endsWith("/displayStudySponsorList")) {
+            url = displaySponsorList(request, response,userid);
             //boolean ret =OrgDocUpldRegistryDB.InsertNewInfo("orgdocuploadid","studyid","subjectid","orgid","categoryid","startdate","userid","enddate","status","remoteip");
             // boolean ret =OrgDocUpldRegistryDB.InsertNewInfo("1","EQ000003","1","TO_DATE('2016-04-02','YYYY-MM-DD')","JOHN01","TO_DATE('2016-04-03','YYYY-MM-DD')","Active","255.255.255.255");
             //   if ("STUDYLIST_NODATA" url equal())
             //session.setAttribute("UID", userid);
             //subject_id = "EQ000003";
             //study_id = "1";
-           //url = subjectSiteDetails(request, response,study_id,subject_id,userid);
+           //url = subjectSponsorDetails(request, response,study_id,subject_id,userid);
             System.out.println("the list is not empty!");
-         } else if (requestURI.endsWith("/studySiteDetails")) {
+         } else if (requestURI.endsWith("/studySponsorDetails")) {
             // String Uid = (String)request.getAttribute("UID");
             // System.out.println("UID="+Uid);
              //String study_id = request.getParameter("eqStudyID");
-            url = studySiteDetails(request, response,study_id,userid);
-            System.out.println("In sutdySiteDetails, url=" + url);
-         } else if (requestURI.endsWith("/subjectSiteDetails")) {
+            url = studySponsorDetails(request, response,study_id,userid);
+            System.out.println("In sutdySponsorDetails, url=" + url);
+         } else if (requestURI.endsWith("/subjectSponsorDetails")) {
              //String subject_id = request.getParameter("eqSubjectID");
-            url = subjectSiteDetails(request, response,study_id, subject_id,userid);
-            System.out.println("In subjectSiteDetails, url=" + url);
-         } else if (requestURI.endsWith("/fileSiteDetails")) {
+            url = subjectSponsorDetails(request, response,study_id, subject_id,userid);
+            System.out.println("In subjectSponsorDetails, url=" + url);
+         } else if (requestURI.endsWith("/fileSponsorDetails")) {
              //String subject_id = request.getParameter("eqSubjectID");
              String pdffile = "C:/clineq/info.pdf";
-                    Part filePart = request.getPart("inpFile");
-        if (filePart != null) {
-            // prints out some information for debugging
-            System.out.println("filepart name="+filePart.getName());
-            System.out.println("filepart SIZE="+filePart.getSize());
-            System.out.println("filepart content="+filePart.getContentType());
-             
-            // obtains input stream of the upload file
-            InputStream inputStream = null;
-            inputStream= filePart.getInputStream();
-           // boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
-            boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"54");
-        }
-            url = fileSiteDetails(request, response,subject_id,study_id,category_id,subcategory_id,userid,pdffile);
+            url = fileSponsorDetails(request, response,subject_id,study_id,category_id,subcategory_id,userid,pdffile);
             
-            System.out.println("In fileSiteDetails, url=" + url);
+            System.out.println("In fileSponsorDetails, url=" + url);
          }
         /* else if (requestURI.endsWith("/newStudySponsor")) {
             url = newStudySponsor(request, response);
@@ -272,8 +248,8 @@ PreparedStatement ps = null;
         /*String requestURI = request.getRequestURI();
         String url = "/siteHome";
 
-        if (requestURI.endsWith("/displaySiteList")) {
-            url = displaySiteList(request, response,request.getParameter("inpUserName"));
+        if (requestURI.endsWith("/displaySponsorList")) {
+            url = displaySponsorList(request, response,request.getParameter("inpUserName"));
         } else if (requestURI.endsWith("/createNewStudy")) {
             url = createNewStudy(request, response);
         } else if (requestURI.endsWith("/newStudySponsor")) {
@@ -285,7 +261,7 @@ PreparedStatement ps = null;
         doPost(request, response);
     }
 
-    private String displaySiteList(HttpServletRequest request,
+    private String displaySponsorList(HttpServletRequest request,
             HttpServletResponse response,String userId) throws IOException {
 
         try {
@@ -330,7 +306,7 @@ PreparedStatement ps = null;
 
     
   
-      private String studySiteDetails(HttpServletRequest request,
+      private String studySponsorDetails(HttpServletRequest request,
             HttpServletResponse response,String studyid,String userid) throws IOException {
 
         /*String url;
@@ -352,7 +328,7 @@ PreparedStatement ps = null;
             siteNameByStudyId = StudyDB.selectSiteNameById(studyid); 
             //select org_full_name,org_type from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'
             siteNCTIDByStudyId = StudyDB.selectSiteNCTIDById(studyid);
-            studySiteSubjectList = SubjectDB.selectSiteSubject(studyid);
+            studySponsorSubjectList = SubjectDB.selectSiteSubject(studyid);
         } catch (DBException e) {
             System.err.println();
         }
@@ -361,13 +337,13 @@ PreparedStatement ps = null;
 
         HttpSession session = request.getSession();
 
-        if (studySiteSubjectList != null) {
+        if (studySponsorSubjectList != null) {
             System.out.println("i checking array");
             //session.setAttribute("siteUserByStudyId", siteUserByStudyId);
             session.setAttribute("siteSponsorByStudyId", siteSponsorByStudyId);
             session.setAttribute("siteNameByStudyId", siteNameByStudyId);
             session.setAttribute("siteNCTIDByStudyId", siteNCTIDByStudyId);
-            session.setAttribute("studySiteSubjectList", studySiteSubjectList);
+            session.setAttribute("studySponsorSubjectList", studySponsorSubjectList);
             session.setAttribute("UserId", userid);
             url = "/siteHome/studyDetails.jsp";
             System.out.println("url " + url);
@@ -380,7 +356,7 @@ PreparedStatement ps = null;
 
     }
 
-        private String subjectSiteDetails(HttpServletRequest request,
+        private String subjectSponsorDetails(HttpServletRequest request,
             HttpServletResponse response,String studyid, String subjectid,String userid) throws IOException {
  
         try {
@@ -397,7 +373,7 @@ PreparedStatement ps = null;
             siteNCTIDByStudyId = StudyDB.selectSiteNCTIDById(studyid);
             studySiteSubjectList = SubjectDB.selectSiteSubject(studyid);*/
         } catch (DBException e) {
-            System.err.println("Error happened in SiteSubjectDetails");
+            System.err.println("Error happened in SponsorSubjectDetails");
         }
 
         String url;
@@ -422,7 +398,7 @@ PreparedStatement ps = null;
         }
     }
 
-        private String fileSiteDetails(HttpServletRequest request,
+        private String fileSponsorDetails(HttpServletRequest request,
             HttpServletResponse response,String subjectid,String studyid, String catogoryid, String subcategoryid, String userid,String pdfFile) throws IOException {
  
         try {
@@ -436,7 +412,7 @@ PreparedStatement ps = null;
 
         HttpSession session = request.getSession();
 
-        if (studySiteSubjectList != null) {
+        if (studySponsorSubjectList != null) {
             System.out.println("i checking array");
         
            /* session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
@@ -539,5 +515,7 @@ try {
             }
       return true;
    }*/
+
+    
 
 }

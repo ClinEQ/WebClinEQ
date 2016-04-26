@@ -24,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Statement;
+import java.io.*;
+
 
 /**
  *
@@ -71,10 +73,11 @@ public class SubjectChartsDB {
        
     }
     
-    public static boolean InsertPdf(String fileName,String uploadtype,String subcategoryid) {
- try {
-File file = new File(fileName);
-FileInputStream fs = new FileInputStream(file);
+    //public static boolean InsertPdf(String fileName,String uploadtype,String subcategoryid) {
+    public static boolean InsertPdf(InputStream inputStream,String uploadtype,String subcategoryid) {
+        try {
+//File file = new File(fileName);
+//FileInputStream fs = new FileInputStream(file);
 Connection conn = DBConnect.getConnection();
 PreparedStatement ps = null;
         Statement stmt = null;
@@ -99,12 +102,16 @@ PreparedStatement ps = null;
             if(count == 0 ) {
              id = String.valueOf(maxid+1);
             //id = "48";
-             System.out.println("In InsertPdf, fileName="+fileName+" id="+id);
+             //System.out.println("In InsertPdf, fileName="+fileName+" id="+id);
             ps = conn.prepareStatement("INSERT INTO clineq.subject_charts (EQ_SUBJECT_CHART_ID,DOC_CONTENT,UPLOAD_TYPE) VALUES(?,?,'" + uploadtype +"')");
             //ps = conn.prepareStatement(sql);
             ps.setString(1,id);
-            ps.setBinaryStream(2,fs,fs.available());
+            //ps.setBinaryStream(2,fs,fs.available());
+            System.out.println("inser 1");
+            ps.setBlob(2,inputStream);
+            System.out.println("inser 2");
             int i = ps.executeUpdate();
+            System.out.println("inser 3");
             if(i!=0)
             {
                System.out.println("inser good"); 
@@ -115,8 +122,8 @@ PreparedStatement ps = null;
             }
             }
             else
-            {
-                System.out.println("Record update");
+           {
+               /* System.out.println("Record update");
                 ps = conn.prepareStatement("update clineq.subject_charts set DOC_CONTENT= ? where EQ_SUBJECT_CHART_ID = ?");
             //ps = conn.prepareStatement(sql);
                
@@ -124,14 +131,14 @@ PreparedStatement ps = null;
                 ps.setBinaryStream(1,fs,fs.available());
                 ps.setString(2,subcategoryid);
                 int i = ps.executeUpdate();
-                System.out.println("Record updated");
+                System.out.println("Record updated");*/
             }
       }catch (SQLException e) {
             System.err.println("Error in image insert "+ e.getMessage());
-        }catch (FileNotFoundException ex){
+       /* }catch (FileNotFoundException ex){
             System.err.println("Error in image insert "+ ex.getMessage());
             }catch (IOException eio){
-            System.err.println("Error in image insert "+ eio.getMessage());
+            System.err.println("Error in image insert "+ eio.getMessage());*/
             }
       
       return true;

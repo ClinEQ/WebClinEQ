@@ -13,5 +13,12 @@
     </head>
     <body>
         <h1>This is subjectDetails page!</h1>
+        
+        <form class="form-horizontal" action="site/fileSiteDetails" enctype="multipart/form-data" method="post">
+            <p>  <input type="file" name="inpFile" size="40" ></p>
+            <div> <input type="submit" value="Submit"></div>
+        </form>
+            
+               
     </body>
 </html>

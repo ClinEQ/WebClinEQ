@@ -10,6 +10,7 @@
         <servlet-name>StudyController</servlet-name>
         <url-pattern>/study/*</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>SiteController</servlet-name>
         <servlet-class>clineq.Controllers.SiteController</servlet-class>
@@ -19,11 +20,22 @@
         <servlet-name>SiteController</servlet-name>
         <url-pattern>/site/*</url-pattern>
     </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>SponsorController</servlet-name>
+        <servlet-class>clineq.Controllers.SponsorController</servlet-class>
+    </servlet>
+    <!-- mapping -->
+    <servlet-mapping>
+        <servlet-name>SponsorController</servlet-name>
+        <url-pattern>/sponsor/*</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>clineq.Controllers.LoginController</servlet-class>
     </servlet>
-    <!-- mapping -->
+    
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/user/*</url-pattern>
