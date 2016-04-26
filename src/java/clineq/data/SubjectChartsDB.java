@@ -25,7 +25,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Statement;
 import java.io.*;
-
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -74,7 +76,7 @@ public class SubjectChartsDB {
     }
     
     //public static boolean InsertPdf(String fileName,String uploadtype,String subcategoryid) {
-    public static boolean InsertPdf(InputStream inputStream,String uploadtype,String subcategoryid) {
+    public static boolean InsertPdf(InputStream inputStream,String uploadtype,String eqsubjectid, String chartcategoryid, String chartsubcategoryid) {
         try {
 //File file = new File(fileName);
 //FileInputStream fs = new FileInputStream(file);
@@ -84,7 +86,7 @@ PreparedStatement ps = null;
         ResultSet rs = null;
         String id = null;
        
-            ps = conn.prepareStatement("select count(CHART_SUBCATEGORY_ID)  Count from clineq.subject_charts where CHART_SUBCATEGORY_ID='" + subcategoryid + "'");
+            ps = conn.prepareStatement("select count(CHART_SUBCATEGORY_ID)  Count from clineq.subject_charts where CHART_SUBCATEGORY_ID='" + chartsubcategoryid + "'");
             rs = ps.executeQuery();
             int count=0;
             if(rs.next()){
@@ -103,15 +105,18 @@ PreparedStatement ps = null;
              id = String.valueOf(maxid+1);
             //id = "48";
              //System.out.println("In InsertPdf, fileName="+fileName+" id="+id);
-            ps = conn.prepareStatement("INSERT INTO clineq.subject_charts (EQ_SUBJECT_CHART_ID,DOC_CONTENT,UPLOAD_TYPE) VALUES(?,?,'" + uploadtype +"')");
+             ps = conn.prepareStatement("INSERT INTO clineq.study_chart_subcategory (CHART_SUBCATEGORY_ID) values ('"
+             + chartsubcategoryid +"')");
+             int i = ps.executeUpdate();
+            ps = conn.prepareStatement("INSERT INTO clineq.subject_charts (EQ_SUBJECT_CHART_ID,DOC_CONTENT,UPLOAD_TYPE,EQ_SUBJECT_ID,CHART_CATEGORY_ID,CHART_SUBCATEGORY_ID) VALUES(?,?,'" 
+                 + uploadtype +"','"
+                 + eqsubjectid +  "','"
+                 + chartcategoryid +  "','"
+                 + chartsubcategoryid +  "')");
             //ps = conn.prepareStatement(sql);
-            ps.setString(1,id);
-            //ps.setBinaryStream(2,fs,fs.available());
-            System.out.println("inser 1");
-            ps.setBlob(2,inputStream);
-            System.out.println("inser 2");
-            int i = ps.executeUpdate();
-            System.out.println("inser 3");
+            ps.setString(1,id);  
+            ps.setBlob(2,inputStream);         
+            i = ps.executeUpdate();
             if(i!=0)
             {
                System.out.println("inser good"); 
@@ -143,5 +148,50 @@ PreparedStatement ps = null;
       
       return true;
     }
+    
+    //public static boolean RetrievePdf(HttpServletRequest request, HttpServletResponse response, String fileName,String eqsubjectchartid) {
+    public static boolean RetrievePdf(HttpServletRequest request, HttpServletResponse response, String eqsubjectchartid) {
+     try {
+          InputStream sPdf;
+          //File targetFile = new File(fileName);
+          //OutputStream outStream = new FileOutputStream(targetFile);
+          ServletOutputStream out = response.getOutputStream();
+          
+            Connection con = DBConnect.getConnection();
+            PreparedStatement psmnt;
+            //String sqlSelect = "SELECT picture FROM clineq.pictures WHERE id = 4";
+            //String sqlSelect = "SELECT picture from pictures where id=?";
+            String sqlSelect = "SELECT DOC_CONTENT from clineq.subject_charts where EQ_SUBJECT_CHART_ID='"
+                    +eqsubjectchartid +"'";
+             psmnt = con.prepareStatement(sqlSelect);             
+            // psmnt.setInt(1,4);
+            System.out.println("Try to get pdf");
+            ResultSet rs1 = psmnt.executeQuery();
+            System.out.println("Try to get pdf after running executeQuery");
+             
+            if(rs1.next()){ 
+                byte[] bytearray = new byte[1048576];
+                    //out.println(bytearray);
+                int size=0;
+                sPdf = rs1.getBinaryStream(1);
+                //String username = rs1.getString("USERNAME");
+                //System.out.println("get USER NAME="+username);
+                int bytesRead;
+                while ((bytesRead = sPdf.read(bytearray)) != -1) {
+                    //outStream.write(bytearray, 0, bytesRead);
+                    out.write(bytearray, 0, bytesRead);
+                }
+                System.out.println("get pdf....");
+            }
+            
+}catch (SQLException e) {
+            System.err.println("Error in image retrieve "+ e.getMessage());
+        }catch (FileNotFoundException ex){
+            System.err.println("Error in image insert "+ ex.getMessage());
+            }catch (IOException eio){
+            System.err.println("Error in image insert "+ eio.getMessage());
+            }
+      return true;
+   }
 
 }

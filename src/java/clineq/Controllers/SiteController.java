@@ -123,7 +123,7 @@ PreparedStatement ps = null;
         }*/
  String uploadtype = "Initial";
  //boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
-  try {
+ /* try {
           InputStream sPdf;
           File targetFile = new File("C:/clineq/output1.pdf");
           OutputStream outStream = new FileOutputStream(targetFile);
@@ -157,8 +157,8 @@ PreparedStatement ps = null;
             
 }catch (SQLException e) {
             System.err.println("Error in image retrieve "+ e.getMessage());
-        }
-            
+        }*/
+        // boolean Retrret=SubjectChartsDB.RetrievePdf(request,response,"10");   
         System.out.println("enter study controller dopost! This is site Controllers ");
       
         String requestURI = request.getRequestURI();
@@ -234,7 +234,7 @@ PreparedStatement ps = null;
             InputStream inputStream = null;
             inputStream= filePart.getInputStream();
            // boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
-            boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"54");
+            boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"EQ000003","5","58");
         }
             url = fileSiteDetails(request, response,subject_id,study_id,category_id,subcategory_id,userid,pdffile);
             
@@ -382,9 +382,11 @@ PreparedStatement ps = null;
 
         private String subjectSiteDetails(HttpServletRequest request,
             HttpServletResponse response,String studyid, String subjectid,String userid) throws IOException {
- 
+           String Gender = request.getParameter("inpGender");
+            String DOB = request.getParameter("inpDOB");
+            String SponsorId = request.getParameter("inpSponsorId");
         try {
-          
+            
             int catCount = CategoryDB.selectSiteCategoryCount(studyid);
             System.out.println("catCount="+catCount);
             siteSubjectSubcategory =SubCategoryDB.selectSiteSubcategory(subjectid,catCount);
@@ -410,6 +412,9 @@ PreparedStatement ps = null;
             session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
             session.setAttribute("siteSubjectCategory", siteSubjectCategory);
             session.setAttribute("siteSubjectChart", siteSubjectChart);
+            session.setAttribute("DOB", DOB);
+            session.setAttribute("SponsorId", SponsorId);
+            session.setAttribute("Gender", Gender);
             
             url = "/siteHome/subjectDetails.jsp";
             //url = "/siteHome/index.jsp";
@@ -500,18 +505,21 @@ PreparedStatement ps = null;
       return true;
     }*/
 
-/*public boolean RetrievePdf(String fileName) {
+public boolean RetrievePdf(String fileName,String eqsubjectchartid) {
 try {
           InputStream sPdf;
           File targetFile = new File(fileName);
           OutputStream outStream = new FileOutputStream(targetFile);
+          //ServletOutputStream out = response.getOutputStream();
           
             Connection con = DBConnect.getConnection();
             PreparedStatement psmnt;
             //String sqlSelect = "SELECT picture FROM clineq.pictures WHERE id = 4";
-            String sqlSelect = "SELECT picture from pictures where id=?";
+            //String sqlSelect = "SELECT picture from pictures where id=?";
+            String sqlSelect = "SELECT DOC_CONTENT from clineq.subject_charts where EQ_SUBJECT_CHART_ID='"
+                    +eqsubjectchartid +"'";
              psmnt = con.prepareStatement(sqlSelect);             
-             psmnt.setInt(1,4);
+            // psmnt.setInt(1,4);
             System.out.println("Try to get pdf");
             ResultSet rs1 = psmnt.executeQuery();
             System.out.println("Try to get pdf after running executeQuery");
@@ -526,6 +534,7 @@ try {
                 int bytesRead;
                 while ((bytesRead = sPdf.read(bytearray)) != -1) {
                     outStream.write(bytearray, 0, bytesRead);
+                    //out.write(bytearray, 0, bytesRead);
                 }
                 System.out.println("get pdf....");
             }
@@ -538,6 +547,6 @@ try {
             System.err.println("Error in image insert "+ eio.getMessage());
             }
       return true;
-   }*/
+   }
 
 }
