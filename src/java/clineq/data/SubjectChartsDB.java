@@ -10,7 +10,7 @@ import clineq.business.Organizations;
 import clineq.business.Studies;
 import clineq.business.Subjects;
 import clineq.business.SubjectCharts;
-import clineq.business.SubjectChartsPK;
+//import clineq.business.SubjectChartsPK;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,10 +34,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author User
  */
 public class SubjectChartsDB {
-    public static ArrayList<SubjectCharts> selectSiteSubjectCharts(String subjectid) throws DBException { 
+    public static ArrayList<SubjectCharts> selectSiteSponsorSubjectCharts(String subjectid) throws DBException { 
         String sql = "SELECT * FROM CLINEQ.SUBJECT_CHARTS"
                 + " WHERE EQ_SUBJECT_ID ='" + subjectid +"'";
-        System.out.println("in selectSiteSubjectCharts, sql="+sql);
+        System.out.println("in selectSiteSponsorSubjectCharts, sql="+sql);
         ArrayList<SubjectCharts> objList = new ArrayList<>();
         PreparedStatement ps = null;
         Statement stmt = null;
@@ -55,13 +55,14 @@ public class SubjectChartsDB {
                 //obj.setEqStudyId(rs.getString("EQ_STUDY_ID"));
                 //Studies eqSubjectId = StudyDB.selectOneStudy(rs.getString("EQ_SUBJECT_ID"));
                 //obj.getSubjectChartsPK().setEqSubjectId(rs.getString("EQ_SUBJECT_ID"));
-                obj.setEqSubjectId(rs.getString("EQ_SUBJECT_ID"));
+                //obj.setEqSubjectId(rs.getString("EQ_SUBJECT_ID"));
+                Subjects eqSubjectId = SubjectDB.selectOneStudy(rs.getString("EQ_SUBJECT_ID"));
+                obj.setEqSubjectId(eqSubjectId);
                 obj.setUploadType(rs.getString("UPLOAD_TYPE"));
                 obj.setDocName(rs.getString("DOC_NAME"));
                 obj.setUploadTimestamp(rs.getDate("UPLOAD_TIMESTAMP"));
                 obj.setReviewStatus(rs.getString("REVIEW_STATUS"));
- 
-                
+                obj.setEqSubjectChartId(rs.getString("EQ_SUBJECT_CHART_ID"));          
                 objList.add(obj);
             }
             return objList;
@@ -76,7 +77,7 @@ public class SubjectChartsDB {
     }
     
     //public static boolean InsertPdf(String fileName,String uploadtype,String subcategoryid) {
-    public static boolean InsertPdf(InputStream inputStream,String uploadtype,String eqsubjectid, String chartcategoryid, String chartsubcategoryid) {
+    public static boolean InsertPdf(InputStream inputStream,String uploadtype,String eqsubjectid, String chartcategoryid, String chartsubcategoryid,String filename) {
         try {
 //File file = new File(fileName);
 //FileInputStream fs = new FileInputStream(file);
@@ -108,11 +109,12 @@ PreparedStatement ps = null;
              ps = conn.prepareStatement("INSERT INTO clineq.study_chart_subcategory (CHART_SUBCATEGORY_ID) values ('"
              + chartsubcategoryid +"')");
              int i = ps.executeUpdate();
-            ps = conn.prepareStatement("INSERT INTO clineq.subject_charts (EQ_SUBJECT_CHART_ID,DOC_CONTENT,UPLOAD_TYPE,EQ_SUBJECT_ID,CHART_CATEGORY_ID,CHART_SUBCATEGORY_ID) VALUES(?,?,'" 
+            ps = conn.prepareStatement("INSERT INTO clineq.subject_charts (EQ_SUBJECT_CHART_ID,DOC_CONTENT,UPLOAD_TYPE,EQ_SUBJECT_ID,CHART_CATEGORY_ID,CHART_SUBCATEGORY_ID,DOC_NAME) VALUES(?,?,'" 
                  + uploadtype +"','"
                  + eqsubjectid +  "','"
                  + chartcategoryid +  "','"
-                 + chartsubcategoryid +  "')");
+                 + chartsubcategoryid +  "','"
+                 + filename +  "')");
             //ps = conn.prepareStatement(sql);
             ps.setString(1,id);  
             ps.setBlob(2,inputStream);         
@@ -193,5 +195,5 @@ PreparedStatement ps = null;
             }
       return true;
    }
-
+ 
 }

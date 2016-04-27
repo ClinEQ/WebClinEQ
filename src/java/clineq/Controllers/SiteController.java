@@ -233,16 +233,30 @@ PreparedStatement ps = null;
             // obtains input stream of the upload file
             InputStream inputStream = null;
             inputStream= filePart.getInputStream();
+            
+                final String partHeader = filePart.getHeader("content-disposition");
+    //LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
+    String fileName = null;
+    for (String content : filePart.getHeader("content-disposition").split(";")) {
+        if (content.trim().startsWith("filename")) {
+            fileName =  content.substring(
+                    content.indexOf('=') + 1).trim().replace("\"", "");
+        }
+    }
+    System.out.println("file Name = "+fileName);
            // boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
-            boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"EQ000003","5","58");
+            boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"EQ000003","5","59",fileName);
         }
             url = fileSiteDetails(request, response,subject_id,study_id,category_id,subcategory_id,userid,pdffile);
             
             System.out.println("In fileSiteDetails, url=" + url);
          }
-        /* else if (requestURI.endsWith("/newStudySponsor")) {
-            url = newStudySponsor(request, response);
-         } else if (requestURI.endsWith("/saveNewStudy")) {
+        else if (requestURI.endsWith("/pdfRetrive")) {
+            String eqsubjectid=request.getParameter("inpeqsubjectchartid");
+            System.out.println("eqsubjectid="+eqsubjectid);
+            boolean Retrret=SubjectChartsDB.RetrievePdf(request,response,eqsubjectid);
+         } 
+        /*else if (requestURI.endsWith("/saveNewStudy")) {
              
             url = saveNewStudy(request, response, "Pending");
          } else if (requestURI.endsWith("/saveNewStudyDraft")) {
@@ -289,12 +303,12 @@ PreparedStatement ps = null;
             HttpServletResponse response,String userId) throws IOException {
 
         try {
-            studyArrayList = StudyDB.selectSiteAllStudy(userId); 
+            studyArrayList = StudyDB.selectSiteSponsorAllStudy(userId); 
             studyStatusList = StudyDB.selectAllStudyStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
             userArrayList = UserDB.selectAllUser();
             orgArrayList = OrganizationDB.selectAllOrganization();
-            String SiteName = OrganizationDB.getSiteByUserName(userId);
+            String SiteSponsorName = OrganizationDB.getSiteSponsorByUserName(userId);
             subjectArrayList = SubjectDB.selectAllSubject();
             System.out.println("subjectArrayList print");
             System.out.println("subjectArrayList="+subjectArrayList.get(1).getEqStudyId());
@@ -349,10 +363,10 @@ PreparedStatement ps = null;
             //select user_login_id from clineq.users U, clineq.studies S, CLINEQ.STUDY_SITE_USER_MAP M where U.eq_user_id=M.eq_user_id and M.eq_study_id=S.eq_study_id and S.eq_study_id =1
             siteSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 
              //select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id  and S.eq_study_id =1
-            siteNameByStudyId = StudyDB.selectSiteNameById(studyid); 
+            siteNameByStudyId = StudyDB.selectSiteSponsorNameById(studyid); 
             //select org_full_name,org_type from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'
-            siteNCTIDByStudyId = StudyDB.selectSiteNCTIDById(studyid);
-            studySiteSubjectList = SubjectDB.selectSiteSubject(studyid);
+            siteNCTIDByStudyId = StudyDB.selectSiteSponsorNCTIDById(studyid);
+            studySiteSubjectList = SubjectDB.selectSiteSponsorSubject(studyid);
         } catch (DBException e) {
             System.err.println();
         }
@@ -387,11 +401,11 @@ PreparedStatement ps = null;
             String SponsorId = request.getParameter("inpSponsorId");
         try {
             
-            int catCount = CategoryDB.selectSiteCategoryCount(studyid);
+            int catCount = CategoryDB.selectSiteSponsorCategoryCount(studyid);
             System.out.println("catCount="+catCount);
-            siteSubjectSubcategory =SubCategoryDB.selectSiteSubcategory(subjectid,catCount);
-            siteSubjectCategory = CategoryDB.selectSiteCategory(studyid);
-            siteSubjectChart = SubjectChartsDB.selectSiteSubjectCharts(subjectid);
+            siteSubjectSubcategory =SubCategoryDB.selectSiteSponsorSubcategory(subjectid,catCount);
+            siteSubjectCategory = CategoryDB.selectSiteSponsorCategory(studyid);
+            siteSubjectChart = SubjectChartsDB.selectSiteSponsorSubjectCharts(subjectid);
             System.out.println("siteSubjectSubcategory print");
             System.out.println("siteSubjectSubcategory="+siteSubjectSubcategory.get(1).getChartSubcategoryName());
            /* siteSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 

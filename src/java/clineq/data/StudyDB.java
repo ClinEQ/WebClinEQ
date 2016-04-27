@@ -30,7 +30,7 @@ public class StudyDB {
     //try ( Connection conn = DBConnect.getConnection();
     //    PreparedStatement ps = conn.prepareStatement(sql))
     //       {
-    public static ArrayList<Studies> selectSiteAllStudy(String userId) throws DBException {
+    public static ArrayList<Studies> selectSiteSponsorAllStudy(String userId) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT S.EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
                 + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
@@ -253,7 +253,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
             return;
         }
     }
-    public static String  selectSiteUserById(String studyid) throws DBException {
+    public static String  selectSiteSponsorUserById(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
         String sql = "select user_login_id from clineq.users U, clineq.studies S, CLINEQ.STUDY_ORG_USER_MAP M "
                 + "where U.eq_user_id=M.eq_user_id and M.eq_study_id=S.eq_study_id and S.eq_study_id ='"
@@ -272,7 +272,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                 user = rs.getString("USER_LOGIN_ID");
             }
         } catch (SQLException e) {
-            System.err.println("Error in StudyDB getSiteUser " + e.getMessage());
+            System.err.println("Error in StudyDB getSiteSponsorUser " + e.getMessage());
             return null;
         } finally {
             DBUtil.closeResultSet(rs);
@@ -308,7 +308,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
         return sponsor;
     }
     
-    public static String  selectSiteNameById(String studyid) throws DBException {
+    public static String  selectSiteSponsorNameById(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
         //String sql = "select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
         String sql = "select study_aname from clineq.studies where eq_study_id = '" + studyid +"'";
@@ -325,7 +325,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                 sitename = rs.getString("STUDY_ANAME");
             }
         } catch (SQLException e) {
-            System.err.println("Error in StudyDB getSiteName " + e.getMessage());
+            System.err.println("Error in StudyDB getSiteSponsorName " + e.getMessage());
             return null;
         } finally {
             DBUtil.closeResultSet(rs);
@@ -334,7 +334,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
         return sitename;
     }
     
-    public static String  selectSiteNCTIDById(String studyid) throws DBException {
+    public static String  selectSiteSponsorNCTIDById(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
         //String sql = "select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'";
         String sql = "select nctid from clineq.studies where eq_study_id = '" + studyid +"'";
@@ -351,7 +351,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                 sitename = rs.getString("NCTID");
             }
         } catch (SQLException e) {
-            System.err.println("Error in StudyDB getSiteNCTID " + e.getMessage());
+            System.err.println("Error in StudyDB getSiteSponsorNCTID " + e.getMessage());
             return null;
         } finally {
             DBUtil.closeResultSet(rs);

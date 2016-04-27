@@ -25,11 +25,11 @@ import java.sql.Statement;
  * @author User
  */
 public class SubCategoryDB {
-         public static ArrayList<StudyChartSubcategory> selectSiteSubcategory(String studyid,int CatCount) throws DBException {   
+         public static ArrayList<StudyChartSubcategory> selectSiteSponsorSubcategory(String studyid,int CatCount) throws DBException {   
   //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.STUDY_CHART_SUBCATEGORY";
                 //+ "WHERE EQ_STUDY_ID ='" + studyid +"'";
-        System.out.println("in selectSiteSubCategory, sql="+sql);
+        System.out.println("in selectSiteSponsorSubCategory, sql="+sql);
         ArrayList<StudyChartSubcategory> objList = new ArrayList<>();
         PreparedStatement ps = null;
         Statement stmt = null;

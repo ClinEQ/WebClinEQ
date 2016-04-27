@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1>This is subjectDetails page!</h1>
+        <a class="btn btn-info btninfo" href="../site/pdfRetrive?inpeqsubjectchartid=10" target="_blank">Retrieve PDF file</a>
         
         <form class="form-horizontal" action="site/fileSiteDetails" enctype="multipart/form-data" method="post">
             <p>  <input type="file" name="inpFile" size="40" ></p>

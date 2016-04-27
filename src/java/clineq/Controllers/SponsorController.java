@@ -57,9 +57,9 @@ public class SponsorController extends HttpServlet {
     private ArrayList<Subjects> subjectArrayList = null;
     private ArrayList<InputStream> sPdfArrayList = null; 
     private ArrayList<Subjects> studySponsorSubjectList = null;
-    private ArrayList<StudyChartCategory> siteSubjectCategory = null;
-    private ArrayList<StudyChartSubcategory> siteSubjectSubcategory = null;
-    private ArrayList<SubjectCharts> siteSubjectChart = null;
+    private ArrayList<StudyChartCategory> sponsorSubjectCategory = null;
+    private ArrayList<StudyChartSubcategory> sponsorSubjectSubcategory = null;
+    private ArrayList<SubjectCharts> sponsorSubjectChart = null;
     
 
     @Override
@@ -176,7 +176,7 @@ PreparedStatement ps = null;
             // = filePart.getInputStream();
         }*/
       
-        String url = "/siteHome";
+        String url = "/sponsorHome";
         System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
                 System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
         System.out.println("URI=" + requestURI);
@@ -227,7 +227,7 @@ PreparedStatement ps = null;
             url = addSponsorToStudy(request, response);
          } */
          else {
-            url = "/siteHome/error.jsp";
+            url = "/sponsorHome/error.jsp";
          }
        /* }
         else if(userType.equals("SPONSOR"))
@@ -246,7 +246,7 @@ PreparedStatement ps = null;
             throws IOException, ServletException {
 
         /*String requestURI = request.getRequestURI();
-        String url = "/siteHome";
+        String url = "/sponsorHome";
 
         if (requestURI.endsWith("/displaySponsorList")) {
             url = displaySponsorList(request, response,request.getParameter("inpUserName"));
@@ -255,7 +255,7 @@ PreparedStatement ps = null;
         } else if (requestURI.endsWith("/newStudySponsor")) {
             url = newStudySponsor(request, response);
         } else {
-            url = "/siteHome/error.jsp";
+            url = "/sponsorHome/error.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);*/
         doPost(request, response);
@@ -265,12 +265,12 @@ PreparedStatement ps = null;
             HttpServletResponse response,String userId) throws IOException {
 
         try {
-            studyArrayList = StudyDB.selectSiteAllStudy(userId); 
+            studyArrayList = StudyDB.selectSiteSponsorAllStudy(userId); 
             studyStatusList = StudyDB.selectAllStudyStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
             userArrayList = UserDB.selectAllUser();
             orgArrayList = OrganizationDB.selectAllOrganization();
-            String SiteName = OrganizationDB.getSiteByUserName(userId);
+            String SponsorName = OrganizationDB.getSiteSponsorByUserName(userId);
             subjectArrayList = SubjectDB.selectAllSubject();
             System.out.println("subjectArrayList print");
             System.out.println("subjectArrayList="+subjectArrayList.get(1).getEqStudyId());
@@ -292,12 +292,12 @@ PreparedStatement ps = null;
             session.setAttribute("userArrayList", userArrayList);
             session.setAttribute("orgArrayList", orgArrayList);
             session.setAttribute("UserId", userId);
-            url = "/siteHome/index.jsp";
+            url = "/sponsorHome/index.jsp";
             System.out.println("url " + url);
             return url;
         } else {
             //System.out.println("url " );
-            return "/siteHome/index.jsp";
+            return "/sponsorHome/index.jsp";
         }
     }
     
@@ -313,22 +313,22 @@ PreparedStatement ps = null;
 
         HttpSession session = request.getSession();
 
-        url = "/siteHome/studyDetails.jsp";
+        url = "/sponsorHome/studyDetails.jsp";
         return url;*/
-        String siteUserByStudyId = null;
-        String siteSponsorByStudyId = null;
-        String siteNameByStudyId = null;
-        String siteNCTIDByStudyId = null;
+        String sponsorUserByStudyId = null;
+        String sponsorSponsorByStudyId = null;
+        String sponsorNameByStudyId = null;
+        String sponsorNCTIDByStudyId = null;
         
         try { 
-            //siteUserByStudyId = StudyDB.selectSiteUserById(studyid);
+            //sponsorUserByStudyId = StudyDB.selectSiteUserById(studyid);
             //select user_login_id from clineq.users U, clineq.studies S, CLINEQ.STUDY_SITE_USER_MAP M where U.eq_user_id=M.eq_user_id and M.eq_study_id=S.eq_study_id and S.eq_study_id =1
-            siteSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 
+            sponsorSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 
              //select org_full_name from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id  and S.eq_study_id =1
-            siteNameByStudyId = StudyDB.selectSiteNameById(studyid); 
+            sponsorNameByStudyId = StudyDB.selectSiteSponsorNameById(studyid); 
             //select org_full_name,org_type from clineq.organizations O, clineq.studies S where O.eq_org_id=S.eq_spon_id AND org_type='SITE'
-            siteNCTIDByStudyId = StudyDB.selectSiteNCTIDById(studyid);
-            studySponsorSubjectList = SubjectDB.selectSiteSubject(studyid);
+            sponsorNCTIDByStudyId = StudyDB.selectSiteSponsorNCTIDById(studyid);
+            studySponsorSubjectList = SubjectDB.selectSiteSponsorSubject(studyid);
         } catch (DBException e) {
             System.err.println();
         }
@@ -339,19 +339,19 @@ PreparedStatement ps = null;
 
         if (studySponsorSubjectList != null) {
             System.out.println("i checking array");
-            //session.setAttribute("siteUserByStudyId", siteUserByStudyId);
-            session.setAttribute("siteSponsorByStudyId", siteSponsorByStudyId);
-            session.setAttribute("siteNameByStudyId", siteNameByStudyId);
-            session.setAttribute("siteNCTIDByStudyId", siteNCTIDByStudyId);
+            //session.setAttribute("sponsorUserByStudyId", sponsorUserByStudyId);
+            session.setAttribute("sponsorSponsorByStudyId", sponsorSponsorByStudyId);
+            session.setAttribute("sponsorNameByStudyId", sponsorNameByStudyId);
+            session.setAttribute("sponsorNCTIDByStudyId", sponsorNCTIDByStudyId);
             session.setAttribute("studySponsorSubjectList", studySponsorSubjectList);
             session.setAttribute("UserId", userid);
-            url = "/siteHome/studyDetails.jsp";
+            url = "/sponsorHome/studyDetails.jsp";
             System.out.println("url " + url);
             return url;
         } else {
             //System.out.println("url " );
-            //return "/siteHome/index.jsp
-            return "/siteHome/studyDetails.jsp";
+            //return "/sponsorHome/index.jsp
+            return "/sponsorHome/studyDetails.jsp";
         }
 
     }
@@ -361,16 +361,16 @@ PreparedStatement ps = null;
  
         try {
           
-            int catCount = CategoryDB.selectSiteCategoryCount(studyid);
+            int catCount = CategoryDB.selectSiteSponsorCategoryCount(studyid);
             System.out.println("catCount="+catCount);
-            siteSubjectSubcategory =SubCategoryDB.selectSiteSubcategory(subjectid,catCount);
-            siteSubjectCategory = CategoryDB.selectSiteCategory(studyid);
-            siteSubjectChart = SubjectChartsDB.selectSiteSubjectCharts(subjectid);
-            System.out.println("siteSubjectSubcategory print");
-            System.out.println("siteSubjectSubcategory="+siteSubjectSubcategory.get(1).getChartSubcategoryName());
-           /* siteSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 
-            siteNameByStudyId = StudyDB.selectSiteNameById(studyid); 
-            siteNCTIDByStudyId = StudyDB.selectSiteNCTIDById(studyid);
+            sponsorSubjectSubcategory =SubCategoryDB.selectSiteSponsorSubcategory(subjectid,catCount);
+            sponsorSubjectCategory = CategoryDB.selectSiteSponsorCategory(studyid);
+            sponsorSubjectChart = SubjectChartsDB.selectSiteSponsorSubjectCharts(subjectid);
+            System.out.println("sponsorSubjectSubcategory print");
+            System.out.println("sponsorSubjectSubcategory="+sponsorSubjectSubcategory.get(1).getChartSubcategoryName());
+           /* sponsorSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 
+            sponsorNameByStudyId = StudyDB.selectSiteNameById(studyid); 
+            sponsorNCTIDByStudyId = StudyDB.selectSiteNCTIDById(studyid);
             studySiteSubjectList = SubjectDB.selectSiteSubject(studyid);*/
         } catch (DBException e) {
             System.err.println("Error happened in SponsorSubjectDetails");
@@ -380,21 +380,21 @@ PreparedStatement ps = null;
 
         HttpSession session = request.getSession();
 
-        if (siteSubjectCategory != null) {
+        if (sponsorSubjectCategory != null) {
             System.out.println("i checking array");
         
-            session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
-            session.setAttribute("siteSubjectCategory", siteSubjectCategory);
-            session.setAttribute("siteSubjectChart", siteSubjectChart);
+            session.setAttribute("sponsorSubjectSubcategory", sponsorSubjectSubcategory);
+            session.setAttribute("sponsorSubjectCategory", sponsorSubjectCategory);
+            session.setAttribute("sponsorSubjectChart", sponsorSubjectChart);
             
-            url = "/siteHome/subjectDetails.jsp";
-            //url = "/siteHome/index.jsp";
+            url = "/sponsorHome/subjectDetails.jsp";
+            //url = "/sponsorHome/index.jsp";
             System.out.println("url " + url);
             return url;
         } else {
             //System.out.println("url " );
-            //return "/siteHome/index.jsp
-            return "/siteHome/studyDetails.jsp";
+            //return "/sponsorHome/index.jsp
+            return "/sponsorHome/studyDetails.jsp";
         }
     }
 
@@ -415,17 +415,17 @@ PreparedStatement ps = null;
         if (studySponsorSubjectList != null) {
             System.out.println("i checking array");
         
-           /* session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
-            session.setAttribute("siteSubjectCategory", siteSubjectCategory);
-            session.setAttribute("siteSubjectChart", siteSubjectChart);*/
+           /* session.setAttribute("sponsorSubjectSubcategory", sponsorSubjectSubcategory);
+            session.setAttribute("sponsorSubjectCategory", sponsorSubjectCategory);
+            session.setAttribute("sponsorSubjectChart", sponsorSubjectChart);*/
             
-            url = "/siteHome/fileDetails.jsp";
+            url = "/sponsorHome/fileDetails.jsp";
             System.out.println("url " + url);
             return url;
         } else {
             //System.out.println("url " );
-            //return "/siteHome/index.jsp
-            return "/siteHome/studyDetails.jsp";
+            //return "/sponsorHome/index.jsp
+            return "/sponsorHome/studyDetails.jsp";
         }
     }
     

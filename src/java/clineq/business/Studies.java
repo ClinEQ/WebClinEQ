@@ -436,4 +436,20 @@ public class Studies implements Serializable {
         this.eqManagerId = eqManagerId;
     }
 */
+
+  /*  public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(BigInteger plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
+
+ /*   public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(BigInteger plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
 }

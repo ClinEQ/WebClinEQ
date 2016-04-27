@@ -85,7 +85,7 @@ public class SubjectDB {
         }
     }
     
-        public static ArrayList<Subjects> selectSiteSubject(String studyid) throws DBException {
+        public static ArrayList<Subjects> selectSiteSponsorSubject(String studyid) throws DBException {
         //String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
         
          String sql = "SELECT * FROM CLINEQ.SUBJECTS"
@@ -119,11 +119,43 @@ public class SubjectDB {
             }
             return objList;
         } catch (SQLException e) {
-            System.err.println("Error in subjectDB selectSiteSubject:" + e.getMessage());
+            System.err.println("Error in subjectDB selectSiteSponsorSubject:" + e.getMessage());
             return null;
         } finally {
            DBUtil.closeResultSet(rs);
            DBUtil.closePreparedStatement(ps);
+        }
+    }
+  
+  
+       public static Subjects selectOneStudy(String EQ_SUBJECT_ID) throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT * "
+                + "FROM CLINEQ.SUBJECTS "
+                + "WHERE  EQ_SUBJECT_ID='" + EQ_SUBJECT_ID + "'";
+                
+                // System.out.println("one study,sql="+sql);
+
+
+        Subjects s = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                s = new Subjects();
+                s.setEqSubjectId(rs.getString("EQ_SUBJECT_ID"));
+            }
+            return s;
+        } catch (SQLException e) {
+            System.err.println("Error in studyDB selectOneSubject" + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
         }
     }
 }

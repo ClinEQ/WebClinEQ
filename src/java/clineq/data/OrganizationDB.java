@@ -147,12 +147,12 @@ public class OrganizationDB {
         return orgname;
     }
 
-    public static String getSiteByUserName(String user_id) throws DBException {
+    public static String getSiteSponsorByUserName(String user_id) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS O, CLINEQ.USERS U WHERE U.EQ_ORG_ID =O.EQ_ORG_ID " 
                 + " AND ORG_TYPE = 'SITE' "
                 + " AND USER_LOGIN_ID='" + user_id +"'";
-System.out.println(" In getSiteByUserName, sql= "+sql);
+System.out.println(" In getSiteSponsorByUserName, sql= "+sql);
         String orgname = null;
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;

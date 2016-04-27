@@ -24,12 +24,12 @@ import java.sql.Statement;
  */
 public class CategoryDB {
     
-     public static ArrayList<StudyChartCategory> selectSiteCategory(String studyid) throws DBException {   
+     public static ArrayList<StudyChartCategory> selectSiteSponsorCategory(String studyid) throws DBException {   
   //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.STUDY_CHART_CATEGORY"
                 + " WHERE EQ_STUDY_ID ='" + studyid +"'";
         
-        System.out.println("in selectSiteCategory, sql="+sql);
+        System.out.println("in selectSiteSponsorCategory, sql="+sql);
         
         ArrayList<StudyChartCategory> objList = new ArrayList<>();
         PreparedStatement ps = null;
@@ -62,11 +62,11 @@ public class CategoryDB {
            DBUtil.closePreparedStatement(ps);
         }
     }
-     public static int selectSiteCategoryCount(String studyid) throws DBException {   
+     public static int selectSiteSponsorCategoryCount(String studyid) throws DBException {   
   //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT count(*) count FROM CLINEQ.STUDY_CHART_CATEGORY"
                 + " WHERE EQ_STUDY_ID ='" + studyid +"'";
-        System.out.println("in selectSiteCategoryCount, sql="+sql);
+        System.out.println("in selectSiteSponsorCategoryCount, sql="+sql);
         ArrayList<StudyChartCategory> objList = new ArrayList<>();
         PreparedStatement ps = null;
         Statement stmt = null;

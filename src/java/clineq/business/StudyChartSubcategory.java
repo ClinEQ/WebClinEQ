@@ -40,6 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "StudyChartSubcategory.findByChartSubcategoryStatus", query = "SELECT s FROM StudyChartSubcategory s WHERE s.chartSubcategoryStatus = :chartSubcategoryStatus")})
 public class StudyChartSubcategory implements Serializable {
 
+    @Column(name = "CHART_SUBCATEGORY_SEQ")
+    private int chartSubcategorySeq;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studyChartSubcategory")
     private Collection<SubjectCharts> subjectChartsCollection;
 
@@ -56,8 +59,6 @@ public class StudyChartSubcategory implements Serializable {
     @Size(max = 30)
     @Column(name = "CHART_TYPE")
     private String chartType;
-    @Column(name = "CHART_SUBCATEGORY_SEQ")
-    private int chartSubcategorySeq;
     @Size(max = 30)
     @Column(name = "CHART_SUBCATEGORY_STATUS")
     private String chartSubcategoryStatus;
@@ -153,5 +154,13 @@ public class StudyChartSubcategory implements Serializable {
     public void setSubjectChartsCollection(Collection<SubjectCharts> subjectChartsCollection) {
         this.subjectChartsCollection = subjectChartsCollection;
     }
+
+  /*  public BigInteger getChartSubcategorySeq() {
+        return chartSubcategorySeq;
+    }
+
+    public void setChartSubcategorySeq(BigInteger chartSubcategorySeq) {
+        this.chartSubcategorySeq = chartSubcategorySeq;
+    }*/
     
 }
