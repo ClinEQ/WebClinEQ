@@ -110,6 +110,10 @@ table {
     margin-top:10px;
 }
 
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+
 table thead tr {
     // background-color: #cae8ca;
     background-color: #b8e0b8;
@@ -166,3 +170,4 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
         font-size: 0.8em;
         font-weight: bold;        
     }
+    

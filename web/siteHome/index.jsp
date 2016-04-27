@@ -48,7 +48,7 @@
     }
     
     .tvnavheader {
-        font-size: 0.85em;
+        font-size: 0.75em;
         color: black;
     }
     
@@ -69,13 +69,12 @@
 </nav>
 
 
-
 <div class="container">   
     
     <div class="row">
         
         <nav class="col-sm-3 col3">
-            <div class="well" style="width:100%; padding: 8px 0; background-color: #dcefdc; font-weight: bold;">
+            <div style="width:100%; padding: 8px 0; background-color: #f2f2f2; font-weight: bold;">
                 <div style="overflow-y: auto; overflow-x: hidden; min-height: 450px;">
                     <ul class="nav nav-list">
                         <li><label class="tree-toggler nav-header tvnavheader">Study</label>
@@ -138,47 +137,48 @@
                         </div>
                     </form>
                  </div>
-
-               
+                
+                <div class="table-responsive">
                     <table class="table table-striped tablesorter" id="tblStudy">
-                        <thead>
-                            <tr>
-                                <th>EQ Study ID</th>                                
-                                <th class="th-sort">Study Name</th>
-                                <th class="th-sort">Sponsor Study ID</th>
-                                <th class="th-sort">Sponsor Name</th>                                
-                                <th class="th-sort">Study Status</th>
-                                <th class="th-sort">Alert Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <c:if test="${studyArrayList == null}">
-                            <p>no studies </p>
-                        </c:if>
-                        <tbody>
-                            <c:forEach var="study" items="${studyArrayList}">
-                                <tr id="${study.getNctid()}" class="studyrow">
-                                    <td>
-                                        ${study.getEqStudyId()}
-                                    </td>                                  
-                                    <td>
-                                        ${study.getStudyAname()}
-                                    </td>
-                                    <td>
-                                        ${study.getSponStudyId()}
-                                    </td>
-                                    <td>
-                                        ${study.getEqSponName()}
-                                    </td>                                  
-                                    <td>
-                                        ${study.getStudyStatus()}
-                                    </td>
-                                    <td></td>
-                                    <td><a class="btn btn-info btninfo" href="../site/studySiteDetails?eqStudyID=${study.getEqStudyId()}&inpUserName=${UserId}" target="_blank">Details</a></td>
+                            <thead>
+                                <tr>
+                                    <th>EQ Study ID</th>                                
+                                    <th class="th-sort">Study Name</th>
+                                    <th class="th-sort">Sponsor Study ID</th>
+                                    <th class="th-sort">Sponsor Name</th>                                
+                                    <th class="th-sort">Study Status</th>
+                                    <th class="th-sort">Alert Status</th>
+                                    <th></th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <c:if test="${studyArrayList == null}">
+                                <p>no studies </p>
+                            </c:if>
+                            <tbody>
+                                <c:forEach var="study" items="${studyArrayList}">
+                                    <tr id="${study.getNctid()}" class="studyrow">
+                                        <td>
+                                            ${study.getEqStudyId()}
+                                        </td>                                  
+                                        <td>
+                                            ${study.getStudyAname()}
+                                        </td>
+                                        <td>
+                                            ${study.getSponStudyId()}
+                                        </td>
+                                        <td>
+                                            ${study.getEqSponName()}
+                                        </td>                                  
+                                        <td>
+                                            ${study.getStudyStatus()}
+                                        </td>
+                                        <td></td>
+                                        <td><a class="btn btn-info btninfo" href="../site/studySiteDetails?eqStudyID=${study.getEqStudyId()}&inpUserName=${UserId}" target="_blank">Details</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                </div>
             
            
         </div>

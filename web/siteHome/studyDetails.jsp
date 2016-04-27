@@ -4,48 +4,33 @@
 
 <style>
     .panel {
-        border: 1px solid #bfbfbf;	
-        
-    }
-    
-    #info {
-        text-align: left;
-       position: relative;
+        border: 1px solid #bfbfbf;
     }
     
     .panel .panel-heading {
         background-color: #e6e6e6;
         text-align: center;
-        padding: 4px;
+        vertical-align: middle;
+        padding: 14px;
+        margin-bottom: 10px;
     }
     
     .table {
         width: 100%;
-    }
-    
-    label.lblInfo {
-        
-       /* font-style: italic;*/
-    }
-
-
-    #tableStudyDetails {
-        width: 100%;
-        margin-bottom: 40px;
-
     }
 
     .colTitle {
         text-align: right;
         width: 50%;
         font-weight: bold;
-        padding: 4px;
+        padding: 1px;        
     }
 
     .colContent {
-        padding: 4px;
+        padding: 1px;
         width: 50%;
         text-align: left;
+        
     }
 
     fieldset.fsStyle {
@@ -60,13 +45,6 @@
        font-size: 1.0em;
    }
 
-/*
-.table-condensed>tbody>tr>td 
-{
-    padding: 10px;
-}
-*/
-
 </style>
  
 
@@ -77,92 +55,77 @@
     </div>
 </nav>
 
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Study Details</li>
+        </ol>
+    </div>
 
 
-<div class="container">   
-                
-   <table style="width: 100%;">
-        <tr>
-            <td style="text-align: left; width:50%; padding-left: 10px;">
-                <label class="lblInfo">Site Name:</label> <c:out value="${siteNameByStudyId}"/> 
-            </td>
-        </tr>
-        
-    </table>
-       
-        
+<div class="container">  
   
     <div class="panel panel-default">
         
         <div class="panel-heading">
-            <h3>Study Details</h3> 
+            <span class="colTitle">Study Name:</span>
+            <span class="colContent" style="margin-right: 30px;">Test Test</span>
+            <span class="colTitle" style="margin-left: 30px;">Sponsor Name:</span>
+            <span class="colContent"><c:out value="${siteSponsorByStudyId}"/></span>
         </div>
+                     
       
         <div class="panel-body">
-            <table id="tableStudyDetails">
-                <tr>
-                    <td class="colTitle">NCTID:</td>
-                    <td class="colContent"><c:out value="${siteNCTIDByStudyId}"/></td>
-                </tr>
-                <tr>
-                    <td class="colTitle">Study Name:</td>
-                    <td class="colContent"><c:out value="${siteNameByStudyId}"/></td>
-                </tr>
-                <tr>
-                    <td class="colTitle">Sponsor Name:</td>
-                    <td class="colContent"><c:out value="${siteSponsorByStudyId}"/></td>
-                </tr>
-            </table>
-                
+            
                 <fieldset class="fsStyle">
                     <legend class="fsStyle">
                         Subject List
                     </legend>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>EQ Subject ID</th>                                
-                                <th>Sponsor Subject ID</th>
-                                <th>Subject Full Name</th>
-                                <th>Birthday</th>                                
-                                <th>Gender</th>
-                                <th>Status</th>
-                                <th>Alert Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <c:if test="${studySiteSubjectList == null}">
-                            <p>no subjects </p>
-                        </c:if>
-                        <tbody>
-                            <c:forEach var="study" items="${studySiteSubjectList}">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        
-                                    </td>                                  
-                                    <td>
-                                       
-                                    </td>
-                                    <td>
-                                      
-                                    </td>
-                                    <td>
-                                       
-                                    </td>                                  
-                                    <td>
-                                      
-                                    </td>
-                                    <td>
-                                        
-                                    </td>
-                                    <td></td>
-                                    <td><a class="btn btn-info btninfo" href="../site/subjectSiteDetails?eqStudyID=${study.getEqStudyId()}&inpUserName=${UserId}" target="_blank">Details</a></td>
-                                
-                                    <!--<td><a class="btn btn-info btninfo" href="../site/subjectSiteDetails?eqStudyID=${study.getEqStudyId()}" target="_blank">Details</a></td>-->
+                                    <th>EQ Subject ID</th>                                
+                                    <th>Sponsor Subject ID</th>                                
+                                    <th>Birthday</th>                                
+                                    <th>Gender</th>
+                                    <th>Status</th>
+                                    <th>Notification</th>
+                                    <th>Alert Status</th>
+                                    <th></th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <c:if test="${studySiteSubjectList == null}">
+                                <p>no subjects </p>
+                            </c:if>
+                            <tbody>
+                                <c:forEach var="subject" items="${studySiteSubjectList}">
+                                    <tr>
+                                        <td>
+                                            ${subject.getEqSubjectId()}
+                                        </td>                                  
+                                        <td>
+                                            ${subject.getSponSubjectId()}
+                                        </td>                                 
+                                        <td>
+                                            ${subject.getDateBirth()}
+                                        </td>                                  
+                                        <td>
+                                            ${subject.getGender()}
+                                        </td>
+                                        <td>
+                                            ${subject.getSubjectStatus()}
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td></td>
+                                        <td><a class="btn btn-info btninfo" href="../site/subjectSiteDetails?eqStudyID=${StudyId}&eqSubjectID=${subject.getEqSubjectId()}&inpUserName=${UserId}" target="_blank">Details</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </fieldset>
         
         </div>

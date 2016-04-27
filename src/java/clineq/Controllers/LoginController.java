@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet {
             String userType = userOrgType(userid);
             if(userType.equals("SITE"))
             {
-              url = "/site/displaySiteList";
+              url = "/site/displaySiteList?inpUserName="+userid;
             }
             else if(userType.equals("CLINEQ"))
             {

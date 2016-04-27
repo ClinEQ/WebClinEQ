@@ -95,7 +95,6 @@ ServletFileUpload sfu  = new ServletFileUpload(factory);*/
  /*try {
 File file = new File("C:/clineq/info.pdf");
 FileInputStream fs = new FileInputStream(file);
-
 Connection conn = DBConnect.getConnection();
 PreparedStatement ps = null;
         Statement stmt = null;
@@ -163,7 +162,7 @@ PreparedStatement ps = null;
       
         String requestURI = request.getRequestURI();
         String userid = request.getParameter("inpUserName");
-        userid = "JOHN01";
+       // userid = "JOHN01";
         String study_id = request.getParameter("eqStudyID");
         String subject_id = request.getParameter("eqSubjectID");
         String category_id = request.getParameter("chartCategoryID");
@@ -223,33 +222,42 @@ PreparedStatement ps = null;
          } else if (requestURI.endsWith("/fileSiteDetails")) {
              //String subject_id = request.getParameter("eqSubjectID");
              String pdffile = "C:/clineq/info.pdf";
-                    Part filePart = request.getPart("inpFile");
-        if (filePart != null) {
-            // prints out some information for debugging
-            System.out.println("filepart name="+filePart.getName());
-            System.out.println("filepart SIZE="+filePart.getSize());
-            System.out.println("filepart content="+filePart.getContentType());
+             Part filePart = request.getPart("inpFile");
+                if (filePart != null) {
+                    // prints out some information for debugging
+                    System.out.println("filepart name="+filePart.getName());
+                    System.out.println("filepart SIZE="+filePart.getSize());
+                    System.out.println("filepart content="+filePart.getContentType());
+
+                    // obtains input stream of the upload file
+                    InputStream inputStream = null;
+                    inputStream= filePart.getInputStream();
+
+                        final String partHeader = filePart.getHeader("content-disposition");
+                        //LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
+                        String fileName = null;
+                        for (String content : filePart.getHeader("content-disposition").split(";")) {
+                            if (content.trim().startsWith("filename")) {
+                                fileName =  content.substring(
+                                        content.indexOf('=') + 1).trim().replace("\"", "");
+                            }
+                        }
+                     System.out.println("file Name = "+fileName);
+                // boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
+                 boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"EQ000003","5","59",fileName);
+                }
+                url = fileSiteDetails(request, response,subject_id,study_id,category_id,subcategory_id,userid,pdffile);
+            
+                System.out.println("In fileSiteDetails, url=" + url);
+         }  
+         
+         else if (requestURI.endsWith("/fileUploadHistory")) {
+             //String subject_id = request.getParameter("eqSubjectID");
+            // String pdffile = "C:/clineq/info.pdf";
              
-            // obtains input stream of the upload file
-            InputStream inputStream = null;
-            inputStream= filePart.getInputStream();
+             url = fileUploadHistory(request, response,subject_id,study_id,category_id,subcategory_id,userid);
+      
             
-                final String partHeader = filePart.getHeader("content-disposition");
-    //LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
-    String fileName = null;
-    for (String content : filePart.getHeader("content-disposition").split(";")) {
-        if (content.trim().startsWith("filename")) {
-            fileName =  content.substring(
-                    content.indexOf('=') + 1).trim().replace("\"", "");
-        }
-    }
-    System.out.println("file Name = "+fileName);
-           // boolean insertPDF = SubjectChartsDB.InsertPdf("C:/clineq/info.pdf",uploadtype,"10");
-            boolean insertPDF = SubjectChartsDB.InsertPdf(inputStream,uploadtype,"EQ000003","5","59",fileName);
-        }
-            url = fileSiteDetails(request, response,subject_id,study_id,category_id,subcategory_id,userid,pdffile);
-            
-            System.out.println("In fileSiteDetails, url=" + url);
          }
         else if (requestURI.endsWith("/pdfRetrive")) {
             String eqsubjectid=request.getParameter("inpeqsubjectchartid");
@@ -285,7 +293,6 @@ PreparedStatement ps = null;
 
         /*String requestURI = request.getRequestURI();
         String url = "/siteHome";
-
         if (requestURI.endsWith("/displaySiteList")) {
             url = displaySiteList(request, response,request.getParameter("inpUserName"));
         } else if (requestURI.endsWith("/createNewStudy")) {
@@ -383,6 +390,7 @@ PreparedStatement ps = null;
             session.setAttribute("siteNCTIDByStudyId", siteNCTIDByStudyId);
             session.setAttribute("studySiteSubjectList", studySiteSubjectList);
             session.setAttribute("UserId", userid);
+            session.setAttribute("StudyId", studyid);
             url = "/siteHome/studyDetails.jsp";
             System.out.println("url " + url);
             return url;
@@ -399,6 +407,7 @@ PreparedStatement ps = null;
            String Gender = request.getParameter("inpGender");
             String DOB = request.getParameter("inpDOB");
             String SponsorId = request.getParameter("inpSponsorId");
+            String testCat = null;
         try {
             
             int catCount = CategoryDB.selectSiteSponsorCategoryCount(studyid);
@@ -406,6 +415,7 @@ PreparedStatement ps = null;
             siteSubjectSubcategory =SubCategoryDB.selectSiteSponsorSubcategory(subjectid,catCount);
             siteSubjectCategory = CategoryDB.selectSiteSponsorCategory(studyid);
             siteSubjectChart = SubjectChartsDB.selectSiteSponsorSubjectCharts(subjectid);
+            testCat = SubjectDB.getTestCat(studyid);
             System.out.println("siteSubjectSubcategory print");
             System.out.println("siteSubjectSubcategory="+siteSubjectSubcategory.get(1).getChartSubcategoryName());
            /* siteSponsorByStudyId = StudyDB.selectSiteSponsorById(studyid); 
@@ -428,7 +438,8 @@ PreparedStatement ps = null;
             session.setAttribute("siteSubjectChart", siteSubjectChart);
             session.setAttribute("DOB", DOB);
             session.setAttribute("SponsorId", SponsorId);
-            session.setAttribute("Gender", Gender);
+            session.setAttribute("Gender", Gender);           
+            session.setAttribute("testCat", testCat);
             
             url = "/siteHome/subjectDetails.jsp";
             //url = "/siteHome/index.jsp";
@@ -440,8 +451,9 @@ PreparedStatement ps = null;
             return "/siteHome/studyDetails.jsp";
         }
     }
-
-        private String fileSiteDetails(HttpServletRequest request,
+        
+        
+    private String fileSiteDetails(HttpServletRequest request,
             HttpServletResponse response,String subjectid,String studyid, String catogoryid, String subcategoryid, String userid,String pdfFile) throws IOException {
  
         try {
@@ -457,10 +469,6 @@ PreparedStatement ps = null;
 
         if (studySiteSubjectList != null) {
             System.out.println("i checking array");
-        
-           /* session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
-            session.setAttribute("siteSubjectCategory", siteSubjectCategory);
-            session.setAttribute("siteSubjectChart", siteSubjectChart);*/
             
             url = "/siteHome/fileDetails.jsp";
             System.out.println("url " + url);
@@ -471,6 +479,51 @@ PreparedStatement ps = null;
             return "/siteHome/studyDetails.jsp";
         }
     }
+      
+      
+
+        private String fileUploadHistory(HttpServletRequest request,
+            HttpServletResponse response,String subjectid,String studyid, String catogoryid, String subcategoryid, String userid) throws IOException {
+ 
+        try {
+            
+             int catCount = CategoryDB.selectSiteSponsorCategoryCount(studyid);
+            System.out.println("catCount="+catCount);
+            siteSubjectSubcategory =SubCategoryDB.selectSiteSponsorSubcategory(subjectid,catCount);
+            siteSubjectCategory = CategoryDB.selectSiteSponsorCategory(studyid);
+            siteSubjectChart = SubjectChartsDB.selectSiteSponsorSubjectCharts(subcategoryid);
+          
+          //boolean insertRet = InsertPdf(pdfFile);
+        } catch (Exception e) {
+            System.err.println();
+        }
+
+        String url;
+
+        HttpSession session = request.getSession();
+
+        if (siteSubjectCategory != null) {
+            System.out.println("i checking array");
+        
+           /* session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
+            session.setAttribute("siteSubjectCategory", siteSubjectCategory);
+            session.setAttribute("siteSubjectChart", siteSubjectChart);*/
+           
+           session.setAttribute("siteSubjectSubcategory", siteSubjectSubcategory);
+            session.setAttribute("siteSubjectCategory", siteSubjectCategory);
+            session.setAttribute("siteSubjectChart", siteSubjectChart);
+            
+            //url = "/siteHome/fileDetails.jsp";
+            url = "/siteHome/fileUploadHistory.jsp";
+            System.out.println("url " + url);
+            return url;
+        } else {
+            //System.out.println("url " );
+            //return "/siteHome/index.jsp
+            //return "/siteHome/studyDetails.jsp";
+            return "/siteHome/fileUploadHistory.jsp";
+        }
+    } 
     
 
 /*public boolean InsertPdf(String fileName,String uploadtype) {

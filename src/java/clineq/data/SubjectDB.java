@@ -158,4 +158,60 @@ public class SubjectDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
+       
+       
+    public static String getTestCat(String studyid) {
+      
+      String sql = "SELECT * FROM CLINEQ.STUDY_CHART_CATEGORY"
+                 + " WHERE EQ_STUDY_ID='" + studyid +"'";
+      
+      StringBuilder sb = new StringBuilder("");
+      
+      PreparedStatement ps = null;
+      Statement stmt = null;
+      ResultSet rs = null;
+      
+      String sql2 = "";
+      Statement stmt2 = null;
+      ResultSet rs2 = null;
+        
+      
+        try { 
+            Connection conn = DBConnect.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql); 
+            
+            while (rs.next()) {
+                 
+                sb.append("{'id':'" + rs.getString("CHART_CATEGORY_ID") + "','name':'" + rs.getString("CHART_CATEGORY_NAME") + "','children':[");  
+                
+                sql2 = "SELECT * FROM CLINEQ.STUDY_CHART_SUBCATEGORY WHERE CHART_CATEGORY_ID='" + rs.getString("CHART_CATEGORY_ID") +"'";
+                
+                stmt2 = conn.createStatement();
+                rs2 = stmt2.executeQuery(sql2);
+                
+                boolean hasNext2 = rs2.next();
+                while (hasNext2) {
+                    sb.append("{'id':'" + rs2.getString("CHART_SUBCATEGORY_ID") + "','name':'" + rs2.getString("CHART_SUBCATEGORY_NAME") + "'}");
+                    
+                    hasNext2 = rs2.next();
+                    if (hasNext2) {
+                        sb.append(",");
+                    }
+                }
+                sb.append("]},");
+            }
+            
+            sb.append("");
+            return sb.toString();
+        } catch (SQLException e) {
+            System.err.println("Error in subjectDB selectSiteSubject:" + e.getMessage());
+            return null;
+        } finally {
+           DBUtil.closeResultSet(rs);
+           DBUtil.closeResultSet(rs2);
+           DBUtil.closePreparedStatement(ps);
+        }        
+       
+    }
 }
