@@ -42,13 +42,40 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <c:forEach var="user" items="${sponsor.getUsersCollection()}">
+                               
+                                <tr>
+                                    <td>
+                                        ${user.getEqUserId()} 
+                                    </td>
+                                    <td>
+                                        ${user.getUserType()} 
+                                    </td>
+                                    <td>
+                                        ${user.getEqOrgId().getOrgFullName()}
+                                    </td>
+                                    <td>
+                                        ${user.getFname()}
+                                    </td>
+                                    <td>
+                                        ${user.getLname()}
+                                    </td>
+                                    <td>
+                                        Detail
+                                    </td>
+                                    <td>
+                                        Delete
+                                    </td>
+                                </tr>
+                            </c:forEach>                            
                         </tbody>
                     </table>
                     <input type="button" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >
                 </div>  
                 <div class="save-options">
-                    <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>
-                    <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySiteUserList.jsp">Next</button>
+                    <button type="submit" class="btn btn-info" onclick="goBack()" >Back</button>
+                    <!--<button type="submit" class="btn btn-info" formaction="newStudySponsorUserList">Back</button>-->
+                    <button type="submit" class="btn btn-success" formaction="newStudySiteUserList">Next</button>
                 </div>
             </form>
         </div>

@@ -21,7 +21,7 @@
         <div class="col-lg-10 col-md-10 col-sm-10">
             <div id="studyBasicInfo">
                 <h1>Study Basic Information</h1>
-                <form id="formEqhomeNSMStudyBasicInfo" class="form-horizontal" action="study/displayStudyList" method="post">
+                <form id="formEqhomeNSMStudyBasicInfo" class="form-horizontal" action="newStudySponsor" method="post">
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSMNCTId">NCT ID</label>
                         <div class="col-sm-7">
@@ -88,17 +88,20 @@
                             <input type="text" id="inpEqhomeNSMEQClsDate" name="EQClsDate" value="${newStudy.getStudyEqCloseDateString()}" class="form-control"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
+                        
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="sltEqhomeNSMStudyStatus">Study Status</label>
                         <div class="col-sm-7">
-                            <select id="sltSponsorName" id="sltEqhomeNSMStudyStatus" class="form-control">
-                                <option disabled selected value> -- Select an Status -- </option>
+                            
+                            <select id="sltSponsorName" id="sltEqhomeNSMStudyStatus" name="StudyStatus" class="form-control">
+                                <!--<option disabled selected value> -- Select an Status -- </option>-->
                                 <c:forEach var="studyStatus" items="${studyStatusList}">
-                                    <option value="${studyStatus}" >${studyStatus}</option>
+                                    <option value="${studyStatus}" selected="${studyStatus == (newStudy.getStudyStatus())?"selected":""}">${studyStatus}</option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
+                       status= ${newStudy.getStudyStatus()}
                     <div class="save-options">
                         <button id="btnEqhomeNSMNext" class="btn btn-success" formaction="../study/newStudySponsor">Next</button>
                     </div>

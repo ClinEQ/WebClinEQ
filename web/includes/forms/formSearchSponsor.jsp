@@ -22,7 +22,7 @@
         </fieldset>
     </form>
 
-    <form>
+    <form action="AddSponsorToStudy" method="post">
         <div class="tableSearchSponsor">
             <table id="tblFormSearchSponsor" class="table table-striped">
                 <thead>
@@ -36,7 +36,7 @@
                 </thead>               
                 <tbody id="fbody">
                     <c:forEach var="org" items="${orgArrayList}">
-                        <c:if test="${org.getOrgType()=='SPONSOR'}">
+
                             <tr>
                                 <td>
                                     ${org.getOrgFullName()}
@@ -51,10 +51,10 @@
                                     ${org.getStatus()}
                                 </td>
                                 <td>
-                                    <input type="radio" name="optionsRadios" value="${org.getEqOrgId()}">
+                                    <input type="radio" name="optionsRadiosAddSponsorToStudy" value="${org.getEqOrgId()}">
                                 </td>
                             </tr>
-                        </c:if>
+                        
                     </c:forEach>
 
 
@@ -62,7 +62,7 @@
             </table>
         </div>
 
-        <input id="btnAddToStudyFormSearchSponsor" type="button" value="Add to Study" style="float:right;" class="btn btn-default" >
+        <input id="btnAddToStudyFormSearchSponsor" type="submit" value="Add to Study" style="float:right;" class="btn btn-default" >
 
     </form>
 </div>

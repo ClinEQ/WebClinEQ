@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -173,6 +174,122 @@ public class UserDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
+    
+        public static ArrayList<Users> selectUsers(String eq_org_id, String user_type) throws DBException {
+
+        String sql = "SELECT * FROM CLINEQ.USERS WHERE EQ_ORG_ID = '" + eq_org_id 
+                + "' and USER_TYPE = '" + user_type + "'";
+
+        ArrayList<Users> objList = new ArrayList<>();
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Users obj = new Users();
+                obj.setEqUserId(rs.getString("EQ_USER_ID"));
+
+                Organizations org = OrganizationDB.selectOneOrganization(rs.getString("EQ_ORG_ID"));
+                System.out.println("org id: " + org.getEqOrgId());
+                System.out.println("org name: " + org.getOrgFullName());
+
+                obj.setEqOrgId(org);
+                obj.setLname(rs.getString("LNAME"));
+                obj.setFname(rs.getString("FNAME"));
+                obj.setTitle(rs.getString("TITLE"));
+                obj.setSetupDate(rs.getDate("SETUP_DATE"));
+                obj.setLastUpdateDate(rs.getDate("LAST_UPDATE_DATE"));
+                obj.setAddress1(rs.getString("ADDRESS1"));
+                obj.setAddress2(rs.getString("ADDRESS2"));
+                obj.setZip(rs.getString("ZIP"));
+                obj.setPhone(rs.getString("PHONE"));
+                obj.setEmail(rs.getString("EMAIL"));
+                obj.setCity(rs.getString("CITY"));
+                obj.setState(rs.getString("STATE"));
+                obj.setCountry(rs.getString("COUNTRY"));
+                obj.setStatus(rs.getString("STATUS"));
+                obj.setExternalDeptName(rs.getString("EXTERNAL_EMPLOYER_ID"));
+                obj.setExternalDeptName(rs.getString("EXTERNAL_DEPT_NAME"));
+                obj.setUserType(rs.getString("USER_TYPE"));
+                obj.setUserRole(rs.getString("USER_ROLE"));
+                obj.setUserLoginId(rs.getString("USER_LOGIN_ID"));
+                obj.setUserLoginPwd(rs.getString("USER_LOGIN_PWD"));
+                objList.add(obj);
+            }
+            return objList;
+        } catch (SQLException e) {
+            System.err.println("Error in userDB selectAllUser : " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+    }
+
+    // Assume userName is qnique
+    public static Users selectUser(String userName, String pwd) throws DBException {
+
+        String sql = "SELECT * FROM CLINEQ.USERS WHERE USER_LOGIN_ID = '" + userName
+                + "' AND USER_LOGIN_PWD='" + pwd + "'";
+
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            Users obj = null;
+            while (rs.next()) {
+                obj = new Users();
+                obj.setEqUserId(rs.getString("EQ_USER_ID"));
+
+                Organizations org = OrganizationDB.selectOneOrganization(rs.getString("EQ_ORG_ID"));
+                System.out.println("org id: " + org.getEqOrgId());
+                System.out.println("org name: " + org.getOrgFullName());
+
+                obj.setEqOrgId(org);
+                obj.setLname(rs.getString("LNAME"));
+                obj.setFname(rs.getString("FNAME"));
+                obj.setTitle(rs.getString("TITLE"));
+                obj.setSetupDate(rs.getDate("SETUP_DATE"));
+                obj.setLastUpdateDate(rs.getDate("LAST_UPDATE_DATE"));
+                obj.setAddress1(rs.getString("ADDRESS1"));
+                obj.setAddress2(rs.getString("ADDRESS2"));
+                obj.setZip(rs.getString("ZIP"));
+                obj.setPhone(rs.getString("PHONE"));
+                obj.setEmail(rs.getString("EMAIL"));
+                obj.setCity(rs.getString("CITY"));
+                obj.setState(rs.getString("STATE"));
+                obj.setCountry(rs.getString("COUNTRY"));
+                obj.setStatus(rs.getString("STATUS"));
+                obj.setExternalDeptName(rs.getString("EXTERNAL_EMPLOYER_ID"));
+                obj.setExternalDeptName(rs.getString("EXTERNAL_DEPT_NAME"));
+                obj.setUserType(rs.getString("USER_TYPE"));
+                obj.setUserRole(rs.getString("USER_ROLE"));
+                obj.setUserLoginId(rs.getString("USER_LOGIN_ID"));
+                obj.setUserLoginPwd(rs.getString("USER_LOGIN_PWD"));
+
+            }
+            return obj;
+        } catch (SQLException e) {
+            System.err.println("Error in userDB selectUser : " + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+    }
 
     public static void saveUser(Users user) throws DBException {
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
@@ -277,30 +394,29 @@ sysdate,
             return;
         }
     }
-      
+
     public static String generateUserID() throws DBException {
 
         PreparedStatement ps = null;
         Statement stmt = null;
         ResultSet rs = null;
         String EQ_USER_ID = null;
-        
+
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement("select clineq.seq_equserid.nextval from dual");
             rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 EQ_USER_ID = Integer.toString(rs.getInt("NEXTVAL"));
                 EQ_USER_ID = "eqstu" + ("00000" + EQ_USER_ID).substring(EQ_USER_ID.length());
             }
-            
-
 
         } catch (SQLException e) {
             System.err.println("Error in studyDB saveStudy : " + e.getMessage());
-            
+
         }
         return EQ_USER_ID;
     }
 }
+

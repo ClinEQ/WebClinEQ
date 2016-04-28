@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -49,7 +50,11 @@ public class LoginController extends HttpServlet {
         String url = null;
         String userid = request.getParameter("inpUserName");
         String pwd = request.getParameter("inpPassword");
-        if (userExist(userid, pwd, request)) {
+        try {
+            user = UserDB.selectUser(userid, pwd);
+        } catch (Exception e) {
+        }
+        if (user != null) {
             String user_type = user.getUserType();
             if ("CLINEQ".equals(user_type)) {
                 url = "/study/displayStudyList";
@@ -82,27 +87,6 @@ public class LoginController extends HttpServlet {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
 
-    }
-
-    private boolean userExist(String userLoginId, String password, HttpServletRequest request) {
-        ArrayList<Users> userArrayList = null;
-        //  Users user = new Users();
-        HttpSession session = request.getSession();
-        try {
-            userArrayList = UserDB.selectAllUser();
-            for (int i = 0; i < userArrayList.size(); i++) {
-                user = userArrayList.get(i);
-                if (userLoginId.equals(user.getUserLoginId()) && password.equals(user.getUserLoginPwd())) {
-
-                    session.setAttribute("loginUser", user);
-                    return true;
-                }
-            }
-
-        } catch (DBException e) {
-            System.err.println();
-        }
-        return false;
     }
 
 }

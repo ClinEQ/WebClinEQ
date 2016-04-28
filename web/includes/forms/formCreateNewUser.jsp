@@ -15,7 +15,7 @@
                     <h4 class="modal-title">Create New User Account</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal form-modal" action="addUserToStudy" method="post">
+                    <form class="form-horizontal form-modal" action="inputUserToOrg" method="post">
                         <div class="form-group form-group-lg">
                             <label class="col-sm-5 control-label" for="inpFormCNULastName">Last Name</label>
                             <div class="col-sm-7">
@@ -129,7 +129,7 @@
                 
                 <div>
                     <!--<button type="button" class="btn btn-default" style="width: 160px; margin-left: 70%;">Save & Add to Study</button>-->
-                                <input type="button" value="Save & Add to Study" class="btn btn-default" style="width: 160px; margin-left: 70%;" onclick="form.action = 'addUserToStudy';">
+                                <input type="submit" value="Add to Organization" class="btn btn-default" style="width: 160px; margin-left: 70%;" onclick="form.action = 'inputUserToOrg';">
                 </div>
                 </form>
                 

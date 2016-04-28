@@ -64,8 +64,8 @@ public class SponsorController extends HttpServlet {
             url = displaySponsorList(request, response);
             //   if ("STUDYLIST_NODATA" url equal())
             System.out.println("the list is not empty!");
-        } else if (requestURI.endsWith("/createNewStudy")) {
- //           url = createNewStudy(request, response);
+        } else if (requestURI.endsWith("/newStudyMain")) {
+ //           url = newStudyMain(request, response);
         } else if (requestURI.endsWith("/newStudySponsor")) {
        //     url = newStudySponsor(request, response);
         } else {

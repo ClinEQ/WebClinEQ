@@ -79,7 +79,8 @@ public class OrganizationDB {
 
     public static ArrayList<Organizations> selectOrganizationByType(String orgType) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
-        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE ORG_TYPE = '" + orgType + "'";
+        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE ORG_TYPE = '" 
+                + orgType + "' AND STATUS = 'ACTIVE'";
 
         ArrayList<Organizations> objList = new ArrayList<>();
         //  Connection connection = DBConnect.getConnection();

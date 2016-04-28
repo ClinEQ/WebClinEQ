@@ -40,14 +40,40 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <!-- newSponsorUserArrayList -->
+                            <c:forEach var="user" items="${sponsor.getUsersCollection()}">
+                               
+                                <tr>
+                                    <td>
+                                        ${user.getEqUserId()} 
+                                    </td>
+                                    <td>
+                                        ${user.getUserType()} 
+                                    </td>
+                                    <td>
+                                        ${user.getEqOrgId().getOrgFullName()}
+                                    </td>
+                                    <td>
+                                        ${user.getFname()}
+                                    </td>
+                                    <td>
+                                        ${user.getLname()}
+                                    </td>
+                                    <td>
+                                        Detail
+                                    </td>
+                                    <td>
+                                        Delete
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <input type="button" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >
                 </div>
                 <div class="save-options">
-                    <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>
-                    <button class="btn btn-success" formaction="../eqhome/newStudySite.jsp">Next</button>
+                    <button type="submit" class="btn btn-info" formaction="newStudySponsor"">Back</button>
+                    <button type="submit" class="btn btn-success" formaction="newStudySite">Next</button>
                 </div>
             </form>
         </div>

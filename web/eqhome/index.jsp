@@ -87,7 +87,7 @@
                     </table>
                 </div>
             </section>
-            <button onclick="openAddNewStudy('../study/createNewStudy', 1000)" class="btn btn-success">Add New Study</button>
+            <button onclick="openAddNewStudy('../study/newStudyMain0', 1000)" class="btn btn-success">Add New Study</button>
         </div>
         <!-- footer -->
         <jsp:include page="../includes/footer.jsp"/>
