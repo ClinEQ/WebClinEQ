@@ -45,19 +45,38 @@ public class LoginController extends HttpServlet {
         System.out.println("doPost enter user controller dopost!");
         String requestURI = request.getRequestURI();
         String url = null;
-        String userid = request.getParameter("userId");
+        String userid = request.getParameter("inpUserName");
+        String title = request.getParameter("title");
+        System.out.println("title="+title+" userid="+userid);
+        
+        //userid = "JOHN01";
         if (userExist(userid)) {
-            url = "/study/displayStudyList";
-            //url = "/eqhome/index.jsp";
+            String userType = userOrgType(userid);
+            if(userType.equals("SITE"))
+            {
+              url = "/site/displaySiteList?inpUserName="+userid;
+            }
+            else if(userType.equals("CLINEQ"))
+            {
+                url = "/study/displayStudySiteList";
+            }
+              else if(userType.equals("SPONSOR"))
+            {
+                url = "/sponsor/displayStudySponsorList";
+            }
+            //url = "/eqhome/index.jsp"; 
         } else {
 //            response.sendRedirect("/login.jsp");
 //            return;
-            request.getSession().invalidate();
-            url = "/eqhome/login.jsp";
-        }
+            //request.getSession().invalidate();
+            //url = "/eqhome/login.jsp";
+            url = "../login.html";
+            response.sendRedirect(url);
+            return;
+        } 
 
-        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        //RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 
@@ -77,9 +96,11 @@ public class LoginController extends HttpServlet {
 
         try {
             userArrayList = UserDB.selectAllUser();
+            //System.out.println("UserLoginId="+userLoginId+"userArrayListsize="+userArrayList.size());
             for (int i=0; i<userArrayList.size(); i++)
             {
                 user = userArrayList.get(i);
+                //System.out.println("UserId in DB="+user.getUserLoginId());
                 if (userLoginId.equals(user.getUserLoginId()))
                 {
                     return true;
@@ -91,6 +112,27 @@ public class LoginController extends HttpServlet {
         }
         return false;
     }
+public String userOrgType(String userLoginId) {
+        ArrayList<Users> userArrayList = null;
+        Users user = new Users();
 
+        try {
+            userArrayList = UserDB.selectAllUser();
+            //System.out.println("UserLoginId="+userLoginId+"userArrayListsize="+userArrayList.size());
+            for (int i=0; i<userArrayList.size(); i++)
+            {
+                user = userArrayList.get(i);
+                //System.out.println("UserId in DB="+user.getUserLoginId());
+                if (userLoginId.equals(user.getUserLoginId()))
+                {
+                    return user.getUserType();
+                }
+            }
+
+        } catch (DBException e) {
+            System.err.println();
+        }
+        return "";
+    }
 
 }

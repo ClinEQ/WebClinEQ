@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -49,6 +50,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Studies.findByPlannedPatientsNum", query = "SELECT s FROM Studies s WHERE s.plannedPatientsNum = :plannedPatientsNum"),
     @NamedQuery(name = "Studies.findByStudyStatus", query = "SELECT s FROM Studies s WHERE s.studyStatus = :studyStatus")})
 public class Studies implements Serializable {
+
+    @Column(name = "PLANNED_PATIENTS_NUM")
+    private int plannedPatientsNum;
+    @JoinColumn(name = "EQ_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
+    @ManyToOne
+    private Users eqManagerId;
+
+    @JoinColumn(name = "SPON_STUDY_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
+    @ManyToOne
+    private Users sponStudyManagerId;
+
+    @Size(max = 30)
+    @Column(name = "CHART_GROUP_ID")
+    private String chartGroupId;
+    @OneToMany(mappedBy = "eqStudyId")
+    private Collection<StudyChartCategory> studyChartCategoryCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -81,8 +98,6 @@ public class Studies implements Serializable {
     @Column(name = "STUDY_EQ_CLOSE_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date studyEqCloseDate;
-    @Column(name = "PLANNED_PATIENTS_NUM")
-    private int plannedPatientsNum;
     @Column(name = "STUDY_STATUS")
     private String studyStatus;
     @OneToMany(mappedBy = "eqStudyId")
@@ -95,16 +110,16 @@ public class Studies implements Serializable {
     private String eqIwrsId;
     @JoinColumn(name = "CHART_GROUP_ID", referencedColumnName = "CHART_GROUP_ID")
     @ManyToOne
-    private String chartGroupId;
-    @JoinColumn(name = "SPON_STUDY_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
-    @ManyToOne
-    private Users sponStudyManagerId;
-    @JoinColumn(name = "EQ_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
-    @ManyToOne
-    private Users eqManagerId;
+    //private String chartGroupId;
+    //@JoinColumn(name = "SPON_STUDY_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
+    //@ManyToOne
+    //private Users sponStudyManagerId;
+    //@JoinColumn(name = "EQ_MANAGER_ID", referencedColumnName = "EQ_USER_ID")
+    //@ManyToOne
+    //private Users eqManagerId;
     @OneToMany(mappedBy = "eqStudyId")
-    private Collection<StudyChartGroup> studyChartGroupCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studies")
+    //private Collection<StudyChartGroup> studyChartGroupCollection;
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "studies")
     private Collection<StudySubjectMap> studySubjectMapCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studies")
     private Collection<StudyUserMap> studyUserMapCollection;
@@ -114,6 +129,8 @@ public class Studies implements Serializable {
     private Collection<StudyLocationMap> studyLocationMapCollection;
 
     private String eqSponName;
+    
+    private String eqUserName; 
 
     public Studies() {
     }
@@ -222,7 +239,7 @@ public class Studies implements Serializable {
         return plannedPatientsNum;
     }
 
-    public void setPlannedPatientsNum(int plannedPatientsNum) {
+    public void setPlannedPatientsNum(int  plannedPatientsNum) {
         this.plannedPatientsNum = plannedPatientsNum;
     }
 
@@ -250,8 +267,17 @@ public class Studies implements Serializable {
     public void setEqSponId(String eqSponId) {
         this.eqSponId = eqSponId;
     }
+ 
+   
+     public String getEqUserName() {
+        return eqUserName;
+    }
 
-    public String getEqSponName() {
+    public void setEqUserName(String eqUserName) {
+        this.eqUserName = eqUserName;
+    }
+    
+       public String getEqSponName() {
         return eqSponName;
     }
 
@@ -291,14 +317,14 @@ public class Studies implements Serializable {
         this.eqManagerId = eqManagerId;
     }
 
-    @XmlTransient
+   /* @XmlTransient
     public Collection<StudyChartGroup> getStudyChartGroupCollection() {
         return studyChartGroupCollection;
     }
 
     public void setStudyChartGroupCollection(Collection<StudyChartGroup> studyChartGroupCollection) {
         this.studyChartGroupCollection = studyChartGroupCollection;
-    }
+    }*/
 
     @XmlTransient
     public Collection<StudySubjectMap> getStudySubjectMapCollection() {
@@ -361,4 +387,69 @@ public class Studies implements Serializable {
         return "clineq.business.Studies[ eqStudyId=" + eqStudyId + " ]";
     }
 
+ /*   public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(BigInteger plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
+
+  /*  public String getChartGroupId() {
+        return chartGroupId;
+    }
+
+    public void setChartGroupId(String chartGroupId) {
+        this.chartGroupId = chartGroupId;
+    }*/
+
+    @XmlTransient
+    public Collection<StudyChartCategory> getStudyChartCategoryCollection() {
+        return studyChartCategoryCollection;
+    }
+
+    public void setStudyChartCategoryCollection(Collection<StudyChartCategory> studyChartCategoryCollection) {
+        this.studyChartCategoryCollection = studyChartCategoryCollection;
+    }
+
+  /*  public Users getSponStudyManagerId() {
+        return sponStudyManagerId;
+    }
+
+    public void setSponStudyManagerId(Users sponStudyManagerId) {
+        this.sponStudyManagerId = sponStudyManagerId;
+    }*/
+
+ /*   public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(int plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
+
+ /*   public Users getEqManagerId() {
+        return eqManagerId;
+    }
+
+    public void setEqManagerId(Users eqManagerId) {
+        this.eqManagerId = eqManagerId;
+    }
+*/
+
+  /*  public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(BigInteger plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
+
+ /*   public BigInteger getPlannedPatientsNum() {
+        return plannedPatientsNum;
+    }
+
+    public void setPlannedPatientsNum(BigInteger plannedPatientsNum) {
+        this.plannedPatientsNum = plannedPatientsNum;
+    }*/
 }

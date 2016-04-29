@@ -10,19 +10,48 @@
     </head>
     <body>
         <div id="login">
-            <form class="form-horizontal" action="study/displayStudyList" method="post">
+            <form class="form-horizontal" action="user/login"  method="post">
+            <!--<form class="form-horizontal" action="user/login" enctype="multipart/form-data" method="post">-->
+                <!--<form class="form-horizontal" action="study/displayStudyList" method="post">-->
                 <div class="form-group form-group-lg">
                     <label class="col-sm-4 control-label" type="text" for="inpUserName">User Name</label>
                     <div class="col-sm-8">
-                    <input class="form-control" id="inpUserName" placeholder="User Name">
-                    </div>
+                    <input class="form-control" id="inpUserName" name="inpUserName" placeholder="User Name">
+                    </div>           
                 </div>
                 <div class="form-group form-group-lg">
                     <label class="col-sm-4 control-label" for="inpPassword">Password</label>
                     <div class="col-sm-8">
-                    <input type="password" class="form-control" id="inpPassword" placeholder="Password">
+                    <input type="password" class="form-control" id="inpPassword" name="inpPassword" placeholder="Password">
                     </div>
                 </div>
+                <!--<div class="form-group form-group-lg">
+                   <label class="col-sm-4 control-label" for="inpFile">file</label>
+                    <div class="col-sm-8">
+                    <input type="file" class="form-control" id="inpFile" name="inpFile" placeholder="inpFile">
+                    </div>
+                    <input type="file" name="inpFile" size="50"/>
+                </div>-->
+                
+                  <!--
+                <div class="form-group form-group-lg">
+                    <label class="col-sm-4 control-label" type="text" for="inpPassword">PhotoId</label>
+                    <div class="col-sm-8">
+                    <input class="form-control" id="id" name="id" placeholder="Enter Photo Id">
+                    </div>
+                </div>
+                <div class="form-group form-group-lg">
+                    <label class="col-sm-4 control-label" for="inpPassword">Photo Title</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" id="title" name="title" placeholder="Title For Photo">
+                  </div>
+                </div>
+                <div class="form-group form-group-lg">
+                    <label class="col-sm-4 control-label" for="photo">Photo</label>
+                    <div class="col-sm-8"> 
+                    <input class="form-control" type="file" id="photo" name="photo" placeholder="Select photo">
+                    </div>
+                </div> -->
                 <button type="submit" class="btn btn-default">Submit</button>
         </div>
     </body>

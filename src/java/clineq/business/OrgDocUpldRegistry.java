@@ -6,7 +6,6 @@
 package clineq.business;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,16 +15,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Elijah
+ * @author User
  */
 @Entity
 @Table(name = "ORG_DOC_UPLD_REGISTRY")
@@ -33,38 +32,51 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "OrgDocUpldRegistry.findAll", query = "SELECT o FROM OrgDocUpldRegistry o"),
     @NamedQuery(name = "OrgDocUpldRegistry.findByOrgDocUploadId", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.orgDocUploadId = :orgDocUploadId"),
-    @NamedQuery(name = "OrgDocUpldRegistry.findByEqOrgId", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.eqOrgId = :eqOrgId"),
     @NamedQuery(name = "OrgDocUpldRegistry.findBySubjectChartCatagoryId", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.subjectChartCatagoryId = :subjectChartCatagoryId"),
-    @NamedQuery(name = "OrgDocUpldRegistry.findByUploadStartDate", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.uploadStartDate = :uploadStartDate"),
+    @NamedQuery(name = "OrgDocUpldRegistry.findByChartSubcategoryId", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.chartSubcategoryId = :chartSubcategoryId"),
+    @NamedQuery(name = "OrgDocUpldRegistry.findByEqOrgId", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.eqOrgId = :eqOrgId"),
     @NamedQuery(name = "OrgDocUpldRegistry.findByEqUserId", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.eqUserId = :eqUserId"),
+    @NamedQuery(name = "OrgDocUpldRegistry.findByUploadStartDate", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.uploadStartDate = :uploadStartDate"),
     @NamedQuery(name = "OrgDocUpldRegistry.findByUploadEndDate", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.uploadEndDate = :uploadEndDate"),
     @NamedQuery(name = "OrgDocUpldRegistry.findByUploadStatus", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.uploadStatus = :uploadStatus"),
-    @NamedQuery(name = "OrgDocUpldRegistry.findByRemoteIp", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.remoteIp = :remoteIp")})
+    @NamedQuery(name = "OrgDocUpldRegistry.findByRemoteIp", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.remoteIp = :remoteIp"),
+    @NamedQuery(name = "OrgDocUpldRegistry.findByCertification", query = "SELECT o FROM OrgDocUpldRegistry o WHERE o.certification = :certification")})
 public class OrgDocUpldRegistry implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ORG_DOC_UPLOAD_ID")
     private String orgDocUploadId;
-    @Column(name = "EQ_ORG_ID")
-    private String eqOrgId;
+    @Size(max = 30)
     @Column(name = "SUBJECT_CHART_CATAGORY_ID")
     private String subjectChartCatagoryId;
+    @Size(max = 30)
+    @Column(name = "CHART_SUBCATEGORY_ID")
+    private String chartSubcategoryId;
+    @Size(max = 30)
+    @Column(name = "EQ_ORG_ID")
+    private String eqOrgId;
+    @Size(max = 30)
+    @Column(name = "EQ_USER_ID")
+    private String eqUserId;
     @Column(name = "UPLOAD_START_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadStartDate;
-    @Column(name = "EQ_USER_ID")
-    private String eqUserId;
     @Column(name = "UPLOAD_END_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadEndDate;
+    @Size(max = 30)
     @Column(name = "UPLOAD_STATUS")
     private String uploadStatus;
+    @Size(max = 30)
     @Column(name = "REMOTE_IP")
     private String remoteIp;
-    @OneToMany(mappedBy = "uploadId")
-    private Collection<SubjectCharts> subjectChartsCollection;
+    @Size(max = 1)
+    @Column(name = "CERTIFICATION")
+    private String certification;
     @JoinColumn(name = "EQ_STUDY_ID", referencedColumnName = "EQ_STUDY_ID")
     @ManyToOne
     private Studies eqStudyId;
@@ -87,14 +99,6 @@ public class OrgDocUpldRegistry implements Serializable {
         this.orgDocUploadId = orgDocUploadId;
     }
 
-    public String getEqOrgId() {
-        return eqOrgId;
-    }
-
-    public void setEqOrgId(String eqOrgId) {
-        this.eqOrgId = eqOrgId;
-    }
-
     public String getSubjectChartCatagoryId() {
         return subjectChartCatagoryId;
     }
@@ -103,12 +107,20 @@ public class OrgDocUpldRegistry implements Serializable {
         this.subjectChartCatagoryId = subjectChartCatagoryId;
     }
 
-    public Date getUploadStartDate() {
-        return uploadStartDate;
+    public String getChartSubcategoryId() {
+        return chartSubcategoryId;
     }
 
-    public void setUploadStartDate(Date uploadStartDate) {
-        this.uploadStartDate = uploadStartDate;
+    public void setChartSubcategoryId(String chartSubcategoryId) {
+        this.chartSubcategoryId = chartSubcategoryId;
+    }
+
+    public String getEqOrgId() {
+        return eqOrgId;
+    }
+
+    public void setEqOrgId(String eqOrgId) {
+        this.eqOrgId = eqOrgId;
     }
 
     public String getEqUserId() {
@@ -117,6 +129,14 @@ public class OrgDocUpldRegistry implements Serializable {
 
     public void setEqUserId(String eqUserId) {
         this.eqUserId = eqUserId;
+    }
+
+    public Date getUploadStartDate() {
+        return uploadStartDate;
+    }
+
+    public void setUploadStartDate(Date uploadStartDate) {
+        this.uploadStartDate = uploadStartDate;
     }
 
     public Date getUploadEndDate() {
@@ -143,13 +163,12 @@ public class OrgDocUpldRegistry implements Serializable {
         this.remoteIp = remoteIp;
     }
 
-    @XmlTransient
-    public Collection<SubjectCharts> getSubjectChartsCollection() {
-        return subjectChartsCollection;
+    public String getCertification() {
+        return certification;
     }
 
-    public void setSubjectChartsCollection(Collection<SubjectCharts> subjectChartsCollection) {
-        this.subjectChartsCollection = subjectChartsCollection;
+    public void setCertification(String certification) {
+        this.certification = certification;
     }
 
     public Studies getEqStudyId() {

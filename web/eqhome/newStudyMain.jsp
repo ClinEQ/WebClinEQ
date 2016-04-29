@@ -1,13 +1,7 @@
-<jsp:include page="../includes/header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <link href="../resources/css/eqhome/newStudyMain.css" rel="stylesheet" type="text/css"/>
-<script src="../resources/lib/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
-<link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
-<link href="../resources/lib/bootstrap-datepicker-1.5.1-dist/css/bootstrap-datepicker.standalone.css" rel="stylesheet" type="text/css"/>
-<script src="../resources/script/eqhome.js" type="text/javascript"></script>
 
+<jsp:include page="../includes/header.jsp"/>
 
 <nav id="navbar-main" class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -18,8 +12,9 @@
 
 <div class="container content">
     <div id="studyBasicInfo">
-        <p>Study Basic Information</p>
-        <form class="form-horizontal" action="study/displayStudyList" method="post">
+        <h1>Study Basic Information</h1>
+        <form class="form-horizontal" action="http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_his_back" method="post">
+        <!--<form class="form-horizontal" action="study/displayStudyList" autocomplete="on" method="post">-->    
             <div class="form-group form-group-lg">
                 <label class="col-sm-5 control-label" for="inpEqhomeNSMNCTId">NCT ID</label>
                 <div class="col-sm-7">
@@ -92,20 +87,17 @@
                     <input class="form-control" id="inpeqhomeNSMStudyStatus" >
                 </div>
             </div>
-            <form>
-                <button type="submit" formaction="../eqhome/newStudySponsor.jsp" class="btn btn-success">Next</button>
-            </form>
+        </form>
     </div>
 
     <div class="save-options">
-        <button type="button" class="btn btn-primary">Create Study</button>
+        <form>
+        <button type="submit" class="btn btn-info" formaction="../eqhome/index.jsp">Back</button>
+        <!--<button type="submit" class="btn btn-success" formaction="../eqhome/newjsp.jsp">Next</button>-->
+        <button type="submit" class="btn btn-success" formaction="../eqhome/newStudySponsor.jsp">Next</button>
+        </form>
+    </div> 
 
-
-        <button type="button" class="btn btn btn-info">Save as Default</button>
-
-
-        <button type="button" class="btn btn btn-danger">Cancel</button>
-    </div>
 </div>
 
 <!-- footer -->

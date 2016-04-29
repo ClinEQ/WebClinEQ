@@ -102,3 +102,45 @@ footer{
 footer>hr{
     margin-bottom: 5px;
 }
+
+.content{
+    margin-left: 250px !important;
+    position:relative;
+}
+
+.content h1 {
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.content h2{
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-horizontal{
+    width: 500px;
+    margin:auto;
+}
+
+.searchArea{
+    padding-bottom: 50px;
+}
+
+.save-options{
+    margin-top:60px;
+    text-align: center;
+}
+
+.save-options button{  
+    margin: 100px 20px 30px 30px;
+    width:100px;
+}
