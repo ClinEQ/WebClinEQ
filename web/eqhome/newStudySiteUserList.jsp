@@ -28,7 +28,9 @@
             <div>
                 <label>Site</label>
                 <select style="width:130px;" id="sltStudySiteUserList" name="sltStudySiteUserList" class="form-control"  >                    
-                        <option value="">AA</option>                   
+                                <c:forEach var="site" items="${newSiteArrayList}">
+                                    <option value="${site.getEqOrgId()}" >${site.getEqOrgId()}</option>
+                                </c:forEach>                 
                 </select>                     
             </div>
             <form>
@@ -46,7 +48,32 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <c:forEach var="user" items="${sponsor.getUsersCollection()}">
+                               
+                                <tr>
+                                    <td>
+                                        ${user.getEqUserId()} 
+                                    </td>
+                                    <td>
+                                        ${user.getUserType()} 
+                                    </td>
+                                    <td>
+                                        ${user.getEqOrgId().getOrgFullName()}
+                                    </td>
+                                    <td>
+                                        ${user.getFname()}
+                                    </td>
+                                    <td>
+                                        ${user.getLname()}
+                                    </td>
+                                    <td>
+                                        Detail
+                                    </td>
+                                    <td>
+                                        Delete
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <input type="button" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >

@@ -42,7 +42,7 @@
                                     ${org.getOrgFullName()}
                                 </td>
                                 <td>
-
+                                    ${org}
                                 </td>
                                 <td>
                                     ${org.getAddress1()} ${org.getAddress2()} ${org.getCity()} ${org.getState()} ${org.getZip()}

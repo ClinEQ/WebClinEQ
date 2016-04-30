@@ -14,6 +14,7 @@
         </fieldset>
     </form>
     
+    <form action="addSiteToStudy" method="post">
     <div class="tableSearchSponsor">
             <table class="table table-striped">
                 <thead>
@@ -26,28 +27,32 @@
                     </tr>
                 </thead>
                 <tbody id="fbody">
-                    <c:forEach var="study" items="${studyArrayList}">
-                        <tr>
-                            <td>
-                                ${study.getEqStudyId()}
-                            </td>
-                            <td>
-                                ${study.getNctid()}
-                            </td>
-                            <td>
-                                ${study.getStudyAname()}
-                            </td>
-                            <td>
-                                ${study.getSponStudyId()}
-                            </td>
-                            <td>
-                                <input type="radio" name="optionsRadios" value="option">
-                            </td>
-                        </tr>
+                    <c:forEach var="org" items="${siteArrayList}">
+
+                            <tr>
+                                <td>
+                                    ${org.getOrgFullName()}
+                                </td>
+                                <td>
+                                    ${org}
+                                </td>
+                                <td>
+                                    ${org.getAddress1()} ${org.getAddress2()} ${org.getCity()} ${org.getState()} ${org.getZip()}
+                                </td>
+                                <td>
+                                    ${org.getStatus()}
+                                </td>
+                                <td>
+                                    <input type="radio" name="optionsRadiosAddSiteToStudy" value="${org.getEqOrgId()}">
+                                </td>
+                            </tr>
+                        
                     </c:forEach>
                 </tbody>
             </table>
     </div>
-    <button type="submit" class="btn btn-default" style="float:right;">Add to Study</button>          
+    <!--<button type="submit" class="btn btn-default" style="float:right;">Add to Study</button>  -->
+    <input id="btnAddToStudyFormSearchSite" type="submit" value="Add to Study" style="float:right;" class="btn btn-default" >
+    </form>
 </div>
 

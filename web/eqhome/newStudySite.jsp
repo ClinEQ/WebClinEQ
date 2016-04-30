@@ -27,7 +27,7 @@
             </div>
             <div class="searchSite subSearchArea" style="display:none">
             </div>
-            <form>
+            <form action="inputSiteToStudy" method="post">
                 <div class="table-area">
                     <table class="table table-striped">
                         <thead>
@@ -42,23 +42,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="user" items="${sponsor.getUsersCollection()}">
+                            <c:forEach var="site" items="${newSiteArrayList}">
                                
                                 <tr>
                                     <td>
-                                        ${user.getEqUserId()} 
+                                        ${site.getEqOrgId()} 
                                     </td>
                                     <td>
-                                        ${user.getUserType()} 
+                                        ${site.getOrgFullName()} 
                                     </td>
                                     <td>
-                                        ${user.getEqOrgId().getOrgFullName()}
+                                        ${site}
                                     </td>
                                     <td>
-                                        ${user.getFname()}
+                                        ${site.getOrgType()}
                                     </td>
                                     <td>
-                                        ${user.getLname()}
+                                        ${site.getStatus()}
                                     </td>
                                     <td>
                                         Detail
@@ -71,10 +71,11 @@
                         </tbody>
                     </table>
                     <input type="button" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >
+
                 </div>  
                 <div class="save-options">
-                    <button type="submit" class="btn btn-info" onclick="goBack()" >Back</button>
-                    <!--<button type="submit" class="btn btn-info" formaction="newStudySponsorUserList">Back</button>-->
+                    <!--<button type="submit" class="btn btn-info" onclick="goBack()" >Back</button>-->
+                    <button type="submit" class="btn btn-info" formaction="newStudySponsorUserList">Back</button>
                     <button type="submit" class="btn btn-success" formaction="newStudySiteUserList">Next</button>
                 </div>
             </form>
