@@ -141,8 +141,8 @@
 
             <div class="save-options">
                 <form>
-                    <button type="submit" class="btn btn-info" formaction="../eqhome/newStudySite.jsp">Back</button>
-                    <button id="btnNextNewStudySponsor"  class="btn btn-success" formaction="../eqhome/newStudyEDC.jsp">Next</button>
+                    <button type="submit" class="btn btn-info" formaction="newStudySiteUserList">Back</button>
+                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudyEDC">Next</button>
                 </form>
             </div>
         </div>

@@ -62,9 +62,9 @@ public class StudyController extends HttpServlet {
     private ArrayList<Organizations> newSiteArrayList = null;
     private ArrayList<Organizations> arrayIWRSList = null;
     private ArrayList<Organizations> arrayEDCList = null;
-    private String nextStudyID = null;
-    private String nextOrgID = null;
-    private String nextUserID = null;
+//    private String nextStudyID = null;
+//    private String nextOrgID = null;
+//    private String nextUserID = null;
     private String currPage = null;
 
     @Override
@@ -113,7 +113,6 @@ public class StudyController extends HttpServlet {
             url = newStudySite(request, response);
         } else if (requestURI.endsWith("newStudySiteUserList")) {
             url = newStudySiteUserList(request, response);
-
         } else if (requestURI.endsWith("newStudyIWRS")) {
             url = newStudyIWRS(request, response);
         } else if (requestURI.endsWith("newStudyEDC")) {
@@ -206,6 +205,10 @@ public class StudyController extends HttpServlet {
         session.removeAttribute("sponsor");
         session.removeAttribute("newSponsorUserArrayList");
         session.removeAttribute("orgUsersArrayList");
+        newSiteArrayList = null;
+        oneSiteUserArrayList = null;
+        oneSite = null;
+        orgUsersArrayList = null;
         session.removeAttribute("newSiteArrayList");
 
         url = "/eqhome/newStudyMain.jsp";
@@ -241,9 +244,9 @@ public class StudyController extends HttpServlet {
 
             orgStatusList = StudyDB.selectAllOrgStatus();
             orgArrayList = OrganizationDB.selectOrganizationByType("SPONSOR");
-            nextStudyID = StudyDB.generateStudyID();
-            nextOrgID = OrganizationDB.generateOrgID();
-            nextUserID = UserDB.generateUserID();
+//            nextStudyID = StudyDB.generateStudyID();
+//            nextOrgID = OrganizationDB.generateOrgID();
+//            nextUserID = UserDB.generateUserID();
             study = getStudy(request);
             session.setAttribute("newStudy", study);
         } catch (DBException e) {
@@ -262,9 +265,9 @@ public class StudyController extends HttpServlet {
             session.setAttribute("jsonInOrgArr", jsonInOrgArrayList);
 
             session.setAttribute("sponsorArrayList", sponsorArrayList);
-            session.setAttribute("nextStudyID", nextStudyID);
-            session.setAttribute("nextSponsorID", nextOrgID);
-            session.setAttribute("nextUserID", nextUserID);
+//            session.setAttribute("nextStudyID", nextStudyID);
+//            session.setAttribute("nextSponsorID", nextOrgID);
+//            session.setAttribute("nextUserID", nextUserID);
 
             session.setAttribute("sponsorArrayList", sponsorArrayList);
         }
@@ -286,6 +289,7 @@ public class StudyController extends HttpServlet {
                 System.out.println("request.getParameter(optionsRadiosAddSponsorToStudy):" + request.getParameter("optionsRadiosAddSponsorToStudy"));
                 System.out.println("item.getEqOrgId():" + item.getEqOrgId());
                 if (item.getEqOrgId().equals(request.getParameter("optionsRadiosAddSponsorToStudy"))) {
+                    sponsor = item;
                     session.setAttribute("sponsor", item);
                     break;
                 }
@@ -314,7 +318,9 @@ public class StudyController extends HttpServlet {
                     if (newSiteArrayList == null) {
                         newSiteArrayList = new ArrayList<Organizations>();
                     }
-                    newSiteArrayList.add(item);
+                    if (!newSiteArrayList.contains(item)) {
+                        newSiteArrayList.add(item);
+                    }
                     session.setAttribute("newSiteArrayList", newSiteArrayList);
                     break;
                 }
@@ -365,6 +371,7 @@ public class StudyController extends HttpServlet {
             }
             newSiteArrayList.add(oneSite);
             session.setAttribute("newSiteArrayList", newSiteArrayList);
+            session.setAttribute("oneSite", oneSite);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -409,11 +416,10 @@ public class StudyController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        url = "/eqhome/newStudySponsorUserList.jsp";
-        if ("SPONSOR".equals(sponsor.getOrgType())) {
-            url = "/eqhome/newStudySponsorUserList.jsp";
-        } else if ("SITE".equals(sponsor.getOrgType())) {
+        if ("SITE".equals(currPage)) {
             url = "/eqhome/newStudySiteUserList.jsp";
+        } else if ("SPONSOR".equals(currPage)) {
+            url = "/eqhome/newStudySponsorUserList.jsp";
         }
 
         System.out.println("url " + url);
@@ -424,33 +430,44 @@ public class StudyController extends HttpServlet {
     private String inputUserToOrg(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
-        String url=null;
+        String url = null;
 
         HttpSession session = request.getSession();
         try {
 
             Users user = getUser(request);
             user.setEqUserId(UserDB.generateUserID());
-            user.setEqOrgId(sponsor);
 
-            if (newSponsorUserArrayList == null) {
-                newSponsorUserArrayList = new ArrayList<Users>();
+            if (currPage.equals("SPONSOR")) {
+                user.setEqOrgId(sponsor);
+                if (newSponsorUserArrayList == null) {
+                    newSponsorUserArrayList = new ArrayList<Users>();
+                }
+
+                newSponsorUserArrayList.add(user);
+                sponsor.setUsersCollection(newSponsorUserArrayList);
+                //sponsor.getUsersCollection().add(item);
+                session.setAttribute("newSponsorUserArrayList", newSponsorUserArrayList);
+                session.setAttribute("sponsor", sponsor);
+            } else if (currPage.equals("SITE")) {
+                user.setEqOrgId(oneSite);
+                oneSiteUserArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
+                if (oneSiteUserArrayList == null) {
+                    oneSiteUserArrayList = new ArrayList<Users>();
+                }
+                oneSiteUserArrayList.add(user);
+                oneSite.setUsersCollection(oneSiteUserArrayList);
+                session.setAttribute("oneSiteUserArrayList", oneSiteUserArrayList);
+                session.setAttribute("oneSite", oneSite);
             }
-
-            newSponsorUserArrayList.add(user);
-            sponsor.setUsersCollection(newSponsorUserArrayList);
-            //sponsor.getUsersCollection().add(item);
-            session.setAttribute("newSponsorUserArrayList", newSponsorUserArrayList);
-            session.setAttribute("sponsor", sponsor);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         if ("SITE".equals(currPage)) {
             url = "/eqhome/newStudySiteUserList.jsp";
-        }
-        else if ("SPONSOR".equals(currPage)) {
+        } else if ("SPONSOR".equals(currPage)) {
             url = "/eqhome/newStudySponsorUserList.jsp";
         }
         System.out.println("url " + url);
@@ -491,20 +508,26 @@ public class StudyController extends HttpServlet {
 
         String url;
         HttpSession session = request.getSession();
+
+        // Back button from newStudySite
+        if ("newStudySite".equals(currPage)) {
+            url = "/eqhome/newStudySponsorUserList.jsp";
+            return url;
+        }
         currPage = "SPONSOR";
 
         try {
 
             // User input sponsor info. instead of pick from the list
             sponsor = getOrganization(request);
-            if (sponsor.getEqOrgId() == null && sponsor.getEqOrgId().equals("")) {
+
+            if (sponsor.getEqOrgId() == null || sponsor.getEqOrgId().equals("")) {
                 sponsor.setEqOrgId(OrganizationDB.generateOrgID());
             }
             sponsor.setUsersCollection(newSponsorUserArrayList);
 
             orgUsersArrayList = UserDB.selectUsers(sponsor.getEqOrgId(), "SPONSOR");
-            //System.out.println("sponsor address1" + sponsor.getAddress1());
-            //System.out.println("sponsor full name" + sponsor.getOrgFullName());
+
             session.setAttribute("sponsor", sponsor);
             session.setAttribute("orgUsersArrayList", orgUsersArrayList);
 
@@ -526,21 +549,44 @@ public class StudyController extends HttpServlet {
         String url;
         HttpSession session = request.getSession();
         currPage = "SITE";
-
+        String selectedSite = request.getParameter("sltStudySiteUserList");
+        session.setAttribute("selectedSite", selectedSite);
+        System.out.println("selectedSite=" + selectedSite);
         try {
 
             // select the current select site
+            boolean firstTime = true;
             for (Organizations site : newSiteArrayList) {
-                if (site.getEqOrgId().equals(request.getParameter("sltStudySiteUserList"))) {
-                    sponsor = site;
+                // Deal with the first site from the dropdown which will be the default value when come to this page
+                if (firstTime) {
+                    oneSite = site;
+                    firstTime = false;
+                }
+                if (site.getEqOrgId().equals(selectedSite)) {
+                    oneSite = site;
                     break;
                 }
             }
 
-            oneSiteUserArrayList = UserDB.selectUsers(sponsor.getEqOrgId(), "SITE");
+            // Not first time, already saved before
+            if (oneSite != null) {
+                System.out.println("oneSite!=null");
+                oneSiteUserArrayList = (ArrayList) oneSite.getUsersCollection();
+            }
+            if (oneSiteUserArrayList == null) {
+                System.out.println("oneSiteUserArrayList==null oneSite.getEqOrgId()=" + oneSite.getEqOrgId());
+                oneSiteUserArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
+                oneSite.setUsersCollection(oneSiteUserArrayList);
+            }
+
+            // Find existing users
+            orgUsersArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
+            session.setAttribute("orgUsersArrayList", orgUsersArrayList);
+
             //System.out.println("sponsor address1" + sponsor.getAddress1());
             //System.out.println("sponsor full name" + sponsor.getOrgFullName());
             session.setAttribute("oneSiteUserArrayList", oneSiteUserArrayList);
+            session.setAttribute("oneSite", oneSite);
 
         } catch (DBException e) {
             System.err.println();
@@ -559,9 +605,11 @@ public class StudyController extends HttpServlet {
 
         String url;
         HttpSession session = request.getSession();
+        currPage = "newStudySite";
 
         try {
             siteArrayList = OrganizationDB.selectOrganizationByType("SITE");
+            System.out.println("sponsor eq id=" + sponsor.getEqOrgId());
             if (htOrg == null) {
                 htOrg = new Hashtable();
             }
@@ -588,7 +636,7 @@ public class StudyController extends HttpServlet {
 
     private String newStudyIWRS(HttpServletRequest request,
             HttpServletResponse response) throws IOException {
-
+        System.out.println("inside IWRS");
         String url;
         HttpSession session = request.getSession();
 
@@ -599,7 +647,8 @@ public class StudyController extends HttpServlet {
             System.err.println();
         }
 
-        if (siteArrayList != null) {
+        System.out.println("after get list");
+        if (arrayIWRSList != null) {
             session.setAttribute("arrayIWRSList", arrayIWRSList);
         }
 

@@ -141,8 +141,8 @@
 
             <div class="save-options">
                 <form>
-                    <button type="submit" class="btn btn-info" formaction="../eqhome/newStudyIWRS.jsp">Back</button>
-                    <button id="btnNextNewStudySponsor"  class="btn btn-success" formaction="#">Create Study</button>
+                    <button type="submit" class="btn btn-info" formaction="newStudyIWRS">Back</button>
+                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="saveNewStudy">Create Study</button>
                     <button id="btnNextNewStudySponsor"  class="btn btn-default" formaction="#">Cancel</button>
                 </form>
             </div>

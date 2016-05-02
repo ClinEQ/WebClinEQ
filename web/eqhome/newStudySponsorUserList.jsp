@@ -25,7 +25,7 @@
             </div>
             <div class="searchUser" style="display:none">
             </div>
-            <form>
+            <form method="post">
                 <div class="table-area">
                     <table id="tblNSSSponsorUserList" class="table table-striped">
                         <thead>
@@ -40,7 +40,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- newSponsorUserArrayList -->
                             <c:forEach var="user" items="${sponsor.getUsersCollection()}">
                                
                                 <tr>
@@ -72,7 +71,7 @@
                     <input type="button" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >
                 </div>
                 <div class="save-options">
-                    <button type="submit" class="btn btn-info" formaction="newStudySponsor"">Back</button>
+                    <button type="submit" class="btn btn-info" formaction="newStudySponsor">Back</button>
                     <button type="submit" class="btn btn-success" formaction="newStudySite">Next</button>
                 </div>
             </form>

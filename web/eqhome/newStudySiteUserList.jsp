@@ -27,11 +27,18 @@
             </div>
             <div>
                 <label>Site</label>
-                <select style="width:130px;" id="sltStudySiteUserList" name="sltStudySiteUserList" class="form-control"  >                    
-                                <c:forEach var="site" items="${newSiteArrayList}">
-                                    <option value="${site.getEqOrgId()}" >${site.getEqOrgId()}</option>
-                                </c:forEach>                 
-                </select>                     
+                <form action="newStudySiteUserList" method="post">
+
+                    <select style="width:130px;" id="sltStudySiteUserList" name="sltStudySiteUserList" class="form-control" onchange="this.form.submit()" >  
+
+
+                        <c:forEach var="site" items="${newSiteArrayList}">
+                            <option value="${site.getEqOrgId()}" ${site.getEqOrgId() == selectedSite?'selected':''}>${site.getEqOrgId()}</option>
+
+
+                        </c:forEach>                 
+                    </select>      
+                </form>
             </div>
             <form>
                 <div class="table-area">
@@ -48,8 +55,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="user" items="${sponsor.getUsersCollection()}">
-                               
+                            <c:forEach var="user" items="${oneSite.getUsersCollection()}">
+
                                 <tr>
                                     <td>
                                         ${user.getEqUserId()} 
@@ -79,8 +86,8 @@
                     <input type="button" value="Add New User" style="float:right;" data-toggle="modal" data-target="#modalNewUser" class="btn btn-default" >
                 </div>
                 <div class="save-options">
-                    <button type="submit" class="btn btn-info" onclick="goBack()">Back</button>
-                    <button  class="btn btn-success" formaction="../eqhome/newStudyIWRS.jsp">Next</button>
+                    <button type="submit" class="btn btn-info" formaction="newStudySite">Back</button>
+                    <button type="submit" class="btn btn-success" formaction="newStudyIWRS">Next</button>
                 </div>
             </form>
         </div>

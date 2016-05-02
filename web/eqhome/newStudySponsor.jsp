@@ -123,9 +123,9 @@
                         <label class="col-sm-5 control-label" for="sltEqhomeNSSSponsorStatus">Sponsor Status</label>
                         <div class="col-sm-7">                    
                             <select id="sltEqhomeNSSSponsorStatus" class="form-control">
-                                <option disabled selected value> -- Select an Status -- </option>
+                                <!--<option disabled selected value> -- Select an Status -- </option>-->
                                 <c:forEach var="sponsorStatus" items="${orgStatusList}">
-                                    <option value="${sponsorStatus}" selected="${sponsorStatus == (sponsor.getStatus())?"selected":""}">${sponsorStatus}</option>
+                                    <option value="${sponsorStatus}" ${sponsorStatus == (sponsor.getStatus())?'selected':''}>${sponsorStatus}</option>
                                 </c:forEach>
                             </select>
                         </div>

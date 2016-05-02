@@ -96,12 +96,12 @@
                             <select id="sltSponsorName" id="sltEqhomeNSMStudyStatus" name="StudyStatus" class="form-control">
                                 <!--<option disabled selected value> -- Select an Status -- </option>-->
                                 <c:forEach var="studyStatus" items="${studyStatusList}">
-                                    <option value="${studyStatus}" selected="${studyStatus == (newStudy.getStudyStatus())?"selected":""}">${studyStatus}</option>
+                                    <option value="${studyStatus}" ${studyStatus == (newStudy.getStudyStatus())?'selected':''}>${studyStatus}</option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
-                       status= ${newStudy.getStudyStatus()}
+                       
                     <div class="save-options">
                         <button id="btnEqhomeNSMNext" class="btn btn-success" formaction="../study/newStudySponsor">Next</button>
                     </div>
