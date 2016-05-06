@@ -74,17 +74,16 @@ public class StudyController extends HttpServlet {
 
         boolean isAjax = false;
 
-        System.out.println("enter study controller dopost!");
+//        System.out.println("enter study controller dopost!");
         String requestURI = request.getRequestURI();
         String url = "/eqhome";
-        System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
-        System.out.println("dopost CoSponStudyId=" + request.getParameter("CoSponStudyId"));
-        System.out.println("dopost study start date=" + request.getParameter("StudyStartDate"));
 
+//        System.out.println("dopost NCTId=" + request.getParameter("NCTId"));
+//        System.out.println("dopost CoSponStudyId=" + request.getParameter("CoSponStudyId"));
+//        System.out.println("dopost study start date=" + request.getParameter("StudyStartDate"));
+        System.out.println("requestURI=" + requestURI);
         if (requestURI.endsWith("displayStudyList")) {
             url = displayStudyList(request, response);
-            //   if ("STUDYLIST_NODATA" url equal())
-            System.out.println("the list is not empty!");
         } else if (requestURI.endsWith("newStudyMain")) {
             url = newStudyMain(request, response);
         } else if (requestURI.endsWith("newStudyMain0")) {
@@ -182,7 +181,7 @@ public class StudyController extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (studyArrayList != null) {
-            System.out.println("i checking array");
+//            System.out.println("i checking array");
             session.setAttribute("studyArrayList", studyArrayList);
             session.setAttribute("studyStatusList", studyStatusList);
             session.setAttribute("sponsorNameList", sponsorNameList);
@@ -556,15 +555,18 @@ public class StudyController extends HttpServlet {
 
             // select the current select site
             boolean firstTime = true;
-            for (Organizations site : newSiteArrayList) {
-                // Deal with the first site from the dropdown which will be the default value when come to this page
-                if (firstTime) {
-                    oneSite = site;
-                    firstTime = false;
-                }
-                if (site.getEqOrgId().equals(selectedSite)) {
-                    oneSite = site;
-                    break;
+            if (newSiteArrayList != null) {
+                for (Organizations site : newSiteArrayList) {
+                    // Deal with the first site from the dropdown which will be the default value when come to this page
+                    System.out.println("inside for loop");
+                    if (firstTime) {
+                        oneSite = site;
+                        firstTime = false;
+                    }
+                    if (site != null && site.getEqOrgId().equals(selectedSite)) {
+                        oneSite = site;
+                        break;
+                    }
                 }
             }
 
@@ -572,15 +574,15 @@ public class StudyController extends HttpServlet {
             if (oneSite != null) {
                 System.out.println("oneSite!=null");
                 oneSiteUserArrayList = (ArrayList) oneSite.getUsersCollection();
-            }
-            if (oneSiteUserArrayList == null) {
-                System.out.println("oneSiteUserArrayList==null oneSite.getEqOrgId()=" + oneSite.getEqOrgId());
-                oneSiteUserArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
-                oneSite.setUsersCollection(oneSiteUserArrayList);
+
+                if (oneSiteUserArrayList == null) {
+                    System.out.println("oneSiteUserArrayList==null oneSite.getEqOrgId()=" + oneSite.getEqOrgId());
+                    oneSiteUserArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
+                    oneSite.setUsersCollection(oneSiteUserArrayList);
+                }            // Find existing users
+                orgUsersArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
             }
 
-            // Find existing users
-            orgUsersArrayList = UserDB.selectUsers(oneSite.getEqOrgId(), "SITE");
             session.setAttribute("orgUsersArrayList", orgUsersArrayList);
 
             //System.out.println("sponsor address1" + sponsor.getAddress1());
@@ -589,9 +591,9 @@ public class StudyController extends HttpServlet {
             session.setAttribute("oneSite", oneSite);
 
         } catch (DBException e) {
-            System.err.println();
+            System.err.println(" DB exception in newStudySiteUserList ");
         } catch (Exception e) {
-            System.err.println();
+            System.err.println(" Exeption in newStudySiteUserList ");
         }
 
         url = "/eqhome/newStudySiteUserList.jsp";
@@ -616,9 +618,9 @@ public class StudyController extends HttpServlet {
             htOrg.put(sponsor.getEqOrgId(), sponsor);
 
         } catch (DBException e) {
-            System.err.println();
+            System.err.println(" DB exception in newStudySite ");
         } catch (Exception e) {
-            System.err.println();
+            System.err.println(" Exeption in newStudySite ");
         }
 
         if (siteArrayList != null) {
@@ -644,7 +646,9 @@ public class StudyController extends HttpServlet {
             arrayIWRSList = OrganizationDB.selectOrganizationByType("IWRS");
 
         } catch (DBException e) {
-            System.err.println();
+            System.err.println(" DB exception in newStudyIWRS ");
+        } catch (Exception e) {
+            System.err.println(" Exception in newStudyIWRS ");
         }
 
         System.out.println("after get list");
@@ -728,8 +732,8 @@ public class StudyController extends HttpServlet {
             study.setStudyTitle(request.getParameter("StudyTitle"));
             study.setSponStudyId(request.getParameter("SponStudyId"));
             study.setCoSponStudyId(request.getParameter("CoSponStudyId"));
-            System.out.println("CoSponStudyId=" + request.getParameter("CoSponStudyId"));
-            System.out.println("study start date=" + request.getParameter("StudyStartDate"));
+//            System.out.println("CoSponStudyId=" + request.getParameter("CoSponStudyId"));
+//            System.out.println("study start date=" + request.getParameter("StudyStartDate"));
 
             studyStartDate = request.getParameter("StudyStartDate");
             if (studyStartDate != null && !studyStartDate.equals("")) {
