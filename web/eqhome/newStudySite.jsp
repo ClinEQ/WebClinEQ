@@ -64,7 +64,7 @@
                                         Detail
                                     </td>
                                     <td>
-                                        Delete
+                                        Remove
                                     </td>
                                 </tr>
                             </c:forEach>                            

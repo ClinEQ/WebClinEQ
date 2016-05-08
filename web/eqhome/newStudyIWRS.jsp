@@ -136,13 +136,14 @@
                             <textarea class="form-group" rows="4" id="txteqhomeNSINote" name="Note"></textarea>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-info" formaction="newStudySiteUserList">Back</button>
+                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudyEDC">Next</button>                        
                 </form>
             </div>
 
             <div class="save-options">
                 <form>
-                    <button type="submit" class="btn btn-info" formaction="newStudySiteUserList">Back</button>
-                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudyEDC">Next</button>
+
                 </form>
             </div>
         </div>

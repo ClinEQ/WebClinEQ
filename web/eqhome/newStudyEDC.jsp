@@ -136,14 +136,15 @@
                             <textarea class="form-group" rows="4" id="txteqhomeNSENote" name="Note"></textarea>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-info" formaction="newStudyIWRS">Back</button>
+                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="saveNewStudy">Create Study</button>
+                    <button id="btnNextNewStudySponsor"  class="btn btn-default" formaction="#">Cancel</button>                        
                 </form>
             </div>
 
             <div class="save-options">
                 <form>
-                    <button type="submit" class="btn btn-info" formaction="newStudyIWRS">Back</button>
-                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="saveNewStudy">Create Study</button>
-                    <button id="btnNextNewStudySponsor"  class="btn btn-default" formaction="#">Cancel</button>
+
                 </form>
             </div>
         </div>

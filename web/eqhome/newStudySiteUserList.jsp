@@ -33,7 +33,7 @@
 
 
                         <c:forEach var="site" items="${newSiteArrayList}">
-                            <option value="${site.getEqOrgId()}" ${site.getEqOrgId() == selectedSite?'selected':''}>${site.getEqOrgId()}</option>
+                            <option value="${site.getEqOrgId()}" ${site.getEqOrgId() == selectedSite?'selected':''}>${site.getOrgFullName()}</option>
 
 
                         </c:forEach>                 
