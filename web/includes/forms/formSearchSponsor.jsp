@@ -22,7 +22,7 @@
         </fieldset>
     </form>
 
-    <form action="AddSponsorToStudy" method="post">
+    <form action="addOrgToStudy" method="post">
         <div class="tableSearchSponsor">
             <table id="tblFormSearchSponsor" class="table table-striped">
                 <thead>
@@ -51,7 +51,7 @@
                                     ${org.getStatus()}
                                 </td>
                                 <td>
-                                    <input type="radio" name="optionsRadiosAddSponsorToStudy" value="${org.getEqOrgId()}">
+                                    <input type="radio" name="optionsRadiosaddOrgToStudy" value="${org.getEqOrgId()}">
                                 </td>
                             </tr>
                         

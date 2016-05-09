@@ -336,14 +336,19 @@ SYSDATE,
         PreparedStatement ps = null;
         Statement stmt = null;
         ResultSet rs = null;
+        String sql = null;
 
         try {
             Connection conn = DBConnect.getConnection();
 
             String EQ_ORG_ID = org.getEqOrgId();
+            
+            // Save only when EQ_ORG_ID is not exist
+            if (getOrgName(EQ_ORG_ID) == null)
+            {
 
             // Insert Org
-            String sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
+             sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
                     + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
                     + "ADDRESS2, CITY, STATE, "
                     + "ZIP, COUNTRY, PHONE, "
@@ -370,11 +375,14 @@ SYSDATE,
             System.out.println("insert sql=" + sql);
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
+            }
             
             
             for (Users user : usersCollection) {
                 EQ_USER_ID = user.getEqUserId();
 
+                if (!UserDB.userExist(EQ_USER_ID))
+                {
                 // Insert User
                 sql = "INSERT INTO CLINEQ.USERS ( EQ_USER_ID, EQ_ORG_ID, LNAME, FNAME, TITLE, SETUP_DATE, "
                         + "LAST_UPDATE_DATE, ADDRESS1, ADDRESS2, ZIP, PHONE, EMAIL, CITY, STATE, COUNTRY, STATUS, "
@@ -408,6 +416,7 @@ SYSDATE,
                 System.out.println("insert sql=" + sql);
                 stmt = conn.createStatement();
                 stmt.executeUpdate(sql);
+                }
 
                 
                 // Insert STUDY_ORG_USER_MAP

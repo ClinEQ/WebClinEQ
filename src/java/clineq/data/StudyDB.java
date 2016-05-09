@@ -356,8 +356,8 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                     + "'" + study.getStudyTitle() + "',"
                     + "'" + study.getSponStudyId() + "',"
                     + "'" + study.getCoSponStudyId() + "',"
-                    + //to_date('01/01/2015','mm/dd/yyyy'),
-                    "to_date('" + (formatter.format(study.getStudyStartDate().getTime())) + "','mm/dd/yyyy'),"
+                    //+ to_date('01/01/2015','mm/dd/yyyy'),
+                    + "to_date('" + (formatter.format(study.getStudyStartDate().getTime())) + "','mm/dd/yyyy'),"
                     + "to_date('" + (formatter.format(study.getStudyEndDate().getTime())) + "','mm/dd/yyyy'),"
                     + "to_date('" + (formatter.format(study.getStudyEqInitDate().getTime())) + "','mm/dd/yyyy'),"
                     + "to_date('" + (formatter.format(study.getStudyEqCloseDate().getTime())) + "','mm/dd/yyyy'),"

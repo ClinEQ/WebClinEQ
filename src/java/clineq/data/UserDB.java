@@ -418,5 +418,31 @@ sysdate,
         }
         return EQ_USER_ID;
     }
+    
+    public static boolean userExist(String userid) throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT * FROM CLINEQ.USERS WHERE EQ_USER_ID = " + userid;
+
+        String orgname = null;
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in organizationDB getOrgName " + e.getMessage());
+            return false;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return false;
+    }    
 }
 
