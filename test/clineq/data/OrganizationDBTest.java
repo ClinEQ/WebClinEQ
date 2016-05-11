@@ -19,22 +19,22 @@ import static org.junit.Assert.*;
  * @author a03538
  */
 public class OrganizationDBTest {
-    
+
     public OrganizationDBTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -105,19 +105,32 @@ public class OrganizationDBTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
     /**
-     * Test of generateOrgID method, of class OrganizationDB.
-     * Increase one before run
+     * Test of generateOrgID method, of class OrganizationDB. Increase one
+     * before run
+     */
+//    @Test
+//    public void testGenerateOrgID() throws Exception {
+//        System.out.println("generateOrgID");
+//        String expResult = "eqorg00020";
+//        String result = OrganizationDB.generateOrgID();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        //fail("The test case is a prototype.");
+//    }
+    /**
+     * Test of orgExist method, of class OrganizationDB.
      */
     @Test
-    public void testGenerateOrgID() throws Exception {
-        System.out.println("generateOrgID");
-        String expResult = "eqorg00020";
-        String result = OrganizationDB.generateOrgID();
+    public void testOrgExist() throws Exception {
+        System.out.println("orgExist");
+        String orgid = "";
+        boolean expResult = false;
+        boolean result = OrganizationDB.orgExist("156");
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        expResult = true;
+        result = OrganizationDB.orgExist("eqorg00419");
+        assertEquals(expResult, result);
     }
-    
+
 }

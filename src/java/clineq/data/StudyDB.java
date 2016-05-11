@@ -340,14 +340,17 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
             Connection conn = DBConnect.getConnection();
             //ps = conn.prepareStatement("select clineq.seq_eqstuddyid.nextval from dual");
             //rs = ps.executeQuery();
-            String EQ_STUDY_ID = generateStudyID();
+            String strStudyStart = (study.getStudyStartDate()!=null)? "to_date('" + (formatter.format(study.getStudyStartDate().getTime())) + "','mm/dd/yyyy'),":"null,";
+            String strStudyEnd = (study.getStudyEndDate()!=null)? "to_date('" + (formatter.format(study.getStudyEndDate().getTime())) + "','mm/dd/yyyy'),":"null,";
+            String strEqInit = (study.getStudyEqInitDate()!=null)? "to_date('" + (formatter.format(study.getStudyEqInitDate().getTime())) + "','mm/dd/yyyy'),":"null,";
+            String strEqClose = (study.getStudyEqCloseDate()!=null)? "to_date('" + (formatter.format(study.getStudyEqCloseDate().getTime())) + "','mm/dd/yyyy'),":"null,";
 
             String sql = "INSERT INTO CLINEQ.STUDIES ( EQ_STUDY_ID, EQ_CO_SPON_ID, NCTID, EU_STUDY_ID, "
                     + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
                     + "CO_SPON_STUDY_ID, STUDY_START_DATE, STUDY_END_DATE, "
                     + "STUDY_EQ_INIT_DATE, STUDY_EQ_CLOSE_DATE, PLANNED_PATIENTS_NUM, "
                     + "EQ_IWRS_ID, CHART_GROUP_ID, STUDY_STATUS ) VALUES ("
-                    + "'" + EQ_STUDY_ID + "',"
+                    + "'" + study.getEqStudyId() + "',"
                     + "'" + study.getEqCoSponId() + "',"
                     + "'" + study.getNctid() + "',"
                     + "'" + study.getEuStudyId() + "',"
@@ -357,10 +360,10 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                     + "'" + study.getSponStudyId() + "',"
                     + "'" + study.getCoSponStudyId() + "',"
                     //+ to_date('01/01/2015','mm/dd/yyyy'),
-                    + "to_date('" + (formatter.format(study.getStudyStartDate().getTime())) + "','mm/dd/yyyy'),"
-                    + "to_date('" + (formatter.format(study.getStudyEndDate().getTime())) + "','mm/dd/yyyy'),"
-                    + "to_date('" + (formatter.format(study.getStudyEqInitDate().getTime())) + "','mm/dd/yyyy'),"
-                    + "to_date('" + (formatter.format(study.getStudyEqCloseDate().getTime())) + "','mm/dd/yyyy'),"
+                    + strStudyStart
+                    + strStudyEnd
+                    + strEqInit
+                    + strEqClose
                     + study.getPlannedPatientsNum() + ","
                     + "'" + study.getEqIwrsId() + "',"
                     + "'" + study.getChartGroupId() + "',"

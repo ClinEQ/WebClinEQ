@@ -144,7 +144,7 @@ public class UserDBTest {
         boolean result = UserDB.userExist("3");
         assertEquals(expResult, result);
         expResult = true;
-        result = UserDB.userExist("1");
+        result = UserDB.userExist("eqstu00317");
         assertEquals(expResult, result);
     }
     

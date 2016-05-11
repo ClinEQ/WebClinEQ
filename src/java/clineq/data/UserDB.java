@@ -409,7 +409,7 @@ sysdate,
 
             while (rs.next()) {
                 EQ_USER_ID = Integer.toString(rs.getInt("NEXTVAL"));
-                EQ_USER_ID = "eqstu" + ("00000" + EQ_USER_ID).substring(EQ_USER_ID.length());
+                EQ_USER_ID = "equsr" + ("00000" + EQ_USER_ID).substring(EQ_USER_ID.length());
             }
 
         } catch (SQLException e) {
@@ -421,9 +421,8 @@ sysdate,
     
     public static boolean userExist(String userid) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
-        String sql = "SELECT * FROM CLINEQ.USERS WHERE EQ_USER_ID = " + userid;
+        String sql = "SELECT * FROM CLINEQ.USERS WHERE EQ_USER_ID = '" + userid + "'";
 
-        String orgname = null;
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

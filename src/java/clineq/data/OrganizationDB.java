@@ -79,7 +79,7 @@ public class OrganizationDB {
 
     public static ArrayList<Organizations> selectOrganizationByType(String orgType) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
-        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE ORG_TYPE = '" 
+        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE ORG_TYPE = '"
                 + orgType + "' AND STATUS = 'ACTIVE'";
 
         ArrayList<Organizations> objList = new ArrayList<>();
@@ -220,7 +220,7 @@ public class OrganizationDB {
 
     public static void saveOrg(Organizations org) throws DBException {
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
-        if (org == null) {
+        if (org == null || OrganizationDB.orgExist(org.getEqOrgId())) {
             return;
         }
 
@@ -272,7 +272,7 @@ values(
         try {
             Connection conn = DBConnect.getConnection();
 
-            String EQ_ORG_ID = generateOrgID();
+            String EQ_ORG_ID = org.getEqOrgId();
 
             String sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
                     + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
@@ -342,107 +342,211 @@ SYSDATE,
             Connection conn = DBConnect.getConnection();
 
             String EQ_ORG_ID = org.getEqOrgId();
-            
+
             // Save only when EQ_ORG_ID is not exist
-            if (getOrgName(EQ_ORG_ID) == null)
-            {
+            if (getOrgName(EQ_ORG_ID) == null) {
 
-            // Insert Org
-             sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
-                    + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
-                    + "ADDRESS2, CITY, STATE, "
-                    + "ZIP, COUNTRY, PHONE, "
-                    + "FAX, ORG_URL, NOTES, STATUS ) VALUES ("
-                    + "'" + EQ_ORG_ID + "',"
-                    + "'" + org.getOrgFullName() + "',"
-                    + "'" + org.getOrgNameAbbr() + "',"
-                    + "'" + org.getOrgDisplayName() + "',"
-                    + "'" + org.getOrgType() + "',"
-                    + "'" + org.getOrgCategory() + "',"
-                    + "'" + org.getAddress1() + "',"
-                    + "'" + org.getAddress2() + "',"
-                    + "'" + org.getCity() + "',"
-                    + "'" + org.getState() + "',"
-                    + "'" + org.getZip() + "',"
-                    + "'" + org.getCountry() + "',"
-                    + "'" + org.getPhone() + "',"
-                    + "'" + org.getFax() + "',"
-                    + "'" + org.getOrgUrl() + "',"
-                    + "'" + org.getNotes() + "',"
-                    + "'" + org.getStatus() + "'"
-                    + ")";
-
-            System.out.println("insert sql=" + sql);
-            stmt = conn.createStatement();
-            stmt.executeUpdate(sql);
-            }
-            
-            
-            for (Users user : usersCollection) {
-                EQ_USER_ID = user.getEqUserId();
-
-                if (!UserDB.userExist(EQ_USER_ID))
-                {
-                // Insert User
-                sql = "INSERT INTO CLINEQ.USERS ( EQ_USER_ID, EQ_ORG_ID, LNAME, FNAME, TITLE, SETUP_DATE, "
-                        + "LAST_UPDATE_DATE, ADDRESS1, ADDRESS2, ZIP, PHONE, EMAIL, CITY, STATE, COUNTRY, STATUS, "
-                        + "EXTERNAL_EMPLOYER_ID, EXTERNAL_DEPT_NAME, USER_TYPE, USER_ROLE, "
-                        + "USER_LOGIN_ID, USER_LOGIN_PWD, FAX ) VALUES ("
-                        + "'" + EQ_USER_ID + "',"
-                        + "'" + user.getEqOrgId().getEqOrgId() + "',"
-                        + "'" + user.getLname() + "',"
-                        + "'" + user.getFname() + "',"
-                        + "'" + user.getTitle() + "',"
-                        + "to_date('" + (formatter.format(user.getSetupDate().getTime())) + "','mm/dd/yyyy'),"
-                        + "to_date('" + (formatter.format(user.getLastUpdateDate().getTime())) + "','mm/dd/yyyy'),"
-                        + "'" + user.getAddress1() + "',"
-                        + "'" + user.getAddress2() + "',"
-                        + "'" + user.getZip() + "',"
-                        + "'" + user.getPhone() + "',"
-                        + "'" + user.getEmail() + "',"
-                        + "'" + user.getCity() + "',"
-                        + "'" + user.getState() + "',"
-                        + "'" + user.getCountry() + "',"
-                        + "'" + user.getStatus() + "',"
-                        + "'" + user.getExternalEmployerId() + "',"
-                        + "'" + user.getExternalDeptName() + "',"
-                        + "'" + user.getUserType() + "',"
-                        + "'" + user.getUserRole() + "',"
-                        + "'" + user.getUserLoginId() + "',"
-                        + "'" + user.getUserLoginPwd() + "',"
-                        + "'" + user.getFax()
-                        + "')";
-
-                System.out.println("insert sql=" + sql);
-                stmt = conn.createStatement();
-                stmt.executeUpdate(sql);
-                }
-
-                
-                // Insert STUDY_ORG_USER_MAP
-                sql = "INSERT INTO CLINEQ.STUDY_ORG_USER_MAP ( EQ_STUDY_ID, EQ_ORG_ID, EQ_USER_ID"
-                        + "LAST_UPDATE_DATE, STATUS, ORG_TYPE, SECURITY_LEVEL "
-                        + ") VALUES ("
-                        + "'" + EQ_STUDY_ID + "',"
+                // Insert Org
+                sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
+                        + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
+                        + "ADDRESS2, CITY, STATE, "
+                        + "ZIP, COUNTRY, PHONE, "
+                        + "FAX, ORG_URL, NOTES, STATUS ) VALUES ("
                         + "'" + EQ_ORG_ID + "',"
-                        + "'" + EQ_USER_ID + "',"
-                        + "SYSDATE, 'ACTIVE',"
+                        + "'" + org.getOrgFullName() + "',"
+                        + "'" + org.getOrgNameAbbr() + "',"
+                        + "'" + org.getOrgDisplayName() + "',"
                         + "'" + org.getOrgType() + "',"
-                        + "'level2'"
+                        + "'" + org.getOrgCategory() + "',"
+                        + "'" + org.getAddress1() + "',"
+                        + "'" + org.getAddress2() + "',"
+                        + "'" + org.getCity() + "',"
+                        + "'" + org.getState() + "',"
+                        + "'" + org.getZip() + "',"
+                        + "'" + org.getCountry() + "',"
+                        + "'" + org.getPhone() + "',"
+                        + "'" + org.getFax() + "',"
+                        + "'" + org.getOrgUrl() + "',"
+                        + "'" + org.getNotes() + "',"
+                        + "'" + org.getStatus() + "'"
                         + ")";
 
                 System.out.println("insert sql=" + sql);
                 stmt = conn.createStatement();
                 stmt.executeUpdate(sql);
+            }
 
+            if (usersCollection != null) {
+                for (Users user : usersCollection) {
+                    EQ_USER_ID = user.getEqUserId();
+
+                    if (!UserDB.userExist(EQ_USER_ID)) {
+
+                        String strSetupDate = (user.getSetupDate() != null) ? "to_date('" + (formatter.format(user.getSetupDate().getTime())) + "','mm/dd/yyyy')," : "null,";
+                        String strLastUpdateDate = (user.getLastUpdateDate() != null) ? "to_date('" + (formatter.format(user.getLastUpdateDate().getTime())) + "','mm/dd/yyyy')," : "null,";
+                        // Insert User
+                        sql = "INSERT INTO CLINEQ.USERS ( EQ_USER_ID, EQ_ORG_ID, LNAME, FNAME, TITLE, SETUP_DATE, "
+                                + "LAST_UPDATE_DATE, ADDRESS1, ADDRESS2, ZIP, PHONE, EMAIL, CITY, STATE, COUNTRY, STATUS, "
+                                + "EXTERNAL_EMPLOYER_ID, EXTERNAL_DEPT_NAME, USER_TYPE, USER_ROLE, "
+                                + "USER_LOGIN_ID, USER_LOGIN_PWD, FAX ) VALUES ("
+                                + "'" + EQ_USER_ID + "',"
+                                + "'" + user.getEqOrgId().getEqOrgId() + "',"
+                                + "'" + user.getLname() + "',"
+                                + "'" + user.getFname() + "',"
+                                + "'" + user.getTitle() + "',"
+                                + strSetupDate
+                                + strLastUpdateDate
+                                + "'" + user.getAddress1() + "',"
+                                + "'" + user.getAddress2() + "',"
+                                + "'" + user.getZip() + "',"
+                                + "'" + user.getPhone() + "',"
+                                + "'" + user.getEmail() + "',"
+                                + "'" + user.getCity() + "',"
+                                + "'" + user.getState() + "',"
+                                + "'" + user.getCountry() + "',"
+                                + "'" + user.getStatus() + "',"
+                                + "'" + user.getExternalEmployerId() + "',"
+                                + "'" + user.getExternalDeptName() + "',"
+                                + "'" + user.getUserType() + "',"
+                                + "'" + user.getUserRole() + "',"
+                                + "'" + user.getUserLoginId() + "',"
+                                + "'" + user.getUserLoginPwd() + "',"
+                                + "'" + user.getFax()
+                                + "')";
+
+                        System.out.println("insert sql=" + sql);
+                        stmt = conn.createStatement();
+                        stmt.executeUpdate(sql);
+                    }
+
+                    // Insert STUDY_ORG_USER_MAP
+                    sql = "INSERT INTO CLINEQ.STUDY_ORG_USER_MAP ( EQ_STUDY_ID, EQ_ORG_ID, EQ_USER_ID, "
+                            + "LAST_UPDATE_DATE, STATUS, ORG_TYPE, SECURITY_LEVEL "
+                            + ") VALUES ("
+                            + "'" + EQ_STUDY_ID + "',"
+                            + "'" + EQ_ORG_ID + "',"
+                            + "'" + EQ_USER_ID + "',"
+                            + "SYSDATE, 'ACTIVE',"
+                            + "'" + org.getOrgType() + "',"
+                            + "'level2'"
+                            + ")";
+
+                    System.out.println("insert sql=" + sql);
+                    stmt = conn.createStatement();
+                    stmt.executeUpdate(sql);
+
+                }
             }
         } catch (SQLException e) {
             System.err.println("Error in orgDB saveOrg :" + e.getMessage());
             return;
         }
     }
-    
-     public static String generateOrgID() throws DBException {
+
+    public static void saveUserNMap(String EQ_STUDY_ID, Organizations org) throws DBException {
+        Collection<Users> usersCollection = org.getUsersCollection();
+        SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
+        String EQ_USER_ID = null;
+
+        /*
+        insert into  clineq.STUDY_ORG_USER_MAP
+(
+  EQ_STUDY_ID       ,
+        EQ_ORG_ID       ,
+        EQ_USER_ID       ,
+  LAST_UPDATE_DATE     ,
+  STATUS   ,
+  ORG_TYPE ,
+  SECURITY_LEVEL  
+)
+values(
+'1',
+'1',
+'1',
+SYSDATE,
+'ACTIVE',
+'SPONSOR',
+'1');
+        
+         */
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String sql = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+
+            String EQ_ORG_ID = org.getEqOrgId();
+
+            if (usersCollection != null) {
+                for (Users user : usersCollection) {
+                    EQ_USER_ID = user.getEqUserId();
+
+                    if (!UserDB.userExist(EQ_USER_ID)) {
+
+                        String strSetupDate = (user.getSetupDate() != null) ? "to_date('" + (formatter.format(user.getSetupDate().getTime())) + "','mm/dd/yyyy')," : "null,";
+                        String strLastUpdateDate = (user.getLastUpdateDate() != null) ? "to_date('" + (formatter.format(user.getLastUpdateDate().getTime())) + "','mm/dd/yyyy')," : "null,";
+                        // Insert User
+                        sql = "INSERT INTO CLINEQ.USERS ( EQ_USER_ID, EQ_ORG_ID, LNAME, FNAME, TITLE, SETUP_DATE, "
+                                + "LAST_UPDATE_DATE, ADDRESS1, ADDRESS2, ZIP, PHONE, EMAIL, CITY, STATE, COUNTRY, STATUS, "
+                                + "EXTERNAL_EMPLOYER_ID, EXTERNAL_DEPT_NAME, USER_TYPE, USER_ROLE, "
+                                + "USER_LOGIN_ID, USER_LOGIN_PWD, FAX ) VALUES ("
+                                + "'" + EQ_USER_ID + "',"
+                                + "'" + user.getEqOrgId().getEqOrgId() + "',"
+                                + "'" + user.getLname() + "',"
+                                + "'" + user.getFname() + "',"
+                                + "'" + user.getTitle() + "',"
+                                + strSetupDate
+                                + strLastUpdateDate
+                                + "'" + user.getAddress1() + "',"
+                                + "'" + user.getAddress2() + "',"
+                                + "'" + user.getZip() + "',"
+                                + "'" + user.getPhone() + "',"
+                                + "'" + user.getEmail() + "',"
+                                + "'" + user.getCity() + "',"
+                                + "'" + user.getState() + "',"
+                                + "'" + user.getCountry() + "',"
+                                + "'" + user.getStatus() + "',"
+                                + "'" + user.getExternalEmployerId() + "',"
+                                + "'" + user.getExternalDeptName() + "',"
+                                + "'" + user.getUserType() + "',"
+                                + "'" + user.getUserRole() + "',"
+                                + "'" + user.getUserLoginId() + "',"
+                                + "'" + user.getUserLoginPwd() + "',"
+                                + "'" + user.getFax()
+                                + "')";
+
+                        System.out.println("insert sql=" + sql);
+                        stmt = conn.createStatement();
+                        stmt.executeUpdate(sql);
+                    }
+
+                    // Insert STUDY_ORG_USER_MAP
+                    sql = "INSERT INTO CLINEQ.STUDY_ORG_USER_MAP ( EQ_STUDY_ID, EQ_ORG_ID, EQ_USER_ID, "
+                            + "LAST_UPDATE_DATE, STATUS, ORG_TYPE, SECURITY_LEVEL "
+                            + ") VALUES ("
+                            + "'" + EQ_STUDY_ID + "',"
+                            + "'" + EQ_ORG_ID + "',"
+                            + "'" + EQ_USER_ID + "',"
+                            + "SYSDATE, 'ACTIVE',"
+                            + "'" + org.getOrgType() + "',"
+                            + "'level2'"
+                            + ")";
+
+                    System.out.println("insert sql=" + sql);
+                    stmt = conn.createStatement();
+                    stmt.executeUpdate(sql);
+
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in orgDB saveOrg :" + e.getMessage());
+            return;
+        }
+    }
+
+    public static String generateOrgID() throws DBException {
 
         PreparedStatement ps = null;
         Statement stmt = null;
@@ -464,5 +568,30 @@ SYSDATE,
 
         }
         return EQ_ORG_ID;
+    }
+
+    public static boolean orgExist(String orgid) throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = '" + orgid + "'";
+
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in organizationDB orgExist " + e.getMessage());
+            return false;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return false;
     }
 }
