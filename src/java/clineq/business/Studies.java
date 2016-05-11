@@ -116,6 +116,7 @@ public class Studies implements Serializable {
 
     private String eqSponName;
     private String eqUserName;
+    private String eqEDCId;
     SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
 
     public Studies() {
@@ -194,7 +195,7 @@ public class Studies implements Serializable {
     }
 
     public String getStudyStartDateString() {
-        return (studyStartDate!=null?formatter.format(studyStartDate):"");
+        return (studyStartDate != null ? formatter.format(studyStartDate) : "");
     }
 
     public void setStudyStartDate(Date studyStartDate) {
@@ -206,7 +207,7 @@ public class Studies implements Serializable {
     }
 
     public String getStudyEndDateString() {
-        return (studyEndDate!=null?formatter.format(studyEndDate):"");
+        return (studyEndDate != null ? formatter.format(studyEndDate) : "");
     }
 
     public void setStudyEndDate(Date studyEndDate) {
@@ -218,7 +219,7 @@ public class Studies implements Serializable {
     }
 
     public String getStudyEqInitDateString() {
-        return (studyEqInitDate!=null?formatter.format(studyEqInitDate):"");
+        return (studyEqInitDate != null ? formatter.format(studyEqInitDate) : "");
     }
 
     public void setStudyEqInitDate(Date studyEqInitDate) {
@@ -226,7 +227,7 @@ public class Studies implements Serializable {
     }
 
     public String getStudyEqCloseDateString() {
-        return (studyEqCloseDate!=null?formatter.format(studyEqCloseDate):"");
+        return (studyEqCloseDate != null ? formatter.format(studyEqCloseDate) : "");
     }
 
     public Date getStudyEqCloseDate() {
@@ -270,14 +271,14 @@ public class Studies implements Serializable {
         this.eqSponId = eqSponId;
     }
 
-         public String getEqUserName() {
+    public String getEqUserName() {
         return eqUserName;
     }
 
     public void setEqUserName(String eqUserName) {
         this.eqUserName = eqUserName;
     }
-    
+
     public String getEqSponName() {
         return eqSponName;
     }
@@ -292,6 +293,14 @@ public class Studies implements Serializable {
 
     public void setEqIwrsId(String eqIwrsId) {
         this.eqIwrsId = eqIwrsId;
+    }
+
+    public String getEqEDCId() {
+        return eqEDCId;
+    }
+
+    public void setEqEDCId(String eqEDCId) {
+        this.eqEDCId = eqEDCId;
     }
 
     public String getChartGroupId() {

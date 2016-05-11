@@ -95,7 +95,7 @@
                             
                             <select id="sltSponsorName" id="sltEqhomeNSMStudyStatus" name="StudyStatus" class="form-control">
                                 <!--<option disabled selected value> -- Select an Status -- </option>-->
-                                <c:forEach var="studyStatus" items="${studyStatusList}">
+                                <c:forEach var="studyStatus" items="${allStudyStatusList}">
                                     <option value="${studyStatus}" ${studyStatus == (newStudy.getStudyStatus())?'selected':''}>${studyStatus}</option>
                                 </c:forEach>
                             </select>

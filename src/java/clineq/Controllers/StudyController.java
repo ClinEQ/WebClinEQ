@@ -52,7 +52,8 @@ public class StudyController extends HttpServlet {
 
     private Collection<Users> userCollection = null;
     private ArrayList<Studies> studyArrayList = null;
-    private ArrayList<String> studyStatusList = null;
+    private ArrayList<String> currStudyStatusList = null;
+    private ArrayList<String> allStudyStatusList = null;
     private ArrayList<String> orgStatusList = null;
     private ArrayList<String> sponsorNameList = null;
     private ArrayList<Users> orgUsersArrayList = null;
@@ -173,8 +174,7 @@ public class StudyController extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         System.out.println("jsonInStudy=" + jsonInStudy);
 
-        Studies study = mapper.readValue(jsonInStudy, Studies.class);
-
+        //Studies study = mapper.readValue(jsonInStudy, Studies.class);
         return jsonInStudy;
     }
 
@@ -183,7 +183,8 @@ public class StudyController extends HttpServlet {
 
         try {
             studyArrayList = StudyDB.selectAllStudy();
-            studyStatusList = SysCodeRegistryDB.selectAllStudyStatus();
+            allStudyStatusList = SysCodeRegistryDB.selectAllStudyStatus();
+            currStudyStatusList = StudyDB.selectAllStudyStatus();
             sponsorNameList = StudyDB.selectAllStudySponsorName();
 
         } catch (DBException e) {
@@ -199,7 +200,8 @@ public class StudyController extends HttpServlet {
         if (studyArrayList != null) {
 //            System.out.println("i checking array");
             session.setAttribute("studyArrayList", studyArrayList);
-            session.setAttribute("studyStatusList", studyStatusList);
+            session.setAttribute("currStudyStatusList", currStudyStatusList);
+            session.setAttribute("allStudyStatusList", allStudyStatusList);
             session.setAttribute("sponsorNameList", sponsorNameList);
             url = "/eqhome/index.jsp";
             System.out.println("url " + url);
@@ -215,6 +217,7 @@ public class StudyController extends HttpServlet {
 
         String url;
 
+        currPage = "newStudyMain";
         HttpSession session = request.getSession();
         session.removeAttribute("newStudy");
         session.removeAttribute("sponsor");
@@ -239,6 +242,7 @@ public class StudyController extends HttpServlet {
     private String newStudyMain(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
+        currPage = "newStudyMain";
         String url;
 
         HttpSession session = request.getSession();
@@ -258,17 +262,18 @@ public class StudyController extends HttpServlet {
         String url;
 
         HttpSession session = request.getSession();
-        currPage = "newStudySponsor";
 
         try {
 
             orgStatusList = StudyDB.selectAllOrgStatus();
             orgArrayList = OrganizationDB.selectOrganizationByType("SPONSOR");
-//            nextStudyID = StudyDB.generateStudyID();
-//            nextOrgID = OrganizationDB.generateOrgID();
-//            nextUserID = UserDB.generateUserID();
-            study = getStudy(request);
-            session.setAttribute("newStudy", study);
+
+            if ("newStudyMain".equals(currPage)) {
+                study = getStudy(request);
+                session.setAttribute("newStudy", study);
+            }
+            currPage = "newStudySponsor";
+
         } catch (DBException e) {
             System.err.println("DBException newStudySponsor");
         } catch (Exception e) {

@@ -26,7 +26,7 @@
                             <label>Study Status</label>
                             <select id="sltStudyStatus" name="sltStudyStatus" class="form-control"  >
                                 <option value="All">ALL</option>
-                                <c:forEach var="studyStatus" items="${studyStatusList}">
+                                <c:forEach var="studyStatus" items="${currStudyStatusList}">
                                     <option value="${studyStatus}">${studyStatus}</option>
                                 </c:forEach>
                             </select>                                        
