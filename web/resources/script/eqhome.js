@@ -55,6 +55,10 @@ $(document).ready(function () {
         autoclose: true,
         todayHighlight: true
     });
+    
+    $(".btnFormClear").on("click",function(){
+        $(this).closest("form")[0].reset();
+    });
 
 
     //New Study Main page 

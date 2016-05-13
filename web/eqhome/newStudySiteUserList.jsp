@@ -20,24 +20,25 @@
             <jsp:include page="../includes/leftNavCreateNewPage.jsp"/>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10">
-            <div class="checkSpon checkSpon2">
-                <h1 class="firstLv">Setup Site User <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Search User</a>  </h1>              
+            <div>
+                <h1 class="firstLv">Setup Site User</h1>   
+            </div>
+            <div class="checkSpon">
+                <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Search User</a>           
             </div>
             <div class="searchUser" style="display:none">
             </div>
             <div>
-                <label>Site</label>
-                <form action="newStudySiteUserList" method="post">
-
-                    <select style="width:130px;" id="sltStudySiteUserList" name="sltStudySiteUserList" class="form-control" onchange="this.form.submit()" >  
-
-
-                        <c:forEach var="site" items="${newSiteArrayList}">
-                            <option value="${site.getEqOrgId()}" ${site.getEqOrgId() == selectedSite?'selected':''}>${site.getOrgFullName()}</option>
-
-
-                        </c:forEach>                 
-                    </select>      
+                <form class="form-inline">
+                    <div>
+                        <label style="margin-right: 2%">Site</label>
+                        <!--<form action="newStudySiteUserList" method="post">-->
+                        <select style="width:130px;" id="sltStudySiteUserList" name="sltStudySiteUserList" class="form-control" onchange="this.form.submit()" >  
+                            <c:forEach var="site" items="${newSiteArrayList}">
+                                <option value="${site.getEqOrgId()}" ${site.getEqOrgId() == selectedSite?'selected':''}>${site.getOrgFullName()}</option>
+                            </c:forEach>                 
+                        </select>
+                    </div>
                 </form>
             </div>
             <form>

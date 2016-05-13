@@ -70,7 +70,7 @@
                             </c:forEach>                            
                         </tbody>
                     </table>
-                    <input type="button" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSite" class="btn btn-default" >
+                    <input type="button" value="Add New Site" style="float:right;" data-toggle="modal" data-target="#modalNewSponsr" class="btn btn-default" >
 
                 </div>  
                 <div class="save-options">
@@ -84,4 +84,4 @@
 </div>
 <!-- footer -->
 <jsp:include page="../includes/footer.jsp"/>
-<jsp:include page="../includes/forms/formCreateNewSite.jsp"/>
+<jsp:include page="../includes/forms/formCreateNewSponsor.jsp"/>

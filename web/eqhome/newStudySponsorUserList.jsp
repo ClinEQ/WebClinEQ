@@ -20,8 +20,11 @@
             <jsp:include page="../includes/leftNavCreateNewPage.jsp"/>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-10">
-            <div class="checkSpon checkSpon2">
-                <h1 class="firstLv">Setup Sponsor User   <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Search User</a>  </h1>              
+            <div>
+                <h1 class="firstLv">Setup Sponsor User</h1>              
+            </div>
+            <div class="checkSpon">
+                <a  style="font-size:14px; font-weight: normal;" href="javascript:void(0);" onclick="ToggleSubform('searchUser', 'formSearchUser');">Search User</a>
             </div>
             <div class="searchUser" style="display:none">
             </div>

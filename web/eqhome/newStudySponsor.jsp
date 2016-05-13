@@ -29,7 +29,7 @@
 
                 <div class="divSearchSponsor subSearchArea" style="display:none">
                 </div>
-                <p style="margin-left: 23%">Enter New Sponsor Information</p>
+                <p style="margin-left: 28%">Enter New Sponsor Information</p>
                 <form class="form-horizontal" method="post">
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
@@ -137,6 +137,7 @@
                         </div>
                     </div>
                     <div class="save-options">
+                        <button type="button" class="btn btn-danger btnFormClear"  >Clear Form</button>
                         <button type="submit" class="btn btn-info" formaction="newStudyMain">Back</button>
                         <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudySponsorUserList">Next</button>
                     </div>

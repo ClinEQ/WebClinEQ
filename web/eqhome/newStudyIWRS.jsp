@@ -136,20 +136,18 @@
                             <textarea class="form-group" rows="4" id="txteqhomeNSINote" name="Note"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info" formaction="newStudySiteUserList">Back</button>
-                    <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudyEDC">Next</button>                        
-                </form>
-            </div>
 
-            <div class="save-options">
-                <form>
-
+                    <div class="save-options">
+                        <button type="button" class="btn btn-danger btnFormClear">Clear Form</button>
+                        <button type="submit" class="btn btn-info" formaction="newStudySiteUserList">Back</button>
+                        <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudyEDC">Next</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-    <!-- footer -->
-    <jsp:include page="../includes/footer.jsp"/>
+<!-- footer -->
+<jsp:include page="../includes/footer.jsp"/>
 
 

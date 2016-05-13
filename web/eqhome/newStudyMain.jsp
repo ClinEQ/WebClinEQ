@@ -103,6 +103,7 @@
                     </div>
                        
                     <div class="save-options">
+                        <button type="button" class="btn btn-danger btnFormClear">Clear Form</button>
                         <button id="btnEqhomeNSMNext" class="btn btn-success" formaction="../study/newStudySponsor">Next</button>
                     </div>
                 </form>
