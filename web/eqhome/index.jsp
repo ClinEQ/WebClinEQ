@@ -13,6 +13,7 @@
             </nav>
         </div>
     </div>
+                ${loginUserID}
     <div class="row  content">
         <div class="col-lg-2 col-md-2 col-sm-2">
             <jsp:include page="../includes/leftNav.jsp"/>

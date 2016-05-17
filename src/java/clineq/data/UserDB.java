@@ -435,7 +435,34 @@ sysdate,
                 return true;
             }
         } catch (SQLException e) {
-            System.err.println("Error in organizationDB getOrgName " + e.getMessage());
+            System.err.println("Error in UserDB userExist " + e.getMessage());
+            return false;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+        return false;
+    }    
+    
+    public static boolean studyOrgUserExist(String studyid, String orgid, String userid) throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT * FROM CLINEQ.STUDY_ORG_USER_MAP WHERE EQ_STUDY_ID = '" + studyid +
+                "' and EQ_ORG_ID = '" + orgid + 
+                "' and EQ_USER_ID = '" + userid + "'";
+
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in UserDB studyOrgUserExist " + e.getMessage());
             return false;
         } finally {
             DBUtil.closeResultSet(rs);

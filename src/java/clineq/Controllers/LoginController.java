@@ -50,6 +50,8 @@ public class LoginController extends HttpServlet {
         String url = null;
         String userid = request.getParameter("inpUserName");
         String pwd = request.getParameter("inpPassword");
+        HttpSession session = request.getSession();
+        
         try {
             user = UserDB.selectUser(userid, pwd);
         } catch (Exception e) {
@@ -63,13 +65,15 @@ public class LoginController extends HttpServlet {
             } else if ("SPONSOR".endsWith(user_type)) {
                 url = "/sponsor/displaySponsorList";
             }
-            //url = "/eqhome/index.jsp";
+            session.setAttribute("loginResult", "");
+            session.setAttribute("loginUserID", userid);
         } else {
 //            response.sendRedirect("/login.jsp");
 //            return;
             //request.getSession().invalidate();
             //url = "/eqhome/login.jsp";
-            url = "../login.html";
+            session.setAttribute("loginResult", "Incorrect User or Password");
+            url = "../login.jsp";
             response.sendRedirect(url);
             return;
         }
@@ -84,6 +88,8 @@ public class LoginController extends HttpServlet {
             throws IOException, ServletException {
         String url = "/eqhome";
         System.out.println("doGet!");
+        HttpSession session = request.getSession();
+        session.removeAttribute("loginResult");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
 

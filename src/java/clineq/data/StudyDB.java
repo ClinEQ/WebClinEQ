@@ -349,7 +349,7 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                     + "EQ_SPON_ID, STUDY_ANAME, STUDY_TITLE, SPON_STUDY_ID, "
                     + "CO_SPON_STUDY_ID, STUDY_START_DATE, STUDY_END_DATE, "
                     + "STUDY_EQ_INIT_DATE, STUDY_EQ_CLOSE_DATE, PLANNED_PATIENTS_NUM, "
-                    + "EQ_IWRS_ID, CHART_GROUP_ID, STUDY_STATUS ) VALUES ("
+                    + "EQ_IWRS_ID, CHART_GROUP_ID, STUDY_STATUS, EQ_EDC_ID ) VALUES ("
                     + "'" + study.getEqStudyId() + "',"
                     + "'" + study.getEqCoSponId() + "',"
                     + "'" + study.getNctid() + "',"
@@ -367,7 +367,8 @@ VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'); *
                     + study.getPlannedPatientsNum() + ","
                     + "'" + study.getEqIwrsId() + "',"
                     + "'" + study.getChartGroupId() + "',"
-                    + "'" + study.getStudyStatus() + "'"
+                    + "'" + study.getStudyStatus() + "',"
+                    + "'" + study.getEqEDCId()+ "'"
                     + ")";
 
             System.out.println("insert sql=" + sql);

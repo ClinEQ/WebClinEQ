@@ -65,7 +65,7 @@
                                         Detail
                                     </td>
                                     <td>
-                                        Delete
+                                        <a href="removeUserFromOrg?deleteUserID=${user.getEqUserId()}">Remove</a>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -35,12 +35,12 @@ public class OrganizationDB {
     public static ArrayList<Organizations> selectAllOrganization() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS";
-
+        
         ArrayList<Organizations> objList = new ArrayList<>();
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class OrganizationDB {
                 obj.setOrgUrl(rs.getString("ORG_URL"));
                 obj.setNotes(rs.getString("NOTES"));
                 obj.setStatus(rs.getString("STATUS"));
-
+                
                 objList.add(obj);
             }
             return objList;
@@ -76,17 +76,17 @@ public class OrganizationDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-
+    
     public static ArrayList<Organizations> selectOrganizationByType(String orgType) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE ORG_TYPE = '"
                 + orgType + "' AND STATUS = 'ACTIVE'";
-
+        
         ArrayList<Organizations> objList = new ArrayList<>();
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class OrganizationDB {
                 obj.setOrgUrl(rs.getString("ORG_URL"));
                 obj.setNotes(rs.getString("NOTES"));
                 obj.setStatus(rs.getString("STATUS"));
-
+                
                 objList.add(obj);
             }
             return objList;
@@ -122,16 +122,16 @@ public class OrganizationDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-
+    
     public static ArrayList<String> selectOrgStatus() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT DISTINCT STATUS FROM CLINEQ.ORGANIZATIONS";
-
+        
         ArrayList<String> statusList = new ArrayList<>();
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
@@ -148,16 +148,16 @@ public class OrganizationDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-
+    
     public static String getOrgName(String orgid) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT ORG_FULL_NAME FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = " + orgid;
-
+        
         String orgname = null;
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
@@ -174,15 +174,15 @@ public class OrganizationDB {
         }
         return orgname;
     }
-
+    
     public static Organizations selectOneOrganization(String EQ_ORG_ID) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = '" + EQ_ORG_ID + "'";
-
+        
         PreparedStatement ps = null;
         ResultSet rs = null;
         Organizations obj = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
@@ -206,7 +206,7 @@ public class OrganizationDB {
                 obj.setOrgUrl(rs.getString("ORG_URL"));
                 obj.setNotes(rs.getString("NOTES"));
                 obj.setStatus(rs.getString("STATUS"));
-
+                
             }
             return obj;
         } catch (SQLException e) {
@@ -217,7 +217,7 @@ public class OrganizationDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-
+    
     public static void saveOrg(Organizations org) throws DBException {
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
         if (org == null || OrganizationDB.orgExist(org.getEqOrgId())) {
@@ -268,12 +268,12 @@ values(
         PreparedStatement ps = null;
         Statement stmt = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
-
+            
             String EQ_ORG_ID = org.getEqOrgId();
-
+            
             String sql = "INSERT INTO CLINEQ.ORGANIZATIONS ( EQ_ORG_ID, ORG_FULL_NAME, ORG_NAME_ABBR, "
                     + "ORG_DISPLAY_NAME, ORG_TYPE, ORG_CATEGORY, ADDRESS1, "
                     + "ADDRESS2, CITY, STATE, "
@@ -297,7 +297,7 @@ values(
                     + "'" + org.getNotes() + "',"
                     + "'" + org.getStatus() + "'"
                     + ")";
-
+            
             System.out.println("insert sql=" + sql);
             stmt = conn.createStatement();
             stmt.executeUpdate(sql);
@@ -306,7 +306,7 @@ values(
             return;
         }
     }
-
+    
     public static void saveOrgNUserNMap(String EQ_STUDY_ID, Organizations org) throws DBException {
         Collection<Users> usersCollection = org.getUsersCollection();
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
@@ -337,10 +337,10 @@ SYSDATE,
         Statement stmt = null;
         ResultSet rs = null;
         String sql = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
-
+            
             String EQ_ORG_ID = org.getEqOrgId();
 
             // Save only when EQ_ORG_ID is not exist
@@ -370,18 +370,18 @@ SYSDATE,
                         + "'" + org.getNotes() + "',"
                         + "'" + org.getStatus() + "'"
                         + ")";
-
+                
                 System.out.println("insert sql=" + sql);
                 stmt = conn.createStatement();
                 stmt.executeUpdate(sql);
             }
-
+            
             if (usersCollection != null) {
                 for (Users user : usersCollection) {
                     EQ_USER_ID = user.getEqUserId();
-
+                    
                     if (!UserDB.userExist(EQ_USER_ID)) {
-
+                        
                         String strSetupDate = (user.getSetupDate() != null) ? "to_date('" + (formatter.format(user.getSetupDate().getTime())) + "','mm/dd/yyyy')," : "null,";
                         String strLastUpdateDate = (user.getLastUpdateDate() != null) ? "to_date('" + (formatter.format(user.getLastUpdateDate().getTime())) + "','mm/dd/yyyy')," : "null,";
                         // Insert User
@@ -413,28 +413,30 @@ SYSDATE,
                                 + "'" + user.getUserLoginPwd() + "',"
                                 + "'" + user.getFax()
                                 + "')";
-
+                        
                         System.out.println("insert sql=" + sql);
                         stmt = conn.createStatement();
                         stmt.executeUpdate(sql);
                     }
 
                     // Insert STUDY_ORG_USER_MAP
-                    sql = "INSERT INTO CLINEQ.STUDY_ORG_USER_MAP ( EQ_STUDY_ID, EQ_ORG_ID, EQ_USER_ID, "
-                            + "LAST_UPDATE_DATE, STATUS, ORG_TYPE, SECURITY_LEVEL "
-                            + ") VALUES ("
-                            + "'" + EQ_STUDY_ID + "',"
-                            + "'" + EQ_ORG_ID + "',"
-                            + "'" + EQ_USER_ID + "',"
-                            + "SYSDATE, 'ACTIVE',"
-                            + "'" + org.getOrgType() + "',"
-                            + "'level2'"
-                            + ")";
-
-                    System.out.println("insert sql=" + sql);
-                    stmt = conn.createStatement();
-                    stmt.executeUpdate(sql);
-
+                    if (!UserDB.studyOrgUserExist(EQ_STUDY_ID, EQ_ORG_ID, EQ_USER_ID)) {
+                        sql = "INSERT INTO CLINEQ.STUDY_ORG_USER_MAP ( EQ_STUDY_ID, EQ_ORG_ID, EQ_USER_ID, "
+                                + "LAST_UPDATE_DATE, STATUS, ORG_TYPE, SECURITY_LEVEL "
+                                + ") VALUES ("
+                                + "'" + EQ_STUDY_ID + "',"
+                                + "'" + EQ_ORG_ID + "',"
+                                + "'" + EQ_USER_ID + "',"
+                                + "SYSDATE, 'ACTIVE',"
+                                + "'" + org.getOrgType() + "',"
+                                + "'level2'"
+                                + ")";
+                        
+                        System.out.println("insert sql=" + sql);
+                        stmt = conn.createStatement();
+                        stmt.executeUpdate(sql);
+                    }
+                    
                 }
             }
         } catch (SQLException e) {
@@ -442,7 +444,7 @@ SYSDATE,
             return;
         }
     }
-
+    
     public static void saveUserNMap(String EQ_STUDY_ID, Organizations org) throws DBException {
         Collection<Users> usersCollection = org.getUsersCollection();
         SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
@@ -473,18 +475,18 @@ SYSDATE,
         Statement stmt = null;
         ResultSet rs = null;
         String sql = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
-
+            
             String EQ_ORG_ID = org.getEqOrgId();
-
+            
             if (usersCollection != null) {
                 for (Users user : usersCollection) {
                     EQ_USER_ID = user.getEqUserId();
-
+                    
                     if (!UserDB.userExist(EQ_USER_ID)) {
-
+                        
                         String strSetupDate = (user.getSetupDate() != null) ? "to_date('" + (formatter.format(user.getSetupDate().getTime())) + "','mm/dd/yyyy')," : "null,";
                         String strLastUpdateDate = (user.getLastUpdateDate() != null) ? "to_date('" + (formatter.format(user.getLastUpdateDate().getTime())) + "','mm/dd/yyyy')," : "null,";
                         // Insert User
@@ -516,7 +518,7 @@ SYSDATE,
                                 + "'" + user.getUserLoginPwd() + "',"
                                 + "'" + user.getFax()
                                 + "')";
-
+                        
                         System.out.println("insert sql=" + sql);
                         stmt = conn.createStatement();
                         stmt.executeUpdate(sql);
@@ -533,11 +535,11 @@ SYSDATE,
                             + "'" + org.getOrgType() + "',"
                             + "'level2'"
                             + ")";
-
+                    
                     System.out.println("insert sql=" + sql);
                     stmt = conn.createStatement();
                     stmt.executeUpdate(sql);
-
+                    
                 }
             }
         } catch (SQLException e) {
@@ -545,31 +547,31 @@ SYSDATE,
             return;
         }
     }
-
+    
     public static String generateOrgID() throws DBException {
-
+        
         PreparedStatement ps = null;
         Statement stmt = null;
         ResultSet rs = null;
         String EQ_ORG_ID = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement("select clineq.seq_eqorgid.nextval from dual");
             rs = ps.executeQuery();
-
+            
             while (rs.next()) {
                 EQ_ORG_ID = Integer.toString(rs.getInt("NEXTVAL"));
                 EQ_ORG_ID = "eqorg" + ("00000" + EQ_ORG_ID).substring(EQ_ORG_ID.length());
             }
-
+            
         } catch (SQLException e) {
             System.err.println("Error in studyDB saveStudy : " + e.getMessage());
-
+            
         }
         return EQ_ORG_ID;
     }
-
+    
     public static boolean orgExist(String orgid) throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT * FROM CLINEQ.ORGANIZATIONS WHERE EQ_ORG_ID = '" + orgid + "'";
@@ -577,7 +579,7 @@ SYSDATE,
         //  Connection connection = DBConnect.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        
         try {
             Connection conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);

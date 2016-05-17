@@ -40,79 +40,79 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEqEDCName">EDC Name</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEqEDCName" name="SponName" value="${sponsor.getOrgFullName()}">
+                            <input class="form-control" id="inpEqhomeNSEEqEDCName" name="SponName" value="${sponsor.getOrgFullName()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEqEDCNameAb">EDC Name ABBR</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEqEDCNameAb" name="SponAB" value="${sponsor.getOrgNameAbbr()}">
+                            <input class="form-control" id="inpEqhomeNSEEqEDCNameAb" name="SponAB" value="${sponsor.getOrgNameAbbr()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEqEDCType">EDC Type</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEqEDCType" name="SponType" value="${sponsor.getOrgType()}" >
+                            <input class="form-control" id="inpEqhomeNSEEqEDCType" name="SponType" value="${sponsor.getOrgType()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEqEDCCate">EDC Category</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEqEDCCate" name="SponCate" value="${sponsor.getOrgCategory()}" >
+                            <input class="form-control" id="inpEqhomeNSEEqEDCCate" name="SponCate" value="${sponsor.getOrgCategory()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEqEDCAddress1">Address1</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEqEDCAddress1" name="Address1" value="${sponsor.getAddress1()}" >
+                            <input class="form-control" id="inpEqhomeNSEEqEDCAddress1" name="Address1" value="${sponsor.getAddress1()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEqEDCAddress2">Address2</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEqEDCAddress2" name="Address2" value="${sponsor.getAddress2()}" >
+                            <input class="form-control" id="inpEqhomeNSEEqEDCAddress2" name="Address2" value="${sponsor.getAddress2()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-1 control-label" for="inpEqhomeNSECity">City</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="inpEqhomeNSECity" name="City" value="${sponsor.getCity()}" >
+                            <input class="form-control" id="inpEqhomeNSECity" name="City" value="${sponsor.getCity()}" ${edcPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-1 control-label" for="inpEqhomeNSEState">State</label>
                         <div class="col-sm-2">
-                            <input class="form-control" id="inpEqhomeNSEState" name="State" value="${sponsor.getState()}" >
+                            <input class="form-control" id="inpEqhomeNSEState" name="State" value="${sponsor.getState()}" ${edcPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-2 control-label" for="inpEqhomeNSEZip">Zip Code</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="inpEqhomeNSEZip" name="Zip" value="${sponsor.getZip()}" >
+                            <input class="form-control" id="inpEqhomeNSEZip" name="Zip" value="${sponsor.getZip()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSECountry">Country</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSECountry" name="Country" value="${sponsor.getCountry()}" >
+                            <input class="form-control" id="inpEqhomeNSECountry" name="Country" value="${sponsor.getCountry()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="inpEqhomeNSEPhone">Phone</label>
                         <div class="col-sm-4">
-                            <input class="form-control" id="inpEqhomeNSEPhone" name="Phone" value="${sponsor.getPhone()}" >
+                            <input class="form-control" id="inpEqhomeNSEPhone" name="Phone" value="${sponsor.getPhone()}" ${edcPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-1 control-label" for="inpEqhomeNSEFax">Fax</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="inpEqhomeNSEFax" name="Fax" value="${sponsor.getFax()}" >
+                            <input class="form-control" id="inpEqhomeNSEFax" name="Fax" value="${sponsor.getFax()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSEEDCUrl">EDC URL</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSEEDCUrl" name="SponUrl" value="${sponsor.getOrgUrl()}" >
+                            <input class="form-control" id="inpEqhomeNSEEDCUrl" name="SponUrl" value="${sponsor.getOrgUrl()}" ${edcPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-3 control-label" for="inpEqhomeNSEConName">Contact Name</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="inpEqhomeNSEConName" name="ConName" value="${sponsor}" >
+                            <input class="form-control" id="inpEqhomeNSEConName" name="ConName" value="${sponsor}" ${edcPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-1 control-label" for="inpEqhomeNSEEmail">Email</label>
                         <div class="col-sm-5">
@@ -122,10 +122,10 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="sltEqhomeNSEEDCStatus">EDC Status</label>
                         <div class="col-sm-7">                    
-                            <select id="sltEqhomeNSEEDCStatus" class="form-control">
+                            <select id="sltEqhomeNSEEDCStatus" class="form-control"  name="sponsorStatus">
                                 <option disabled selected value> -- Select an Status -- </option>
                                 <c:forEach var="sponsorStatus" items="${orgStatusList}">
-                                    <option value="${sponsorStatus}" >${sponsorStatus}</option>
+                                    <option value="${sponsorStatus}" ${sponsorStatus == (sponsor.getStatus())?'selected':''} ${edcPicked == true?'disabled':''}>${sponsorStatus}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -133,11 +133,11 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="txteqhomeNSENote">Notes</label>
                         <div class="col-sm-12">
-                            <textarea class="form-group" rows="4" id="txteqhomeNSENote" name="Note"></textarea>
+                            <input class="form-group" rows="4" id="txteqhomeNSENote" name="Note"  ${edcPicked == true?'readonly':''}></input>
                         </div>
                     </div>
                     <div class="save-options">
-                        <button type="button" class="btn btn-danger btnFormClear">Clear Form</button>
+                        <button type="submit" class="btn btn-danger btnFormClear" formaction="clearForm">Clear Form</button>
                         <button type="submit" class="btn btn-info" formaction="newStudyIWRS">Back</button>
                         <button id="btnNextNewStudySponsor"  class="btn btn-default" formaction="#">Cancel</button>   
                         <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="saveNewStudy">Create Study</button>

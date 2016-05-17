@@ -40,75 +40,76 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIEqIWRSName">IWRS Name</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIEqIWRSName" name="SponName" value="${sponsor.getOrgFullName()}">
+                            <input class="form-control" id="inpEqhomeNSIEqIWRSName" name="SponName" value="${sponsor.getOrgFullName()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIEqIWRSNameAb">IWRS Name ABBR</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIEqIWRSNameAb" name="SponAB" value="${sponsor.getOrgNameAbbr()}">
+                            <input class="form-control" id="inpEqhomeNSIEqIWRSNameAb" name="SponAB" value="${sponsor.getOrgNameAbbr()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIEqIWRSType">IWRS Type</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIEqIWRSType" name="SponType" value="${sponsor.getOrgType()}" >
+                            <input class="form-control" id="inpEqhomeNSIEqIWRSType" name="SponType" value="${sponsor.getOrgType()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIEqIWRSCate">IWRS Category</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIEqIWRSCate" name="SponCate" value="${sponsor.getOrgCategory()}" >
+                            <input class="form-control" id="inpEqhomeNSIEqIWRSCate" name="SponCate" value="${sponsor.getOrgCategory()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIEqIWRSAddress1">Address1</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIEqIWRSAddress1" name="Address1" value="${sponsor.getAddress1()}" >
+                            <input class="form-control" id="inpEqhomeNSIEqIWRSAddress1" name="Address1" value="${sponsor.getAddress1()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIEqIWRSAddress2">Address2</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIEqIWRSAddress2" name="Address2" value="${sponsor.getAddress2()}" >
+                            <input class="form-control" id="inpEqhomeNSIEqIWRSAddress2" name="Address2" value="${sponsor.getAddress2()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-1 control-label" for="inpEqhomeNSICity">City</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="inpEqhomeNSICity" name="City" value="${sponsor.getCity()}" >
+                            <input class="form-control" id="inpEqhomeNSICity" name="City" value="${sponsor.getCity()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-1 control-label" for="inpEqhomeNSIState">State</label>
                         <div class="col-sm-2">
-                            <input class="form-control" id="inpEqhomeNSIState" name="State" value="${sponsor.getState()}" >
+                            <input class="form-control" id="inpEqhomeNSIState" name="State" value="${sponsor.getState()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-2 control-label" for="inpEqhomeNSIZip">Zip Code</label>
                         <div class="col-sm-3">
-                            <input class="form-control" id="inpEqhomeNSIZip" name="Zip" value="${sponsor.getZip()}" >
+                            <input class="form-control" id="inpEqhomeNSIZip" name="Zip" value="${sponsor.getZip()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSICountry">Country</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSICountry" name="Country" value="${sponsor.getCountry()}" >
+                            <input class="form-control" id="inpEqhomeNSICountry" name="Country" value="${sponsor.getCountry()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="inpEqhomeNSIPhone">Phone</label>
                         <div class="col-sm-4">
-                            <input class="form-control" id="inpEqhomeNSIPhone" name="Phone" value="${sponsor.getPhone()}" >
+                            <input class="form-control" id="inpEqhomeNSIPhone" name="Phone" value="${sponsor.getPhone()}"  ${iwrsPicked == true?'readonly':''}>
                         </div>
                         <label class="col-sm-1 control-label" for="inpEqhomeNSIFax">Fax</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="inpEqhomeNSIFax" name="Fax" value="${sponsor.getFax()}" >
+                            <input class="form-control" id="inpEqhomeNSIFax" name="Fax" value="${sponsor.getFax()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="inpEqhomeNSIIWRSUrl">IWRS URL</label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="inpEqhomeNSIIWRSUrl" name="SponUrl" value="${sponsor.getOrgUrl()}" >
+                            <input class="form-control" id="inpEqhomeNSIIWRSUrl" name="SponUrl" value="${sponsor.getOrgUrl()}" ${iwrsPicked == true?'readonly':''}>
                         </div>
                     </div>
+                        <!--
                     <div class="form-group form-group-lg">
                         <label class="col-sm-3 control-label" for="inpEqhomeNSIConName">Contact Name</label>
                         <div class="col-sm-3">
@@ -119,13 +120,14 @@
                             <input class="form-control" id="inpEqhomeNSIEmail" name="Email" value="${sponsor}" >
                         </div>
                     </div>
+                        -->
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="sltEqhomeNSIIWRSStatus">IWRS Status</label>
                         <div class="col-sm-7">                    
-                            <select id="sltEqhomeNSIIWRSStatus" class="form-control">
+                            <select id="sltEqhomeNSIIWRSStatus" class="form-control" name="sponsorStatus">
                                 <option disabled selected value> -- Select an Status -- </option>
                                 <c:forEach var="sponsorStatus" items="${orgStatusList}">
-                                    <option value="${sponsorStatus}" >${sponsorStatus}</option>
+                                    <option value="${sponsorStatus}" ${sponsorStatus == (sponsor.getStatus())?'selected':''} ${iwrsPicked == true?'disabled':''}>${sponsorStatus}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -133,12 +135,12 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="txteqhomeNSINote">Notes</label>
                         <div class="col-sm-12">
-                            <textarea class="form-group" rows="4" id="txteqhomeNSINote" name="Note"></textarea>
+                            <input class="form-group" rows="4" id="txteqhomeNSINote" name="Note" value=""${sponsor.getNotes()} ${iwrsPicked == true?'readonly':''}></input>
                         </div>
                     </div>
 
                     <div class="save-options">
-                        <button type="button" class="btn btn-danger btnFormClear">Clear Form</button>
+                        <button type="submit" class="btn btn-danger btnFormClear" formaction="clearForm">Clear Form</button>
                         <button type="submit" class="btn btn-info" formaction="newStudySiteUserList">Back</button>
                         <button type="submit" id="btnNextNewStudySponsor"  class="btn btn-success" formaction="newStudyEDC">Next</button>
                     </div>

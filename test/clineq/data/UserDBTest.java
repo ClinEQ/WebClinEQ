@@ -148,4 +148,16 @@ public class UserDBTest {
         assertEquals(expResult, result);
     }
     
+        @Test
+    public void testStudyOrgUserExist() throws Exception {
+        System.out.println("studyOrgUserExist");
+        String userid = "";
+        boolean expResult = false;
+        boolean result = UserDB.studyOrgUserExist("3","1","2");
+        assertEquals(expResult, result);
+        expResult = true;
+        result = UserDB.studyOrgUserExist("eqstu00262","2","2");
+        assertEquals(expResult, result);
+    }
+    
 }

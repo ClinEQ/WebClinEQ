@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+<%-- 
+    Document   : login
+    Created on : May 15, 2016, 11:33:29 AM
+    Author     : Calum
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>ClinEQ Index</title>
@@ -9,6 +15,7 @@
             <link href="resources/css/login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        
         <div id="login">
             <form class="form-horizontal" action="user/login" method="post">
                 <!--<form class="form-horizontal" action="study/displayStudyList" method="post">-->
@@ -25,6 +32,9 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            ${loginResult}
         </div>
     </body>
 </html>
+
