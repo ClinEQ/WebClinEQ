@@ -13,7 +13,6 @@
             </nav>
         </div>
     </div>
-                ${loginUserID}
     <div class="row  content">
         <div class="col-lg-2 col-md-2 col-sm-2">
             <jsp:include page="../includes/leftNav.jsp"/>
@@ -45,7 +44,7 @@
                 </div>
 
                 <div class="table-area">
-                    <table class="table table-striped" id="tableStudy">
+                    <table class="table table-striped table-bordered" id="tableStudy">
                         <thead>
                             <tr>
                                 <th>EQ Study ID</th>

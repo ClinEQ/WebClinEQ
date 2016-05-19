@@ -16,7 +16,7 @@
     
     <form action="addSiteToStudy" method="post">
     <div class="tableSearchSponsor">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Sponsor Name</th>

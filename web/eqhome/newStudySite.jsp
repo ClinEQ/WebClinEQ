@@ -29,7 +29,7 @@
             </div>
             <form action="inputSiteToStudy" method="post">
                 <div class="table-area">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>EQ Site ID</th>

@@ -47,7 +47,7 @@
             </div>
             <!-- Table -->
             <div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered table-bordered">
                     <thead>
                         <tr>
                             <th>EQ Sponsor ID</th>

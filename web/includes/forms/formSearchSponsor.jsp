@@ -24,7 +24,7 @@
 
     <form action="addOrgToStudy" method="post">
         <div class="tableSearchSponsor">
-            <table id="tblFormSearchSponsor" class="table table-striped">
+            <table id="tblFormSearchSponsor" class="table table-striped table-bordered table-bordered">
                 <thead>
                     <tr>
                         <th>Sponsor Name</th>

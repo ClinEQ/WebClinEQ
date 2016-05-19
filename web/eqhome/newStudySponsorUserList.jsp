@@ -30,7 +30,7 @@
             </div>
             <form method="post">
                 <div class="table-area">
-                    <table id="tblNSSSponsorUserList" class="table table-striped">
+                    <table id="tblNSSSponsorUserList" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>EQ User ID</th>

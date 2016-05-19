@@ -27,7 +27,7 @@
             </div>
         </form>
         <div class="table-area">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>EQ Subject ID</th>

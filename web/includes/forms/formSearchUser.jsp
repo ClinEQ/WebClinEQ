@@ -23,8 +23,7 @@
 
 <div class="tableSearchUser">
     <form action="addUserToOrg" method="post">
-    <table class="table table-striped">
-        
+        <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>User Name</th>
@@ -59,9 +58,8 @@
                     </tr>
                 </c:forEach>
             </tbody>
-            <input type="submit" value="Add to Study" class="btn btn-default" style="float:right;">
-                   
-    </table>
+        </table>
+        <input type="submit" value="Add to Study" class="btn btn-default" style="float:right;">
     </form> 
 </div>
 
