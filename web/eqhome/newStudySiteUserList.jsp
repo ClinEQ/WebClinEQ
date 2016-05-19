@@ -29,7 +29,7 @@
             <div class="searchUser" style="display:none">
             </div>
             <div>
-                <form class="form-inline">
+                <form class="form-inline" action="newStudySiteUserList" method="post">
                     <div>
                         <label style="margin-right: 2%">Site</label>
                         <!--<form action="newStudySiteUserList" method="post">-->
@@ -41,7 +41,7 @@
                     </div>
                 </form>
             </div>
-            <form>
+            <form action="post">
                 <div class="table-area">
                     <table id="tblNSSSponsorUserList" class="table table-striped">
                         <thead>

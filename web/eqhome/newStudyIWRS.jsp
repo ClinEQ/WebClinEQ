@@ -125,7 +125,7 @@
                         <label class="col-sm-5 control-label" for="sltEqhomeNSIIWRSStatus">IWRS Status</label>
                         <div class="col-sm-7">                    
                             <select id="sltEqhomeNSIIWRSStatus" class="form-control" name="sponsorStatus">
-                                <option disabled selected value> -- Select an Status -- </option>
+                                <!--<option disabled selected value> -- Select an Status -- </option>-->
                                 <c:forEach var="sponsorStatus" items="${orgStatusList}">
                                     <option value="${sponsorStatus}" ${sponsorStatus == (sponsor.getStatus())?'selected':''} ${iwrsPicked == true?'disabled':''}>${sponsorStatus}</option>
                                 </c:forEach>

@@ -65,7 +65,7 @@ public class SysCodeRegistryDB {
             }
             return objList;
         } catch (SQLException e) {
-            System.err.println("Erro in SysCodeRegistryDB : "+ e.getMessage());
+            System.err.println("Erro in SysCodeRegistryDB selectAllSysCodeRegistry: "+ e.getMessage());
             return null;
         } finally {
            DBUtil.closeResultSet(rs);
@@ -98,5 +98,31 @@ public class SysCodeRegistryDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
+            
+            public static ArrayList<String> selectAllOrgStatus() throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT DISTINCT CODE_VALUE FROM CLINEQ.SYS_CODE_REGISTRY WHERE CODE_GROUP_NAME = 'ORG_STATUS'";
+
+        ArrayList<String> statusList = new ArrayList<>();
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                statusList.add(rs.getString("CODE_VALUE"));
+            }
+            return statusList;
+        } catch (SQLException e) {
+            System.err.println("Error in SysCodeRegistryDB selectAllOrgStatus" + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+    }            
     
 }
