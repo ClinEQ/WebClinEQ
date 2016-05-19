@@ -1003,13 +1003,12 @@ public class StudyController extends HttpServlet {
                 System.out.println("newStudyEDC savedIWRS" + savedIWRS.getEqOrgId());
                 session.removeAttribute("sponsor");
                 sponsor = null;
-            } else {
-                // IWRS Saved before
-
-                sponsor = savedEDC;
-                session.setAttribute("sponsor", sponsor);
-                //System.out.println("Find  save IWRS" + sponsor.getEqOrgId());
             }
+
+            // IWRS Saved before
+            sponsor = savedEDC;
+            session.setAttribute("sponsor", sponsor);
+            //System.out.println("Find  save IWRS" + sponsor.getEqOrgId());
 
 //            System.out.println("savedIWRS " + savedIWRS.getEqOrgId());
 //            System.out.println("savedIWRS " + savedIWRS.getOrgFullName());

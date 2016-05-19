@@ -133,7 +133,7 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="txteqhomeNSENote">Notes</label>
                         <div class="col-sm-12">
-                            <input class="form-group" rows="4" id="txteqhomeNSENote" name="Note"  ${edcPicked == true?'readonly':''}></input>
+                            <textarea class="form-group" rows="4" id="txteqhomeNSENote" name="Note"  ${edcPicked == true?'readonly':''}>${sponsor.getNotes()}</textarea>
                         </div>
                     </div>
                     <div class="save-options">

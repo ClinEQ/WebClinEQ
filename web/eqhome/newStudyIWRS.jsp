@@ -135,7 +135,7 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-5 control-label" for="txteqhomeNSINote">Notes</label>
                         <div class="col-sm-12">
-                            <input class="form-group" rows="4" id="txteqhomeNSINote" name="Note" value=""${sponsor.getNotes()} ${iwrsPicked == true?'readonly':''}></input>
+                            <textarea class="form-group" rows="4" id="txteqhomeNSINote" name="Note" ${iwrsPicked == true?'readonly':''}>${sponsor.getNotes()} </textarea>
                         </div>
                     </div>
 
