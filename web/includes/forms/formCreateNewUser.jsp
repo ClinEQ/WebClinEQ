@@ -119,9 +119,12 @@
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpFormCNUStatus">Status</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" id="inpFormCNUStatus" name="FormCNUStatus" >
+                            <label class="col-sm-5 control-label" for="sltFormCNUStatus">Status</label>
+                            <div class="col-sm-7">                    
+                                <select id="sltFormCNUStatus" class="form-control">
+                                    <option disabled selected value> -- Select an Status -- </option>
+                                    
+                                </select>
                             </div>
                         </div>
                     

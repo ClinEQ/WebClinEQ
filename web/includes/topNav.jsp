@@ -1,6 +1,6 @@
 <!-- Navigation -->
     <div class="navbar-header">
-        <a class="navbar-brand" href="#"><i class="fa fa-home"></i> Home </a>
+        <a class="navbar-brand" href="../eqhome/index.jsp"><i class="fa fa-home"></i> Home </a>
     </div>
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
