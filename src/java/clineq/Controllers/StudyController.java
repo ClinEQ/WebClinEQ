@@ -55,6 +55,7 @@ public class StudyController extends HttpServlet {
     private ArrayList<String> currStudyStatusList = null;
     private ArrayList<String> allStudyStatusList = null;
     private ArrayList<String> orgStatusList = null;
+    private ArrayList<String> userStatusList = null;
     private ArrayList<String> sponsorNameList = null;
     private ArrayList<Users> orgUsersArrayList = null;
     private ArrayList<Users> newSponsorUserArrayList = null;
@@ -790,7 +791,7 @@ public class StudyController extends HttpServlet {
         currPage = "SPONSOR";
 
         try {
-
+userStatusList = SysCodeRegistryDB.selectAllUserStatus();
             if (savedSponsor == null) {
                 // User input sponsor info. instead of pick from the list
                 sponsor = getOrganization(request);
@@ -820,6 +821,7 @@ public class StudyController extends HttpServlet {
 
             session.setAttribute("sponsor", sponsor);
             session.setAttribute("orgUsersArrayList", orgUsersArrayList);
+            session.setAttribute("userStatusList", userStatusList);
 
         } catch (DBException e) {
             System.err.println("DBException newStudySponsorUserList");

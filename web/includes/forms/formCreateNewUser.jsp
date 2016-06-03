@@ -82,12 +82,14 @@
                                 <input class="form-control" id="inpFormCNUExEmId" name="FormCNUExEmId" >
                             </div>
                         </div>
+                        <!--
                         <div class="form-group form-group-lg">
                             <label class="col-sm-5 control-label" for="inpFormCNUUserType">User Type</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpFormCNUUserType" name="FormCNUUserType" >
                             </div>
                         </div>
+                        -->
                         <div class="form-group form-group-lg">
                             <label class="col-sm-5 control-label" for="inpFormCNUUserRole">User Role</label>
                             <div class="col-sm-7">
@@ -121,27 +123,29 @@
                         <div class="form-group form-group-lg">
                             <label class="col-sm-5 control-label" for="sltFormCNUStatus">Status</label>
                             <div class="col-sm-7">                    
-                                <select id="sltFormCNUStatus" class="form-control">
+                                <select id="sltFormCNUStatus" class="form-control" name="FormCNUStatus">
                                     <option disabled selected value> -- Select an Status -- </option>
-                                    
+                                    <c:forEach var="userStatus" items="${userStatusList}">
+                                        <option value="${userStatus}" >${userStatus}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
-                    
-                
-                
-                <div>
-                    <!--<button type="button" class="btn btn-default" style="width: 160px; margin-left: 70%;">Save & Add to Study</button>-->
-                                <input type="submit" value="Add to Organization" class="btn btn-default" style="width: 160px; margin-left: 70%;" onclick="form.action = 'inputUserToOrg';">
+
+
+
+                        <div>
+                            <!--<button type="button" class="btn btn-default" style="width: 160px; margin-left: 70%;">Save & Add to Study</button>-->
+                            <input type="submit" value="Add to Organization" class="btn btn-default" style="width: 160px; margin-left: 70%;" onclick="form.action = 'inputUserToOrg';">
+                        </div>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 220px;">Cancel & Close Window</button>
+                    </div>
                 </div>
-                </form>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 220px;">Cancel & Close Window</button>
-                </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>
