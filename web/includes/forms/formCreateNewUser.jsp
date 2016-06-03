@@ -82,14 +82,19 @@
                                 <input class="form-control" id="inpFormCNUExEmId" name="FormCNUExEmId" >
                             </div>
                         </div>
-                        <!--
+
                         <div class="form-group form-group-lg">
                             <label class="col-sm-5 control-label" for="inpFormCNUUserType">User Type</label>
                             <div class="col-sm-7">
-                                <input class="form-control" id="inpFormCNUUserType" name="FormCNUUserType" >
+                                <select id="inpFormCNUUserType" name="FormCNUUserType" class="form-control" >
+                                        <option disabled selected value> -- Select a Type -- </option>
+                                    <c:forEach var="userType" items="${userTypeList}">
+                                        <option value="${userType}" >${userType}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
-                        -->
+
                         <div class="form-group form-group-lg">
                             <label class="col-sm-5 control-label" for="inpFormCNUUserRole">User Role</label>
                             <div class="col-sm-7">

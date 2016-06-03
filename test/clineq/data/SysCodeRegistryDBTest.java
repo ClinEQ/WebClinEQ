@@ -54,5 +54,32 @@ public class SysCodeRegistryDBTest {
     }
 
 
+    /**
+     * Test of selectAllUserType method, of class SysCodeRegistryDB.
+     */
+    @Test
+    public void testSelectAllUserType() throws Exception {
+        System.out.println("selectAllUserType");
+        ArrayList<String> expResult = null;
+        ArrayList<String> result = SysCodeRegistryDB.selectAllUserType();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of selectAllOrgStatus method, of class SysCodeRegistryDB.
+     */
+    @Test
+    public void testSelectAllOrgStatus() throws Exception {
+        System.out.println("selectAllOrgStatus");
+        ArrayList<String> expResult = null;
+        ArrayList<String> result = SysCodeRegistryDB.selectAllOrgStatus();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+
     
 }

@@ -21,29 +21,26 @@ import clineq.data.DBUtil;
 import java.math.BigInteger;
 import java.sql.Statement;
 
-
 /**
  *
  * @author Calum
  */
-
 public class SysCodeRegistryDB {
-    
-    
-        public static ArrayList<SysCodeRegistry> selectAllSysCodeRegistry() throws DBException {    
+
+    public static ArrayList<SysCodeRegistry> selectAllSysCodeRegistry() throws DBException {
         String sql = "SELECT * FROM CLINEQ.SYS_CODE_REGISTRY";
-        
+
         ArrayList<SysCodeRegistry> objList = new ArrayList<>();
         PreparedStatement ps = null;
         Statement stmt = null;
         ResultSet rs = null;
-      
-        try { 
+
+        try {
             Connection conn = DBConnect.getConnection();
 //            ps = conn.prepareStatement(sql);
 //            rs = ps.executeQuery();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql); 
+            rs = stmt.executeQuery(sql);
             String eqOrgId = null;
             while (rs.next()) {
                 SysCodeRegistry obj = new SysCodeRegistry();
@@ -65,15 +62,15 @@ public class SysCodeRegistryDB {
             }
             return objList;
         } catch (SQLException e) {
-            System.err.println("Erro in SysCodeRegistryDB selectAllSysCodeRegistry: "+ e.getMessage());
+            System.err.println("Erro in SysCodeRegistryDB selectAllSysCodeRegistry: " + e.getMessage());
             return null;
         } finally {
-           DBUtil.closeResultSet(rs);
-           DBUtil.closePreparedStatement(ps);
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
         }
     }
-    
-            public static ArrayList<String> selectAllStudyStatus() throws DBException {
+
+    public static ArrayList<String> selectAllStudyStatus() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT DISTINCT CODE_VALUE FROM CLINEQ.SYS_CODE_REGISTRY WHERE CODE_GROUP_NAME = 'STUDY_STATUS'";
 
@@ -98,8 +95,8 @@ public class SysCodeRegistryDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-            
-                        public static ArrayList<String> selectAllUserStatus() throws DBException {
+
+    public static ArrayList<String> selectAllUserStatus() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT DISTINCT CODE_VALUE FROM CLINEQ.SYS_CODE_REGISTRY WHERE CODE_GROUP_NAME = 'USESR_STATUS'";
 
@@ -124,8 +121,34 @@ public class SysCodeRegistryDB {
             DBUtil.closePreparedStatement(ps);
         }
     }
-            
-            public static ArrayList<String> selectAllOrgStatus() throws DBException {
+
+     public static ArrayList<String> selectAllUserType() throws DBException {
+        //   public  List<AtomObj> getAll() throws DBException { 
+        String sql = "SELECT DISTINCT CODE_VALUE FROM CLINEQ.SYS_CODE_REGISTRY WHERE CODE_GROUP_NAME = 'USER_TYPE'";
+
+        ArrayList<String> statusList = new ArrayList<>();
+        //  Connection connection = DBConnect.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery(); //{
+            while (rs.next()) {
+                statusList.add(rs.getString("CODE_VALUE"));
+            }
+            return statusList;
+        } catch (SQLException e) {
+            System.err.println("Error in SysCodeRegistryDB selectAllUserType" + e.getMessage());
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+        }
+    }
+
+    public static ArrayList<String> selectAllOrgStatus() throws DBException {
         //   public  List<AtomObj> getAll() throws DBException { 
         String sql = "SELECT DISTINCT CODE_VALUE FROM CLINEQ.SYS_CODE_REGISTRY WHERE CODE_GROUP_NAME = 'ORG_STATUS'";
 
@@ -149,6 +172,6 @@ public class SysCodeRegistryDB {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
         }
-    }            
-    
+    }
+
 }
