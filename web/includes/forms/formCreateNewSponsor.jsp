@@ -11,36 +11,36 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                    <h4 class="modal-title">Create New Sponsor</h4>
+                    <h4 class="modal-title">Create New Site</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" method="post">
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Sponsor ID</label>
+                            <label class="col-sm-5 control-label" for="inpEqhomeNSSEqSponId">EQ Site ID</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpEqhomeNSSEqSponId" name="EqSponId" readonly>
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponName">Sponsor Name</label>
+                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponName">Site Name</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpEqhomeNSSSponName" name="SponName" value="">
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponAB">Sponsor Name ABBR</label>
+                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponAB">Site Name ABBR</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpEqhomeNSSSponAB" name="SponAB" value="">
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponType">Sponsor Type</label>
+                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponType">Site Type</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpEqhomeNSSSponType" name="SponType" value="" >
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponCate">Sponsor Category</label>
+                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponCate">Site Category</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpEqhomeNSSSponCate" name="SponCate" value="" >
                             </div>
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponUrl">Sponsor URL</label>
+                            <label class="col-sm-5 control-label" for="inpEqhomeNSSSponUrl">Site URL</label>
                             <div class="col-sm-7">
                                 <input class="form-control" id="inpEqhomeNSSSponUrl" name="SponUrl" value="" >
                             </div>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
-                            <label class="col-sm-5 control-label" for="sltEqhomeNSSSponsorStatus">Sponsor Status</label>
+                            <label class="col-sm-5 control-label" for="sltEqhomeNSSSponsorStatus">Site Status</label>
                             <div class="col-sm-7">                    
                                 <select id="sltEqhomeNSSSponsorStatus" class="form-control" name="sponsorStatus">
                                     <option disabled selected value> -- Select an Status -- </option>
